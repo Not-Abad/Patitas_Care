@@ -12,7 +12,7 @@ ProVet es una herramienta diseñada en **Java** para optimizar el control de pac
 
 ##  Instalación y ejecución
 1. **Clonar el repositorio:**
-   `git clone https://github.com/Not-Abad/ProVet.git`
+   `git clone https://github.com/Not-Abad/PatitasCare.git`
 2. **Abrir en NetBeans:**
    File > Open Project > Seleccionar la carpeta `ProVet`.
 3. **Configurar base de datos:** Actualmente no tenemos BD, se configurara en proximas versiones
