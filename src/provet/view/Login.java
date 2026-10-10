@@ -1,15 +1,14 @@
 
 package provet.view;
 
-import javax.swing.JOptionPane;
+import javax.swing.JFrame;
 
 public class Login extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Login.class.getName());
 
     public Login() {
-    initComponents();
-
+        initComponents();
     }
 
     @SuppressWarnings("unchecked")
@@ -21,6 +20,11 @@ public class Login extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -54,8 +58,40 @@ public class Login extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel9.setText("¿No tienes una cuenta con nosotros?");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 240, -1));
+        jLabel9.setText("Contraseña:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 240, -1));
+
+        jTextField1.setBackground(new java.awt.Color(216, 218, 203));
+        jTextField1.setToolTipText("Usuario");
+        jTextField1.setActionCommand("<Not Set>");
+        jTextField1.setAutoscrolls(false);
+        jTextField1.setBorder(null);
+        jTextField1.setCaretColor(new java.awt.Color(0, 204, 102));
+        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 230, 20));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel10.setText("¿No tienes una cuenta con nosotros?");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 240, -1));
+
+        jTextField2.setBackground(new java.awt.Color(216, 218, 203));
+        jTextField2.setToolTipText("Usuario");
+        jTextField2.setActionCommand("<Not Set>");
+        jTextField2.setAutoscrolls(false);
+        jTextField2.setBorder(null);
+        jTextField2.setCaretColor(new java.awt.Color(0, 204, 102));
+        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 230, 20));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel11.setText("Usuario:");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 240, -1));
+
+        jButton1.setBackground(new java.awt.Color(69, 98, 78));
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(228, 230, 217));
+        jButton1.setText("Iniciar");
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 230, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 0, 420, 470));
 
@@ -98,18 +134,10 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_iniciarsActionPerformed
 
     public void verificar_Datos(){
-        /*if(txt_usuario.getText().equals("a") && txt_contraseña.getText().equals("a")){
-            Menu_Principal v2 = new Menu_Principal();
-            v2.setVisible(true);
-            dispose();
-        }else{
-            JOptionPane.showMessageDialog(null,"Usuario y/o contraseña Incorrecto","Error",JOptionPane.ERROR_MESSAGE);
-            txt_usuario.setText("");
-            txt_contraseña.setText("");
-        }
-    }/*
+        java.awt.EventQueue.invokeLater(() -> new Login().setVisible(true));
+    }
     
-    public static void main(String args[]) {
+        public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -132,7 +160,10 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -143,5 +174,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
