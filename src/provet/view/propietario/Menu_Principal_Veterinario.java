@@ -3,11 +3,11 @@ package provet.view.propietario;
 
 import javax.swing.JFrame;
 
-public class Menu_Principal extends javax.swing.JFrame {
+public class Menu_Principal_Veterinario extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Menu_Principal.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Menu_Principal_Veterinario.class.getName());
 
-    public Menu_Principal() {
+    public Menu_Principal_Veterinario() {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
@@ -333,7 +333,7 @@ public class Menu_Principal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Menu_Principal().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new Menu_Principal_Veterinario().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
