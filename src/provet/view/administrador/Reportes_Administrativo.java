@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package provet.view.administrador;
 
 /**
@@ -17,6 +14,7 @@ public class Reportes_Administrativo extends javax.swing.JFrame {
      */
     public Reportes_Administrativo() {
         initComponents();
+       
     }
 
     /**
@@ -30,7 +28,7 @@ public class Reportes_Administrativo extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lbl_fecha = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -477,7 +475,7 @@ public class Reportes_Administrativo extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel5.setText("Reportes");
 
-        jLabel6.setText("Fecha");
+        lbl_fecha.setText("Fecha");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -486,7 +484,7 @@ public class Reportes_Administrativo extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
+                    .addComponent(lbl_fecha)
                     .addComponent(jLabel5))
                 .addContainerGap(1061, Short.MAX_VALUE))
         );
@@ -496,7 +494,7 @@ public class Reportes_Administrativo extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel6)
+                .addComponent(lbl_fecha)
                 .addContainerGap(608, Short.MAX_VALUE))
         );
 
@@ -3330,7 +3328,6 @@ public class Reportes_Administrativo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel59;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
@@ -3373,5 +3370,6 @@ public class Reportes_Administrativo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel99;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lbl_fecha;
     // End of variables declaration//GEN-END:variables
 }
