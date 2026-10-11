@@ -2,11 +2,6 @@
 //Paquete al que pertenece la ventana
 package provet.view;
 
-//Importamos librerias
-import java.awt.Font;                   //Para modificar la letra del texto
-import java.awt.font.TextAttribute;     //Para modificar los atributos del texto
-import java.util.Map;                   //Para emplear Map
-
 //Inicio de la clase Login, que hereda de la clase JFrame
 public class Login extends javax.swing.JFrame {
     
@@ -15,16 +10,6 @@ public class Login extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     public Login() {
         initComponents();
-        
-        Font font_recuperarContraseña = lbl_recuperarContraseña.getFont();
-        Map<TextAttribute, Object> attributes_RC = (Map<TextAttribute, Object>) font_recuperarContraseña.getAttributes();
-        attributes_RC.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-        lbl_recuperarContraseña.setFont(font_recuperarContraseña.deriveFont(attributes_RC));
-        
-        Font font_nuevaCuenta = lbl_nuevaCuenta.getFont();
-        Map<TextAttribute, Object> attributes_NC = (Map<TextAttribute, Object>) font_nuevaCuenta.getAttributes();
-        attributes_NC.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-        lbl_nuevaCuenta.setFont(font_nuevaCuenta.deriveFont(attributes_NC));
     }
 
     
@@ -32,7 +17,6 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        lbl_recuperarContraseña = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -41,8 +25,9 @@ public class Login extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         botonSwing1 = new provet.componentes.botonSwing();
-        lbl_nuevaCuenta = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        link_nuevaCuenta = new provet.componentes.linkLabel();
+        link_recuperarContra = new provet.componentes.linkLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -58,19 +43,6 @@ public class Login extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(228, 230, 217));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lbl_recuperarContraseña.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbl_recuperarContraseña.setForeground(new java.awt.Color(39, 53, 38));
-        lbl_recuperarContraseña.setText("Haz click aquí");
-        lbl_recuperarContraseña.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbl_recuperarContraseñaMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lbl_recuperarContraseñaMouseEntered(evt);
-            }
-        });
-        jPanel1.add(lbl_recuperarContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 100, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(39, 53, 38));
@@ -123,23 +95,26 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel1.add(botonSwing1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 230, 50));
 
-        lbl_nuevaCuenta.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbl_nuevaCuenta.setForeground(new java.awt.Color(39, 53, 38));
-        lbl_nuevaCuenta.setText("Crea una cuenta aquí.");
-        lbl_nuevaCuenta.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbl_nuevaCuentaMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lbl_nuevaCuentaMouseEntered(evt);
-            }
-        });
-        jPanel1.add(lbl_nuevaCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 240, -1));
-
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(39, 53, 38));
         jLabel12.setText("¿No tienes una cuenta con nosotros?");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 250, -1));
+
+        link_nuevaCuenta.setText("Crea una cuenta aquí");
+        link_nuevaCuenta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                link_nuevaCuentaMouseClicked(evt);
+            }
+        });
+        jPanel1.add(link_nuevaCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, -1, -1));
+
+        link_recuperarContra.setText("Haz clic aquí");
+        link_recuperarContra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                link_recuperarContraMouseClicked(evt);
+            }
+        });
+        jPanel1.add(link_recuperarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 0, 420, 470));
 
@@ -184,21 +159,13 @@ public class Login extends javax.swing.JFrame {
         verificar_Datos();
     }//GEN-LAST:event_botonSwing1ActionPerformed
 
-    private void lbl_recuperarContraseñaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_recuperarContraseñaMouseClicked
-        System.out.println("Presionaron Recuperar contraseña");
-    }//GEN-LAST:event_lbl_recuperarContraseñaMouseClicked
+    private void link_nuevaCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_link_nuevaCuentaMouseClicked
+        System.out.println("Se presiono crear cuenta");
+    }//GEN-LAST:event_link_nuevaCuentaMouseClicked
 
-    private void lbl_recuperarContraseñaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_recuperarContraseñaMouseEntered
-        lbl_recuperarContraseña.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_lbl_recuperarContraseñaMouseEntered
-
-    private void lbl_nuevaCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_nuevaCuentaMouseClicked
-        System.out.println("Presionaron Nueva Cuenta");
-    }//GEN-LAST:event_lbl_nuevaCuentaMouseClicked
-
-    private void lbl_nuevaCuentaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_nuevaCuentaMouseEntered
-        lbl_nuevaCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_lbl_nuevaCuentaMouseEntered
+    private void link_recuperarContraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_link_recuperarContraMouseClicked
+        System.out.println("Se presiono recuperar contraseña");
+    }//GEN-LAST:event_link_recuperarContraMouseClicked
 
     public void verificar_Datos(){
         // Aquí iría tu lógica (ej: if usuario y pass son correctos...)
@@ -250,7 +217,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JLabel lbl_nuevaCuenta;
-    private javax.swing.JLabel lbl_recuperarContraseña;
+    private provet.componentes.linkLabel link_nuevaCuenta;
+    private provet.componentes.linkLabel link_recuperarContra;
     // End of variables declaration//GEN-END:variables
 }
