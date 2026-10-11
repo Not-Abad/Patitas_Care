@@ -95,7 +95,7 @@ public class Login extends javax.swing.JFrame {
         txt_Contraseña.setCaretColor(new java.awt.Color(39, 53, 38));
         pnl_Login.add(txt_Contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 190, 30));
 
-        chk_Ojo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/basil--eye-solid.png"))); // NOI18N
+        chk_Ojo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/eye.png"))); // NOI18N
         pnl_Login.add(chk_Ojo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 40, 30));
 
         btn_Aceptar.setBackground(new java.awt.Color(69, 98, 78));
