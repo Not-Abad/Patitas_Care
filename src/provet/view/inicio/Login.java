@@ -100,7 +100,7 @@ public class Login extends javax.swing.JFrame {
 
         btn_Aceptar.setBackground(new java.awt.Color(69, 98, 78));
         btn_Aceptar.setForeground(new java.awt.Color(228, 230, 217));
-        btn_Aceptar.setText("Iniciar");
+        btn_Aceptar.setText("Aceptar");
         btn_Aceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_AceptarActionPerformed(evt);

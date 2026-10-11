@@ -1,8 +1,9 @@
+
 //Indicamos a que paquete pertenece
 package provet.componentes;
 
 //Importamos las librerias
-import javax.swing.*;                 //Toda la libreria .swing
+import javax.swing.*;                   //Toda la libreria .swing
 import javax.swing.border.EmptyBorder;  //La libreria que edita los bordes
 import java.awt.*;                      //Toda la libreria .awt
 import java.io.File;                    //La libreria para manejo de archivos
@@ -41,7 +42,7 @@ public class Panel_DocumentoSubido extends PanelRedondeado {
     public enum TipoArchivo {
         //Definimos los tipos soportados y sus rutas de imagen
         PDF(new String[]{".pdf"}, "/imagenes/Iconos_pnlDocumentoSubido/pdf.png"),
-        IMAGEN(new String[]{".jpg", ".jpeg", ".png"}, "/imagenes/Iconos_pnlDocumentoSubido/imagen.png"),
+        IMAGEN(new String[]{".jpg", ".jpeg", ".png"}, "/imagenes/Iconos_pnlDocumentoSubido/amor.png"),
         DESCONOCIDO(new String[]{}, "/imagenes/Iconos_pnlDocumentoSubido/expediente.png");
 
         //Atributos del tipo
@@ -76,9 +77,17 @@ public class Panel_DocumentoSubido extends PanelRedondeado {
     private JButton btnDescargar;       //Boton para guardar copia en disco
 
     //Atributos de la clase (Propiedades)
-    private String rutaArchivo = "";                         //Ruta fisica del archivo
-    private File archivoVinculado;                           //Objeto archivo de Java
-    private EstadoArchivo estadoActual = EstadoArchivo.PENDIENTE; //Estado por defecto
+    private String rutaArchivo = "";                                //Ruta fisica del archivo
+    private File archivoVinculado;                                  //Objeto archivo de Java
+    private EstadoArchivo estadoActual = EstadoArchivo.PENDIENTE;   //Estado por defecto
+
+    //Colores de los botones
+    public final Color clrRojoF  = new Color(255, 235, 235);
+    public final Color clrRojoT  = new Color(170, 40, 40);
+    public final Color clrAzulF  = new Color(235, 245, 235);
+    public final Color clrAzulT  = new Color(40, 110, 40);
+    public final Color clrVerdeF = new Color(235, 240, 255);
+    public final Color clrVerdeT = new Color(40, 80, 170);
 
     //Constructor de la clase
     public Panel_DocumentoSubido() {
@@ -90,64 +99,64 @@ public class Panel_DocumentoSubido extends PanelRedondeado {
     //Metodo inicializar (agrega todos los ajustes)
     private void inicializar() {
         //Estilizamos el panel principal
-        setLayout(new BorderLayout(15, 0));                     //Define disposicion de bordes
-        setBorder(new EmptyBorder(12, 15, 12, 15));  //Agrega margen interno (Padding)
+        setLayout(new BorderLayout(15, 0));                             //Define disposicion de bordes
+        setBorder(new EmptyBorder(12, 15, 12, 15));          //Agrega margen interno (Padding)
         
-        setPreferredSize(new Dimension(840, 105));              //Define tamaño preferido
-        setMaximumSize(new Dimension(Integer.MAX_VALUE, 105));  //Define tamaño maximo
+        setPreferredSize(new Dimension(840, 105));                   //Define tamaño preferido
+        setMaximumSize(new Dimension(Integer.MAX_VALUE, 105));       //Define tamaño maximo
 
         //Configuramos el panel del icono (Lado izquierdo)
-        JPanel pnlIcono = new JPanel(new GridBagLayout());          //Usa GridBag para centrar
-        pnlIcono.setOpaque(false);                           //Hace el fondo transparente
-        pnlIcono.setPreferredSize(new Dimension(70, 0)); //Ancho fijo para el icono
+        JPanel pnlIcono = new JPanel(new GridBagLayout());                      //Usa GridBag para centrar
+        pnlIcono.setOpaque(false);                                       //Hace el fondo transparente
+        pnlIcono.setPreferredSize(new Dimension(70, 0));             //Ancho fijo para el icono
         
-        GridBagConstraints gbc = new GridBagConstraints(); //Crea restricciones de diseño
-        gbc.anchor = GridBagConstraints.NORTH;             //Alinea al norte (arriba)
-        gbc.weighty = 1.0;                                 //Da peso vertical
-        gbc.insets = new java.awt.Insets(10, 0, 0, 0);     //Agrega margen superior (10%)
-        
-        lblIcono = new JLabel();                           //Inicializa etiqueta de icono
-        actualizarIconoVisual("");                   //Carga imagen de expediente por defecto
-        
-        pnlIcono.add(lblIcono, gbc);         //Agrega etiqueta con restricciones
-        add(pnlIcono, BorderLayout.WEST);    //Lo posiciona al oeste
+        GridBagConstraints gbc = new GridBagConstraints();                      //Crea restricciones de diseño
+        gbc.anchor = GridBagConstraints.NORTH;                                  //Alinea al norte (arriba)
+        gbc.weighty = 1.0;                                                      //Da peso vertical
+        gbc.insets = new java.awt.Insets(10, 0, 0, 0);       //Agrega margen superior (10%)
+        lblIcono = new JLabel();                                                //Inicializa etiqueta de icono
+        actualizarIconoVisual("");                                        //Carga imagen de expediente por defecto
+        pnlIcono.add(lblIcono, gbc);                              //Agrega etiqueta con restricciones
+        add(pnlIcono, BorderLayout.WEST);                         //Lo posiciona al oeste
 
         //Configuramos el panel de informacion (Centro)
-        JPanel pnlInfo = new JPanel(new GridLayout(3, 1, 0, 2)); //Rejilla de 3 filas
-        pnlInfo.setOpaque(false);                                //Fondo transparente
+        JPanel pnlInfo = new JPanel(new GridLayout(2, 1, 0, 2));//Rejilla de 2 filas
+        pnlInfo.setOpaque(false);                                        //Fondo transparente
         
-        lblNombre = new JLabel("Sin archivo seleccionado");             //Etiqueta de nombre inicial
-        lblNombre.setFont(new Font("Arial", Font.BOLD, 14));   //Define tipografia negrita
+        lblNombre = new JLabel("Sin archivo seleccionado");                 //Etiqueta de nombre inicial
+        lblNombre.setFont(new Font("Tahoma", Font.BOLD, 25));      //Define tipografia negrita
         
-        lblFecha = new JLabel("Fecha: --/--/----");                     //Etiqueta de fecha inicial
-        lblFecha.setFont(new Font("Arial", Font.PLAIN, 12));   //Define tipografia normal
-        lblFecha.setForeground(Color.GRAY);                              //Color gris
-        
-        lblEstado = new JLabel();                                //Inicializa etiqueta de estado
-        lblEstado.setFont(new Font("Arial", Font.ITALIC + Font.BOLD, 11)); //Negrita cursiva
+        JPanel pnlDatos = new JPanel(new GridLayout(1,2,0,2));
+        pnlDatos.setOpaque(false);
+        lblFecha = new JLabel("Fecha: --/--/----");                         //Etiqueta de fecha inicial
+        lblFecha.setFont(new Font("Tahoma", Font.PLAIN, 12));      //Define tipografia normal
+        lblFecha.setForeground(Color.GRAY);                                  //Color gris
+        lblEstado = new JLabel();                                               //Inicializa etiqueta de estado
+        lblEstado.setFont(new Font("Tahoma", Font.ITALIC + Font.BOLD, 11)); //Negrita cursiva
+        pnlDatos.add(lblFecha);                                             //Agrega fecha
+        pnlDatos.add(lblEstado);                                            //Agrega estado
         
         pnlInfo.add(lblNombre);         //Agrega nombre
-        pnlInfo.add(lblFecha);          //Agrega fecha
-        pnlInfo.add(lblEstado);         //Agrega estado
+        pnlInfo.add(pnlDatos);         //Agregamos el panel de los datos
         add(pnlInfo, BorderLayout.CENTER); //Lo posiciona al centro
 
         //Configuramos el panel de acciones (Lado derecho)
         JPanel pnlAcciones = new JPanel(new FlowLayout(FlowLayout.RIGHT, 8, 18)); //Alineado derecha
         pnlAcciones.setOpaque(false);                                             //Fondo transparente
 
-        btnVer = crearBoton("👁", new Color(235, 245, 235), new Color(40, 110, 40));      //Boton ver
-        btnDescargar = crearBoton("💾↓", new Color(235, 240, 255), new Color(40, 80, 170)); //Boton descargar
-        btnBorrar = crearBoton("🗑", new Color(255, 235, 235), new Color(170, 40, 40));    //Boton borrar
+        btnVer = crearBoton("👁", clrVerdeF, clrVerdeT);      //Boton ver
+        btnDescargar = crearBoton("💾↓", clrAzulF,clrAzulT); //Boton descargar
+        btnBorrar = crearBoton("🗑", clrRojoF, clrRojoT);    //Boton borrar
 
-        pnlAcciones.add(btnVer);        //Agrega boton ver
-        pnlAcciones.add(btnDescargar);  //Agrega boton descargar
-        pnlAcciones.add(btnBorrar);     //Agrega boton borrar
-        add(pnlAcciones, BorderLayout.EAST); //Lo posiciona al este
+        pnlAcciones.add(btnVer);                        //Agrega boton ver
+        pnlAcciones.add(btnDescargar);                  //Agrega boton descargar
+        pnlAcciones.add(btnBorrar);                     //Agrega boton borrar
+        add(pnlAcciones, BorderLayout.EAST);  //Lo posiciona al este
 
         //Agregamos eventos a los botones
-        btnVer.addActionListener(e -> abrirDocumento());        //Accion para visualizar
-        btnBorrar.addActionListener(e -> eliminarEstePanel());  //Accion para quitar panel
-        btnDescargar.addActionListener(e -> descargarDocumento()); //Accion para guardar
+        btnVer.addActionListener(e -> abrirDocumento());            //Accion para visualizar
+        btnBorrar.addActionListener(e -> eliminarEstePanel());      //Accion para quitar panel
+        btnDescargar.addActionListener(e -> descargarDocumento());  //Accion para guardar
 
         actualizarEstadoVisual(); //Pinta el estado inicial
     }
@@ -210,7 +219,7 @@ public class Panel_DocumentoSubido extends PanelRedondeado {
         Container padre = this.getParent(); //Busca el contenedor padre
         //Si tiene un padre, Entonces..
         if (padre != null) {
-            padre.remove(this);             //Se quita a si mismo
+            padre.remove(this);         //Se quita a si mismo
             padre.revalidate();             //Revalida diseño
             padre.repaint();                //Repinta
         }
@@ -221,12 +230,12 @@ public class Panel_DocumentoSubido extends PanelRedondeado {
         TipoArchivo tipo = TipoArchivo.desdeNombre(nombre); //Busca el tipo segun extension
         try {
             java.net.URL url = getClass().getResource(tipo.getRuta());
-            //Si encuentra la imagen, Entonces..
+            //Si encuentra la imagen, Entoncxes..
             if (url != null) {
-                ImageIcon img = new ImageIcon(url);         //Carga imagen
+                ImageIcon img = new ImageIcon(url);          //Carga imagen
                 lblIcono.setIcon(new ImageIcon(img.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
-                lblIcono.setText("");                       //Limpia texto
-            } else { throw new Exception(); }               //Fuerza error si no hay imagen
+                lblIcono.setText("");                           //Limpia texto
+            } else { throw new Exception(); }                       //Fuerza error si no hay imagen
         } catch (Exception e) {
             lblIcono.setIcon(null); lblIcono.setText("X📄"); //Muestra emoji de respaldo
             lblIcono.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 30));
@@ -243,13 +252,12 @@ public class Panel_DocumentoSubido extends PanelRedondeado {
     }
 
     // --- GETTERS Y SETTERS PARA EL INSPECTOR DE NETBEANS ---
-
     public String getRutaArchivo() { return rutaArchivo; }
     
     //Modifica la ruta y actualiza toda la informacion del panel
     public void setRutaArchivo(String ruta) {
-        this.rutaArchivo = ruta;                    //Guarda ruta
-        this.archivoVinculado = new File(ruta);     //Crea objeto File
+        this.rutaArchivo = ruta;                        //Guarda ruta
+        this.archivoVinculado = new File(ruta);  //Crea objeto File
         //Si el archivo existe fisicamente, Entonces..
         if (archivoVinculado.exists()) {
             lblNombre.setText(archivoVinculado.getName()); //Cambia nombre
@@ -257,7 +265,7 @@ public class Panel_DocumentoSubido extends PanelRedondeado {
             lblFecha.setText("Subido: " + sdf.format(archivoVinculado.lastModified())); //Cambia fecha
             actualizarIconoVisual(archivoVinculado.getName()); //Cambia icono
         } else { //Si no, Entonces..
-            actualizarIconoVisual(""); //Regresa a icono de expediente
+            actualizarIconoVisual("");              //Regresa a icono de expediente
         }
     }
 
