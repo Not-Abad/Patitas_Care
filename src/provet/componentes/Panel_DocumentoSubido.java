@@ -173,23 +173,34 @@ public class Panel_DocumentoSubido extends PanelRedondeado {
     }
 
     //Metodo para abrir el documento en el sistema
+//Metodo para abrir el documento (Corregido para que no se cierre en Ubuntu)
     private void abrirDocumento() {
-        //Si el archivo existe, Entonces..
+        //Si el archivo existe fisicamente, Entonces..
         if (archivoVinculado != null && archivoVinculado.exists()) {
-            //Lanzamos un hilo nuevo para evitar congelar la interfaz
+            //Lanzamos un hilo nuevo para no congelar la interfaz de Provet
             new Thread(() -> {
                 try {
+                    String ruta = archivoVinculado.getAbsolutePath();
                     String os = System.getProperty("os.name").toLowerCase();
-                    //Si es sistema Linux, Entonces..
+
+                    //Si el sistema es Linux/Ubuntu, Entonces..
                     if (os.contains("nix") || os.contains("nux")) {
-                        Runtime.getRuntime().exec(new String[]{"xdg-open", archivoVinculado.getAbsolutePath()});
-                    } else { //Si no, Entonces..
+                        //Usamos 'sh -c' para que el lector sea un proceso totalmente independiente
+                        //Esto evita que Ubuntu cierre el PDF cuando el hilo de Java termine
+                        String[] comando = {"sh", "-c", "xdg-open '" + ruta + "' & disown"};
+                        Runtime.getRuntime().exec(comando);
+                    } else if (os.contains("win")) {
+                        //Si es Windows, lanzamos el proceso nativo ligero
+                        new ProcessBuilder("rundll32", "url.dll,FileProtocolHandler", ruta).start();
+                    } else {
+                        //Si es otro sistema, usamos el metodo por defecto de Java
                         Desktop.getDesktop().open(archivoVinculado);
                     }
                 } catch (IOException ex) {
-                    SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(this, "Error al abrir."));
+                    //Si falla, avisamos al usuario mediante un hilo de interfaz
+                    SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(this, "Error al abrir el visor."));
                 }
-            }).start();
+            }).start(); //Iniciamos el hilo
         }
     }
 

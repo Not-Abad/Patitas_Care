@@ -1,7 +1,12 @@
 
 package provet.view.propietario;
 
+import java.awt.Dimension;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.Box.Filler;
+import javax.swing.JOptionPane;
+import provet.componentes.Panel_DocumentoSubido;
 
 public class MenuPropietario_Archivos extends javax.swing.JFrame {
     
@@ -20,6 +25,8 @@ public class MenuPropietario_Archivos extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         botonSwing2 = new provet.componentes.botonSwing();
+        contenedorArchivos = new provet.componentes.Contenedor_Cartas();
+        contenedorArchivos.setEje(1);
         panel_DocumentoSubido1 = new provet.componentes.Panel_DocumentoSubido();
         panel_DocumentoSubido2 = new provet.componentes.Panel_DocumentoSubido();
         panel_DocumentoSubido3 = new provet.componentes.Panel_DocumentoSubido();
@@ -59,14 +66,14 @@ public class MenuPropietario_Archivos extends javax.swing.JFrame {
                 botonSwing2ActionPerformed(evt);
             }
         });
-        jPanel1.add(botonSwing2, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 50, 250, 60));
+        jPanel1.add(botonSwing2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 50, 250, 60));
 
-        panel_DocumentoSubido1.setRutaArchivo("/home/jesus-abad/Descargas/PatitasCare-1.0.0/src/imagenes/Iconos_pnlDocumentoSubido/Abad_Jesus_Act2.4.pdf");
-        jPanel1.add(panel_DocumentoSubido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 410, 840, -1));
-        jPanel1.add(panel_DocumentoSubido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, -1, -1));
+        contenedorArchivos.setBackground(new java.awt.Color(192, 207, 178));
+        contenedorArchivos.add(panel_DocumentoSubido1, new java.awt.GridBagConstraints());
+        contenedorArchivos.add(panel_DocumentoSubido2, new java.awt.GridBagConstraints());
+        contenedorArchivos.add(panel_DocumentoSubido3, new java.awt.GridBagConstraints());
 
-        panel_DocumentoSubido3.setRutaArchivo("/home/jesus-abad/Descargas/PatitasCare-1.0.0/src/imagenes/Iconos_pnlDocumentoSubido/amor.png");
-        jPanel1.add(panel_DocumentoSubido3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, -1, -1));
+        jPanel1.add(contenedorArchivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 970, 590));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, 1200, 740));
 
@@ -131,7 +138,6 @@ public class MenuPropietario_Archivos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_administrativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_administrativoActionPerformed
-        
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_administrativoActionPerformed
 
@@ -152,13 +158,40 @@ public class MenuPropietario_Archivos extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_SalirActionPerformed
 
     private void botonSwing2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing2ActionPerformed
-        // TODO add your handling code here:
+        abrirDocumento();
     }//GEN-LAST:event_botonSwing2ActionPerformed
 
     private void btn_MenuPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_MenuPActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_MenuPActionPerformed
 
+        //Metodo para abrir el documento en el sistema
+    private void abrirDocumento() {
+        
+        // 1. Creamos la instancia del selector de archivos
+        JFileChooser selector = new JFileChooser();
+
+        // 2. Creamos filtros para que solo se vean archivos útiles (Opcional pero recomendado)
+        javax.swing.filechooser.FileNameExtensionFilter filtro = new javax.swing.filechooser.FileNameExtensionFilter(
+    "Documentos de Mascotas (PDF, JPG, PNG)", "pdf", "jpg", "jpeg", "png");
+        selector.setFileFilter(filtro);
+
+        // 3. Abrimos la ventana y guardamos la respuesta del usuario
+        int resultado = selector.showOpenDialog(this);
+
+        // 4. Si el usuario seleccionó un archivo y le dio a "Abrir"...
+        if (resultado == JFileChooser.APPROVE_OPTION) {
+            java.io.File archivoSeleccionado = selector.getSelectedFile();
+            String rutaAbsoluta = archivoSeleccionado.getAbsolutePath();
+    
+            // Aquí es donde ocurre la magia:
+            // Creamos una nueva instancia de tu componente y le pasamos la ruta
+            Panel_DocumentoSubido nuevaTarjeta = new Panel_DocumentoSubido();
+            nuevaTarjeta.setRutaArchivo(rutaAbsoluta);
+            contenedorArchivos.add(nuevaTarjeta);
+            JOptionPane.showMessageDialog(null,"Archivo vinculado: " + rutaAbsoluta);
+    }
+}
     /**
      * @param args the command line arguments
      */
@@ -191,6 +224,7 @@ public class MenuPropietario_Archivos extends javax.swing.JFrame {
     private provet.componentes.botonSwing btn_MenuP;
     private provet.componentes.botonSwing btn_Reportes;
     private provet.componentes.botonSwing btn_Salir;
+    private provet.componentes.Contenedor_Cartas contenedorArchivos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
