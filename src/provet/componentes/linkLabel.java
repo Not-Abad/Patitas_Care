@@ -70,22 +70,22 @@ public final class linkLabel extends JLabel {
     private void inicializar() {
         
         setCursor(new Cursor(Cursor.HAND_CURSOR));  //Cambia el puntero a la manita
-        cambiarEstilo(false, colorNormal);          //Estado inicial: sin subrayado y color normal
+        cambiarEstilo(false, colorNormal);  //Estado inicial: sin subrayado y color normal
 
         //Agregamos nuestras Listeners de Mouse al label
         addMouseListener(new MouseAdapter() {
             
-            @Override       //Al pasar el mouse (Hover) -> Subrayar
+            @Override       //Al pasar el mouse Subrayar
             public void mouseEntered(MouseEvent e) {
                 cambiarEstilo(true, colorNormal); 
             }
 
-            @Override       //Al quitar el mouse -> Quitar subrayado y volver a color normal
+            @Override       //Al quitar el mouse Quitar subrayado y volver a color normal
             public void mouseExited(MouseEvent e) {
                 cambiarEstilo(false, colorNormal);
             }
 
-            @Override       //Al presionar el click -> Subrayar y poner Azul
+            @Override       //Al presionar el click Subrayar y poner Azul
             public void mousePressed(MouseEvent e) {
                 cambiarEstilo(true, colorClick);
             }

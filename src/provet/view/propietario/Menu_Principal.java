@@ -1,5 +1,5 @@
 
-package provet.view;
+package provet.view.propietario;
 
 import javax.swing.JFrame;
 

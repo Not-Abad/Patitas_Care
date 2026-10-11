@@ -1,8 +1,11 @@
 
 //Paquete al que pertenece la ventana
-package provet.view;
+package provet.view.inicio;
 
 //Inicio de la clase Login, que hereda de la clase JFrame
+
+import provet.view.veterinario.Menu_Principal;
+
 public class Login extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Login.class.getName());
@@ -134,12 +137,12 @@ public class Login extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(228, 230, 217));
         jLabel4.setText("PatitasCare es un sistema que permite el");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 260, 20));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 280, 20));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(228, 230, 217));
         jLabel5.setText("manejo de personal médico y usuarios para");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 280, 20));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 310, 20));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(228, 230, 217));
