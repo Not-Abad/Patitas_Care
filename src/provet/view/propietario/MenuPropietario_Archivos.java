@@ -51,6 +51,7 @@ public class MenuPropietario_Archivos extends javax.swing.JFrame {
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, -1, 29));
 
         botonSwing2.setBackground(new java.awt.Color(108, 135, 118));
+        botonSwing2.setForeground(new java.awt.Color(39, 53, 38));
         botonSwing2.setText("Subir archivos");
         botonSwing2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         botonSwing2.addActionListener(new java.awt.event.ActionListener() {
@@ -93,13 +94,24 @@ public class MenuPropietario_Archivos extends javax.swing.JFrame {
         jLabel16.setText("Propietario");
         jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, -1, -1));
 
+        btn_MenuP.setForeground(new java.awt.Color(39, 53, 38));
         btn_MenuP.setText("Menú Principal");
+        btn_MenuP.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        btn_MenuP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_MenuPActionPerformed(evt);
+            }
+        });
         jPanel2.add(btn_MenuP, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 60));
 
+        botonSwing1.setForeground(new java.awt.Color(39, 53, 38));
         botonSwing1.setText("Pacientes");
+        botonSwing1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jPanel2.add(botonSwing1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 250, 60));
 
+        btn_Calendario.setForeground(new java.awt.Color(39, 53, 38));
         btn_Calendario.setText("Calendario");
+        btn_Calendario.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jPanel2.add(btn_Calendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 250, 60));
 
         btn_Reportes.setText("Reportes");
@@ -142,6 +154,10 @@ public class MenuPropietario_Archivos extends javax.swing.JFrame {
     private void botonSwing2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_botonSwing2ActionPerformed
+
+    private void btn_MenuPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_MenuPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_MenuPActionPerformed
 
     /**
      * @param args the command line arguments

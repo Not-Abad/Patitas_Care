@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package provet.componentes;
-
+import provet.model.Paciente;
 /**
  *
  * @author anguv
@@ -17,6 +17,13 @@ public class PanelPaciente extends PanelRedondeado {
         initComponents();
     }
 
+public void setDatos(Paciente paciente) {
+    IDlabel.setText("ID: " + paciente.getID());
+    NombreMascotalbl.setText(paciente.getNombre());
+    Razalbl.setText(paciente.getRaza());
+    lblfoto.setText(paciente.getFoto());
+    
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,19 +33,88 @@ public class PanelPaciente extends PanelRedondeado {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        IDlabel = new javax.swing.JLabel();
+        NombreMascotalbl = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        lblfoto = new javax.swing.JLabel();
+        Razalbl = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+
+        jPanel1.setBackground(new java.awt.Color(192, 207, 178));
+
+        IDlabel.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        IDlabel.setForeground(new java.awt.Color(39, 53, 38));
+        IDlabel.setText("IDMASCOTA");
+
+        NombreMascotalbl.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        NombreMascotalbl.setForeground(new java.awt.Color(39, 53, 38));
+        NombreMascotalbl.setText("NombreMascota");
+
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblfoto.setText("foto");
+        jPanel2.add(lblfoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 58, -1, -1));
+
+        Razalbl.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        Razalbl.setForeground(new java.awt.Color(39, 53, 38));
+        Razalbl.setText("RazaMascota");
+
+        jSeparator1.setBackground(new java.awt.Color(39, 53, 38));
+        jSeparator1.setForeground(new java.awt.Color(39, 53, 38));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(NombreMascotalbl)
+                    .addComponent(IDlabel)
+                    .addComponent(Razalbl)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(IDlabel)
+                        .addGap(16, 16, 16)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(NombreMascotalbl)
+                        .addGap(18, 18, 18)
+                        .addComponent(Razalbl)))
+                .addContainerGap(41, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 380, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel IDlabel;
+    private javax.swing.JLabel NombreMascotalbl;
+    private javax.swing.JLabel Razalbl;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblfoto;
     // End of variables declaration//GEN-END:variables
 }

@@ -65,7 +65,7 @@ public final class botonSwing extends JButton {
         setBorderPainted(false);            //Quita el borde gris estándar de los botones
         setOpaque(false);              //Hace que el componente sea transparente en las esquinas
         setCursor(new Cursor(Cursor.HAND_CURSOR));  //Cambia el puntero a la manita
-        setFont(new Font("Segoe UI", Font.BOLD, 16));   // Define una tipografía
+        setFont(new Font("Tahoma", Font.BOLD, 16));   // Define una tipografía
 
         //Agregamos nuestras Listeners de Mouse al boton
         addMouseListener(new MouseAdapter() {

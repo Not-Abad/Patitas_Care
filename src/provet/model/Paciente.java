@@ -18,12 +18,13 @@ public class Paciente {
     String Sexo;
     String Alergias;
     String Vacunas;
+    String foto;
     
     public Paciente(){
         
     }
     
-    public Paciente(int ID, String Nombre, String Especie, String Raza, float Edad, float Peso, String Sexo, String Alergias, String Vacunas){
+    public Paciente(int ID, String Nombre, String Especie, String Raza, float Edad, float Peso, String Sexo, String Alergias, String Vacunas, String foto){
         this.ID = ID;
         this.Nombre = Nombre;
         this.Especie = Especie;
@@ -33,6 +34,7 @@ public class Paciente {
         this.Sexo = Sexo;
         this.Alergias = Alergias;
         this.Vacunas = Vacunas;
+        this.foto = foto;
     }
     
     //getters
@@ -72,6 +74,10 @@ public class Paciente {
         return Vacunas;
     }
     
+    public String getFoto(){
+        return foto;
+    }
+    
     //setters
     public void setID(int ID) {
         this.ID = ID;
@@ -97,6 +103,10 @@ public class Paciente {
         this.Peso = Peso;
     } 
     
+    public void setSexo(String Sexo) {
+        this.Sexo = Sexo;
+    } 
+    
     public void setAlergias(String Alergias) {
         this.Alergias = Alergias;
     }
@@ -105,6 +115,9 @@ public class Paciente {
         this.Vacunas = Vacunas;
     }
   
+    public void setFoto (String foto) {
+        this.foto = foto;
+    }
 }
 
 

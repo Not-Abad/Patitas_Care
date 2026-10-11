@@ -2,6 +2,10 @@
 package provet.view.propietario;
 
 import javax.swing.JFrame;
+import provet.model.Paciente;
+import provet.model.ControlPacientes;
+import provet.componentes.PanelPaciente;
+import java.awt.GridLayout;
 
 public class Pacientes extends javax.swing.JFrame {
     
@@ -10,7 +14,47 @@ public class Pacientes extends javax.swing.JFrame {
     public Pacientes() {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+   jPanel3.setLayout(new GridLayout(0, 3, 20, 20));
+   
+    ControlPacientes.listaPacientes.add(
+        new Paciente(1, "Firulais", "Perro", "Labrador", 3, 20, "M", "", "", "src/img/perro1.jpg")
+    );
+
+    ControlPacientes.listaPacientes.add(
+        new Paciente(2, "Michi", "Gato", "Siames", 2, 5, "H", "", "", "src/img/gato1.jpg")
+    );
+
+    ControlPacientes.listaPacientes.add(
+        new Paciente(3, "Rocky", "Perro", "Bulldog", 4, 18, "M", "", "", "src/img/perro2.jpg")
+    );
+
+
+    cargarPacientes();
     }
+    
+    public void agregarPaciente(Paciente p) {
+    PanelPaciente panel = new PanelPaciente();
+    panel.setDatos(p);
+
+    jPanel3.add(panel);
+    jPanel3.revalidate();
+    jPanel3.repaint();
+}
+    
+    public void cargarPacientes() {
+    jPanel3.removeAll();
+
+    for (Paciente p : ControlPacientes.listaPacientes) {
+        PanelPaciente panel = new PanelPaciente();
+        panel.setDatos(p);
+        jPanel3.add(panel);
+    }
+
+    jPanel3.revalidate();
+    jPanel3.repaint();
+}
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -29,7 +73,6 @@ public class Pacientes extends javax.swing.JFrame {
         btn_Salir = new provet.componentes.botonSwing();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
 
         jMenu1.setText("jMenu1");
 
@@ -62,6 +105,7 @@ public class Pacientes extends javax.swing.JFrame {
         jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, -1, -1));
 
         btn_MenuP.setText("Menú Principal");
+        btn_MenuP.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jPanel2.add(btn_MenuP, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 60));
 
         botonSwing1.setText("Pacientes");
@@ -84,9 +128,7 @@ public class Pacientes extends javax.swing.JFrame {
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 740));
 
         jPanel3.setBackground(new java.awt.Color(228, 230, 217));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 380, 370));
-
+        jPanel3.setLayout(new java.awt.GridLayout());
         jScrollPane1.setViewportView(jPanel3);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 2, 1200, 740));
@@ -151,7 +193,6 @@ public class Pacientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
