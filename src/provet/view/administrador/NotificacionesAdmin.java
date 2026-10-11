@@ -43,10 +43,10 @@ private javax.swing.JLabel lblFecha;
         jLabel6 = new javax.swing.JLabel();
         lbl_admin_menu = new javax.swing.JLabel();
         lbl_administrador_menu = new javax.swing.JLabel();
-        btn_usuarios1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btn_MenuN = new javax.swing.JButton();
+        btn_reportesN = new javax.swing.JButton();
         btn_salida1 = new javax.swing.JButton();
-        btn_usuarios3 = new javax.swing.JButton();
+        btn_usuariosN = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
 
@@ -70,23 +70,25 @@ private javax.swing.JLabel lblFecha;
         lbl_administrador_menu.setForeground(new java.awt.Color(255, 255, 255));
         lbl_administrador_menu.setText("Administrador");
 
-        btn_usuarios1.setBackground(new java.awt.Color(228, 230, 217));
-        btn_usuarios1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btn_usuarios1.setText("Menu Principal");
+        btn_MenuN.setBackground(new java.awt.Color(228, 230, 217));
+        btn_MenuN.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_MenuN.setText("Menu Principal");
+        btn_MenuN.addActionListener(this::btn_MenuNActionPerformed);
 
-        jButton3.setBackground(new java.awt.Color(228, 230, 217));
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton3.setText("Reportes");
-        jButton3.setPreferredSize(new java.awt.Dimension(97, 29));
-        jButton3.addActionListener(this::jButton3ActionPerformed);
+        btn_reportesN.setBackground(new java.awt.Color(228, 230, 217));
+        btn_reportesN.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_reportesN.setText("Reportes");
+        btn_reportesN.setPreferredSize(new java.awt.Dimension(97, 29));
+        btn_reportesN.addActionListener(this::btn_reportesNActionPerformed);
 
         btn_salida1.setBackground(new java.awt.Color(228, 230, 217));
         btn_salida1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btn_salida1.setText("Salida");
 
-        btn_usuarios3.setBackground(new java.awt.Color(228, 230, 217));
-        btn_usuarios3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btn_usuarios3.setText("Usuarios");
+        btn_usuariosN.setBackground(new java.awt.Color(228, 230, 217));
+        btn_usuariosN.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_usuariosN.setText("Usuarios");
+        btn_usuariosN.addActionListener(this::btn_usuariosNActionPerformed);
 
         jLabel3.setBackground(new java.awt.Color(108, 135, 118));
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -107,14 +109,14 @@ private javax.swing.JLabel lblFecha;
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(58, 58, 58)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btn_usuarios1, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+                            .addComponent(btn_MenuN, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addGap(62, 62, 62)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbl_admin_menu)
                                     .addComponent(lbl_administrador_menu)))
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+                            .addComponent(btn_reportesN, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(59, 59, 59)
                                 .addComponent(jLabel3)))))
@@ -126,7 +128,7 @@ private javax.swing.JLabel lblFecha;
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(55, 55, 55)
-                    .addComponent(btn_usuarios3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_usuariosN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGap(40, 40, 40)))
         );
         jPanel1Layout.setVerticalGroup(
@@ -145,9 +147,9 @@ private javax.swing.JLabel lblFecha;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lbl_administrador_menu)
                         .addGap(95, 95, 95)
-                        .addComponent(btn_usuarios1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_MenuN, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(107, 107, 107)))
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_reportesN, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(174, 174, 174)
@@ -156,7 +158,7 @@ private javax.swing.JLabel lblFecha;
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(320, 320, 320)
-                    .addComponent(btn_usuarios3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_usuariosN, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(380, Short.MAX_VALUE)))
         );
 
@@ -180,9 +182,20 @@ private javax.swing.JLabel lblFecha;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void btn_reportesNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reportesNActionPerformed
+    new ReportesAdmin().setVisible(true); 
+    this.dispose();
+    }//GEN-LAST:event_btn_reportesNActionPerformed
+
+    private void btn_MenuNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_MenuNActionPerformed
+    new MenuAdmin().setVisible(true); 
+    this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_MenuNActionPerformed
+
+    private void btn_usuariosNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_usuariosNActionPerformed
+     new UsuariosAdmin().setVisible(true); 
+    this.dispose();
+    }//GEN-LAST:event_btn_usuariosNActionPerformed
 
     private void construirUI() {
 
@@ -346,10 +359,10 @@ private javax.swing.JPanel crearFila(Notificacion n) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_MenuN;
+    private javax.swing.JButton btn_reportesN;
     private javax.swing.JButton btn_salida1;
-    private javax.swing.JButton btn_usuarios1;
-    private javax.swing.JButton btn_usuarios3;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btn_usuariosN;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;

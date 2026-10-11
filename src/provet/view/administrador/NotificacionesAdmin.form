@@ -49,7 +49,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="btn_usuarios1" pref="235" max="32767" attributes="0"/>
+                              <Component id="btn_MenuN" pref="235" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
@@ -58,7 +58,7 @@
                                       <Component id="lbl_administrador_menu" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Component id="jButton3" alignment="0" pref="235" max="32767" attributes="0"/>
+                              <Component id="btn_reportesN" alignment="0" pref="235" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
@@ -76,7 +76,7 @@
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-                      <Component id="btn_usuarios3" max="32767" attributes="0"/>
+                      <Component id="btn_usuariosN" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -99,11 +99,11 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="lbl_administrador_menu" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
-                          <Component id="btn_usuarios1" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="btn_MenuN" min="-2" pref="40" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="jButton3" min="-2" pref="40" max="-2" attributes="0"/>
+                  <Component id="btn_reportesN" min="-2" pref="40" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   <Component id="jLabel3" min="-2" pref="40" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="174" max="-2" attributes="0"/>
@@ -113,7 +113,7 @@
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="320" max="-2" attributes="0"/>
-                      <Component id="btn_usuarios3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="btn_usuariosN" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace pref="380" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -160,7 +160,7 @@
             <Property name="text" type="java.lang.String" value="Administrador"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btn_usuarios1">
+        <Component class="javax.swing.JButton" name="btn_MenuN">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="d9" green="e6" red="e4" type="rgb"/>
@@ -170,8 +170,11 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Menu Principal"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_MenuNActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton3">
+        <Component class="javax.swing.JButton" name="btn_reportesN">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="d9" green="e6" red="e4" type="rgb"/>
@@ -185,7 +188,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_reportesNActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_salida1">
@@ -199,7 +202,7 @@
             <Property name="text" type="java.lang.String" value="Salida"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btn_usuarios3">
+        <Component class="javax.swing.JButton" name="btn_usuariosN">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="d9" green="e6" red="e4" type="rgb"/>
@@ -209,6 +212,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Usuarios"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_usuariosNActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>

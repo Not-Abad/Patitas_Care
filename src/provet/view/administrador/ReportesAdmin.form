@@ -95,9 +95,9 @@
                       </Group>
                   </Group>
                   <Component id="btn_menuR" min="-2" pref="40" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   <Component id="btn_usuariosR" min="-2" pref="40" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Component id="lbl_reportes" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                   <Component id="btn_notificacionesR" min="-2" pref="40" max="-2" attributes="0"/>
@@ -158,6 +158,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Menu Principal"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_menuRActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_notificacionesR">
           <Properties>
@@ -169,6 +172,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Notificaciones"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_notificacionesRActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_salidaR">
           <Properties>
@@ -202,6 +208,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Usuarios"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_usuariosRActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

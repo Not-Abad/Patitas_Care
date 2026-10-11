@@ -77,6 +77,7 @@ class Usuario {
         btn_notificacionesU.setBackground(new java.awt.Color(228, 230, 217));
         btn_notificacionesU.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btn_notificacionesU.setText("Notificaciones");
+        btn_notificacionesU.addActionListener(this::btn_notificacionesUActionPerformed);
 
         btn_salidaU.setBackground(new java.awt.Color(228, 230, 217));
         btn_salidaU.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -89,6 +90,7 @@ class Usuario {
         btn_menuU.setBackground(new java.awt.Color(228, 230, 217));
         btn_menuU.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btn_menuU.setText("Menu Principal");
+        btn_menuU.addActionListener(this::btn_menuUActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -141,9 +143,9 @@ class Usuario {
                 .addComponent(lbl_usuariosU)
                 .addGap(40, 40, 40)
                 .addComponent(btn_reportesU, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(32, 32, 32)
                 .addComponent(btn_notificacionesU, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(172, 172, 172)
+                .addGap(170, 170, 170)
                 .addComponent(btn_salidaU, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
         );
@@ -169,8 +171,19 @@ class Usuario {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_reportesUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reportesUActionPerformed
-        // TODO add your handling code here:
+    new ReportesAdmin().setVisible(true); 
+    this.dispose();
     }//GEN-LAST:event_btn_reportesUActionPerformed
+
+    private void btn_menuUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_menuUActionPerformed
+    new MenuAdmin().setVisible(true); 
+    this.dispose();
+    }//GEN-LAST:event_btn_menuUActionPerformed
+
+    private void btn_notificacionesUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_notificacionesUActionPerformed
+    new NotificacionesAdmin().setVisible(true); 
+    this.dispose();
+    }//GEN-LAST:event_btn_notificacionesUActionPerformed
 
     private void construirUI() {
     jPanel2.setLayout(null);

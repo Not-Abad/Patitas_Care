@@ -62,10 +62,12 @@ private javax.swing.JPanel panelHistorial;
         btn_menuR.setBackground(new java.awt.Color(228, 230, 217));
         btn_menuR.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btn_menuR.setText("Menu Principal");
+        btn_menuR.addActionListener(this::btn_menuRActionPerformed);
 
         btn_notificacionesR.setBackground(new java.awt.Color(228, 230, 217));
         btn_notificacionesR.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btn_notificacionesR.setText("Notificaciones");
+        btn_notificacionesR.addActionListener(this::btn_notificacionesRActionPerformed);
 
         btn_salidaR.setBackground(new java.awt.Color(228, 230, 217));
         btn_salidaR.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -78,6 +80,7 @@ private javax.swing.JPanel panelHistorial;
         btn_usuariosR.setBackground(new java.awt.Color(228, 230, 217));
         btn_usuariosR.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btn_usuariosR.setText("Usuarios");
+        btn_usuariosR.addActionListener(this::btn_usuariosRActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -126,9 +129,9 @@ private javax.swing.JPanel panelHistorial;
                         .addComponent(lbl_administrador_menu)
                         .addGap(102, 102, 102)))
                 .addComponent(btn_menuR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(38, 38, 38)
                 .addComponent(btn_usuariosR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addGap(32, 32, 32)
                 .addComponent(lbl_reportes)
                 .addGap(37, 37, 37)
                 .addComponent(btn_notificacionesR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -156,6 +159,21 @@ private javax.swing.JPanel panelHistorial;
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_menuRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_menuRActionPerformed
+     new MenuAdmin().setVisible(true); 
+    this.dispose();
+    }//GEN-LAST:event_btn_menuRActionPerformed
+
+    private void btn_usuariosRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_usuariosRActionPerformed
+    new UsuariosAdmin().setVisible(true); 
+    this.dispose();
+    }//GEN-LAST:event_btn_usuariosRActionPerformed
+
+    private void btn_notificacionesRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_notificacionesRActionPerformed
+    new NotificacionesAdmin().setVisible(true); 
+    this.dispose();
+    }//GEN-LAST:event_btn_notificacionesRActionPerformed
 
     private void construirUI() {
     jPanel2.setLayout(null);

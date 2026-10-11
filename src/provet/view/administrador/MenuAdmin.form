@@ -158,6 +158,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Usuarios"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_usuariosMActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_reportesM">
           <Properties>
@@ -186,6 +189,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Notificaciones"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_notificacionesMActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_salidaM">
           <Properties>
@@ -500,6 +506,9 @@
                   <Dimension value="[215, 70]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_notificacionesActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
