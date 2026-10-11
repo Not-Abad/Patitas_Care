@@ -18,17 +18,6 @@ public class MenuPropietario_Archivos extends javax.swing.JFrame {
 
         jMenu1 = new javax.swing.JMenu();
         jPanel1 = new javax.swing.JPanel();
-        panel_citas_pendientes = new provet.componentes.PanelRedondeado();
-        lbl_acceder = new javax.swing.JLabel();
-        usuario = new javax.swing.JLabel();
-        btn_iniciars = new provet.componentes.boton_redondo();
-        lbl_imaarchivo4 = new javax.swing.JLabel();
-        lbl_archivo4 = new javax.swing.JLabel();
-        lbl_archivo4fecha4 = new javax.swing.JLabel();
-        lbl_estatusarchivo4 = new javax.swing.JLabel();
-        btn_verarchivo3 = new javax.swing.JButton();
-        btn_descargararchivo3 = new javax.swing.JButton();
-        btn_eliminararchivo3 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         botonSwing2 = new provet.componentes.botonSwing();
         panel_citas_pendientes1 = new provet.componentes.PanelRedondeado();
@@ -53,17 +42,9 @@ public class MenuPropietario_Archivos extends javax.swing.JFrame {
         btn_verarchivo1 = new javax.swing.JButton();
         btn_descargararchivo1 = new javax.swing.JButton();
         btn_eliminararchivo1 = new javax.swing.JButton();
-        panel_citas_pendientes3 = new provet.componentes.PanelRedondeado();
-        lbl_acceder4 = new javax.swing.JLabel();
-        usuario4 = new javax.swing.JLabel();
-        btn_iniciars4 = new provet.componentes.boton_redondo();
-        lbl_imaarchivo3 = new javax.swing.JLabel();
-        lbl_arcivo3 = new javax.swing.JLabel();
-        lbl_archivo3fecha3 = new javax.swing.JLabel();
-        lbl_estatusarchivo3 = new javax.swing.JLabel();
-        btn_verarchivo2 = new javax.swing.JButton();
-        btn_descargararchivo2 = new javax.swing.JButton();
-        btn_eliminararchivo2 = new javax.swing.JButton();
+        panel_DocumentoSubido1 = new provet.componentes.Panel_DocumentoSubido();
+        panel_DocumentoSubido2 = new provet.componentes.Panel_DocumentoSubido();
+        panel_DocumentoSubido3 = new provet.componentes.Panel_DocumentoSubido();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -84,58 +65,6 @@ public class MenuPropietario_Archivos extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(228, 230, 217));
         jPanel1.setPreferredSize(new java.awt.Dimension(1291, 70));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        panel_citas_pendientes.setBackground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lbl_acceder.setForeground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes.add(lbl_acceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
-
-        usuario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        usuario.setForeground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes.add(usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
-
-        btn_iniciars.setText("Iniciar Sesión");
-        btn_iniciars.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_iniciarsActionPerformed(evt);
-            }
-        });
-        panel_citas_pendientes.add(btn_iniciars, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 210, 40));
-
-        lbl_imaarchivo4.setText("lbl_imaarchivo4");
-        panel_citas_pendientes.add(lbl_imaarchivo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
-
-        lbl_archivo4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl_archivo4.setText("Receta-Luna");
-        panel_citas_pendientes.add(lbl_archivo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, -1, -1));
-
-        lbl_archivo4fecha4.setText("Subido: 20/04/2026       10:43 a.m");
-        panel_citas_pendientes.add(lbl_archivo4fecha4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, -1, -1));
-
-        lbl_estatusarchivo4.setText("jLabel5");
-        panel_citas_pendientes.add(lbl_estatusarchivo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, -1, -1));
-
-        btn_verarchivo3.setText("Ver");
-        btn_verarchivo3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_verarchivo3ActionPerformed(evt);
-            }
-        });
-        panel_citas_pendientes.add(btn_verarchivo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, -1, -1));
-
-        btn_descargararchivo3.setText("descargar");
-        panel_citas_pendientes.add(btn_descargararchivo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 40, -1, -1));
-
-        btn_eliminararchivo3.setText("eliminar");
-        btn_eliminararchivo3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_eliminararchivo3ActionPerformed(evt);
-            }
-        });
-        panel_citas_pendientes.add(btn_eliminararchivo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 40, -1, -1));
-
-        jPanel1.add(panel_citas_pendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 490, 860, 100));
 
         jLabel9.setBackground(new java.awt.Color(51, 255, 51));
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -257,57 +186,12 @@ public class MenuPropietario_Archivos extends javax.swing.JFrame {
 
         jPanel1.add(panel_citas_pendientes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 860, 100));
 
-        panel_citas_pendientes3.setBackground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panel_DocumentoSubido1.setRutaArchivo("/home/jesus-abad/Descargas/PatitasCare-1.0.0/src/imagenes/Iconos_pnlDocumentoSubido/Abad_Jesus_Act2.4.pdf");
+        jPanel1.add(panel_DocumentoSubido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 610, 840, -1));
+        jPanel1.add(panel_DocumentoSubido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 490, -1, -1));
 
-        lbl_acceder4.setForeground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes3.add(lbl_acceder4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
-
-        usuario4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        usuario4.setForeground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes3.add(usuario4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
-
-        btn_iniciars4.setText("Iniciar Sesión");
-        btn_iniciars4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_iniciars4ActionPerformed(evt);
-            }
-        });
-        panel_citas_pendientes3.add(btn_iniciars4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 210, 40));
-
-        lbl_imaarchivo3.setText("lbl_imaarchivo3");
-        panel_citas_pendientes3.add(lbl_imaarchivo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
-
-        lbl_arcivo3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl_arcivo3.setText("Receta-Max");
-        panel_citas_pendientes3.add(lbl_arcivo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, -1, -1));
-
-        lbl_archivo3fecha3.setText("Subido: 20/04/2026       10:35 a.m");
-        panel_citas_pendientes3.add(lbl_archivo3fecha3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, -1, -1));
-
-        lbl_estatusarchivo3.setText("jLabel4");
-        panel_citas_pendientes3.add(lbl_estatusarchivo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, -1, 20));
-
-        btn_verarchivo2.setText("Ver");
-        btn_verarchivo2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_verarchivo2ActionPerformed(evt);
-            }
-        });
-        panel_citas_pendientes3.add(btn_verarchivo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, -1, -1));
-
-        btn_descargararchivo2.setText("descargar");
-        panel_citas_pendientes3.add(btn_descargararchivo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 40, -1, -1));
-
-        btn_eliminararchivo2.setText("eliminar");
-        btn_eliminararchivo2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_eliminararchivo2ActionPerformed(evt);
-            }
-        });
-        panel_citas_pendientes3.add(btn_eliminararchivo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 40, -1, -1));
-
-        jPanel1.add(panel_citas_pendientes3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 370, 860, 100));
+        panel_DocumentoSubido3.setRutaArchivo("/home/jesus-abad/Descargas/PatitasCare-1.0.0/src/imagenes/Iconos_pnlDocumentoSubido/amor.png");
+        jPanel1.add(panel_DocumentoSubido3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 370, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, 1200, 740));
 
@@ -377,10 +261,6 @@ public class MenuPropietario_Archivos extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btn_reportesActionPerformed
 
-    private void btn_iniciarsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_iniciarsActionPerformed
-        
-    }//GEN-LAST:event_btn_iniciarsActionPerformed
-
     private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
         dispose();
     }//GEN-LAST:event_btn_SalirActionPerformed
@@ -397,10 +277,6 @@ public class MenuPropietario_Archivos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_iniciars2ActionPerformed
 
-    private void btn_iniciars4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_iniciars4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_iniciars4ActionPerformed
-
     private void btn_verarchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_verarchivoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_verarchivoActionPerformed
@@ -413,25 +289,9 @@ public class MenuPropietario_Archivos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_verarchivo1ActionPerformed
 
-    private void btn_verarchivo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_verarchivo2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_verarchivo2ActionPerformed
-
-    private void btn_verarchivo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_verarchivo3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_verarchivo3ActionPerformed
-
     private void btn_eliminararchivo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminararchivo1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_eliminararchivo1ActionPerformed
-
-    private void btn_eliminararchivo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminararchivo2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_eliminararchivo2ActionPerformed
-
-    private void btn_eliminararchivo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminararchivo3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_eliminararchivo3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -467,20 +327,12 @@ public class MenuPropietario_Archivos extends javax.swing.JFrame {
     private provet.componentes.botonSwing btn_Salir;
     private javax.swing.JButton btn_descargararchivo;
     private javax.swing.JButton btn_descargararchivo1;
-    private javax.swing.JButton btn_descargararchivo2;
-    private javax.swing.JButton btn_descargararchivo3;
     private javax.swing.JButton btn_eliminararchivo;
     private javax.swing.JButton btn_eliminararchivo1;
-    private javax.swing.JButton btn_eliminararchivo2;
-    private javax.swing.JButton btn_eliminararchivo3;
-    private provet.componentes.boton_redondo btn_iniciars;
     private provet.componentes.boton_redondo btn_iniciars1;
     private provet.componentes.boton_redondo btn_iniciars2;
-    private provet.componentes.boton_redondo btn_iniciars4;
     private javax.swing.JButton btn_verarchivo;
     private javax.swing.JButton btn_verarchivo1;
-    private javax.swing.JButton btn_verarchivo2;
-    private javax.swing.JButton btn_verarchivo3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -489,33 +341,22 @@ public class MenuPropietario_Archivos extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel lbl_acceder;
     private javax.swing.JLabel lbl_acceder1;
     private javax.swing.JLabel lbl_acceder2;
-    private javax.swing.JLabel lbl_acceder4;
     private javax.swing.JLabel lbl_archivo1;
     private javax.swing.JLabel lbl_archivo1fecha;
     private javax.swing.JLabel lbl_archivo2;
     private javax.swing.JLabel lbl_archivo2fecha2;
-    private javax.swing.JLabel lbl_archivo3fecha3;
-    private javax.swing.JLabel lbl_archivo4;
-    private javax.swing.JLabel lbl_archivo4fecha4;
-    private javax.swing.JLabel lbl_arcivo3;
     private javax.swing.JLabel lbl_estatusarchivo1;
     private javax.swing.JLabel lbl_estatusarchivo2;
-    private javax.swing.JLabel lbl_estatusarchivo3;
-    private javax.swing.JLabel lbl_estatusarchivo4;
     private javax.swing.JLabel lbl_imaarchivo;
     private javax.swing.JLabel lbl_imaarchivo2;
-    private javax.swing.JLabel lbl_imaarchivo3;
-    private javax.swing.JLabel lbl_imaarchivo4;
-    private provet.componentes.PanelRedondeado panel_citas_pendientes;
+    private provet.componentes.Panel_DocumentoSubido panel_DocumentoSubido1;
+    private provet.componentes.Panel_DocumentoSubido panel_DocumentoSubido2;
+    private provet.componentes.Panel_DocumentoSubido panel_DocumentoSubido3;
     private provet.componentes.PanelRedondeado panel_citas_pendientes1;
     private provet.componentes.PanelRedondeado panel_citas_pendientes2;
-    private provet.componentes.PanelRedondeado panel_citas_pendientes3;
-    private javax.swing.JLabel usuario;
     private javax.swing.JLabel usuario1;
     private javax.swing.JLabel usuario2;
-    private javax.swing.JLabel usuario4;
     // End of variables declaration//GEN-END:variables
 }

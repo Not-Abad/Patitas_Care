@@ -19,89 +19,45 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        botonSwing1 = new provet.componentes.botonSwing();
-        jLabel12 = new javax.swing.JLabel();
+        pnl_Operativo = new javax.swing.JPanel();
+        lbl_Titulo = new javax.swing.JLabel();
+        pnl_Login = new provet.componentes.PanelRedondeado();
         link_nuevaCuenta = new provet.componentes.linkLabel();
         link_recuperarContra = new provet.componentes.linkLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        txt_Usuario = new javax.swing.JTextField();
+        txt_Contraseña = new javax.swing.JTextField();
+        chk_Ojo = new javax.swing.JCheckBox();
+        btn_Aceptar = new provet.componentes.botonSwing();
+        lbl_Bienvenido = new javax.swing.JLabel();
+        lbl_Pregunta1 = new javax.swing.JLabel();
+        lbl_Usuario = new javax.swing.JLabel();
+        lbl_Contraseña = new javax.swing.JLabel();
+        lbl_Pregunta2 = new javax.swing.JLabel();
+        lbl_MarcoContraseña = new javax.swing.JLabel();
+        pnl_Informativo = new javax.swing.JPanel();
+        lbl_TituloP1 = new javax.swing.JLabel();
+        lbl_TituloP2 = new javax.swing.JLabel();
+        lbl_DescripcionP1 = new javax.swing.JLabel();
+        lbl_DescripcionP2 = new javax.swing.JLabel();
+        lbl_DescripcionP3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Provet");
-        setMinimumSize(new java.awt.Dimension(700, 500));
+        setMinimumSize(new java.awt.Dimension(700, 450));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(228, 230, 217));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnl_Operativo.setBackground(new java.awt.Color(228, 230, 217));
+        pnl_Operativo.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        pnl_Operativo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel7.setText("PatitasCare");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 110, 30));
+        lbl_Titulo.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        lbl_Titulo.setForeground(new java.awt.Color(39, 53, 38));
+        lbl_Titulo.setText("PatitasCare");
+        pnl_Operativo.add(lbl_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 30, 220, 30));
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel8.setText("¡Bienvenido!");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 140, -1));
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel9.setText("Contraseña:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 240, -1));
-
-        jTextField1.setBackground(new java.awt.Color(216, 218, 203));
-        jTextField1.setToolTipText("Usuario");
-        jTextField1.setActionCommand("<Not Set>");
-        jTextField1.setAutoscrolls(false);
-        jTextField1.setBorder(null);
-        jTextField1.setCaretColor(new java.awt.Color(0, 204, 102));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 230, 20));
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel10.setText("¿Olvidaste tu contraseña?");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, 180, -1));
-
-        jTextField2.setBackground(new java.awt.Color(216, 218, 203));
-        jTextField2.setToolTipText("Usuario");
-        jTextField2.setActionCommand("<Not Set>");
-        jTextField2.setAutoscrolls(false);
-        jTextField2.setBorder(null);
-        jTextField2.setCaretColor(new java.awt.Color(0, 204, 102));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 230, 20));
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel11.setText("Usuario:");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 240, -1));
-
-        botonSwing1.setBackground(new java.awt.Color(69, 98, 78));
-        botonSwing1.setForeground(new java.awt.Color(228, 230, 217));
-        botonSwing1.setText("Iniciar");
-        botonSwing1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonSwing1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(botonSwing1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 230, 50));
-
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel12.setText("¿No tienes una cuenta con nosotros?");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 250, -1));
+        pnl_Login.setBackground(new java.awt.Color(192, 207, 178));
+        pnl_Login.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         link_nuevaCuenta.setText("Crea una cuenta aquí");
         link_nuevaCuenta.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -109,7 +65,7 @@ public class Login extends javax.swing.JFrame {
                 link_nuevaCuentaMouseClicked(evt);
             }
         });
-        jPanel1.add(link_nuevaCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, -1, -1));
+        pnl_Login.add(link_nuevaCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
         link_recuperarContra.setText("Haz clic aquí");
         link_recuperarContra.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -117,39 +73,103 @@ public class Login extends javax.swing.JFrame {
                 link_recuperarContraMouseClicked(evt);
             }
         });
-        jPanel1.add(link_recuperarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, -1, -1));
+        pnl_Login.add(link_recuperarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 0, 420, 470));
+        txt_Usuario.setBackground(new java.awt.Color(216, 218, 203));
+        txt_Usuario.setFont(new java.awt.Font("Verdana", 1, 15)); // NOI18N
+        txt_Usuario.setForeground(new java.awt.Color(39, 53, 38));
+        txt_Usuario.setToolTipText("Usuario");
+        txt_Usuario.setActionCommand("<Not Set>");
+        txt_Usuario.setAutoscrolls(false);
+        txt_Usuario.setBorder(null);
+        txt_Usuario.setCaretColor(new java.awt.Color(39, 53, 38));
+        pnl_Login.add(txt_Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 230, 30));
 
-        jPanel2.setBackground(new java.awt.Color(69, 98, 78));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        txt_Contraseña.setBackground(new java.awt.Color(216, 218, 203));
+        txt_Contraseña.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        txt_Contraseña.setForeground(new java.awt.Color(39, 53, 38));
+        txt_Contraseña.setToolTipText("Usuario");
+        txt_Contraseña.setActionCommand("<Not Set>");
+        txt_Contraseña.setAutoscrolls(false);
+        txt_Contraseña.setBorder(null);
+        txt_Contraseña.setCaretColor(new java.awt.Color(39, 53, 38));
+        pnl_Login.add(txt_Contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 190, 30));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(228, 230, 217));
-        jLabel1.setText("el mejor cuidado de tus mascotas.");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 280, 20));
+        chk_Ojo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/basil--eye-solid.png"))); // NOI18N
+        pnl_Login.add(chk_Ojo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 40, 30));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(228, 230, 217));
-        jLabel2.setText("usuario!");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 310, 100));
+        btn_Aceptar.setBackground(new java.awt.Color(69, 98, 78));
+        btn_Aceptar.setForeground(new java.awt.Color(228, 230, 217));
+        btn_Aceptar.setText("Iniciar");
+        btn_Aceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AceptarActionPerformed(evt);
+            }
+        });
+        pnl_Login.add(btn_Aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 230, 50));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(228, 230, 217));
-        jLabel4.setText("PatitasCare es un sistema que permite el");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 280, 20));
+        lbl_Bienvenido.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbl_Bienvenido.setForeground(new java.awt.Color(39, 53, 38));
+        lbl_Bienvenido.setText("¡Bienvenido!");
+        pnl_Login.add(lbl_Bienvenido, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 140, -1));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(228, 230, 217));
-        jLabel5.setText("manejo de personal médico y usuarios para");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 310, 20));
+        lbl_Pregunta1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl_Pregunta1.setForeground(new java.awt.Color(39, 53, 38));
+        lbl_Pregunta1.setText("¿No tienes una cuenta con nosotros?");
+        pnl_Login.add(lbl_Pregunta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 250, -1));
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(228, 230, 217));
-        jLabel6.setText("¡Hola ");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, 100));
+        lbl_Usuario.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbl_Usuario.setForeground(new java.awt.Color(39, 53, 38));
+        lbl_Usuario.setText("Usuario:");
+        pnl_Login.add(lbl_Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 80, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 470));
+        lbl_Contraseña.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbl_Contraseña.setForeground(new java.awt.Color(39, 53, 38));
+        lbl_Contraseña.setText("Contraseña:");
+        pnl_Login.add(lbl_Contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 110, -1));
+
+        lbl_Pregunta2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl_Pregunta2.setForeground(new java.awt.Color(39, 53, 38));
+        lbl_Pregunta2.setText("¿Olvidaste tu contraseña?");
+        pnl_Login.add(lbl_Pregunta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, 180, -1));
+
+        lbl_MarcoContraseña.setBackground(new java.awt.Color(216, 218, 203));
+        lbl_MarcoContraseña.setOpaque(true);
+        pnl_Login.add(lbl_MarcoContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 230, 30));
+
+        pnl_Operativo.add(pnl_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 390, 330));
+
+        getContentPane().add(pnl_Operativo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 450, 470));
+
+        pnl_Informativo.setBackground(new java.awt.Color(69, 98, 78));
+        pnl_Informativo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_TituloP1.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        lbl_TituloP1.setForeground(new java.awt.Color(228, 230, 217));
+        lbl_TituloP1.setText("¡Hola ");
+        pnl_Informativo.add(lbl_TituloP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, 100));
+
+        lbl_TituloP2.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        lbl_TituloP2.setForeground(new java.awt.Color(228, 230, 217));
+        lbl_TituloP2.setText("usuario!");
+        pnl_Informativo.add(lbl_TituloP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 310, 50));
+
+        lbl_DescripcionP1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl_DescripcionP1.setForeground(new java.awt.Color(228, 230, 217));
+        lbl_DescripcionP1.setText("PatitasCare es un sistema que permite el");
+        pnl_Informativo.add(lbl_DescripcionP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 280, 20));
+
+        lbl_DescripcionP2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl_DescripcionP2.setForeground(new java.awt.Color(228, 230, 217));
+        lbl_DescripcionP2.setText("manejo de personal médico y usuarios para");
+        pnl_Informativo.add(lbl_DescripcionP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 310, 20));
+
+        lbl_DescripcionP3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl_DescripcionP3.setForeground(new java.awt.Color(228, 230, 217));
+        lbl_DescripcionP3.setText("el mejor cuidado de tus mascotas.");
+        pnl_Informativo.add(lbl_DescripcionP3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 280, 20));
+
+        getContentPane().add(pnl_Informativo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 470));
 
         pack();
         setLocationRelativeTo(null);
@@ -158,9 +178,9 @@ public class Login extends javax.swing.JFrame {
     private void btn_iniciarsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_iniciarsActionPerformed
     }//GEN-LAST:event_btn_iniciarsActionPerformed
 
-    private void botonSwing1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing1ActionPerformed
+    private void btn_AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AceptarActionPerformed
         verificar_Datos();
-    }//GEN-LAST:event_botonSwing1ActionPerformed
+    }//GEN-LAST:event_btn_AceptarActionPerformed
 
     private void link_nuevaCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_link_nuevaCuentaMouseClicked
         System.out.println("Se presiono crear cuenta");
@@ -204,23 +224,26 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private provet.componentes.botonSwing botonSwing1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private provet.componentes.botonSwing btn_Aceptar;
+    private javax.swing.JCheckBox chk_Ojo;
+    private javax.swing.JLabel lbl_Bienvenido;
+    private javax.swing.JLabel lbl_Contraseña;
+    private javax.swing.JLabel lbl_DescripcionP1;
+    private javax.swing.JLabel lbl_DescripcionP2;
+    private javax.swing.JLabel lbl_DescripcionP3;
+    private javax.swing.JLabel lbl_MarcoContraseña;
+    private javax.swing.JLabel lbl_Pregunta1;
+    private javax.swing.JLabel lbl_Pregunta2;
+    private javax.swing.JLabel lbl_Titulo;
+    private javax.swing.JLabel lbl_TituloP1;
+    private javax.swing.JLabel lbl_TituloP2;
+    private javax.swing.JLabel lbl_Usuario;
     private provet.componentes.linkLabel link_nuevaCuenta;
     private provet.componentes.linkLabel link_recuperarContra;
+    private javax.swing.JPanel pnl_Informativo;
+    private provet.componentes.PanelRedondeado pnl_Login;
+    private javax.swing.JPanel pnl_Operativo;
+    private javax.swing.JTextField txt_Contraseña;
+    private javax.swing.JTextField txt_Usuario;
     // End of variables declaration//GEN-END:variables
 }
