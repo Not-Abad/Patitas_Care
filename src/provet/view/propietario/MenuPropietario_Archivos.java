@@ -14,7 +14,24 @@ public class MenuPropietario_Archivos extends javax.swing.JFrame {
 
     public MenuPropietario_Archivos() {
         initComponents();
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //x
+if (isUndecorated()) {
+    dispose();
+    setUndecorated(false);
+}
+
+// paneles se estiran
+getContentPane().removeAll();
+getContentPane().setLayout(new java.awt.BorderLayout());
+getContentPane().add(jPanel2, java.awt.BorderLayout.WEST);    // sidebar
+getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);  // contenido
+
+// 3) Sidebar mantiene 270px de ancho fijo
+jPanel2.setPreferredSize(new java.awt.Dimension(270, 0));
+
+// 4) Maximizar y cierre limpio
+setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     @SuppressWarnings("unchecked")
@@ -32,14 +49,15 @@ public class MenuPropietario_Archivos extends javax.swing.JFrame {
         panel_DocumentoSubido3 = new provet.componentes.Panel_DocumentoSubido();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        btn_MenuP = new provet.componentes.botonSwing();
         botonSwing1 = new provet.componentes.botonSwing();
         btn_Calendario = new provet.componentes.botonSwing();
         btn_Reportes = new provet.componentes.botonSwing();
         btn_Salir = new provet.componentes.botonSwing();
+        botonSwing3 = new provet.componentes.botonSwing();
+        panelRedondeado2 = new provet.componentes.PanelRedondeado();
+        jLabel8 = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
 
@@ -83,24 +101,22 @@ public class MenuPropietario_Archivos extends javax.swing.JFrame {
         jLabel6.setBackground(new java.awt.Color(51, 255, 51));
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel6.setText("Propietario");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, -1, -1));
-
-        jLabel1.setText("FOTO");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
+        jLabel6.setText("Nombre");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, -1, -1));
 
         jLabel15.setBackground(new java.awt.Color(51, 255, 51));
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(39, 53, 38));
         jLabel15.setText("PatitasCare");
-        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
+        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, -1, -1));
 
         jLabel16.setBackground(new java.awt.Color(51, 255, 51));
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(39, 53, 38));
         jLabel16.setText("Propietario");
-        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, -1, -1));
+        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
 
+<<<<<<< HEAD
         btn_MenuP.setForeground(new java.awt.Color(39, 53, 38));
         btn_MenuP.setText("Menú Principal");
         btn_MenuP.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -114,6 +130,15 @@ public class MenuPropietario_Archivos extends javax.swing.JFrame {
         botonSwing1.setForeground(new java.awt.Color(39, 53, 38));
         botonSwing1.setText("Pacientes");
         botonSwing1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+=======
+        botonSwing1.setForeground(new java.awt.Color(39, 53, 38));
+        botonSwing1.setText("Mis archivos");
+        botonSwing1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSwing1ActionPerformed(evt);
+            }
+        });
+>>>>>>> 3d1a9d1 (Ventanas Propietario Completas)
         jPanel2.add(botonSwing1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 250, 60));
 
         btn_Calendario.setForeground(new java.awt.Color(39, 53, 38));
@@ -132,6 +157,36 @@ public class MenuPropietario_Archivos extends javax.swing.JFrame {
         });
         jPanel2.add(btn_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 250, 60));
 
+        botonSwing3.setText("Menú Principal");
+        botonSwing3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSwing3ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(botonSwing3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 60));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/mascota2.jpeg"))); // NOI18N
+        jLabel8.setText("jLabel8");
+
+        javax.swing.GroupLayout panelRedondeado2Layout = new javax.swing.GroupLayout(panelRedondeado2);
+        panelRedondeado2.setLayout(panelRedondeado2Layout);
+        panelRedondeado2Layout.setHorizontalGroup(
+            panelRedondeado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRedondeado2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 78, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelRedondeado2Layout.setVerticalGroup(
+            panelRedondeado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRedondeado2Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8)
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        jPanel2.add(panelRedondeado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 90, 80));
+
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 740));
 
         pack();
@@ -146,7 +201,9 @@ public class MenuPropietario_Archivos extends javax.swing.JFrame {
         dispose();    }//GEN-LAST:event_btn_atencionmedActionPerformed
 
     private void btn_configuraciónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_configuraciónActionPerformed
-         
+    MenuPropietario_Configuracion menu = new MenuPropietario_Configuracion();
+    menu.setVisible(true);
+    this.dispose();
     }//GEN-LAST:event_btn_configuraciónActionPerformed
 
     private void btn_reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reportesActionPerformed
@@ -161,9 +218,22 @@ public class MenuPropietario_Archivos extends javax.swing.JFrame {
         abrirDocumento();
     }//GEN-LAST:event_botonSwing2ActionPerformed
 
+
     private void btn_MenuPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_MenuPActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_MenuPActionPerformed
+
+    private void botonSwing1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing1ActionPerformed
+        MenuPropietario_Archivos menu = new MenuPropietario_Archivos();
+        menu.setVisible(true);
+        this.dispose();// TODO add your handling code here:
+    }//GEN-LAST:event_botonSwing1ActionPerformed
+
+    private void botonSwing3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing3ActionPerformed
+        MenuPropietario_Principal menu = new MenuPropietario_Principal();
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_botonSwing3ActionPerformed
 
         //Metodo para abrir el documento en el sistema
     private void abrirDocumento() {
@@ -220,19 +290,20 @@ public class MenuPropietario_Archivos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private provet.componentes.botonSwing botonSwing1;
     private provet.componentes.botonSwing botonSwing2;
+    private provet.componentes.botonSwing botonSwing3;
     private provet.componentes.botonSwing btn_Calendario;
-    private provet.componentes.botonSwing btn_MenuP;
     private provet.componentes.botonSwing btn_Reportes;
     private provet.componentes.botonSwing btn_Salir;
     private provet.componentes.Contenedor_Cartas contenedorArchivos;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private provet.componentes.PanelRedondeado panelRedondeado2;
     private provet.componentes.Panel_DocumentoSubido panel_DocumentoSubido1;
     private provet.componentes.Panel_DocumentoSubido panel_DocumentoSubido2;
     private provet.componentes.Panel_DocumentoSubido panel_DocumentoSubido3;

@@ -251,6 +251,7 @@ public class Login extends javax.swing.JFrame {
             String Usuario = txt_Usuario.getText();
             Recuperar_Contraseña vEmergente = new Recuperar_Contraseña(Usuario);
             vEmergente.setVisible(true);
+
         }
         
     }//GEN-LAST:event_link_recuperarContraMouseClicked

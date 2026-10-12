@@ -4,7 +4,9 @@
  */
 package provet.view.propietario;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
  *
@@ -19,7 +21,23 @@ public class MenuPropietario_Agendarcitas extends javax.swing.JFrame {
      */
     public MenuPropietario_Agendarcitas() {
         initComponents();
-       
+       if (isUndecorated()) {
+    dispose();
+    setUndecorated(false);
+}
+
+// paneles se estiran
+getContentPane().removeAll();
+getContentPane().setLayout(new java.awt.BorderLayout());
+getContentPane().add(jPanel2, java.awt.BorderLayout.WEST);    // sidebar
+getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);  // contenido
+
+// 3) Sidebar mantiene 270px de ancho fijo
+jPanel2.setPreferredSize(new java.awt.Dimension(270, 0));
+
+// 4) Maximizar y cierre limpio
+setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /**
@@ -35,19 +53,13 @@ public class MenuPropietario_Agendarcitas extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        boton_menu = new provet.componentes.PanelRedondeado();
-        jLabel18 = new javax.swing.JLabel();
-        boton_salir = new provet.componentes.PanelRedondeado();
-        jLabel19 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        panelRedondeado1 = new provet.componentes.PanelRedondeado();
-        jLabel2 = new javax.swing.JLabel();
-        panelRedondeado3 = new provet.componentes.PanelRedondeado();
-        jLabel4 = new javax.swing.JLabel();
-        panelRedondeado4 = new provet.componentes.PanelRedondeado();
-        jLabel7 = new javax.swing.JLabel();
         panelRedondeado2 = new provet.componentes.PanelRedondeado();
         jLabel8 = new javax.swing.JLabel();
+        botonSwing4 = new provet.componentes.botonSwing();
+        botonSwing1 = new provet.componentes.botonSwing();
+        btn_Calendario = new provet.componentes.botonSwing();
+        btn_Reportes = new provet.componentes.botonSwing();
+        btn_Salir = new provet.componentes.botonSwing();
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -66,7 +78,7 @@ public class MenuPropietario_Agendarcitas extends javax.swing.JFrame {
         txtDescripcion = new javax.swing.JTextPane();
         txtbotonconfirmarcita = new provet.componentes.botonSwing();
         txtbotoncancelar = new provet.componentes.botonSwing();
-        btn_regresarprincipal = new provet.componentes.botonSwing();
+        botonSwing2 = new provet.componentes.botonSwing();
         botonSwing3 = new provet.componentes.botonSwing();
         txtmascota1 = new javax.swing.JLabel();
         txt_nombremascota = new javax.swing.JTextField();
@@ -96,104 +108,6 @@ public class MenuPropietario_Agendarcitas extends javax.swing.JFrame {
         jLabel16.setText("Propetario");
         jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
 
-        boton_menu.setBackground(new java.awt.Color(228, 230, 217));
-        boton_menu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel18.setBackground(new java.awt.Color(51, 255, 51));
-        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel18.setText("Menú principal");
-        boton_menu.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
-
-        jPanel2.add(boton_menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 60));
-
-        boton_salir.setBackground(new java.awt.Color(228, 230, 217));
-        boton_salir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel19.setBackground(new java.awt.Color(51, 255, 51));
-        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel19.setText("Salir");
-        boton_salir.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
-
-        jButton1.setText("->");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
-        boton_salir.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 50, -1));
-
-        jPanel2.add(boton_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 250, 60));
-
-        panelRedondeado1.setBackground(new java.awt.Color(228, 230, 217));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("Mis archivos");
-
-        javax.swing.GroupLayout panelRedondeado1Layout = new javax.swing.GroupLayout(panelRedondeado1);
-        panelRedondeado1.setLayout(panelRedondeado1Layout);
-        panelRedondeado1Layout.setHorizontalGroup(
-            panelRedondeado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado1Layout.createSequentialGroup()
-                .addContainerGap(55, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49))
-        );
-        panelRedondeado1Layout.setVerticalGroup(
-            panelRedondeado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado1Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18))
-        );
-
-        jPanel2.add(panelRedondeado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 250, 60));
-
-        panelRedondeado3.setBackground(new java.awt.Color(228, 230, 217));
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("Calendario");
-
-        javax.swing.GroupLayout panelRedondeado3Layout = new javax.swing.GroupLayout(panelRedondeado3);
-        panelRedondeado3.setLayout(panelRedondeado3Layout);
-        panelRedondeado3Layout.setHorizontalGroup(
-            panelRedondeado3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado3Layout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
-        );
-        panelRedondeado3Layout.setVerticalGroup(
-            panelRedondeado3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRedondeado3Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel4)
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
-
-        jPanel2.add(panelRedondeado3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, -1, -1));
-
-        panelRedondeado4.setBackground(new java.awt.Color(228, 230, 217));
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel7.setText("Reporte");
-
-        javax.swing.GroupLayout panelRedondeado4Layout = new javax.swing.GroupLayout(panelRedondeado4);
-        panelRedondeado4.setLayout(panelRedondeado4Layout);
-        panelRedondeado4Layout.setHorizontalGroup(
-            panelRedondeado4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado4Layout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
-        );
-        panelRedondeado4Layout.setVerticalGroup(
-            panelRedondeado4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRedondeado4Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel7)
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
-
-        jPanel2.add(panelRedondeado4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, -1, -1));
-
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/mascota2.jpeg"))); // NOI18N
         jLabel8.setText("jLabel8");
 
@@ -216,6 +130,26 @@ public class MenuPropietario_Agendarcitas extends javax.swing.JFrame {
 
         jPanel2.add(panelRedondeado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 90, 80));
 
+        botonSwing4.setText("Menú Principal");
+        botonSwing4.addActionListener(this::botonSwing4ActionPerformed);
+        jPanel2.add(botonSwing4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 60));
+
+        botonSwing1.setForeground(new java.awt.Color(39, 53, 38));
+        botonSwing1.setText("Mis archivos");
+        botonSwing1.addActionListener(this::botonSwing1ActionPerformed);
+        jPanel2.add(botonSwing1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 250, 60));
+
+        btn_Calendario.setForeground(new java.awt.Color(39, 53, 38));
+        btn_Calendario.setText("Calendario");
+        jPanel2.add(btn_Calendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 250, 60));
+
+        btn_Reportes.setText("Reportes");
+        jPanel2.add(btn_Reportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 250, 60));
+
+        btn_Salir.setText("Salir");
+        btn_Salir.addActionListener(this::btn_SalirActionPerformed);
+        jPanel2.add(btn_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 250, 60));
+
         jPanel1.setBackground(new java.awt.Color(228, 230, 217));
         jPanel1.setMinimumSize(new java.awt.Dimension(1470, 740));
         jPanel1.setPreferredSize(new java.awt.Dimension(1291, 70));
@@ -225,7 +159,7 @@ public class MenuPropietario_Agendarcitas extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(39, 53, 38));
         jLabel9.setText("Descripción:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 400, 140, 30));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 410, 140, 30));
 
         jLabel10.setBackground(new java.awt.Color(51, 255, 51));
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -282,7 +216,7 @@ public class MenuPropietario_Agendarcitas extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(txtDescripcion);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 400, 470, 190));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 410, 470, 190));
 
         txtbotonconfirmarcita.setBackground(new java.awt.Color(108, 135, 118));
         txtbotonconfirmarcita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/guardar_1.png"))); // NOI18N
@@ -296,10 +230,10 @@ public class MenuPropietario_Agendarcitas extends javax.swing.JFrame {
         txtbotoncancelar.addActionListener(this::txtbotoncancelarActionPerformed);
         jPanel1.add(txtbotoncancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 670, 160, 40));
 
-        btn_regresarprincipal.setBackground(new java.awt.Color(108, 135, 118));
-        btn_regresarprincipal.setText("Regresar");
-        btn_regresarprincipal.addActionListener(this::btn_regresarprincipalActionPerformed);
-        jPanel1.add(btn_regresarprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 650, 160, 60));
+        botonSwing2.setBackground(new java.awt.Color(108, 135, 118));
+        botonSwing2.setText("Regresar");
+        botonSwing2.addActionListener(this::botonSwing2ActionPerformed);
+        jPanel1.add(botonSwing2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 650, 160, 60));
 
         botonSwing3.setBackground(new java.awt.Color(108, 135, 118));
         botonSwing3.setText("Regresar");
@@ -351,10 +285,6 @@ public class MenuPropietario_Agendarcitas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void comboHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboHorarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboHorarioActionPerformed
@@ -362,7 +292,7 @@ public class MenuPropietario_Agendarcitas extends javax.swing.JFrame {
     private void txtbotonconfirmarcitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbotonconfirmarcitaActionPerformed
         // TODO add your handling code here:
 
-     
+       // 1. Captura de datos (Tu código base)
 String raza = txt_raza.getText().trim();
 String nombre = txt_nombremascota.getText().trim();
 String especie = comboespecie.getSelectedItem().toString();
@@ -372,23 +302,28 @@ String horario = comboHorario.getSelectedItem().toString();
 String motivo = comboMotivo.getSelectedItem().toString();
 String descripcion = txtDescripcion.getText().trim();
 
+// 2. Validación
 if (nombre.isEmpty() || raza.isEmpty() || fecha.isEmpty() || descripcion.isEmpty()) {
     JOptionPane.showMessageDialog(this, "Por favor completa todos los campos");
     return;
 }
 
+// 3. OBTENER LA INSTANCIA DE LA TABLA (Para no crear una nueva y borrar todo)
+// Si la ventana no existe, la creamos una sola vez
 if (MenuPropietario_miscitass.instanciaUnica == null) {
     MenuPropietario_miscitass.instanciaUnica = new MenuPropietario_miscitass();
 }
 
+// 4. AGREGAR A LA TABLA VISUALMENTE
 MenuPropietario_miscitass.instanciaUnica.insertarCita(nombre, raza, especie, veterinario, fecha, horario, motivo, descripcion);
 
+// 5. GUARDAR EN ARCHIVO PLANO (Igual que el código de las flores)
 try {
-   
+    // El "true" es vital para que no borre las citas anteriores en el archivo
     java.io.FileWriter archivo = new java.io.FileWriter("citas.txt", true);
     java.io.PrintWriter escribir = new java.io.PrintWriter(archivo);
 
-    
+    // Guardamos los 8 datos separados por comas
     escribir.println(nombre + "," + raza + "," + especie + "," + veterinario + "," + fecha + "," + horario + "," + motivo + "," + descripcion);
 
     escribir.close();
@@ -396,6 +331,7 @@ try {
     JOptionPane.showMessageDialog(this, "Error al guardar en archivo: " + e.getMessage());
 }
 
+// 6. Finalización
 MenuPropietario_miscitass.instanciaUnica.setVisible(true);
 JOptionPane.showMessageDialog(this, "Tu cita se ha agendado correctamente");
 JOptionPane.showMessageDialog(null, "Recuerda llegar 10 min antes a tu cita");
@@ -419,11 +355,11 @@ this.dispose();
         txt_nombremascota.requestFocus();
     }//GEN-LAST:event_txtbotoncancelarActionPerformed
 
-    private void btn_regresarprincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regresarprincipalActionPerformed
+    private void botonSwing2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing2ActionPerformed
         MenuPropietario_Principal menu = new MenuPropietario_Principal();
         menu.setVisible(true);
         this.dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_regresarprincipalActionPerformed
+    }//GEN-LAST:event_botonSwing2ActionPerformed
 
     private void botonSwing3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing3ActionPerformed
         MenuPropietario_Principal menu = new MenuPropietario_Principal();
@@ -438,6 +374,22 @@ this.dispose();
     private void txt_razaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_razaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_razaActionPerformed
+
+    private void botonSwing4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing4ActionPerformed
+        MenuPropietario_Principal menu = new MenuPropietario_Principal();
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_botonSwing4ActionPerformed
+
+    private void botonSwing1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing1ActionPerformed
+        MenuPropietario_Archivos menu = new MenuPropietario_Archivos();
+        menu.setVisible(true);
+        this.dispose();// TODO add your handling code here:
+    }//GEN-LAST:event_botonSwing1ActionPerformed
+
+    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_btn_SalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -465,35 +417,29 @@ this.dispose();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private provet.componentes.botonSwing botonSwing1;
+    private provet.componentes.botonSwing botonSwing2;
     private provet.componentes.botonSwing botonSwing3;
-    private provet.componentes.PanelRedondeado boton_menu;
-    private provet.componentes.PanelRedondeado boton_salir;
-    private provet.componentes.botonSwing btn_regresarprincipal;
+    private provet.componentes.botonSwing botonSwing4;
+    private provet.componentes.botonSwing btn_Calendario;
+    private provet.componentes.botonSwing btn_Reportes;
+    private provet.componentes.botonSwing btn_Salir;
     private javax.swing.JComboBox<String> comboHorario;
     private javax.swing.JComboBox<String> comboMotivo;
     private javax.swing.JComboBox<String> comboVeterinario;
     private javax.swing.JComboBox<String> comboespecie;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private provet.componentes.PanelRedondeado panelRedondeado1;
     private provet.componentes.PanelRedondeado panelRedondeado2;
-    private provet.componentes.PanelRedondeado panelRedondeado3;
-    private provet.componentes.PanelRedondeado panelRedondeado4;
     private javax.swing.JTextPane txtDescripcion;
     private javax.swing.JTextPane txtFecha;
     private javax.swing.JTextField txt_nombremascota;

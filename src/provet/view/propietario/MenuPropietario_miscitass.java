@@ -4,7 +4,9 @@
  */
 package provet.view.propietario;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,24 +22,50 @@ public class MenuPropietario_miscitass extends javax.swing.JFrame {
      */
     public MenuPropietario_miscitass() {
         initComponents();
+        
+        instanciaUnica = this;
+        if (isUndecorated()) {
+    dispose();
+    setUndecorated(false);
+}
+
+// paneles se estiran
+getContentPane().removeAll();
+getContentPane().setLayout(new java.awt.BorderLayout());
+getContentPane().add(jPanel2, java.awt.BorderLayout.WEST);    // sidebar
+getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);  // contenido
+
+// 3) Sidebar mantiene 270px de ancho fijo
+jPanel2.setPreferredSize(new java.awt.Dimension(270, 0));
+
+// 4) Maximizar y cierre limpio
+setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
     public void insertarCita(String nom, String raza, String esp, String vet, String fec, String hor, String mot, String desc) {
     try {
+        // Obtenemos el modelo actual de la tabla
+        DefaultTableModel modelo = (DefaultTableModel) tablacitas.getModel();
         
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        
-        
+        // Creamos la fila con los datos recibidos
         Object[] fila = {nom, raza, esp, vet, fec, hor, mot, desc};
         
-     
+        // CAMBIO AQUÍ: insertRow(0, ...) coloca la nueva cita en la posición inicial (arriba)
         modelo.insertRow(0, fila); 
         
-        jTable1.revalidate();
-        jTable1.repaint();
+        // Refrescar visualmente
+        tablacitas.revalidate();
+        tablacitas.repaint();
 
     } catch (Exception e) {
         JOptionPane.showMessageDialog(null, "Error al actualizar tabla: " + e.getMessage());
     }
+    }
+      
+    // Este método permitirá que otras ventanas "pidan" la tabla
+    public javax.swing.JTable getjTable1() {
+    return tablacitas; 
+
 }
 
 
@@ -54,26 +82,20 @@ public class MenuPropietario_miscitass extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        boton_menu = new provet.componentes.PanelRedondeado();
-        jLabel21 = new javax.swing.JLabel();
-        boton_salir = new provet.componentes.PanelRedondeado();
-        jLabel22 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        panelRedondeado1 = new provet.componentes.PanelRedondeado();
-        jLabel2 = new javax.swing.JLabel();
-        panelRedondeado3 = new provet.componentes.PanelRedondeado();
-        jLabel5 = new javax.swing.JLabel();
-        panelRedondeado4 = new provet.componentes.PanelRedondeado();
-        jLabel8 = new javax.swing.JLabel();
         panelRedondeado2 = new provet.componentes.PanelRedondeado();
         jLabel9 = new javax.swing.JLabel();
+        botonSwing4 = new provet.componentes.botonSwing();
+        botonSwing1 = new provet.componentes.botonSwing();
+        btn_Calendario = new provet.componentes.botonSwing();
+        btn_Reportes = new provet.componentes.botonSwing();
+        btn_Salir = new provet.componentes.botonSwing();
         jPanel1 = new javax.swing.JPanel();
         lbl_configuracion = new javax.swing.JLabel();
-        btn_agregarcitanueva = new provet.componentes.botonSwing();
+        botonSwing3 = new provet.componentes.botonSwing();
         jLabel7 = new javax.swing.JLabel();
-        btn_regresarprincipal = new provet.componentes.botonSwing();
+        botonSwing2 = new provet.componentes.botonSwing();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablacitas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,104 +120,6 @@ public class MenuPropietario_miscitass extends javax.swing.JFrame {
         jLabel16.setText("Propetario");
         jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
 
-        boton_menu.setBackground(new java.awt.Color(228, 230, 217));
-        boton_menu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel21.setBackground(new java.awt.Color(51, 255, 51));
-        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel21.setText("Menú principal");
-        boton_menu.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
-
-        jPanel2.add(boton_menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 60));
-
-        boton_salir.setBackground(new java.awt.Color(228, 230, 217));
-        boton_salir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel22.setBackground(new java.awt.Color(51, 255, 51));
-        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel22.setText("Salir");
-        boton_salir.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
-
-        jButton1.setText("->");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
-        boton_salir.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 50, -1));
-
-        jPanel2.add(boton_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 250, 60));
-
-        panelRedondeado1.setBackground(new java.awt.Color(228, 230, 217));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("Mis archivos");
-
-        javax.swing.GroupLayout panelRedondeado1Layout = new javax.swing.GroupLayout(panelRedondeado1);
-        panelRedondeado1.setLayout(panelRedondeado1Layout);
-        panelRedondeado1Layout.setHorizontalGroup(
-            panelRedondeado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado1Layout.createSequentialGroup()
-                .addContainerGap(55, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49))
-        );
-        panelRedondeado1Layout.setVerticalGroup(
-            panelRedondeado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado1Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18))
-        );
-
-        jPanel2.add(panelRedondeado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 250, 60));
-
-        panelRedondeado3.setBackground(new java.awt.Color(228, 230, 217));
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel5.setText("Calendario");
-
-        javax.swing.GroupLayout panelRedondeado3Layout = new javax.swing.GroupLayout(panelRedondeado3);
-        panelRedondeado3.setLayout(panelRedondeado3Layout);
-        panelRedondeado3Layout.setHorizontalGroup(
-            panelRedondeado3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado3Layout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
-        );
-        panelRedondeado3Layout.setVerticalGroup(
-            panelRedondeado3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRedondeado3Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel5)
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
-
-        jPanel2.add(panelRedondeado3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, -1, -1));
-
-        panelRedondeado4.setBackground(new java.awt.Color(228, 230, 217));
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel8.setText("Reporte");
-
-        javax.swing.GroupLayout panelRedondeado4Layout = new javax.swing.GroupLayout(panelRedondeado4);
-        panelRedondeado4.setLayout(panelRedondeado4Layout);
-        panelRedondeado4Layout.setHorizontalGroup(
-            panelRedondeado4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado4Layout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
-        );
-        panelRedondeado4Layout.setVerticalGroup(
-            panelRedondeado4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRedondeado4Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel8)
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
-
-        jPanel2.add(panelRedondeado4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, -1, -1));
-
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/mascota2.jpeg"))); // NOI18N
         jLabel9.setText("jLabel8");
 
@@ -218,6 +142,26 @@ public class MenuPropietario_miscitass extends javax.swing.JFrame {
 
         jPanel2.add(panelRedondeado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 90, 80));
 
+        botonSwing4.setText("Menú Principal");
+        botonSwing4.addActionListener(this::botonSwing4ActionPerformed);
+        jPanel2.add(botonSwing4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 60));
+
+        botonSwing1.setForeground(new java.awt.Color(39, 53, 38));
+        botonSwing1.setText("Mis archivos");
+        botonSwing1.addActionListener(this::botonSwing1ActionPerformed);
+        jPanel2.add(botonSwing1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 250, 60));
+
+        btn_Calendario.setForeground(new java.awt.Color(39, 53, 38));
+        btn_Calendario.setText("Calendario");
+        jPanel2.add(btn_Calendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 250, 60));
+
+        btn_Reportes.setText("Reportes");
+        jPanel2.add(btn_Reportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 250, 60));
+
+        btn_Salir.setText("Salir");
+        btn_Salir.addActionListener(this::btn_SalirActionPerformed);
+        jPanel2.add(btn_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 250, 60));
+
         jPanel1.setBackground(new java.awt.Color(228, 230, 217));
         jPanel1.setMinimumSize(new java.awt.Dimension(1470, 740));
         jPanel1.setName(""); // NOI18N
@@ -230,11 +174,11 @@ public class MenuPropietario_miscitass extends javax.swing.JFrame {
         lbl_configuracion.setText("Mis citas");
         jPanel1.add(lbl_configuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, 29));
 
-        btn_agregarcitanueva.setBackground(new java.awt.Color(108, 135, 118));
-        btn_agregarcitanueva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/lapiz.png"))); // NOI18N
-        btn_agregarcitanueva.setText("Agendar una nueva cita");
-        btn_agregarcitanueva.addActionListener(this::btn_agregarcitanuevaActionPerformed);
-        jPanel1.add(btn_agregarcitanueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 80, -1, -1));
+        botonSwing3.setBackground(new java.awt.Color(108, 135, 118));
+        botonSwing3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/lapiz.png"))); // NOI18N
+        botonSwing3.setText("Agendar una nueva cita");
+        botonSwing3.addActionListener(this::botonSwing3ActionPerformed);
+        jPanel1.add(botonSwing3, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 80, -1, -1));
 
         jLabel7.setBackground(new java.awt.Color(51, 255, 51));
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -242,14 +186,14 @@ public class MenuPropietario_miscitass extends javax.swing.JFrame {
         jLabel7.setText("Historial de citas");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
 
-        btn_regresarprincipal.setBackground(new java.awt.Color(108, 135, 118));
-        btn_regresarprincipal.setText("Regresar");
-        btn_regresarprincipal.addActionListener(this::btn_regresarprincipalActionPerformed);
-        jPanel1.add(btn_regresarprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 650, 160, 60));
+        botonSwing2.setBackground(new java.awt.Color(108, 135, 118));
+        botonSwing2.setText("Regresar");
+        botonSwing2.addActionListener(this::botonSwing2ActionPerformed);
+        jPanel1.add(botonSwing2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 650, 160, 60));
 
-        jTable1.setBackground(new java.awt.Color(228, 230, 217));
-        jTable1.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablacitas.setBackground(new java.awt.Color(228, 230, 217));
+        tablacitas.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        tablacitas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -260,7 +204,7 @@ public class MenuPropietario_miscitass extends javax.swing.JFrame {
                 "Nombre de la mascota", "Raza", "Especie", "Veterinario", "Fecha", "Horario", "Motivo", "Descripción"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablacitas);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 1100, 450));
 
@@ -284,21 +228,33 @@ public class MenuPropietario_miscitass extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void btn_agregarcitanuevaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarcitanuevaActionPerformed
+    private void botonSwing3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing3ActionPerformed
         MenuPropietario_Agendarcitas menu = new MenuPropietario_Agendarcitas();
         menu.setVisible(true);
         this.dispose();         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_agregarcitanuevaActionPerformed
+    }//GEN-LAST:event_botonSwing3ActionPerformed
 
-    private void btn_regresarprincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regresarprincipalActionPerformed
+    private void botonSwing2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing2ActionPerformed
         MenuPropietario_Principal menu = new MenuPropietario_Principal();
         menu.setVisible(true);
         this.dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_regresarprincipalActionPerformed
+    }//GEN-LAST:event_botonSwing2ActionPerformed
+
+    private void botonSwing4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing4ActionPerformed
+        MenuPropietario_Principal menu = new MenuPropietario_Principal();
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_botonSwing4ActionPerformed
+
+    private void botonSwing1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing1ActionPerformed
+        MenuPropietario_Archivos menu = new MenuPropietario_Archivos();
+        menu.setVisible(true);
+        this.dispose();// TODO add your handling code here:
+    }//GEN-LAST:event_botonSwing1ActionPerformed
+
+    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_btn_SalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -326,29 +282,23 @@ public class MenuPropietario_miscitass extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private provet.componentes.PanelRedondeado boton_menu;
-    private provet.componentes.PanelRedondeado boton_salir;
-    private provet.componentes.botonSwing btn_agregarcitanueva;
-    private provet.componentes.botonSwing btn_regresarprincipal;
-    private javax.swing.JButton jButton1;
+    private provet.componentes.botonSwing botonSwing1;
+    private provet.componentes.botonSwing botonSwing2;
+    private provet.componentes.botonSwing botonSwing3;
+    private provet.componentes.botonSwing botonSwing4;
+    private provet.componentes.botonSwing btn_Calendario;
+    private provet.componentes.botonSwing btn_Reportes;
+    private provet.componentes.botonSwing btn_Salir;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbl_configuracion;
-    private provet.componentes.PanelRedondeado panelRedondeado1;
     private provet.componentes.PanelRedondeado panelRedondeado2;
-    private provet.componentes.PanelRedondeado panelRedondeado3;
-    private provet.componentes.PanelRedondeado panelRedondeado4;
+    public javax.swing.JTable tablacitas;
     // End of variables declaration//GEN-END:variables
 }

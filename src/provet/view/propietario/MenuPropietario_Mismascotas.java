@@ -4,7 +4,10 @@
  */
 package provet.view.propietario;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import provet.componentes.PanelMascota;
 
 /**
  *
@@ -19,8 +22,55 @@ public class MenuPropietario_Mismascotas extends javax.swing.JFrame {
      */
     public MenuPropietario_Mismascotas() {
         initComponents();
+        panelContenedor.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 20));
+        if (isUndecorated()) {
+    dispose();
+    setUndecorated(false);
+}
+
+// paneles se estiran
+getContentPane().removeAll();
+getContentPane().setLayout(new java.awt.BorderLayout());
+getContentPane().add(jPanel2, java.awt.BorderLayout.WEST);    // sidebar
+getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);  // contenido
+
+// 3) Sidebar mantiene 270px de ancho fijo
+jPanel2.setPreferredSize(new java.awt.Dimension(270, 0));
+
+// 4) Maximizar y cierre limpio
+setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
+    
+    private void AgregarMascota() {
+    // 1. Obtener los datos de tus JTextField o Labels
+    String nombre = txt_nombre.getText();
+    String raza   = txt_raza.getText();
+    String edad   = txt_edad.getText();
+
+    // Validar que no estén vacíos
+if (nombre.trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "El nombre de la mascota es obligatorio");
+        return;
+    }
+
+    // 2. Crear la nueva tarjeta usando la clase que hicimos antes
+    provet.componentes.PanelMascota nuevaCard = new provet.componentes.PanelMascota();
+    nuevaCard.setDatos(nombre, raza, edad);
+
+    // 3. Agregarla al panel contenedor (el que tiene FlowLayout)
+    panelContenedor.add(nuevaCard);
+
+    // 4. MUY IMPORTANTE: Refrescar el panel para que la tarjeta aparezca
+    panelContenedor.revalidate();
+    panelContenedor.repaint();
+
+    // 5. Limpiar los campos para la siguiente mascota
+    txt_nombre.setText("");
+    txt_raza.setText("");
+    txt_edad.setText("");
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,51 +81,32 @@ public class MenuPropietario_Mismascotas extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        boton_menu = new provet.componentes.PanelRedondeado();
-        jLabel21 = new javax.swing.JLabel();
-        boton_salir = new provet.componentes.PanelRedondeado();
-        jLabel22 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        panelRedondeado1 = new provet.componentes.PanelRedondeado();
-        jLabel2 = new javax.swing.JLabel();
-        panelRedondeado3 = new provet.componentes.PanelRedondeado();
-        jLabel4 = new javax.swing.JLabel();
-        panelRedondeado4 = new provet.componentes.PanelRedondeado();
-        jLabel7 = new javax.swing.JLabel();
         panelRedondeado2 = new provet.componentes.PanelRedondeado();
         jLabel8 = new javax.swing.JLabel();
+        botonSwing4 = new provet.componentes.botonSwing();
+        botonSwing1 = new provet.componentes.botonSwing();
+        btn_Calendario = new provet.componentes.botonSwing();
+        btn_Reportes = new provet.componentes.botonSwing();
+        btn_Salir = new provet.componentes.botonSwing();
         jPanel1 = new javax.swing.JPanel();
-        btn_notificacion = new provet.componentes.botonSwing();
-        btn_regresarprincipal = new provet.componentes.botonSwing();
-        panelRedondeado5 = new provet.componentes.PanelRedondeado();
-        panelRedondeado6 = new provet.componentes.PanelRedondeado();
-        lbl_configuracion1 = new javax.swing.JLabel();
-        lbl_configuracion2 = new javax.swing.JLabel();
         lbl_configuracion = new javax.swing.JLabel();
-        panelRedondeado7 = new provet.componentes.PanelRedondeado();
-        jLabel9 = new javax.swing.JLabel();
-        lbl_configuracion3 = new javax.swing.JLabel();
-        panelRedondeado8 = new provet.componentes.PanelRedondeado();
-        panelRedondeado11 = new provet.componentes.PanelRedondeado();
-        lbl_configuracion7 = new javax.swing.JLabel();
-        lbl_configuracion8 = new javax.swing.JLabel();
-        lbl_configuracion9 = new javax.swing.JLabel();
-        panelRedondeado12 = new provet.componentes.PanelRedondeado();
-        jLabel11 = new javax.swing.JLabel();
+        botonSwing3 = new provet.componentes.botonSwing();
+        botonSwing2 = new provet.componentes.botonSwing();
+        panelContenedor = new javax.swing.JPanel();
+        lbl_nombre = new javax.swing.JLabel();
+        lbl_raza = new javax.swing.JLabel();
+        lbl_edad = new javax.swing.JLabel();
+        txt_nombre = new javax.swing.JTextField();
+        txt_edad = new javax.swing.JTextField();
+        txt_raza = new javax.swing.JTextField();
+        btn_registrar = new provet.componentes.botonSwing();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(108, 135, 118));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel6.setBackground(new java.awt.Color(51, 255, 51));
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel6.setText("Nombre");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, -1, -1));
 
         jLabel15.setBackground(new java.awt.Color(51, 255, 51));
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -88,104 +119,6 @@ public class MenuPropietario_Mismascotas extends javax.swing.JFrame {
         jLabel16.setForeground(new java.awt.Color(39, 53, 38));
         jLabel16.setText("Propetario");
         jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
-
-        boton_menu.setBackground(new java.awt.Color(228, 230, 217));
-        boton_menu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel21.setBackground(new java.awt.Color(51, 255, 51));
-        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel21.setText("Menú principal");
-        boton_menu.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
-
-        jPanel2.add(boton_menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 60));
-
-        boton_salir.setBackground(new java.awt.Color(228, 230, 217));
-        boton_salir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel22.setBackground(new java.awt.Color(51, 255, 51));
-        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel22.setText("Salir");
-        boton_salir.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
-
-        jButton1.setText("->");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
-        boton_salir.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 50, -1));
-
-        jPanel2.add(boton_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 250, 60));
-
-        panelRedondeado1.setBackground(new java.awt.Color(228, 230, 217));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("Mis archivos");
-
-        javax.swing.GroupLayout panelRedondeado1Layout = new javax.swing.GroupLayout(panelRedondeado1);
-        panelRedondeado1.setLayout(panelRedondeado1Layout);
-        panelRedondeado1Layout.setHorizontalGroup(
-            panelRedondeado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado1Layout.createSequentialGroup()
-                .addContainerGap(55, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49))
-        );
-        panelRedondeado1Layout.setVerticalGroup(
-            panelRedondeado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado1Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18))
-        );
-
-        jPanel2.add(panelRedondeado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 250, 60));
-
-        panelRedondeado3.setBackground(new java.awt.Color(228, 230, 217));
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("Calendario");
-
-        javax.swing.GroupLayout panelRedondeado3Layout = new javax.swing.GroupLayout(panelRedondeado3);
-        panelRedondeado3.setLayout(panelRedondeado3Layout);
-        panelRedondeado3Layout.setHorizontalGroup(
-            panelRedondeado3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado3Layout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
-        );
-        panelRedondeado3Layout.setVerticalGroup(
-            panelRedondeado3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRedondeado3Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel4)
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
-
-        jPanel2.add(panelRedondeado3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, -1, -1));
-
-        panelRedondeado4.setBackground(new java.awt.Color(228, 230, 217));
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel7.setText("Reporte");
-
-        javax.swing.GroupLayout panelRedondeado4Layout = new javax.swing.GroupLayout(panelRedondeado4);
-        panelRedondeado4.setLayout(panelRedondeado4Layout);
-        panelRedondeado4Layout.setHorizontalGroup(
-            panelRedondeado4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado4Layout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
-        );
-        panelRedondeado4Layout.setVerticalGroup(
-            panelRedondeado4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRedondeado4Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel7)
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
-
-        jPanel2.add(panelRedondeado4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, -1, -1));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/mascota2.jpeg"))); // NOI18N
         jLabel8.setText("jLabel8");
@@ -209,202 +142,85 @@ public class MenuPropietario_Mismascotas extends javax.swing.JFrame {
 
         jPanel2.add(panelRedondeado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 90, 80));
 
+        botonSwing4.setText("Menú Principal");
+        botonSwing4.addActionListener(this::botonSwing4ActionPerformed);
+        jPanel2.add(botonSwing4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 60));
+
+        botonSwing1.setForeground(new java.awt.Color(39, 53, 38));
+        botonSwing1.setText("Mis archivos");
+        botonSwing1.addActionListener(this::botonSwing1ActionPerformed);
+        jPanel2.add(botonSwing1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 250, 60));
+
+        btn_Calendario.setForeground(new java.awt.Color(39, 53, 38));
+        btn_Calendario.setText("Calendario");
+        jPanel2.add(btn_Calendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 250, 60));
+
+        btn_Reportes.setText("Reportes");
+        jPanel2.add(btn_Reportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 250, 60));
+
+        btn_Salir.setText("Salir");
+        btn_Salir.addActionListener(this::btn_SalirActionPerformed);
+        jPanel2.add(btn_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 250, 60));
+
         jPanel1.setBackground(new java.awt.Color(228, 230, 217));
         jPanel1.setPreferredSize(new java.awt.Dimension(1291, 70));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn_notificacion.setBackground(new java.awt.Color(108, 135, 118));
-        btn_notificacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/system-uicons--bell.png"))); // NOI18N
-        btn_notificacion.setText("Notificaciones");
-        btn_notificacion.addActionListener(this::btn_notificacionActionPerformed);
-        jPanel1.add(btn_notificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 60, 190, -1));
-
-        btn_regresarprincipal.setBackground(new java.awt.Color(108, 135, 118));
-        btn_regresarprincipal.setText("Regresar");
-        btn_regresarprincipal.addActionListener(this::btn_regresarprincipalActionPerformed);
-        jPanel1.add(btn_regresarprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 670, 160, 60));
-
-        panelRedondeado6.setBackground(new java.awt.Color(228, 230, 217));
-
-        lbl_configuracion1.setBackground(new java.awt.Color(51, 255, 51));
-        lbl_configuracion1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lbl_configuracion1.setForeground(new java.awt.Color(39, 53, 38));
-        lbl_configuracion1.setText("Nombre mascota: Duke");
-
-        lbl_configuracion2.setBackground(new java.awt.Color(51, 255, 51));
-        lbl_configuracion2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lbl_configuracion2.setForeground(new java.awt.Color(39, 53, 38));
-        lbl_configuracion2.setText("Raza: Pomerania");
-
         lbl_configuracion.setBackground(new java.awt.Color(51, 255, 51));
         lbl_configuracion.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lbl_configuracion.setForeground(new java.awt.Color(39, 53, 38));
-        lbl_configuracion.setText("Id mascota: 123456");
+        lbl_configuracion.setText("Mis mascotas");
+        jPanel1.add(lbl_configuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 160, 50));
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/mascota2.jpeg"))); // NOI18N
-        jLabel9.setText("jLabel8");
+        botonSwing3.setBackground(new java.awt.Color(108, 135, 118));
+        botonSwing3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/lapiz.png"))); // NOI18N
+        botonSwing3.setText("Próximas citas");
+        botonSwing3.addActionListener(this::botonSwing3ActionPerformed);
+        jPanel1.add(botonSwing3, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 80, 190, -1));
 
-        javax.swing.GroupLayout panelRedondeado7Layout = new javax.swing.GroupLayout(panelRedondeado7);
-        panelRedondeado7.setLayout(panelRedondeado7Layout);
-        panelRedondeado7Layout.setHorizontalGroup(
-            panelRedondeado7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRedondeado7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 78, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        panelRedondeado7Layout.setVerticalGroup(
-            panelRedondeado7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRedondeado7Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel9)
-                .addContainerGap(17, Short.MAX_VALUE))
-        );
+        botonSwing2.setBackground(new java.awt.Color(108, 135, 118));
+        botonSwing2.setText("Regresar");
+        botonSwing2.addActionListener(this::botonSwing2ActionPerformed);
+        jPanel1.add(botonSwing2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 650, 160, 60));
 
-        javax.swing.GroupLayout panelRedondeado6Layout = new javax.swing.GroupLayout(panelRedondeado6);
-        panelRedondeado6.setLayout(panelRedondeado6Layout);
-        panelRedondeado6Layout.setHorizontalGroup(
-            panelRedondeado6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado6Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(panelRedondeado7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
-                .addGroup(panelRedondeado6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRedondeado6Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(lbl_configuracion2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lbl_configuracion1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_configuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(73, 73, 73))
+        panelContenedor.setBackground(new java.awt.Color(228, 230, 217));
+
+        javax.swing.GroupLayout panelContenedorLayout = new javax.swing.GroupLayout(panelContenedor);
+        panelContenedor.setLayout(panelContenedorLayout);
+        panelContenedorLayout.setHorizontalGroup(
+            panelContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1040, Short.MAX_VALUE)
         );
-        panelRedondeado6Layout.setVerticalGroup(
-            panelRedondeado6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRedondeado6Layout.createSequentialGroup()
-                .addGroup(panelRedondeado6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRedondeado6Layout.createSequentialGroup()
-                        .addComponent(lbl_configuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_configuracion1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbl_configuracion2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRedondeado6Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(panelRedondeado7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(9, Short.MAX_VALUE))
+        panelContenedorLayout.setVerticalGroup(
+            panelContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 440, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout panelRedondeado5Layout = new javax.swing.GroupLayout(panelRedondeado5);
-        panelRedondeado5.setLayout(panelRedondeado5Layout);
-        panelRedondeado5Layout.setHorizontalGroup(
-            panelRedondeado5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRedondeado5Layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(panelRedondeado6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
-        );
-        panelRedondeado5Layout.setVerticalGroup(
-            panelRedondeado5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRedondeado5Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(panelRedondeado6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(14, 14, 14))
-        );
+        jPanel1.add(panelContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 1040, 440));
 
-        jPanel1.add(panelRedondeado5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, 640, 150));
+        lbl_nombre.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbl_nombre.setText("Nombre:");
+        jPanel1.add(lbl_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
-        lbl_configuracion3.setBackground(new java.awt.Color(51, 255, 51));
-        lbl_configuracion3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lbl_configuracion3.setForeground(new java.awt.Color(39, 53, 38));
-        lbl_configuracion3.setText("Mis mascotas");
-        jPanel1.add(lbl_configuracion3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 210, 80));
+        lbl_raza.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbl_raza.setText("Raza:");
+        jPanel1.add(lbl_raza, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, -1, -1));
 
-        panelRedondeado11.setBackground(new java.awt.Color(228, 230, 217));
+        lbl_edad.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbl_edad.setText("Edad:");
+        jPanel1.add(lbl_edad, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 90, 50, 20));
 
-        lbl_configuracion7.setBackground(new java.awt.Color(51, 255, 51));
-        lbl_configuracion7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lbl_configuracion7.setForeground(new java.awt.Color(39, 53, 38));
-        lbl_configuracion7.setText("Nombre mascota: Walter");
+        txt_nombre.addActionListener(this::txt_nombreActionPerformed);
+        jPanel1.add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 150, -1));
+        jPanel1.add(txt_edad, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 90, 150, -1));
 
-        lbl_configuracion8.setBackground(new java.awt.Color(51, 255, 51));
-        lbl_configuracion8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lbl_configuracion8.setForeground(new java.awt.Color(39, 53, 38));
-        lbl_configuracion8.setText("Raza: Husky");
+        txt_raza.addActionListener(this::txt_razaActionPerformed);
+        jPanel1.add(txt_raza, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 140, -1));
 
-        lbl_configuracion9.setBackground(new java.awt.Color(51, 255, 51));
-        lbl_configuracion9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lbl_configuracion9.setForeground(new java.awt.Color(39, 53, 38));
-        lbl_configuracion9.setText("Id mascota: 56789");
-
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/mascota2.jpeg"))); // NOI18N
-        jLabel11.setText("jLabel8");
-
-        javax.swing.GroupLayout panelRedondeado12Layout = new javax.swing.GroupLayout(panelRedondeado12);
-        panelRedondeado12.setLayout(panelRedondeado12Layout);
-        panelRedondeado12Layout.setHorizontalGroup(
-            panelRedondeado12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRedondeado12Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 78, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        panelRedondeado12Layout.setVerticalGroup(
-            panelRedondeado12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRedondeado12Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel11)
-                .addContainerGap(17, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout panelRedondeado11Layout = new javax.swing.GroupLayout(panelRedondeado11);
-        panelRedondeado11.setLayout(panelRedondeado11Layout);
-        panelRedondeado11Layout.setHorizontalGroup(
-            panelRedondeado11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado11Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(panelRedondeado12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
-                .addGroup(panelRedondeado11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRedondeado11Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(lbl_configuracion8, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lbl_configuracion9, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_configuracion7))
-                .addGap(69, 69, 69))
-        );
-        panelRedondeado11Layout.setVerticalGroup(
-            panelRedondeado11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRedondeado11Layout.createSequentialGroup()
-                .addGroup(panelRedondeado11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRedondeado11Layout.createSequentialGroup()
-                        .addComponent(lbl_configuracion9, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_configuracion7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbl_configuracion8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRedondeado11Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(panelRedondeado12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(9, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout panelRedondeado8Layout = new javax.swing.GroupLayout(panelRedondeado8);
-        panelRedondeado8.setLayout(panelRedondeado8Layout);
-        panelRedondeado8Layout.setHorizontalGroup(
-            panelRedondeado8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRedondeado8Layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(panelRedondeado11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
-        );
-        panelRedondeado8Layout.setVerticalGroup(
-            panelRedondeado8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRedondeado8Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(panelRedondeado11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(14, 14, 14))
-        );
-
-        jPanel1.add(panelRedondeado8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 400, -1, -1));
+        btn_registrar.setBackground(new java.awt.Color(108, 135, 118));
+        btn_registrar.setText("Registrar");
+        btn_registrar.addActionListener(this::btn_registrarActionPerformed);
+        jPanel1.add(btn_registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 80, 180, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -419,18 +235,18 @@ public class MenuPropietario_Mismascotas extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void btn_notificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_notificacionActionPerformed
+    private void botonSwing3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing3ActionPerformed
         // TODO add your handling code here:
         boolean hayCitas = true;
         if(!hayCitas){
@@ -441,13 +257,41 @@ public class MenuPropietario_Mismascotas extends javax.swing.JFrame {
             // opcional: abrir ventana de citas
             new MenuPropietario_CitasPendientes().setVisible(true);
         }
-    }//GEN-LAST:event_btn_notificacionActionPerformed
+    }//GEN-LAST:event_botonSwing3ActionPerformed
 
-    private void btn_regresarprincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regresarprincipalActionPerformed
-        MenuPropietario_Principal menu = new MenuPropietario_Principal();
+    private void botonSwing2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing2ActionPerformed
+        MenuPropietario_miscitass menu = new MenuPropietario_miscitass();
         menu.setVisible(true);
         this.dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_regresarprincipalActionPerformed
+    }//GEN-LAST:event_botonSwing2ActionPerformed
+
+    private void botonSwing4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing4ActionPerformed
+        MenuPropietario_Principal menu = new MenuPropietario_Principal();
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_botonSwing4ActionPerformed
+
+    private void botonSwing1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing1ActionPerformed
+        MenuPropietario_Archivos menu = new MenuPropietario_Archivos();
+        menu.setVisible(true);
+        this.dispose();// TODO add your handling code here:
+    }//GEN-LAST:event_botonSwing1ActionPerformed
+
+    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_btn_SalirActionPerformed
+
+    private void txt_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_nombreActionPerformed
+
+    private void txt_razaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_razaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_razaActionPerformed
+
+    private void btn_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registrarActionPerformed
+      AgregarMascota();  // TODO add your handling code here:
+    }//GEN-LAST:event_btn_registrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -475,40 +319,27 @@ public class MenuPropietario_Mismascotas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private provet.componentes.PanelRedondeado boton_menu;
-    private provet.componentes.PanelRedondeado boton_salir;
-    private provet.componentes.botonSwing btn_notificacion;
-    private provet.componentes.botonSwing btn_regresarprincipal;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel11;
+    private provet.componentes.botonSwing botonSwing1;
+    private provet.componentes.botonSwing botonSwing2;
+    private provet.componentes.botonSwing botonSwing3;
+    private provet.componentes.botonSwing botonSwing4;
+    private provet.componentes.botonSwing btn_Calendario;
+    private provet.componentes.botonSwing btn_Reportes;
+    private provet.componentes.botonSwing btn_Salir;
+    private provet.componentes.botonSwing btn_registrar;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lbl_configuracion;
-    private javax.swing.JLabel lbl_configuracion1;
-    private javax.swing.JLabel lbl_configuracion2;
-    private javax.swing.JLabel lbl_configuracion3;
-    private javax.swing.JLabel lbl_configuracion7;
-    private javax.swing.JLabel lbl_configuracion8;
-    private javax.swing.JLabel lbl_configuracion9;
-    private provet.componentes.PanelRedondeado panelRedondeado1;
-    private provet.componentes.PanelRedondeado panelRedondeado11;
-    private provet.componentes.PanelRedondeado panelRedondeado12;
+    private javax.swing.JLabel lbl_edad;
+    private javax.swing.JLabel lbl_nombre;
+    private javax.swing.JLabel lbl_raza;
+    private javax.swing.JPanel panelContenedor;
     private provet.componentes.PanelRedondeado panelRedondeado2;
-    private provet.componentes.PanelRedondeado panelRedondeado3;
-    private provet.componentes.PanelRedondeado panelRedondeado4;
-    private provet.componentes.PanelRedondeado panelRedondeado5;
-    private provet.componentes.PanelRedondeado panelRedondeado6;
-    private provet.componentes.PanelRedondeado panelRedondeado7;
-    private provet.componentes.PanelRedondeado panelRedondeado8;
+    private javax.swing.JTextField txt_edad;
+    private javax.swing.JTextField txt_nombre;
+    private javax.swing.JTextField txt_raza;
     // End of variables declaration//GEN-END:variables
 }
