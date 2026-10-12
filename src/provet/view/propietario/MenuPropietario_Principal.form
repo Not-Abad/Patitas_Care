@@ -349,7 +349,7 @@
             <Component class="javax.swing.JLabel" name="jLabel11">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/imagenes/mascota2.jpeg"/>
+                  <Image iconType="3" name="/imagenes/ep--home-filled (1).png"/>
                 </Property>
               </Properties>
               <Constraints>

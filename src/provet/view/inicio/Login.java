@@ -2,12 +2,14 @@
 //Paquete al que pertenece la ventana
 package provet.view.inicio;
 
-//Inicio de la clase Login, que hereda de la clase JFrame
-
 import javax.swing.JOptionPane;
-import provet.view.veterinario.Menu_Principal;
 import provet.model.ControlUsuarios;
 import provet.model.Usuario;
+import provet.view.administrador.MenuAdmin;
+import provet.view.veterinario.Menu_Principal;
+import provet.view.secretario.Dashboard_Secretario;
+
+//Inicio de la clase Login, que hereda de la clase JFrame
 public class Login extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Login.class.getName());
@@ -15,6 +17,7 @@ public class Login extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     public Login() {
         initComponents();
+        provet.model.InicializadorDatos.cargarUsuarios();    
     }
 
     
@@ -27,7 +30,6 @@ public class Login extends javax.swing.JFrame {
         link_nuevaCuenta = new provet.componentes.linkLabel();
         link_recuperarContra = new provet.componentes.linkLabel();
         txt_Usuario = new javax.swing.JTextField();
-        txt_Contraseña = new javax.swing.JTextField();
         chk_Ojo = new javax.swing.JCheckBox();
         btn_Aceptar = new provet.componentes.botonSwing();
         lbl_Bienvenido = new javax.swing.JLabel();
@@ -35,6 +37,7 @@ public class Login extends javax.swing.JFrame {
         lbl_Usuario = new javax.swing.JLabel();
         lbl_Contraseña = new javax.swing.JLabel();
         lbl_Pregunta2 = new javax.swing.JLabel();
+        txt_contraseña = new javax.swing.JPasswordField();
         lbl_MarcoContraseña = new javax.swing.JLabel();
         pnl_Informativo = new javax.swing.JPanel();
         lbl_TituloP1 = new javax.swing.JLabel();
@@ -87,17 +90,12 @@ public class Login extends javax.swing.JFrame {
         txt_Usuario.setCaretColor(new java.awt.Color(39, 53, 38));
         pnl_Login.add(txt_Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 230, 30));
 
-        txt_Contraseña.setBackground(new java.awt.Color(216, 218, 203));
-        txt_Contraseña.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        txt_Contraseña.setForeground(new java.awt.Color(39, 53, 38));
-        txt_Contraseña.setToolTipText("Usuario");
-        txt_Contraseña.setActionCommand("<Not Set>");
-        txt_Contraseña.setAutoscrolls(false);
-        txt_Contraseña.setBorder(null);
-        txt_Contraseña.setCaretColor(new java.awt.Color(39, 53, 38));
-        pnl_Login.add(txt_Contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 190, 30));
-
-        chk_Ojo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/eye.png"))); // NOI18N
+        chk_Ojo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/basil--eye-closed-solid.png"))); // NOI18N
+        chk_Ojo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chk_OjoActionPerformed(evt);
+            }
+        });
         pnl_Login.add(chk_Ojo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 40, 30));
 
         btn_Aceptar.setBackground(new java.awt.Color(69, 98, 78));
@@ -134,6 +132,12 @@ public class Login extends javax.swing.JFrame {
         lbl_Pregunta2.setForeground(new java.awt.Color(39, 53, 38));
         lbl_Pregunta2.setText("¿Olvidaste tu contraseña?");
         pnl_Login.add(lbl_Pregunta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, 180, -1));
+
+        txt_contraseña.setBackground(new java.awt.Color(216, 218, 203));
+        txt_contraseña.setFont(new java.awt.Font("Verdana", 1, 15)); // NOI18N
+        txt_contraseña.setForeground(new java.awt.Color(39, 53, 38));
+        txt_contraseña.setBorder(null);
+        pnl_Login.add(txt_contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 190, 30));
 
         lbl_MarcoContraseña.setBackground(new java.awt.Color(216, 218, 203));
         lbl_MarcoContraseña.setOpaque(true);
@@ -181,22 +185,58 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_iniciarsActionPerformed
 
     private void btn_AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AceptarActionPerformed
-    String Nombre = txt_Usuario.getText().trim();
+        
+        String nombreIngresado = txt_Usuario.getText().trim();
+        String passwordIngresada = String.valueOf(txt_contraseña.getPassword());
+        
+        if (nombreIngresado.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor ingresa un nombre.");
+            return;
+        }
 
-    if (Nombre.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Por favor ingresa un nombre.");
-        return;
+        //BUSCAMOS al usuario en la lista global
+        Usuario usuarioEncontrado = null;
+
+        for (Usuario u : ControlUsuarios.listaUsuarios) {
+            if (u.getNombre().equalsIgnoreCase(nombreIngresado)) {
+                usuarioEncontrado = u;
+                break; // Detenemos la búsqueda porque ya lo hallamos
+            }
+        }
+
+        //Si el usuario existe, Entonces ...
+        if (usuarioEncontrado != null) {            
+            if (usuarioEncontrado.getContraseña().equals(passwordIngresada)) {
+                // CASO: TODO CORRECTO
+                ControlUsuarios.usuarioActivo = usuarioEncontrado;
+                String rol = usuarioEncontrado.getTipo_Usuario();
+
+        // Estructura para abrir la ventana según el rol
+        switch (rol) {
+            case "Administrador":
+                MenuAdmin mpAdmin = new MenuAdmin();
+                mpAdmin.setVisible(true);
+                break;
+            case "Veterinario":
+                Menu_Principal mpVet = new Menu_Principal(usuarioEncontrado);
+                mpVet.setVisible(true);
+                break;
+            case "Recepcionista":
+                Dashboard_Secretario mpSec = new Dashboard_Secretario();
+                mpSec.setVisible(true);
+        }
+        this.dispose();
+    } else {
+        // CASO: CONTRASEÑA INCORRECTA
+        JOptionPane.showMessageDialog(this, "La contraseña es incorrecta. Inténtalo de nuevo.");
+        txt_contraseña.setText(""); // Limpiamos el campo por seguridad
+        txt_contraseña.requestFocus();
     }
-
-    Usuario nuevoUsuario = new Usuario(Nombre);
-    ControlUsuarios.usuarioActivo = nuevoUsuario;
-
-    ControlUsuarios.listaUsuarios.add(nuevoUsuario);
-
-    Menu_Principal menu = new Menu_Principal(nuevoUsuario);
-    menu.setVisible(true);
-    this.dispose();
-
+    
+        } else {        //Si el usuario NO existe, Entonces ...
+            JOptionPane.showMessageDialog(this, "El usuario '" + nombreIngresado + "' no existe. Por favor, crea una cuenta.");
+ 
+}
     }//GEN-LAST:event_btn_AceptarActionPerformed
 
     private void link_nuevaCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_link_nuevaCuentaMouseClicked
@@ -208,19 +248,25 @@ public class Login extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null, "Error, no hay usuario para recuperar contraseña");
            txt_Usuario.requestFocus();
         }else{
-            Recuperar_Contraseña vEmergente = new Recuperar_Contraseña();
+            String Usuario = txt_Usuario.getText();
+            Recuperar_Contraseña vEmergente = new Recuperar_Contraseña(Usuario);
             vEmergente.setVisible(true);
         }
         
     }//GEN-LAST:event_link_recuperarContraMouseClicked
 
-    public void verificar_Datos(Usuario nuevoUsuario) {
-    Menu_Principal menu = new Menu_Principal(nuevoUsuario);
-    menu.setVisible(true);
-    this.dispose();
-}
+    private void chk_OjoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chk_OjoActionPerformed
+        if(chk_Ojo.isSelected()){
+            txt_contraseña.setEchoChar((char)0);
+            chk_Ojo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/basil--eye-solid.png")));
+        }else{
+            txt_contraseña.setEchoChar('•');
+            chk_Ojo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/basil--eye-closed-solid.png")));
+        }
+    }//GEN-LAST:event_chk_OjoActionPerformed
+
     
-        public static void main(String args[]) {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -262,7 +308,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel pnl_Informativo;
     private provet.componentes.PanelRedondeado pnl_Login;
     private javax.swing.JPanel pnl_Operativo;
-    private javax.swing.JTextField txt_Contraseña;
     private javax.swing.JTextField txt_Usuario;
+    private javax.swing.JPasswordField txt_contraseña;
     // End of variables declaration//GEN-END:variables
 }

@@ -158,7 +158,7 @@ public class MenuPropietario_Principal extends javax.swing.JFrame {
         btn_Entrarmismascotas.addActionListener(this::btn_EntrarmismascotasActionPerformed);
         panel_mismascotas.add(btn_Entrarmismascotas, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 390, -1, -1));
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/mascota2.jpeg"))); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ep--home-filled (1).png"))); // NOI18N
         panel_mismascotas.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 140, 80));
 
         jPanel1.add(panel_mismascotas, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 250, 240, 460));
