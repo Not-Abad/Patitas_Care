@@ -33,6 +33,7 @@ public class MenuPropietario_MisMscotas extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         lbl_configuracion = new javax.swing.JLabel();
         botonSwing3 = new provet.componentes.botonSwing();
+<<<<<<< Updated upstream
         botonSwing2 = new provet.componentes.botonSwing();
         panelRedondeado5 = new provet.componentes.PanelRedondeado();
         panelPaciente11 = new provet.componentes.PanelPaciente();
@@ -47,10 +48,17 @@ public class MenuPropietario_MisMscotas extends javax.swing.JFrame {
         panelPaciente8 = new provet.componentes.PanelPaciente();
         panelRedondeado7 = new provet.componentes.PanelRedondeado();
         panelPaciente9 = new provet.componentes.PanelPaciente();
+=======
+        botonSwing4 = new provet.componentes.botonSwing();
+        panelPaciente1 = new provet.componentes.PanelPaciente();
+        panelPaciente2 = new provet.componentes.PanelPaciente();
+        panelPaciente3 = new provet.componentes.PanelPaciente();
+>>>>>>> Stashed changes
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+<<<<<<< Updated upstream
         boton_menu = new provet.componentes.PanelRedondeado();
         jLabel21 = new javax.swing.JLabel();
         boton_salir = new provet.componentes.PanelRedondeado();
@@ -64,10 +72,23 @@ public class MenuPropietario_MisMscotas extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         panelRedondeado2 = new provet.componentes.PanelRedondeado();
         jLabel8 = new javax.swing.JLabel();
+=======
+        boton_salir = new provet.componentes.PanelRedondeado();
+        jLabel19 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        botonSwing1 = new provet.componentes.botonSwing();
+        btn_Calendario = new provet.componentes.botonSwing();
+        btn_Reportes = new provet.componentes.botonSwing();
+        btn_MenuP = new provet.componentes.botonSwing();
+        jLabel10 = new javax.swing.JLabel();
+        panelRedondeado1 = new provet.componentes.PanelRedondeado();
+        jLabel2 = new javax.swing.JLabel();
+>>>>>>> Stashed changes
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(228, 230, 217));
+        jPanel1.setMinimumSize(new java.awt.Dimension(1040, 740));
         jPanel1.setPreferredSize(new java.awt.Dimension(1291, 70));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -75,12 +96,17 @@ public class MenuPropietario_MisMscotas extends javax.swing.JFrame {
         lbl_configuracion.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lbl_configuracion.setForeground(new java.awt.Color(39, 53, 38));
         lbl_configuracion.setText("Mis mascotas");
+<<<<<<< Updated upstream
         jPanel1.add(lbl_configuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 160, 50));
+=======
+        jPanel1.add(lbl_configuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, -1, 29));
+>>>>>>> Stashed changes
 
         botonSwing3.setBackground(new java.awt.Color(108, 135, 118));
         botonSwing3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/lapiz.png"))); // NOI18N
         botonSwing3.setText("Próximas citas");
         botonSwing3.addActionListener(this::botonSwing3ActionPerformed);
+<<<<<<< Updated upstream
         jPanel1.add(botonSwing3, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 60, -1, -1));
 
         botonSwing2.setBackground(new java.awt.Color(108, 135, 118));
@@ -116,11 +142,15 @@ public class MenuPropietario_MisMscotas extends javax.swing.JFrame {
         lbl_configuracion1.setForeground(new java.awt.Color(39, 53, 38));
         lbl_configuracion1.setText("Mis mascotas");
         jPanel3.add(lbl_configuracion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 160, 50));
+=======
+        jPanel1.add(botonSwing3, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 90, -1, -1));
+>>>>>>> Stashed changes
 
         botonSwing4.setBackground(new java.awt.Color(108, 135, 118));
         botonSwing4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/lapiz.png"))); // NOI18N
         botonSwing4.setText("Próximas citas");
         botonSwing4.addActionListener(this::botonSwing4ActionPerformed);
+<<<<<<< Updated upstream
         jPanel3.add(botonSwing4, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 60, -1, -1));
         jPanel3.add(panelPaciente5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 360, -1, -1));
         jPanel3.add(panelPaciente6, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 150, -1, -1));
@@ -170,6 +200,12 @@ public class MenuPropietario_MisMscotas extends javax.swing.JFrame {
         );
 
         jPanel1.add(panelRedondeado7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, -1, -1));
+=======
+        jPanel1.add(botonSwing4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 660, 130, 50));
+        jPanel1.add(panelPaciente1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+        jPanel1.add(panelPaciente2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
+        jPanel1.add(panelPaciente3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 110, -1, -1));
+>>>>>>> Stashed changes
 
         jPanel2.setBackground(new java.awt.Color(108, 135, 118));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -177,14 +213,22 @@ public class MenuPropietario_MisMscotas extends javax.swing.JFrame {
         jLabel6.setBackground(new java.awt.Color(51, 255, 51));
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(39, 53, 38));
+<<<<<<< Updated upstream
         jLabel6.setText("Nombre");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, -1, -1));
+=======
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, -1, -1));
+>>>>>>> Stashed changes
 
         jLabel15.setBackground(new java.awt.Color(51, 255, 51));
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(39, 53, 38));
         jLabel15.setText("PatitasCare");
+<<<<<<< Updated upstream
         jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
+=======
+        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
+>>>>>>> Stashed changes
 
         jLabel16.setBackground(new java.awt.Color(51, 255, 51));
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -192,6 +236,7 @@ public class MenuPropietario_MisMscotas extends javax.swing.JFrame {
         jLabel16.setText("Propetario");
         jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
 
+<<<<<<< Updated upstream
         boton_menu.setBackground(new java.awt.Color(228, 230, 217));
         boton_menu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -211,6 +256,16 @@ public class MenuPropietario_MisMscotas extends javax.swing.JFrame {
         jLabel22.setForeground(new java.awt.Color(39, 53, 38));
         jLabel22.setText("Salir");
         boton_salir.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
+=======
+        boton_salir.setBackground(new java.awt.Color(228, 230, 217));
+        boton_salir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel19.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel19.setText("Salir");
+        boton_salir.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
+>>>>>>> Stashed changes
 
         jButton1.setText("->");
         jButton1.addActionListener(this::jButton1ActionPerformed);
@@ -218,23 +273,57 @@ public class MenuPropietario_MisMscotas extends javax.swing.JFrame {
 
         jPanel2.add(boton_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 250, 60));
 
+<<<<<<< Updated upstream
         panelRedondeado1.setBackground(new java.awt.Color(228, 230, 217));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("Mis archivos");
+=======
+        botonSwing1.setText("Pacientes");
+        jPanel2.add(botonSwing1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 250, 60));
+
+        btn_Calendario.setText("Calendario");
+        jPanel2.add(btn_Calendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 250, 60));
+
+        btn_Reportes.setText("Reportes");
+        jPanel2.add(btn_Reportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, 250, 60));
+
+        btn_MenuP.setText("Menú Principal");
+        jPanel2.add(btn_MenuP, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 60));
+
+        jLabel10.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel10.setText("Propietario");
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, -1, -1));
+
+        panelRedondeado1.setMaximumSize(new java.awt.Dimension(122, 45));
+        panelRedondeado1.setMinimumSize(new java.awt.Dimension(122, 45));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/mascota2.jpeg"))); // NOI18N
+        jLabel2.setText("jLabel2");
+>>>>>>> Stashed changes
 
         javax.swing.GroupLayout panelRedondeado1Layout = new javax.swing.GroupLayout(panelRedondeado1);
         panelRedondeado1.setLayout(panelRedondeado1Layout);
         panelRedondeado1Layout.setHorizontalGroup(
             panelRedondeado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< Updated upstream
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado1Layout.createSequentialGroup()
                 .addContainerGap(55, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49))
+=======
+            .addGroup(panelRedondeado1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
+>>>>>>> Stashed changes
         );
         panelRedondeado1Layout.setVerticalGroup(
             panelRedondeado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado1Layout.createSequentialGroup()
+<<<<<<< Updated upstream
                 .addContainerGap(20, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18))
@@ -311,31 +400,72 @@ public class MenuPropietario_MisMscotas extends javax.swing.JFrame {
         );
 
         jPanel2.add(panelRedondeado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 90, 80));
+=======
+                .addContainerGap(7, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jPanel2.add(panelRedondeado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 100, 50));
+>>>>>>> Stashed changes
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< Updated upstream
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+=======
+            .addGroup(layout.createSequentialGroup()
+>>>>>>> Stashed changes
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< Updated upstream
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+=======
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE)
+>>>>>>> Stashed changes
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< Updated upstream
+=======
+    private void botonSwing3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing3ActionPerformed
+        // TODO add your handling code here:
+       boolean hayCitas = true;
+       if(!hayCitas){
+           JOptionPane.showMessageDialog(this, "No tienes citas pendientes");
+    } else {
+        JOptionPane.showMessageDialog(this, "Tienes citas pendientes, revisa el apartado de citas");
+        
+        // opcional: abrir ventana de citas
+        new MenuPropietario_CitasPendientes().setVisible(true);
+    }
+       
+           
+    }//GEN-LAST:event_botonSwing3ActionPerformed
+
+    private void botonSwing4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing4ActionPerformed
+Menupropietario_Principal menu = new Menupropietario_Principal();
+menu.setVisible(true);
+this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_botonSwing4ActionPerformed
+
+>>>>>>> Stashed changes
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -398,6 +528,7 @@ public class MenuPropietario_MisMscotas extends javax.swing.JFrame {
     private provet.componentes.botonSwing botonSwing2;
     private provet.componentes.botonSwing botonSwing3;
     private provet.componentes.botonSwing botonSwing4;
+<<<<<<< Updated upstream
     private provet.componentes.botonSwing botonSwing5;
     private provet.componentes.PanelRedondeado boton_menu;
     private provet.componentes.PanelRedondeado boton_salir;
@@ -408,11 +539,24 @@ public class MenuPropietario_MisMscotas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel4;
+=======
+    private provet.componentes.PanelRedondeado boton_salir;
+    private provet.componentes.botonSwing btn_Calendario;
+    private provet.componentes.botonSwing btn_MenuP;
+    private provet.componentes.botonSwing btn_Reportes;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+>>>>>>> Stashed changes
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+<<<<<<< Updated upstream
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lbl_configuracion;
     private javax.swing.JLabel lbl_configuracion1;
@@ -429,5 +573,12 @@ public class MenuPropietario_MisMscotas extends javax.swing.JFrame {
     private provet.componentes.PanelRedondeado panelRedondeado5;
     private provet.componentes.PanelRedondeado panelRedondeado6;
     private provet.componentes.PanelRedondeado panelRedondeado7;
+=======
+    private javax.swing.JLabel lbl_configuracion;
+    private provet.componentes.PanelPaciente panelPaciente1;
+    private provet.componentes.PanelPaciente panelPaciente2;
+    private provet.componentes.PanelPaciente panelPaciente3;
+    private provet.componentes.PanelRedondeado panelRedondeado1;
+>>>>>>> Stashed changes
     // End of variables declaration//GEN-END:variables
 }

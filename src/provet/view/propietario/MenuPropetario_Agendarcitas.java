@@ -31,6 +31,7 @@ public class MenuPropetario_Agendarcitas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+<<<<<<< Updated upstream
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -48,6 +49,8 @@ public class MenuPropetario_Agendarcitas extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         panelRedondeado2 = new provet.componentes.PanelRedondeado();
         jLabel8 = new javax.swing.JLabel();
+=======
+>>>>>>> Stashed changes
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -56,8 +59,13 @@ public class MenuPropetario_Agendarcitas extends javax.swing.JFrame {
         comboMotivo = new javax.swing.JComboBox<>();
         txtveterinario = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
+<<<<<<< Updated upstream
         txtFecha = new javax.swing.JTextPane();
         comboespecie = new javax.swing.JComboBox<>();
+=======
+        txt_nombre = new javax.swing.JTextPane();
+        comboMascota = new javax.swing.JComboBox<>();
+>>>>>>> Stashed changes
         txtfecha = new javax.swing.JLabel();
         txthorario = new javax.swing.JLabel();
         comboHorario = new javax.swing.JComboBox<>();
@@ -66,6 +74,7 @@ public class MenuPropetario_Agendarcitas extends javax.swing.JFrame {
         txtDescripcion = new javax.swing.JTextPane();
         txtbotonconfirmarcita = new provet.componentes.botonSwing();
         txtbotoncancelar = new provet.componentes.botonSwing();
+<<<<<<< Updated upstream
         botonSwing2 = new provet.componentes.botonSwing();
         botonSwing3 = new provet.componentes.botonSwing();
         txtmascota1 = new javax.swing.JLabel();
@@ -233,6 +242,28 @@ public class MenuPropetario_Agendarcitas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+=======
+        txthorario1 = new javax.swing.JLabel();
+        botonSwing4 = new provet.componentes.botonSwing();
+        txt_fecha = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        boton_salir = new provet.componentes.PanelRedondeado();
+        jLabel19 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        botonSwing1 = new provet.componentes.botonSwing();
+        btn_Calendario = new provet.componentes.botonSwing();
+        btn_Reportes = new provet.componentes.botonSwing();
+        btn_MenuP = new provet.componentes.botonSwing();
+        jLabel11 = new javax.swing.JLabel();
+        panelRedondeado1 = new provet.componentes.PanelRedondeado();
+        jLabel2 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+>>>>>>> Stashed changes
         jPanel1.setBackground(new java.awt.Color(228, 230, 217));
         jPanel1.setMinimumSize(new java.awt.Dimension(1470, 740));
         jPanel1.setPreferredSize(new java.awt.Dimension(1291, 70));
@@ -256,11 +287,19 @@ public class MenuPropetario_Agendarcitas extends javax.swing.JFrame {
         txtmascota.setBackground(new java.awt.Color(51, 255, 51));
         txtmascota.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtmascota.setForeground(new java.awt.Color(39, 53, 38));
+<<<<<<< Updated upstream
         txtmascota.setText("Nombre de la mascota:");
         jPanel1.add(txtmascota, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 120, 220, 20));
 
         comboMotivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vomito", "Diarrea", "Consulta general", "Vacunacion", "otro" }));
         jPanel1.add(comboMotivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 360, 430, -1));
+=======
+        txtmascota.setText("Tipo de Mascota:");
+        jPanel1.add(txtmascota, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, -1, 29));
+
+        comboMotivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vomito", "Diarrea", "Consulta general", "Vacunacion", "Otro" }));
+        jPanel1.add(comboMotivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 300, 240, -1));
+>>>>>>> Stashed changes
 
         txtveterinario.setBackground(new java.awt.Color(51, 255, 51));
         txtveterinario.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -268,9 +307,13 @@ public class MenuPropetario_Agendarcitas extends javax.swing.JFrame {
         txtveterinario.setText("Veterinario:");
         jPanel1.add(txtveterinario, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, -1, 29));
 
-        jScrollPane1.setViewportView(txtFecha);
+        jScrollPane1.setViewportView(txt_nombre);
 
+<<<<<<< Updated upstream
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 280, 430, 20));
+=======
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 100, 240, -1));
+>>>>>>> Stashed changes
 
         comboespecie.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Perro", "Gato", "Especie diferente" }));
         jPanel1.add(comboespecie, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, 430, 20));
@@ -313,6 +356,7 @@ public class MenuPropetario_Agendarcitas extends javax.swing.JFrame {
         txtbotoncancelar.addActionListener(this::txtbotoncancelarActionPerformed);
         jPanel1.add(txtbotoncancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 610, 160, 40));
 
+<<<<<<< Updated upstream
         botonSwing2.setBackground(new java.awt.Color(108, 135, 118));
         botonSwing2.setText("Regresar");
         botonSwing2.addActionListener(this::botonSwing2ActionPerformed);
@@ -481,11 +525,103 @@ public class MenuPropetario_Agendarcitas extends javax.swing.JFrame {
         );
 
         jPanel4.add(panelRedondeado12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 90, 80));
+=======
+        txthorario1.setBackground(new java.awt.Color(51, 255, 51));
+        txthorario1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        txthorario1.setForeground(new java.awt.Color(39, 53, 38));
+        txthorario1.setText("Nombre de la mascota");
+        jPanel1.add(txthorario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 100, -1, 29));
+
+        botonSwing4.setBackground(new java.awt.Color(108, 135, 118));
+        botonSwing4.setText("Regresar");
+        botonSwing4.addActionListener(this::botonSwing4ActionPerformed);
+        jPanel1.add(botonSwing4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 580, 130, 50));
+        jPanel1.add(txt_fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 220, 240, -1));
+
+        jPanel2.setBackground(new java.awt.Color(108, 135, 118));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel6.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(39, 53, 38));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, -1, -1));
+
+        jLabel15.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel15.setText("PatitasCare");
+        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
+
+        jLabel16.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel16.setText("Propetario");
+        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
+
+        boton_salir.setBackground(new java.awt.Color(228, 230, 217));
+        boton_salir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel19.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel19.setText("Salir");
+        boton_salir.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
+
+        jButton1.setText("->");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
+        boton_salir.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 50, -1));
+
+        jPanel2.add(boton_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 250, 60));
+
+        botonSwing1.setText("Pacientes");
+        jPanel2.add(botonSwing1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 250, 60));
+
+        btn_Calendario.setText("Calendario");
+        jPanel2.add(btn_Calendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 250, 60));
+
+        btn_Reportes.setText("Reportes");
+        jPanel2.add(btn_Reportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, 250, 60));
+
+        btn_MenuP.setText("Menú Principal");
+        jPanel2.add(btn_MenuP, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 60));
+
+        jLabel11.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel11.setText("Propietario");
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, -1, -1));
+
+        panelRedondeado1.setMaximumSize(new java.awt.Dimension(122, 45));
+        panelRedondeado1.setMinimumSize(new java.awt.Dimension(122, 45));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/mascota2.jpeg"))); // NOI18N
+        jLabel2.setText("jLabel2");
+
+        javax.swing.GroupLayout panelRedondeado1Layout = new javax.swing.GroupLayout(panelRedondeado1);
+        panelRedondeado1.setLayout(panelRedondeado1Layout);
+        panelRedondeado1Layout.setHorizontalGroup(
+            panelRedondeado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRedondeado1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
+        );
+        panelRedondeado1Layout.setVerticalGroup(
+            panelRedondeado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado1Layout.createSequentialGroup()
+                .addContainerGap(7, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jPanel2.add(panelRedondeado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 100, 50));
+>>>>>>> Stashed changes
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< Updated upstream
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -501,6 +637,18 @@ public class MenuPropetario_Agendarcitas extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+=======
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(73, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE)
+>>>>>>> Stashed changes
         );
 
         pack();
@@ -508,22 +656,33 @@ public class MenuPropetario_Agendarcitas extends javax.swing.JFrame {
 
     private void txtbotonconfirmarcitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbotonconfirmarcitaActionPerformed
         // TODO add your handling code here:
+<<<<<<< Updated upstream
 
 String raza = txt_raza.getText().trim();
 String nombre = txt_nombremascota.getText().trim();
 String especie = comboespecie.getSelectedItem().toString();
+=======
+// 1. Captura de datos
+String nombre = txt_nombre.getText().trim();   
+String mascota = comboMascota.getSelectedItem().toString();
+>>>>>>> Stashed changes
 String veterinario = comboVeterinario.getSelectedItem().toString();
-String fecha = txtFecha.getText().trim();
+String fecha = txt_fecha.getText().trim(); 
 String horario = comboHorario.getSelectedItem().toString();
 String motivo = comboMotivo.getSelectedItem().toString();
 String descripcion = txtDescripcion.getText().trim();
+<<<<<<< Updated upstream
 
 // 2. Validación
 if (nombre.isEmpty() || raza.isEmpty() || fecha.isEmpty() || descripcion.isEmpty()) {
+=======
+if (nombre.isEmpty() || fecha.isEmpty() || descripcion.isEmpty()) {
+>>>>>>> Stashed changes
     JOptionPane.showMessageDialog(this, "Por favor completa todos los campos");
     return;
 }
 
+<<<<<<< Updated upstream
 // 3. OBTENER LA INSTANCIA DE LA TABLA (Para no crear una nueva y borrar todo)
 // Si la ventana no existe, la creamos una sola vez
 if (MenuPropietario_miscitas.instanciaUnica == null) {
@@ -549,10 +708,19 @@ try {
 
 // 6. Finalización
 MenuPropietario_miscitas.instanciaUnica.setVisible(true);
+=======
+MenuPropietario_miscitas citas = new MenuPropietario_miscitas();
+
+citas.insertarCita(nombre, mascota, veterinario, fecha, horario, motivo, descripcion);
+
+citas.setVisible(true);
+
+>>>>>>> Stashed changes
 JOptionPane.showMessageDialog(this, "Tu cita se ha agendado correctamente");
 JOptionPane.showMessageDialog(null, "Recuerda llegar 10 min antes a tu cita");
 
 this.dispose();
+
     }//GEN-LAST:event_txtbotonconfirmarcitaActionPerformed
 
     private void comboHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboHorarioActionPerformed
@@ -560,6 +728,7 @@ this.dispose();
     }//GEN-LAST:event_comboHorarioActionPerformed
 
     private void txtbotoncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbotoncancelarActionPerformed
+<<<<<<< Updated upstream
     
     txt_raza.setText("");
     txt_nombremascota.setText("");
@@ -606,6 +775,36 @@ this.dispose();
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+=======
+    // 1. Limpiar campos de texto
+    txt_nombre.setText("");
+    txt_fecha.setText("");
+    txtDescripcion.setText("");
+
+    // 2. Resetear ComboBox
+    comboMascota.setSelectedIndex(0);
+    comboVeterinario.setSelectedIndex(0);
+    comboHorario.setSelectedIndex(0);
+    comboMotivo.setSelectedIndex(0);
+
+    // 3. Mensaje
+    JOptionPane.showMessageDialog(null, "Tu cita se ha cancelado y los campos se han limpiado");
+                  
+    }//GEN-LAST:event_txtbotoncancelarActionPerformed
+    // TODO add your handling code here:
+
+
+    private void botonSwing4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing4ActionPerformed
+Menupropietario_Principal menu = new Menupropietario_Principal();
+menu.setVisible(true);
+this.dispose();        
+// TODO add your handling code here:
+    }//GEN-LAST:event_botonSwing4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      
+    }//GEN-LAST:event_jButton1ActionPerformed
+>>>>>>> Stashed changes
 
     /**
      * @param args the command line arguments
@@ -633,26 +832,40 @@ this.dispose();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+<<<<<<< Updated upstream
     private provet.componentes.botonSwing botonSwing2;
     private provet.componentes.botonSwing botonSwing3;
     private provet.componentes.PanelRedondeado boton_menu;
     private provet.componentes.PanelRedondeado boton_menu2;
     private provet.componentes.PanelRedondeado boton_salir;
     private provet.componentes.PanelRedondeado boton_salir2;
+=======
+    private provet.componentes.botonSwing botonSwing1;
+    private provet.componentes.botonSwing botonSwing4;
+    private provet.componentes.PanelRedondeado boton_salir;
+    private provet.componentes.botonSwing btn_Calendario;
+    private provet.componentes.botonSwing btn_MenuP;
+    private provet.componentes.botonSwing btn_Reportes;
+>>>>>>> Stashed changes
     private javax.swing.JComboBox<String> comboHorario;
     private javax.swing.JComboBox<String> comboMotivo;
     private javax.swing.JComboBox<String> comboVeterinario;
     private javax.swing.JComboBox<String> comboespecie;
     private javax.swing.JButton jButton1;
+<<<<<<< Updated upstream
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel14;
+=======
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+>>>>>>> Stashed changes
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+<<<<<<< Updated upstream
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
@@ -662,6 +875,8 @@ this.dispose();
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel4;
+=======
+>>>>>>> Stashed changes
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -672,6 +887,7 @@ this.dispose();
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private provet.componentes.PanelRedondeado panelRedondeado1;
+<<<<<<< Updated upstream
     private provet.componentes.PanelRedondeado panelRedondeado10;
     private provet.componentes.PanelRedondeado panelRedondeado11;
     private provet.componentes.PanelRedondeado panelRedondeado12;
@@ -683,10 +899,16 @@ this.dispose();
     private javax.swing.JTextPane txtFecha;
     private javax.swing.JTextField txt_nombremascota;
     private javax.swing.JTextField txt_raza;
+=======
+    private javax.swing.JTextPane txtDescripcion;
+    private javax.swing.JTextField txt_fecha;
+    private javax.swing.JTextPane txt_nombre;
+>>>>>>> Stashed changes
     private provet.componentes.botonSwing txtbotoncancelar;
     private provet.componentes.botonSwing txtbotonconfirmarcita;
     private javax.swing.JLabel txtfecha;
     private javax.swing.JLabel txthorario;
+    private javax.swing.JLabel txthorario1;
     private javax.swing.JLabel txtmascota;
     private javax.swing.JLabel txtmascota1;
     private javax.swing.JLabel txtmascota2;
