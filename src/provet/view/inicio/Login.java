@@ -4,6 +4,7 @@ package provet.view.inicio;
 
 //Inicio de la clase Login, que hereda de la clase JFrame
 
+import javax.swing.JOptionPane;
 import provet.view.veterinario.Menu_Principal;
 
 public class Login extends javax.swing.JFrame {
@@ -42,7 +43,7 @@ public class Login extends javax.swing.JFrame {
         lbl_DescripcionP3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Provet");
+        setTitle("Patitas Care");
         setMinimumSize(new java.awt.Dimension(700, 450));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -187,7 +188,14 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_link_nuevaCuentaMouseClicked
 
     private void link_recuperarContraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_link_recuperarContraMouseClicked
-        System.out.println("Se presiono recuperar contraseña");
+        if(txt_Usuario.getText().equals("")){
+           JOptionPane.showMessageDialog(null, "Error, no hay usuario para recuperar contraseña");
+           txt_Usuario.requestFocus();
+        }else{
+            Recuperar_Contraseña vEmergente = new Recuperar_Contraseña();
+            vEmergente.setVisible(true);
+        }
+        
     }//GEN-LAST:event_link_recuperarContraMouseClicked
 
     public void verificar_Datos(){
