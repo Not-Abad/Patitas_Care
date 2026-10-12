@@ -362,7 +362,7 @@ public class MenuPropietario_Agendarcitas extends javax.swing.JFrame {
     private void txtbotonconfirmarcitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbotonconfirmarcitaActionPerformed
         // TODO add your handling code here:
 
-       // 1. Captura de datos (Tu código base)
+     
 String raza = txt_raza.getText().trim();
 String nombre = txt_nombremascota.getText().trim();
 String especie = comboespecie.getSelectedItem().toString();
@@ -372,28 +372,23 @@ String horario = comboHorario.getSelectedItem().toString();
 String motivo = comboMotivo.getSelectedItem().toString();
 String descripcion = txtDescripcion.getText().trim();
 
-// 2. Validación
 if (nombre.isEmpty() || raza.isEmpty() || fecha.isEmpty() || descripcion.isEmpty()) {
     JOptionPane.showMessageDialog(this, "Por favor completa todos los campos");
     return;
 }
 
-// 3. OBTENER LA INSTANCIA DE LA TABLA (Para no crear una nueva y borrar todo)
-// Si la ventana no existe, la creamos una sola vez
 if (MenuPropietario_miscitass.instanciaUnica == null) {
     MenuPropietario_miscitass.instanciaUnica = new MenuPropietario_miscitass();
 }
 
-// 4. AGREGAR A LA TABLA VISUALMENTE
 MenuPropietario_miscitass.instanciaUnica.insertarCita(nombre, raza, especie, veterinario, fecha, horario, motivo, descripcion);
 
-// 5. GUARDAR EN ARCHIVO PLANO (Igual que el código de las flores)
 try {
-    // El "true" es vital para que no borre las citas anteriores en el archivo
+   
     java.io.FileWriter archivo = new java.io.FileWriter("citas.txt", true);
     java.io.PrintWriter escribir = new java.io.PrintWriter(archivo);
 
-    // Guardamos los 8 datos separados por comas
+    
     escribir.println(nombre + "," + raza + "," + especie + "," + veterinario + "," + fecha + "," + horario + "," + motivo + "," + descripcion);
 
     escribir.close();
@@ -401,7 +396,6 @@ try {
     JOptionPane.showMessageDialog(this, "Error al guardar en archivo: " + e.getMessage());
 }
 
-// 6. Finalización
 MenuPropietario_miscitass.instanciaUnica.setVisible(true);
 JOptionPane.showMessageDialog(this, "Tu cita se ha agendado correctamente");
 JOptionPane.showMessageDialog(null, "Recuerda llegar 10 min antes a tu cita");

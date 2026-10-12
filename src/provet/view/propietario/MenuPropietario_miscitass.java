@@ -23,16 +23,15 @@ public class MenuPropietario_miscitass extends javax.swing.JFrame {
     }
     public void insertarCita(String nom, String raza, String esp, String vet, String fec, String hor, String mot, String desc) {
     try {
-        // Obtenemos el modelo actual de la tabla
+        
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         
-        // Creamos la fila con los datos recibidos
+        
         Object[] fila = {nom, raza, esp, vet, fec, hor, mot, desc};
         
-        // CAMBIO AQUÍ: insertRow(0, ...) coloca la nueva cita en la posición inicial (arriba)
+     
         modelo.insertRow(0, fila); 
         
-        // Refrescar visualmente
         jTable1.revalidate();
         jTable1.repaint();
 
