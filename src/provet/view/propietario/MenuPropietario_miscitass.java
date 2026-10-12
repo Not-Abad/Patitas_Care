@@ -70,9 +70,9 @@ public class MenuPropietario_miscitass extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         lbl_configuracion = new javax.swing.JLabel();
-        botonSwing3 = new provet.componentes.botonSwing();
+        btn_agregarcitanueva = new provet.componentes.botonSwing();
         jLabel7 = new javax.swing.JLabel();
-        botonSwing2 = new provet.componentes.botonSwing();
+        btn_regresarprincipal = new provet.componentes.botonSwing();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -231,11 +231,11 @@ public class MenuPropietario_miscitass extends javax.swing.JFrame {
         lbl_configuracion.setText("Mis citas");
         jPanel1.add(lbl_configuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, 29));
 
-        botonSwing3.setBackground(new java.awt.Color(108, 135, 118));
-        botonSwing3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/lapiz.png"))); // NOI18N
-        botonSwing3.setText("Agendar una nueva cita");
-        botonSwing3.addActionListener(this::botonSwing3ActionPerformed);
-        jPanel1.add(botonSwing3, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 80, -1, -1));
+        btn_agregarcitanueva.setBackground(new java.awt.Color(108, 135, 118));
+        btn_agregarcitanueva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/lapiz.png"))); // NOI18N
+        btn_agregarcitanueva.setText("Agendar una nueva cita");
+        btn_agregarcitanueva.addActionListener(this::btn_agregarcitanuevaActionPerformed);
+        jPanel1.add(btn_agregarcitanueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 80, -1, -1));
 
         jLabel7.setBackground(new java.awt.Color(51, 255, 51));
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -243,10 +243,10 @@ public class MenuPropietario_miscitass extends javax.swing.JFrame {
         jLabel7.setText("Historial de citas");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
 
-        botonSwing2.setBackground(new java.awt.Color(108, 135, 118));
-        botonSwing2.setText("Regresar");
-        botonSwing2.addActionListener(this::botonSwing2ActionPerformed);
-        jPanel1.add(botonSwing2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 650, 160, 60));
+        btn_regresarprincipal.setBackground(new java.awt.Color(108, 135, 118));
+        btn_regresarprincipal.setText("Regresar");
+        btn_regresarprincipal.addActionListener(this::btn_regresarprincipalActionPerformed);
+        jPanel1.add(btn_regresarprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 650, 160, 60));
 
         jTable1.setBackground(new java.awt.Color(228, 230, 217));
         jTable1.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
@@ -289,17 +289,17 @@ public class MenuPropietario_miscitass extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void botonSwing3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing3ActionPerformed
+    private void btn_agregarcitanuevaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarcitanuevaActionPerformed
         MenuPropietario_Agendarcitas menu = new MenuPropietario_Agendarcitas();
         menu.setVisible(true);
         this.dispose();         // TODO add your handling code here:
-    }//GEN-LAST:event_botonSwing3ActionPerformed
+    }//GEN-LAST:event_btn_agregarcitanuevaActionPerformed
 
-    private void botonSwing2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing2ActionPerformed
+    private void btn_regresarprincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regresarprincipalActionPerformed
         MenuPropietario_Principal menu = new MenuPropietario_Principal();
         menu.setVisible(true);
         this.dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_botonSwing2ActionPerformed
+    }//GEN-LAST:event_btn_regresarprincipalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -327,10 +327,10 @@ public class MenuPropietario_miscitass extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private provet.componentes.botonSwing botonSwing2;
-    private provet.componentes.botonSwing botonSwing3;
     private provet.componentes.PanelRedondeado boton_menu;
     private provet.componentes.PanelRedondeado boton_salir;
+    private provet.componentes.botonSwing btn_agregarcitanueva;
+    private provet.componentes.botonSwing btn_regresarprincipal;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;

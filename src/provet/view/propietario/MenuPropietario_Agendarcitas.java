@@ -66,7 +66,7 @@ public class MenuPropietario_Agendarcitas extends javax.swing.JFrame {
         txtDescripcion = new javax.swing.JTextPane();
         txtbotonconfirmarcita = new provet.componentes.botonSwing();
         txtbotoncancelar = new provet.componentes.botonSwing();
-        botonSwing2 = new provet.componentes.botonSwing();
+        btn_regresarprincipal = new provet.componentes.botonSwing();
         botonSwing3 = new provet.componentes.botonSwing();
         txtmascota1 = new javax.swing.JLabel();
         txt_nombremascota = new javax.swing.JTextField();
@@ -225,7 +225,7 @@ public class MenuPropietario_Agendarcitas extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(39, 53, 38));
         jLabel9.setText("Descripción:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 410, 140, 30));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 400, 140, 30));
 
         jLabel10.setBackground(new java.awt.Color(51, 255, 51));
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -282,7 +282,7 @@ public class MenuPropietario_Agendarcitas extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(txtDescripcion);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 410, 470, 190));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 400, 470, 190));
 
         txtbotonconfirmarcita.setBackground(new java.awt.Color(108, 135, 118));
         txtbotonconfirmarcita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/guardar_1.png"))); // NOI18N
@@ -296,10 +296,10 @@ public class MenuPropietario_Agendarcitas extends javax.swing.JFrame {
         txtbotoncancelar.addActionListener(this::txtbotoncancelarActionPerformed);
         jPanel1.add(txtbotoncancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 670, 160, 40));
 
-        botonSwing2.setBackground(new java.awt.Color(108, 135, 118));
-        botonSwing2.setText("Regresar");
-        botonSwing2.addActionListener(this::botonSwing2ActionPerformed);
-        jPanel1.add(botonSwing2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 650, 160, 60));
+        btn_regresarprincipal.setBackground(new java.awt.Color(108, 135, 118));
+        btn_regresarprincipal.setText("Regresar");
+        btn_regresarprincipal.addActionListener(this::btn_regresarprincipalActionPerformed);
+        jPanel1.add(btn_regresarprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 650, 160, 60));
 
         botonSwing3.setBackground(new java.awt.Color(108, 135, 118));
         botonSwing3.setText("Regresar");
@@ -425,11 +425,11 @@ this.dispose();
         txt_nombremascota.requestFocus();
     }//GEN-LAST:event_txtbotoncancelarActionPerformed
 
-    private void botonSwing2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing2ActionPerformed
+    private void btn_regresarprincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regresarprincipalActionPerformed
         MenuPropietario_Principal menu = new MenuPropietario_Principal();
         menu.setVisible(true);
         this.dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_botonSwing2ActionPerformed
+    }//GEN-LAST:event_btn_regresarprincipalActionPerformed
 
     private void botonSwing3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing3ActionPerformed
         MenuPropietario_Principal menu = new MenuPropietario_Principal();
@@ -471,10 +471,10 @@ this.dispose();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private provet.componentes.botonSwing botonSwing2;
     private provet.componentes.botonSwing botonSwing3;
     private provet.componentes.PanelRedondeado boton_menu;
     private provet.componentes.PanelRedondeado boton_salir;
+    private provet.componentes.botonSwing btn_regresarprincipal;
     private javax.swing.JComboBox<String> comboHorario;
     private javax.swing.JComboBox<String> comboMotivo;
     private javax.swing.JComboBox<String> comboVeterinario;

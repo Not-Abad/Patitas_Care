@@ -48,9 +48,23 @@ public class MenuPropietario_Mismascotas extends javax.swing.JFrame {
         panelRedondeado2 = new provet.componentes.PanelRedondeado();
         jLabel8 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        btn_notificacion = new provet.componentes.botonSwing();
+        btn_regresarprincipal = new provet.componentes.botonSwing();
+        panelRedondeado5 = new provet.componentes.PanelRedondeado();
+        panelRedondeado6 = new provet.componentes.PanelRedondeado();
+        lbl_configuracion1 = new javax.swing.JLabel();
+        lbl_configuracion2 = new javax.swing.JLabel();
         lbl_configuracion = new javax.swing.JLabel();
-        botonSwing3 = new provet.componentes.botonSwing();
-        botonSwing2 = new provet.componentes.botonSwing();
+        panelRedondeado7 = new provet.componentes.PanelRedondeado();
+        jLabel9 = new javax.swing.JLabel();
+        lbl_configuracion3 = new javax.swing.JLabel();
+        panelRedondeado8 = new provet.componentes.PanelRedondeado();
+        panelRedondeado11 = new provet.componentes.PanelRedondeado();
+        lbl_configuracion7 = new javax.swing.JLabel();
+        lbl_configuracion8 = new javax.swing.JLabel();
+        lbl_configuracion9 = new javax.swing.JLabel();
+        panelRedondeado12 = new provet.componentes.PanelRedondeado();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -199,22 +213,198 @@ public class MenuPropietario_Mismascotas extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(1291, 70));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btn_notificacion.setBackground(new java.awt.Color(108, 135, 118));
+        btn_notificacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/system-uicons--bell.png"))); // NOI18N
+        btn_notificacion.setText("Notificaciones");
+        btn_notificacion.addActionListener(this::btn_notificacionActionPerformed);
+        jPanel1.add(btn_notificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 60, 190, -1));
+
+        btn_regresarprincipal.setBackground(new java.awt.Color(108, 135, 118));
+        btn_regresarprincipal.setText("Regresar");
+        btn_regresarprincipal.addActionListener(this::btn_regresarprincipalActionPerformed);
+        jPanel1.add(btn_regresarprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 670, 160, 60));
+
+        panelRedondeado6.setBackground(new java.awt.Color(228, 230, 217));
+
+        lbl_configuracion1.setBackground(new java.awt.Color(51, 255, 51));
+        lbl_configuracion1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbl_configuracion1.setForeground(new java.awt.Color(39, 53, 38));
+        lbl_configuracion1.setText("Nombre mascota: Duke");
+
+        lbl_configuracion2.setBackground(new java.awt.Color(51, 255, 51));
+        lbl_configuracion2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbl_configuracion2.setForeground(new java.awt.Color(39, 53, 38));
+        lbl_configuracion2.setText("Raza: Pomerania");
+
         lbl_configuracion.setBackground(new java.awt.Color(51, 255, 51));
         lbl_configuracion.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lbl_configuracion.setForeground(new java.awt.Color(39, 53, 38));
-        lbl_configuracion.setText("Mis mascotas");
-        jPanel1.add(lbl_configuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 160, 50));
+        lbl_configuracion.setText("Id mascota: 123456");
 
-        botonSwing3.setBackground(new java.awt.Color(108, 135, 118));
-        botonSwing3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/lapiz.png"))); // NOI18N
-        botonSwing3.setText("Próximas citas");
-        botonSwing3.addActionListener(this::botonSwing3ActionPerformed);
-        jPanel1.add(botonSwing3, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 60, -1, -1));
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/mascota2.jpeg"))); // NOI18N
+        jLabel9.setText("jLabel8");
 
-        botonSwing2.setBackground(new java.awt.Color(108, 135, 118));
-        botonSwing2.setText("Regresar");
-        botonSwing2.addActionListener(this::botonSwing2ActionPerformed);
-        jPanel1.add(botonSwing2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 670, 160, 60));
+        javax.swing.GroupLayout panelRedondeado7Layout = new javax.swing.GroupLayout(panelRedondeado7);
+        panelRedondeado7.setLayout(panelRedondeado7Layout);
+        panelRedondeado7Layout.setHorizontalGroup(
+            panelRedondeado7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRedondeado7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 78, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelRedondeado7Layout.setVerticalGroup(
+            panelRedondeado7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRedondeado7Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel9)
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout panelRedondeado6Layout = new javax.swing.GroupLayout(panelRedondeado6);
+        panelRedondeado6.setLayout(panelRedondeado6Layout);
+        panelRedondeado6Layout.setHorizontalGroup(
+            panelRedondeado6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado6Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(panelRedondeado7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                .addGroup(panelRedondeado6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRedondeado6Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(lbl_configuracion2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbl_configuracion1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_configuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(73, 73, 73))
+        );
+        panelRedondeado6Layout.setVerticalGroup(
+            panelRedondeado6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRedondeado6Layout.createSequentialGroup()
+                .addGroup(panelRedondeado6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRedondeado6Layout.createSequentialGroup()
+                        .addComponent(lbl_configuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_configuracion1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbl_configuracion2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelRedondeado6Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(panelRedondeado7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(9, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout panelRedondeado5Layout = new javax.swing.GroupLayout(panelRedondeado5);
+        panelRedondeado5.setLayout(panelRedondeado5Layout);
+        panelRedondeado5Layout.setHorizontalGroup(
+            panelRedondeado5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRedondeado5Layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(panelRedondeado6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(63, Short.MAX_VALUE))
+        );
+        panelRedondeado5Layout.setVerticalGroup(
+            panelRedondeado5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRedondeado5Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(panelRedondeado6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(14, 14, 14))
+        );
+
+        jPanel1.add(panelRedondeado5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, 640, 150));
+
+        lbl_configuracion3.setBackground(new java.awt.Color(51, 255, 51));
+        lbl_configuracion3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbl_configuracion3.setForeground(new java.awt.Color(39, 53, 38));
+        lbl_configuracion3.setText("Mis mascotas");
+        jPanel1.add(lbl_configuracion3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 210, 80));
+
+        panelRedondeado11.setBackground(new java.awt.Color(228, 230, 217));
+
+        lbl_configuracion7.setBackground(new java.awt.Color(51, 255, 51));
+        lbl_configuracion7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbl_configuracion7.setForeground(new java.awt.Color(39, 53, 38));
+        lbl_configuracion7.setText("Nombre mascota: Walter");
+
+        lbl_configuracion8.setBackground(new java.awt.Color(51, 255, 51));
+        lbl_configuracion8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbl_configuracion8.setForeground(new java.awt.Color(39, 53, 38));
+        lbl_configuracion8.setText("Raza: Husky");
+
+        lbl_configuracion9.setBackground(new java.awt.Color(51, 255, 51));
+        lbl_configuracion9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbl_configuracion9.setForeground(new java.awt.Color(39, 53, 38));
+        lbl_configuracion9.setText("Id mascota: 56789");
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/mascota2.jpeg"))); // NOI18N
+        jLabel11.setText("jLabel8");
+
+        javax.swing.GroupLayout panelRedondeado12Layout = new javax.swing.GroupLayout(panelRedondeado12);
+        panelRedondeado12.setLayout(panelRedondeado12Layout);
+        panelRedondeado12Layout.setHorizontalGroup(
+            panelRedondeado12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRedondeado12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 78, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelRedondeado12Layout.setVerticalGroup(
+            panelRedondeado12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRedondeado12Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel11)
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout panelRedondeado11Layout = new javax.swing.GroupLayout(panelRedondeado11);
+        panelRedondeado11.setLayout(panelRedondeado11Layout);
+        panelRedondeado11Layout.setHorizontalGroup(
+            panelRedondeado11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado11Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(panelRedondeado12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                .addGroup(panelRedondeado11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRedondeado11Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(lbl_configuracion8, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbl_configuracion9, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_configuracion7))
+                .addGap(69, 69, 69))
+        );
+        panelRedondeado11Layout.setVerticalGroup(
+            panelRedondeado11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRedondeado11Layout.createSequentialGroup()
+                .addGroup(panelRedondeado11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRedondeado11Layout.createSequentialGroup()
+                        .addComponent(lbl_configuracion9, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_configuracion7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbl_configuracion8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelRedondeado11Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(panelRedondeado12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(9, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout panelRedondeado8Layout = new javax.swing.GroupLayout(panelRedondeado8);
+        panelRedondeado8.setLayout(panelRedondeado8Layout);
+        panelRedondeado8Layout.setHorizontalGroup(
+            panelRedondeado8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRedondeado8Layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(panelRedondeado11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(63, Short.MAX_VALUE))
+        );
+        panelRedondeado8Layout.setVerticalGroup(
+            panelRedondeado8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRedondeado8Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(panelRedondeado11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(14, 14, 14))
+        );
+
+        jPanel1.add(panelRedondeado8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 400, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -229,12 +419,8 @@ public class MenuPropietario_Mismascotas extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -244,7 +430,7 @@ public class MenuPropietario_Mismascotas extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void botonSwing3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing3ActionPerformed
+    private void btn_notificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_notificacionActionPerformed
         // TODO add your handling code here:
         boolean hayCitas = true;
         if(!hayCitas){
@@ -255,13 +441,13 @@ public class MenuPropietario_Mismascotas extends javax.swing.JFrame {
             // opcional: abrir ventana de citas
             new MenuPropietario_CitasPendientes().setVisible(true);
         }
-    }//GEN-LAST:event_botonSwing3ActionPerformed
+    }//GEN-LAST:event_btn_notificacionActionPerformed
 
-    private void botonSwing2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing2ActionPerformed
+    private void btn_regresarprincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regresarprincipalActionPerformed
         MenuPropietario_Principal menu = new MenuPropietario_Principal();
         menu.setVisible(true);
         this.dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_botonSwing2ActionPerformed
+    }//GEN-LAST:event_btn_regresarprincipalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -289,11 +475,12 @@ public class MenuPropietario_Mismascotas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private provet.componentes.botonSwing botonSwing2;
-    private provet.componentes.botonSwing botonSwing3;
     private provet.componentes.PanelRedondeado boton_menu;
     private provet.componentes.PanelRedondeado boton_salir;
+    private provet.componentes.botonSwing btn_notificacion;
+    private provet.componentes.botonSwing btn_regresarprincipal;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
@@ -303,12 +490,25 @@ public class MenuPropietario_Mismascotas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lbl_configuracion;
+    private javax.swing.JLabel lbl_configuracion1;
+    private javax.swing.JLabel lbl_configuracion2;
+    private javax.swing.JLabel lbl_configuracion3;
+    private javax.swing.JLabel lbl_configuracion7;
+    private javax.swing.JLabel lbl_configuracion8;
+    private javax.swing.JLabel lbl_configuracion9;
     private provet.componentes.PanelRedondeado panelRedondeado1;
+    private provet.componentes.PanelRedondeado panelRedondeado11;
+    private provet.componentes.PanelRedondeado panelRedondeado12;
     private provet.componentes.PanelRedondeado panelRedondeado2;
     private provet.componentes.PanelRedondeado panelRedondeado3;
     private provet.componentes.PanelRedondeado panelRedondeado4;
+    private provet.componentes.PanelRedondeado panelRedondeado5;
+    private provet.componentes.PanelRedondeado panelRedondeado6;
+    private provet.componentes.PanelRedondeado panelRedondeado7;
+    private provet.componentes.PanelRedondeado panelRedondeado8;
     // End of variables declaration//GEN-END:variables
 }
