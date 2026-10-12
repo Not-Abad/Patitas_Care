@@ -161,6 +161,11 @@ public class Pacientes extends javax.swing.JFrame {
         jPanel2.add(btn_MenuP, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 60));
 
         botonSwing1.setText("Pacientes");
+        botonSwing1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSwing1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(botonSwing1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 250, 60));
 
         btn_Calendario.setText("Calendario");
@@ -231,6 +236,10 @@ public class Pacientes extends javax.swing.JFrame {
         r.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btn_ReportesActionPerformed
+
+    private void botonSwing1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonSwing1ActionPerformed
 
     /**
      * @param args the command line arguments

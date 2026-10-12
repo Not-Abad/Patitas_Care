@@ -250,6 +250,11 @@ public class Menu_Principal extends javax.swing.JFrame {
         jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, -1, -1));
 
         btn_MenuP.setText("Menú Principal");
+        btn_MenuP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_MenuPActionPerformed(evt);
+            }
+        });
         jPanel2.add(btn_MenuP, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 60));
 
         btnPacientes.setText("Pacientes");
@@ -332,6 +337,10 @@ public class Menu_Principal extends javax.swing.JFrame {
         r.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnReportesActionPerformed
+
+    private void btn_MenuPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_MenuPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_MenuPActionPerformed
 
     /**
      * @param args the command line arguments
