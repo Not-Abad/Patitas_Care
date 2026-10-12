@@ -6,7 +6,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import provet.model.Paciente;
 import provet.model.ControlPacientes;
-import provet.componentes.PanelPacientes;
+import provet.componentes.PanelPaciente;
 import provet.componentes.PanelPaciente2;
 import java.awt.GridLayout;
 import javax.swing.JDialog;
@@ -47,7 +47,7 @@ public class Pacientes extends javax.swing.JFrame {
 }
     
     public void agregarPaciente(Paciente p) {
-    PanelPacientes panel = new PanelPacientes();
+    PanelPaciente panel = new PanelPaciente();
     panel.setDatos(p);
 
     contenedor_Cartas1.add(panel);
@@ -59,7 +59,7 @@ public class Pacientes extends javax.swing.JFrame {
     contenedor_Cartas1.removeAll();
 
     for (Paciente p : ControlPacientes.listaPacientes) {
-    PanelPacientes panel = new PanelPacientes();
+    PanelPaciente panel = new PanelPaciente();
     panel.setDatos(p);
 
     panel.setClickListener(() -> {
@@ -120,7 +120,7 @@ public class Pacientes extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
         contenedor_Cartas1 = new provet.componentes.Contenedor_Cartas();
-        panelPacientes1 = new provet.componentes.PanelPacientes();
+        panelPacientes1 = new provet.componentes.PanelPaciente();
 
         jMenu1.setText("jMenu1");
 
@@ -281,6 +281,6 @@ public class Pacientes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private provet.componentes.PanelPacientes panelPacientes1;
+    private provet.componentes.PanelPaciente panelPacientes1;
     // End of variables declaration//GEN-END:variables
 }

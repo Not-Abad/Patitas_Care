@@ -14,9 +14,9 @@ import provet.model.Paciente;
  *
  * @author anguv
  */
-public class PanelPacientes extends PanelRedondeado {
+public class PanelPaciente extends PanelRedondeado {
 
-    public PanelPacientes() {
+    public PanelPaciente() {
         initComponents();
         
         setBackground(new Color(228,230,217));

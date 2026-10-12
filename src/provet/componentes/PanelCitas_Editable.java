@@ -17,6 +17,19 @@ public class PanelCitas_Editable extends javax.swing.JPanel {
     public PanelCitas_Editable() {
         initComponents();
     }
+    
+/*- - - - - - AGREGUE ESTO PARA QUE EL CLEAN AND BUILD FUNCIONARA!!!! - - - - - -*/
+    private Runnable clickListener;
+
+    public void setClickListener(Runnable clickListener) {
+        this.clickListener = clickListener;
+    }
+
+    private void ejecutarClick() {
+        if (clickListener != null) {
+            clickListener.run();
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -6,11 +6,12 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import provet.model.Paciente;
 import provet.model.ControlPacientes;
-import provet.componentes.PanelPacientes;
+import provet.componentes.PanelPaciente;
 import provet.componentes.PanelPaciente2;
 import provet.componentes.PanelCitas;
 import java.awt.GridLayout;
 import javax.swing.JDialog;
+import provet.componentes.PanelCitas_Editable;
 
 public class Reportes_Citas extends javax.swing.JFrame {
     
@@ -48,7 +49,7 @@ public class Reportes_Citas extends javax.swing.JFrame {
 }
     
     public void agregarPaciente(Paciente p) {
-    PanelCitas panel = new PanelCitas();
+    PanelCitas_Editable panel = new PanelCitas_Editable();
     panel.setDatos(p);
 
     contenedor_Cartas1.add(panel);
@@ -60,7 +61,7 @@ public class Reportes_Citas extends javax.swing.JFrame {
     contenedor_Cartas1.removeAll();
 
     for (Paciente p : ControlPacientes.listaPacientes) {
-    PanelCitas panel = new PanelCitas();
+    PanelCitas_Editable panel = new PanelCitas_Editable();
     panel.setDatos(p);
 
     panel.setClickListener(() -> {
@@ -95,7 +96,7 @@ public class Reportes_Citas extends javax.swing.JFrame {
     JDialog dialog = new JDialog(this, true);
     dialog.setTitle("Detalle del paciente");
 
-    PanelCitas panel = new PanelCitas();
+    PanelCitas_Editable panel = new PanelCitas_Editable();
     panel.setDatos(p); // 👈 importante
 
     dialog.add(panel);
@@ -121,7 +122,7 @@ public class Reportes_Citas extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
         contenedor_Cartas1 = new provet.componentes.Contenedor_Cartas();
-        panelPacientes1 = new provet.componentes.PanelPacientes();
+        panelPacientes1 = new provet.componentes.PanelPaciente();
         botonSwing2 = new provet.componentes.botonSwing();
 
         jMenu1.setText("jMenu1");
@@ -301,6 +302,6 @@ public class Reportes_Citas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private provet.componentes.PanelPacientes panelPacientes1;
+    private provet.componentes.PanelPaciente panelPacientes1;
     // End of variables declaration//GEN-END:variables
 }
