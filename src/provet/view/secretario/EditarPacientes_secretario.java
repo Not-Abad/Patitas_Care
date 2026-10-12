@@ -4,6 +4,9 @@
  */
 package provet.view.secretario;
 
+import javax.swing.JFrame;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+
 /**
  *
  * @author Andreij Haziel
@@ -15,6 +18,23 @@ public class EditarPacientes_secretario extends javax.swing.JFrame {
      */
     public EditarPacientes_secretario() {
         initComponents();
+        if (isUndecorated()) {
+    dispose();
+    setUndecorated(false);
+}
+
+// paneles se estiran
+getContentPane().removeAll();
+getContentPane().setLayout(new java.awt.BorderLayout());
+getContentPane().add(jPanel2, java.awt.BorderLayout.WEST);    // sidebar
+getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);  // contenido
+
+// 3) Sidebar mantiene 270px de ancho fijo
+jPanel2.setPreferredSize(new java.awt.Dimension(270, 0));
+
+// 4) Maximizar y cierre limpio
+setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /**
@@ -32,17 +52,11 @@ public class EditarPacientes_secretario extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        boton_menu = new provet.componentes.PanelRedondeado();
-        jLabel18 = new javax.swing.JLabel();
-        boton_salir = new provet.componentes.PanelRedondeado();
-        jLabel19 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        boton_calendario = new provet.componentes.PanelRedondeado();
-        jLabel21 = new javax.swing.JLabel();
-        boton_paciente = new provet.componentes.PanelRedondeado();
-        jLabel20 = new javax.swing.JLabel();
-        boton_reportes1 = new provet.componentes.PanelRedondeado();
-        jLabel22 = new javax.swing.JLabel();
+        botonSwing3 = new provet.componentes.botonSwing();
+        botonSwing1 = new provet.componentes.botonSwing();
+        btn_Calendario = new provet.componentes.botonSwing();
+        btn_Reportes = new provet.componentes.botonSwing();
+        btn_Salir = new provet.componentes.botonSwing();
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -81,68 +95,47 @@ public class EditarPacientes_secretario extends javax.swing.JFrame {
         jLabel16.setText("Secretario");
         jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, -1, -1));
 
-        boton_menu.setBackground(new java.awt.Color(228, 230, 217));
-        boton_menu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel18.setBackground(new java.awt.Color(51, 255, 51));
-        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel18.setText("Menú principal");
-        boton_menu.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
-
-        jPanel2.add(boton_menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 60));
-
-        boton_salir.setBackground(new java.awt.Color(228, 230, 217));
-        boton_salir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel19.setBackground(new java.awt.Color(51, 255, 51));
-        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel19.setText("Salir");
-        boton_salir.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
-
-        jButton1.setText("->");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonSwing3.setText("Menú Principal");
+        botonSwing3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonSwing3ActionPerformed(evt);
             }
         });
-        boton_salir.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 50, -1));
+        jPanel2.add(botonSwing3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 60));
 
-        jPanel2.add(boton_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 250, 60));
+        botonSwing1.setForeground(new java.awt.Color(39, 53, 38));
+        botonSwing1.setText("Registrar Paciente");
+        botonSwing1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSwing1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(botonSwing1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 250, 60));
 
-        boton_calendario.setBackground(new java.awt.Color(228, 230, 217));
-        boton_calendario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btn_Calendario.setForeground(new java.awt.Color(39, 53, 38));
+        btn_Calendario.setText("Editar Paciente");
+        btn_Calendario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CalendarioActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn_Calendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 250, 60));
 
-        jLabel21.setBackground(new java.awt.Color(51, 255, 51));
-        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel21.setText("Editar Pacientes");
-        boton_calendario.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
+        btn_Reportes.setText("Reportes");
+        btn_Reportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ReportesActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn_Reportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 250, 60));
 
-        jPanel2.add(boton_calendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 250, 60));
-
-        boton_paciente.setBackground(new java.awt.Color(228, 230, 217));
-        boton_paciente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel20.setBackground(new java.awt.Color(51, 255, 51));
-        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel20.setText("Registrar Pacientes");
-        boton_paciente.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
-
-        jPanel2.add(boton_paciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 250, 60));
-
-        boton_reportes1.setBackground(new java.awt.Color(228, 230, 217));
-        boton_reportes1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel22.setBackground(new java.awt.Color(51, 255, 51));
-        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel22.setText("Reportes");
-        boton_reportes1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, -1, -1));
-
-        jPanel2.add(boton_reportes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 250, 60));
+        btn_Salir.setText("Salir");
+        btn_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SalirActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 250, 60));
 
         jPanel1.setBackground(new java.awt.Color(228, 230, 217));
         jPanel1.setPreferredSize(new java.awt.Dimension(1291, 70));
@@ -225,9 +218,33 @@ public class EditarPacientes_secretario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botonSwing3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing3ActionPerformed
+        Dashboard_Secretario menu = new Dashboard_Secretario();
+        menu.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_botonSwing3ActionPerformed
+
+    private void botonSwing1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing1ActionPerformed
+        Registrar_paciente_secretario menu = new Registrar_paciente_secretario();
+        menu.setVisible(true);
+        this.dispose();// TODO add your handling code here:
+    }//GEN-LAST:event_botonSwing1ActionPerformed
+
+    private void btn_CalendarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CalendarioActionPerformed
+        EditarPacientes_secretario menu = new EditarPacientes_secretario();
+        menu.setVisible(true);
+        this.dispose();// TODO add your handling code here:
+    }//GEN-LAST:event_btn_CalendarioActionPerformed
+
+    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_btn_SalirActionPerformed
+
+    private void btn_ReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReportesActionPerformed
+    Reporte_secretario menu = new Reporte_secretario();
+    menu.setVisible(true);
+    this.dispose();    // TODO add your handling code here:
+    }//GEN-LAST:event_btn_ReportesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -265,24 +282,18 @@ public class EditarPacientes_secretario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private provet.componentes.PanelRedondeado boton_calendario;
+    private provet.componentes.botonSwing botonSwing1;
+    private provet.componentes.botonSwing botonSwing3;
     private provet.componentes.botonSwing boton_dar_de_baja;
     private provet.componentes.botonSwing boton_editar;
-    private provet.componentes.PanelRedondeado boton_menu;
-    private provet.componentes.PanelRedondeado boton_paciente;
-    private provet.componentes.PanelRedondeado boton_reportes1;
-    private provet.componentes.PanelRedondeado boton_salir;
     private provet.componentes.botonSwing boton_ver_detalles;
-    private javax.swing.JButton jButton1;
+    private provet.componentes.botonSwing btn_Calendario;
+    private provet.componentes.botonSwing btn_Reportes;
+    private provet.componentes.botonSwing btn_Salir;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;

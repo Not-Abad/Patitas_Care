@@ -4,6 +4,9 @@
  */
 package provet.view.secretario;
 
+import javax.swing.JFrame;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+
 /**
  *
  * @author Andreij Haziel
@@ -15,6 +18,23 @@ public class notifi_secretario extends javax.swing.JFrame {
      */
     public notifi_secretario() {
         initComponents();
+        if (isUndecorated()) {
+    dispose();
+    setUndecorated(false);
+}
+
+// paneles se estiran
+getContentPane().removeAll();
+getContentPane().setLayout(new java.awt.BorderLayout());
+getContentPane().add(jPanel2, java.awt.BorderLayout.WEST);    // sidebar
+getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);  // contenido
+
+// 3) Sidebar mantiene 270px de ancho fijo
+jPanel2.setPreferredSize(new java.awt.Dimension(270, 0));
+
+// 4) Maximizar y cierre limpio
+setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /**
@@ -47,17 +67,11 @@ public class notifi_secretario extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        boton_menu1 = new provet.componentes.PanelRedondeado();
-        jLabel24 = new javax.swing.JLabel();
-        boton_salir1 = new provet.componentes.PanelRedondeado();
-        jLabel25 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        boton_calendario1 = new provet.componentes.PanelRedondeado();
-        jLabel26 = new javax.swing.JLabel();
-        boton_paciente1 = new provet.componentes.PanelRedondeado();
-        jLabel27 = new javax.swing.JLabel();
-        boton_reportes2 = new provet.componentes.PanelRedondeado();
-        jLabel28 = new javax.swing.JLabel();
+        botonSwing3 = new provet.componentes.botonSwing();
+        botonSwing1 = new provet.componentes.botonSwing();
+        btn_Calendario = new provet.componentes.botonSwing();
+        btn_Reportes = new provet.componentes.botonSwing();
+        btn_Salir = new provet.componentes.botonSwing();
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         panelRedondeado30 = new provet.componentes.PanelRedondeado();
@@ -189,68 +203,47 @@ public class notifi_secretario extends javax.swing.JFrame {
         jLabel23.setText("Secretario");
         jPanel3.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, -1, -1));
 
-        boton_menu1.setBackground(new java.awt.Color(228, 230, 217));
-        boton_menu1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel24.setBackground(new java.awt.Color(51, 255, 51));
-        jLabel24.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel24.setText("Menú principal");
-        boton_menu1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
-
-        jPanel3.add(boton_menu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 60));
-
-        boton_salir1.setBackground(new java.awt.Color(228, 230, 217));
-        boton_salir1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel25.setBackground(new java.awt.Color(51, 255, 51));
-        jLabel25.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel25.setText("Salir");
-        boton_salir1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
-
-        jButton2.setText("->");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botonSwing3.setText("Menú Principal");
+        botonSwing3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botonSwing3ActionPerformed(evt);
             }
         });
-        boton_salir1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 50, -1));
+        jPanel3.add(botonSwing3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 60));
 
-        jPanel3.add(boton_salir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 250, 60));
+        botonSwing1.setForeground(new java.awt.Color(39, 53, 38));
+        botonSwing1.setText("Registrar Paciente");
+        botonSwing1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSwing1ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(botonSwing1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 250, 60));
 
-        boton_calendario1.setBackground(new java.awt.Color(228, 230, 217));
-        boton_calendario1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btn_Calendario.setForeground(new java.awt.Color(39, 53, 38));
+        btn_Calendario.setText("Editar Paciente");
+        btn_Calendario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CalendarioActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btn_Calendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 250, 60));
 
-        jLabel26.setBackground(new java.awt.Color(51, 255, 51));
-        jLabel26.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel26.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel26.setText("Editar Pacientes");
-        boton_calendario1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
+        btn_Reportes.setText("Reportes");
+        btn_Reportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ReportesActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btn_Reportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 250, 60));
 
-        jPanel3.add(boton_calendario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 250, 60));
-
-        boton_paciente1.setBackground(new java.awt.Color(228, 230, 217));
-        boton_paciente1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel27.setBackground(new java.awt.Color(51, 255, 51));
-        jLabel27.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel27.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel27.setText("Registrar Pacientes");
-        boton_paciente1.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
-
-        jPanel3.add(boton_paciente1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 250, 60));
-
-        boton_reportes2.setBackground(new java.awt.Color(228, 230, 217));
-        boton_reportes2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel28.setBackground(new java.awt.Color(51, 255, 51));
-        jLabel28.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel28.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel28.setText("Reportes");
-        boton_reportes2.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, -1, -1));
-
-        jPanel3.add(boton_reportes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 250, 60));
+        btn_Salir.setText("Salir");
+        btn_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SalirActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btn_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 250, 60));
 
         jPanel1.setBackground(new java.awt.Color(228, 230, 217));
         jPanel1.setPreferredSize(new java.awt.Dimension(1291, 70));
@@ -262,7 +255,7 @@ public class notifi_secretario extends javax.swing.JFrame {
         jLabel9.setText("NOTIFICACIONES");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, -1, 29));
 
-        jLabel96.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/calendar.png"))); // NOI18N
+        jLabel96.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--calendar.png"))); // NOI18N
 
         jLabel97.setBackground(new java.awt.Color(51, 255, 51));
         jLabel97.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -299,7 +292,7 @@ public class notifi_secretario extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelRedondeado30Layout.createSequentialGroup()
                         .addComponent(text_field_notificacione_solicitud_cita27, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
                         .addComponent(text_field_fecha_notificacion_solicitud_cita28, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27))))
         );
@@ -315,12 +308,12 @@ public class notifi_secretario extends javax.swing.JFrame {
                             .addComponent(text_field_notificacione_solicitud_cita27, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(text_field_fecha_notificacion_solicitud_cita28, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel96))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         jPanel1.add(panelRedondeado30, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 1030, 120));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/cancel.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--error.png"))); // NOI18N
 
         jLabel29.setBackground(new java.awt.Color(51, 255, 51));
         jLabel29.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -352,7 +345,7 @@ public class notifi_secretario extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelRedondeado2Layout.createSequentialGroup()
                         .addComponent(text_field_notificacione_solicitud_cancelacion, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
                         .addComponent(text_field_fecha_notificacion_cancelacion_cita, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28))))
         );
@@ -368,12 +361,12 @@ public class notifi_secretario extends javax.swing.JFrame {
                             .addComponent(text_field_notificacione_solicitud_cancelacion, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(text_field_fecha_notificacion_cancelacion_cita, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel3))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         jPanel1.add(panelRedondeado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, 1030, 120));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/cloud.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--cloud-upload.png"))); // NOI18N
 
         jLabel30.setBackground(new java.awt.Color(51, 255, 51));
         jLabel30.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -410,7 +403,7 @@ public class notifi_secretario extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelRedondeado3Layout.createSequentialGroup()
                         .addComponent(text_field_notificacione_cliente_subioArchivos, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
                         .addComponent(text_field_fecha_notificacion_subio_archivos, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31))))
         );
@@ -426,7 +419,7 @@ public class notifi_secretario extends javax.swing.JFrame {
                             .addComponent(text_field_notificacione_cliente_subioArchivos, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(text_field_fecha_notificacion_subio_archivos, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel4))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         jPanel1.add(panelRedondeado3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 480, 1030, 120));
@@ -463,10 +456,6 @@ public class notifi_secretario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void text_field_notificacione_solicitud_cita27text_field_notificacione_solicitud_citaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_field_notificacione_solicitud_cita27text_field_notificacione_solicitud_citaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_text_field_notificacione_solicitud_cita27text_field_notificacione_solicitud_citaActionPerformed
@@ -486,6 +475,34 @@ public class notifi_secretario extends javax.swing.JFrame {
     private void text_field_fecha_notificacion_subio_archivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_field_fecha_notificacion_subio_archivosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_text_field_fecha_notificacion_subio_archivosActionPerformed
+
+    private void botonSwing3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing3ActionPerformed
+        Dashboard_Secretario menu = new Dashboard_Secretario();
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_botonSwing3ActionPerformed
+
+    private void botonSwing1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing1ActionPerformed
+        Registrar_paciente_secretario menu = new Registrar_paciente_secretario();
+        menu.setVisible(true);
+        this.dispose();// TODO add your handling code here:
+    }//GEN-LAST:event_botonSwing1ActionPerformed
+
+    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_btn_SalirActionPerformed
+
+    private void btn_CalendarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CalendarioActionPerformed
+        EditarPacientes_secretario menu = new EditarPacientes_secretario();
+        menu.setVisible(true);
+        this.dispose();  // TODO add your handling code here:
+    }//GEN-LAST:event_btn_CalendarioActionPerformed
+
+    private void btn_ReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReportesActionPerformed
+    Reporte_secretario menu = new Reporte_secretario();
+    menu.setVisible(true);
+    this.dispose();    // TODO add your handling code here:
+    }//GEN-LAST:event_btn_ReportesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -523,18 +540,17 @@ public class notifi_secretario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private provet.componentes.botonSwing botonSwing1;
+    private provet.componentes.botonSwing botonSwing3;
     private provet.componentes.PanelRedondeado boton_calendario;
-    private provet.componentes.PanelRedondeado boton_calendario1;
     private provet.componentes.PanelRedondeado boton_menu;
-    private provet.componentes.PanelRedondeado boton_menu1;
     private provet.componentes.PanelRedondeado boton_paciente;
-    private provet.componentes.PanelRedondeado boton_paciente1;
     private provet.componentes.PanelRedondeado boton_reportes1;
-    private provet.componentes.PanelRedondeado boton_reportes2;
     private provet.componentes.PanelRedondeado boton_salir;
-    private provet.componentes.PanelRedondeado boton_salir1;
+    private provet.componentes.botonSwing btn_Calendario;
+    private provet.componentes.botonSwing btn_Reportes;
+    private provet.componentes.botonSwing btn_Salir;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -546,11 +562,6 @@ public class notifi_secretario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
