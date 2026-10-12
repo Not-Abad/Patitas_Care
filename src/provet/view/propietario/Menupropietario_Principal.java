@@ -32,7 +32,6 @@ public class Menupropietario_Principal extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         boton_menu = new provet.componentes.PanelRedondeado();
@@ -46,12 +45,15 @@ public class Menupropietario_Principal extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         panelRedondeado4 = new provet.componentes.PanelRedondeado();
         jLabel7 = new javax.swing.JLabel();
+        panelRedondeado2 = new provet.componentes.PanelRedondeado();
+        jLabel8 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         panel_citas_pendientes = new provet.componentes.PanelRedondeado();
         lbl_acceder = new javax.swing.JLabel();
         usuario = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         btn_EntrarCitaspendientes = new provet.componentes.botonSwing();
+        jLabel1 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         panel_citas_pendientes1 = new provet.componentes.PanelRedondeado();
@@ -59,6 +61,7 @@ public class Menupropietario_Principal extends javax.swing.JFrame {
         usuario5 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         btn_EntraragendarCitas = new provet.componentes.botonSwing();
+        jLabel10 = new javax.swing.JLabel();
         panel_citas_pendientes2 = new provet.componentes.PanelRedondeado();
         lbl_acceder6 = new javax.swing.JLabel();
         usuario6 = new javax.swing.JLabel();
@@ -76,22 +79,19 @@ public class Menupropietario_Principal extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(39, 53, 38));
         jLabel6.setText("Nombre");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, -1, -1));
-
-        jLabel1.setText("FOTO");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, -1, -1));
 
         jLabel15.setBackground(new java.awt.Color(51, 255, 51));
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(39, 53, 38));
         jLabel15.setText("PatitasCare");
-        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
+        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
         jLabel16.setBackground(new java.awt.Color(51, 255, 51));
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(39, 53, 38));
         jLabel16.setText("Propetario");
-        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, -1, -1));
+        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
 
         boton_menu.setBackground(new java.awt.Color(228, 230, 217));
         boton_menu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -102,7 +102,7 @@ public class Menupropietario_Principal extends javax.swing.JFrame {
         jLabel18.setText("Menú principal");
         boton_menu.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
 
-        jPanel2.add(boton_menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 250, 60));
+        jPanel2.add(boton_menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 60));
 
         boton_salir.setBackground(new java.awt.Color(228, 230, 217));
         boton_salir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -141,7 +141,7 @@ public class Menupropietario_Principal extends javax.swing.JFrame {
                 .addGap(18, 18, 18))
         );
 
-        jPanel2.add(panelRedondeado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 250, 60));
+        jPanel2.add(panelRedondeado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 250, 60));
 
         panelRedondeado3.setBackground(new java.awt.Color(228, 230, 217));
 
@@ -165,7 +165,7 @@ public class Menupropietario_Principal extends javax.swing.JFrame {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        jPanel2.add(panelRedondeado3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, -1, -1));
+        jPanel2.add(panelRedondeado3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, -1, -1));
 
         panelRedondeado4.setBackground(new java.awt.Color(228, 230, 217));
 
@@ -189,9 +189,32 @@ public class Menupropietario_Principal extends javax.swing.JFrame {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        jPanel2.add(panelRedondeado4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, -1, -1));
+        jPanel2.add(panelRedondeado4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, -1, -1));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/mascota2.jpeg"))); // NOI18N
+        jLabel8.setText("jLabel8");
+
+        javax.swing.GroupLayout panelRedondeado2Layout = new javax.swing.GroupLayout(panelRedondeado2);
+        panelRedondeado2.setLayout(panelRedondeado2Layout);
+        panelRedondeado2Layout.setHorizontalGroup(
+            panelRedondeado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRedondeado2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 78, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelRedondeado2Layout.setVerticalGroup(
+            panelRedondeado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRedondeado2Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8)
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        jPanel2.add(panelRedondeado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 90, 80));
 
         jPanel1.setBackground(new java.awt.Color(228, 230, 217));
+        jPanel1.setMinimumSize(new java.awt.Dimension(1470, 740));
         jPanel1.setPreferredSize(new java.awt.Dimension(1291, 70));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -215,7 +238,10 @@ public class Menupropietario_Principal extends javax.swing.JFrame {
         btn_EntrarCitaspendientes.addActionListener(this::btn_EntrarCitaspendientesActionPerformed);
         panel_citas_pendientes.add(btn_EntrarCitaspendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, -1));
 
-        jPanel1.add(panel_citas_pendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 240, 310));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--calendar-day.png"))); // NOI18N
+        panel_citas_pendientes.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
+
+        jPanel1.add(panel_citas_pendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 270, 240, 310));
 
         jLabel9.setBackground(new java.awt.Color(51, 255, 51));
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -223,8 +249,9 @@ public class Menupropietario_Principal extends javax.swing.JFrame {
         jLabel9.setText("¡HOLA PROPIETARIO!");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, 29));
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setText("Bienvenido a tu espacio PatitasCare");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 210, 30));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 350, 30));
 
         panel_citas_pendientes1.setBackground(new java.awt.Color(192, 207, 178));
         panel_citas_pendientes1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -246,7 +273,10 @@ public class Menupropietario_Principal extends javax.swing.JFrame {
         btn_EntraragendarCitas.addActionListener(this::btn_EntraragendarCitasActionPerformed);
         panel_citas_pendientes1.add(btn_EntraragendarCitas, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, -1, -1));
 
-        jPanel1.add(panel_citas_pendientes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 240, 240, 310));
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--calendar.png"))); // NOI18N
+        panel_citas_pendientes1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
+
+        jPanel1.add(panel_citas_pendientes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 270, 240, 310));
 
         panel_citas_pendientes2.setBackground(new java.awt.Color(192, 207, 178));
         panel_citas_pendientes2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -268,28 +298,29 @@ public class Menupropietario_Principal extends javax.swing.JFrame {
         btn_Entrarmismascotas.addActionListener(this::btn_EntrarmismascotasActionPerformed);
         panel_citas_pendientes2.add(btn_Entrarmismascotas, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, -1, -1));
 
-        jPanel1.add(panel_citas_pendientes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 240, 240, 310));
+        jPanel1.add(panel_citas_pendientes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 270, 240, 310));
 
         btn_notificaciones.setBackground(new java.awt.Color(108, 135, 118));
+        btn_notificaciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/system-uicons--bell.png"))); // NOI18N
         btn_notificaciones.setText("Notificaciones");
         btn_notificaciones.addActionListener(this::btn_notificacionesActionPerformed);
-        jPanel1.add(btn_notificaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 79, 160, 40));
+        jPanel1.add(btn_notificaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 80, 200, 40));
 
         botonSwing2.setBackground(new java.awt.Color(108, 135, 118));
+        botonSwing2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/tabla.png"))); // NOI18N
         botonSwing2.setText("Citas pendientes");
         botonSwing2.addActionListener(this::botonSwing2ActionPerformed);
-        jPanel1.add(botonSwing2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 80, 170, 40));
+        jPanel1.add(botonSwing2, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 80, 230, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(94, 94, 94))
+                .addGap(0, 100, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -380,6 +411,7 @@ dispose();
     private provet.componentes.botonSwing btn_notificaciones;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -392,6 +424,7 @@ dispose();
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -399,6 +432,7 @@ dispose();
     private javax.swing.JLabel lbl_acceder5;
     private javax.swing.JLabel lbl_acceder6;
     private provet.componentes.PanelRedondeado panelRedondeado1;
+    private provet.componentes.PanelRedondeado panelRedondeado2;
     private provet.componentes.PanelRedondeado panelRedondeado3;
     private provet.componentes.PanelRedondeado panelRedondeado4;
     private provet.componentes.PanelRedondeado panel_citas_pendientes;

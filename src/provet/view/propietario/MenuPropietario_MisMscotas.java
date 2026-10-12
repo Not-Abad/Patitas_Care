@@ -30,147 +30,33 @@ public class MenuPropietario_MisMscotas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        btn_MenuP = new provet.componentes.botonSwing();
-        botonSwing1 = new provet.componentes.botonSwing();
-        btn_Calendario = new provet.componentes.botonSwing();
-        btn_Reportes = new provet.componentes.botonSwing();
-        btn_Salir = new provet.componentes.botonSwing();
-        jLabel17 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         lbl_configuracion = new javax.swing.JLabel();
-        panel_citas_pendientes3 = new provet.componentes.PanelRedondeado();
-        lbl_acceder3 = new javax.swing.JLabel();
-        usuario3 = new javax.swing.JLabel();
-        btn_iniciars3 = new provet.componentes.boton_redondo();
-        lbl_imagenmascota2 = new javax.swing.JLabel();
-        lbl_nombremascota2 = new javax.swing.JLabel();
-        lbl_estatusarchivo3 = new javax.swing.JLabel();
-        lbl_fecha1 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        lbl_imagenagenda2 = new javax.swing.JLabel();
-        panel_citas_pendientes4 = new provet.componentes.PanelRedondeado();
-        lbl_acceder4 = new javax.swing.JLabel();
-        usuario4 = new javax.swing.JLabel();
-        btn_iniciars4 = new provet.componentes.boton_redondo();
-        lbl_imagenmascota3 = new javax.swing.JLabel();
-        lbl_nombremascota3 = new javax.swing.JLabel();
-        lbl_estatusarchivo4 = new javax.swing.JLabel();
-        lbl_fecha2 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        lbl_imagenagenda3 = new javax.swing.JLabel();
-        panel_citas_pendientes7 = new provet.componentes.PanelRedondeado();
-        lbl_acceder7 = new javax.swing.JLabel();
-        usuario7 = new javax.swing.JLabel();
-        btn_iniciars7 = new provet.componentes.boton_redondo();
-        lbl_imagenmascota6 = new javax.swing.JLabel();
-        lbl_nombremascota6 = new javax.swing.JLabel();
-        lbl_estatusarchivo7 = new javax.swing.JLabel();
-        lbl_fecha5 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        lbl_imagenagenda6 = new javax.swing.JLabel();
-        panel_citas_pendientes8 = new provet.componentes.PanelRedondeado();
-        lbl_acceder8 = new javax.swing.JLabel();
-        usuario8 = new javax.swing.JLabel();
-        btn_iniciars8 = new provet.componentes.boton_redondo();
-        lbl_imagenmascota7 = new javax.swing.JLabel();
-        lbl_nombremascota7 = new javax.swing.JLabel();
-        lbl_estatusarchivo8 = new javax.swing.JLabel();
-        lbl_fecha6 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        lbl_imagenagenda7 = new javax.swing.JLabel();
-        panel_citas_pendientes9 = new provet.componentes.PanelRedondeado();
-        lbl_acceder9 = new javax.swing.JLabel();
-        usuario9 = new javax.swing.JLabel();
-        btn_iniciars9 = new provet.componentes.boton_redondo();
-        lbl_imagenmascota8 = new javax.swing.JLabel();
-        lbl_nombremascota8 = new javax.swing.JLabel();
-        lbl_estatusarchivo9 = new javax.swing.JLabel();
-        lbl_fecha7 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        lbl_imagenagenda8 = new javax.swing.JLabel();
-        panel_citas_pendientes10 = new provet.componentes.PanelRedondeado();
-        lbl_acceder10 = new javax.swing.JLabel();
-        usuario10 = new javax.swing.JLabel();
-        btn_iniciars10 = new provet.componentes.boton_redondo();
-        lbl_imagenmascota9 = new javax.swing.JLabel();
-        lbl_nombremascota9 = new javax.swing.JLabel();
-        lbl_estatusarchivo10 = new javax.swing.JLabel();
-        lbl_fecha8 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        lbl_imagenagenda9 = new javax.swing.JLabel();
         botonSwing3 = new provet.componentes.botonSwing();
-        panel_citas_pendientes5 = new provet.componentes.PanelRedondeado();
-        lbl_acceder5 = new javax.swing.JLabel();
-        usuario5 = new javax.swing.JLabel();
-        btn_iniciars5 = new provet.componentes.boton_redondo();
-        lbl_imagenmascota4 = new javax.swing.JLabel();
-        lbl_nombremascota4 = new javax.swing.JLabel();
-        lbl_estatusarchivo5 = new javax.swing.JLabel();
-        lbl_fecha3 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        lbl_imagenagenda4 = new javax.swing.JLabel();
-        panel_citas_pendientes6 = new provet.componentes.PanelRedondeado();
-        lbl_acceder6 = new javax.swing.JLabel();
-        usuario6 = new javax.swing.JLabel();
-        btn_iniciars6 = new provet.componentes.boton_redondo();
-        lbl_imagenmascota5 = new javax.swing.JLabel();
-        lbl_nombremascota5 = new javax.swing.JLabel();
-        lbl_estatusarchivo6 = new javax.swing.JLabel();
-        lbl_fecha4 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        lbl_imagenagenda5 = new javax.swing.JLabel();
-        botonSwing4 = new provet.componentes.botonSwing();
+        panelPaciente1 = new provet.componentes.PanelPaciente();
+        panelPaciente2 = new provet.componentes.PanelPaciente();
+        panelPaciente3 = new provet.componentes.PanelPaciente();
+        panelPaciente4 = new provet.componentes.PanelPaciente();
+        botonSwing2 = new provet.componentes.botonSwing();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        boton_menu = new provet.componentes.PanelRedondeado();
+        jLabel21 = new javax.swing.JLabel();
+        boton_salir = new provet.componentes.PanelRedondeado();
+        jLabel22 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        panelRedondeado1 = new provet.componentes.PanelRedondeado();
+        jLabel2 = new javax.swing.JLabel();
+        panelRedondeado3 = new provet.componentes.PanelRedondeado();
+        jLabel4 = new javax.swing.JLabel();
+        panelRedondeado4 = new provet.componentes.PanelRedondeado();
+        jLabel7 = new javax.swing.JLabel();
+        panelRedondeado2 = new provet.componentes.PanelRedondeado();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel2.setBackground(new java.awt.Color(108, 135, 118));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel6.setBackground(new java.awt.Color(51, 255, 51));
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel6.setText("Propietario");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, -1, -1));
-
-        jLabel1.setText("FOTO");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
-
-        jLabel15.setBackground(new java.awt.Color(51, 255, 51));
-        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel15.setText("PatitasCare");
-        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
-
-        btn_MenuP.setText("Menú Principal");
-        jPanel2.add(btn_MenuP, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 60));
-
-        botonSwing1.setText("Pacientes");
-        jPanel2.add(botonSwing1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 250, 60));
-
-        btn_Calendario.setText("Calendario");
-        jPanel2.add(btn_Calendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 250, 60));
-
-        btn_Reportes.setText("Reportes");
-        jPanel2.add(btn_Reportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 250, 60));
-
-        btn_Salir.setText("Salir");
-        btn_Salir.addActionListener(this::btn_SalirActionPerformed);
-        jPanel2.add(btn_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 250, 60));
-
-        jLabel17.setBackground(new java.awt.Color(51, 255, 51));
-        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel17.setText("Propietario");
-        jPanel2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, -1, -1));
-
-        jButton1.setText("->");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 610, 50, -1));
 
         jPanel1.setBackground(new java.awt.Color(228, 230, 217));
         jPanel1.setPreferredSize(new java.awt.Dimension(1291, 70));
@@ -180,303 +66,170 @@ public class MenuPropietario_MisMscotas extends javax.swing.JFrame {
         lbl_configuracion.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lbl_configuracion.setForeground(new java.awt.Color(39, 53, 38));
         lbl_configuracion.setText("Mis mascotas");
-        jPanel1.add(lbl_configuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, -1, 29));
-
-        panel_citas_pendientes3.setBackground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lbl_acceder3.setForeground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes3.add(lbl_acceder3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
-
-        usuario3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        usuario3.setForeground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes3.add(usuario3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
-
-        btn_iniciars3.setText("Iniciar Sesión");
-        btn_iniciars3.addActionListener(this::btn_iniciars3ActionPerformed);
-        panel_citas_pendientes3.add(btn_iniciars3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 210, 40));
-
-        lbl_imagenmascota2.setText("Raza: Promeranian");
-        panel_citas_pendientes3.add(lbl_imagenmascota2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, -1, -1));
-
-        lbl_nombremascota2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl_nombremascota2.setText("Max");
-        panel_citas_pendientes3.add(lbl_nombremascota2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, -1, -1));
-
-        lbl_estatusarchivo3.setText("Perro");
-        panel_citas_pendientes3.add(lbl_estatusarchivo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, -1, -1));
-
-        lbl_fecha1.setText("Peso 3kg");
-        panel_citas_pendientes3.add(lbl_fecha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, -1, -1));
-
-        jLabel10.setText("3 años");
-        panel_citas_pendientes3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, -1, -1));
-
-        lbl_imagenagenda2.setText("imagen");
-        panel_citas_pendientes3.add(lbl_imagenagenda2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, -1));
-
-        panel_citas_pendientes4.setBackground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lbl_acceder4.setForeground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes4.add(lbl_acceder4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
-
-        usuario4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        usuario4.setForeground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes4.add(usuario4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
-
-        btn_iniciars4.setText("Iniciar Sesión");
-        btn_iniciars4.addActionListener(this::btn_iniciars4ActionPerformed);
-        panel_citas_pendientes4.add(btn_iniciars4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 210, 40));
-
-        lbl_imagenmascota3.setText("Raza: Promeranian");
-        panel_citas_pendientes4.add(lbl_imagenmascota3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, -1, -1));
-
-        lbl_nombremascota3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl_nombremascota3.setText("Max");
-        panel_citas_pendientes4.add(lbl_nombremascota3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, -1, -1));
-
-        lbl_estatusarchivo4.setText("Perro");
-        panel_citas_pendientes4.add(lbl_estatusarchivo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, -1, -1));
-
-        lbl_fecha2.setText("Peso 3kg");
-        panel_citas_pendientes4.add(lbl_fecha2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, -1, -1));
-
-        jLabel11.setText("3 años");
-        panel_citas_pendientes4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, -1, -1));
-
-        lbl_imagenagenda3.setText("imagen");
-        panel_citas_pendientes4.add(lbl_imagenagenda3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, -1));
-
-        panel_citas_pendientes3.add(panel_citas_pendientes4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 600, 170));
-
-        panel_citas_pendientes7.setBackground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lbl_acceder7.setForeground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes7.add(lbl_acceder7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
-
-        usuario7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        usuario7.setForeground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes7.add(usuario7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
-
-        btn_iniciars7.setText("Iniciar Sesión");
-        btn_iniciars7.addActionListener(this::btn_iniciars7ActionPerformed);
-        panel_citas_pendientes7.add(btn_iniciars7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 210, 40));
-
-        lbl_imagenmascota6.setText("Raza: Promeranian");
-        panel_citas_pendientes7.add(lbl_imagenmascota6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, -1, -1));
-
-        lbl_nombremascota6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl_nombremascota6.setText("Max");
-        panel_citas_pendientes7.add(lbl_nombremascota6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, -1, -1));
-
-        lbl_estatusarchivo7.setText("Perro");
-        panel_citas_pendientes7.add(lbl_estatusarchivo7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, -1, -1));
-
-        lbl_fecha5.setText("Peso 3kg");
-        panel_citas_pendientes7.add(lbl_fecha5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, -1, -1));
-
-        jLabel14.setText("3 años");
-        panel_citas_pendientes7.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, -1, -1));
-
-        lbl_imagenagenda6.setText("imagen");
-        panel_citas_pendientes7.add(lbl_imagenagenda6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, -1));
-
-        panel_citas_pendientes8.setBackground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lbl_acceder8.setForeground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes8.add(lbl_acceder8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
-
-        usuario8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        usuario8.setForeground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes8.add(usuario8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
-
-        btn_iniciars8.setText("Iniciar Sesión");
-        btn_iniciars8.addActionListener(this::btn_iniciars8ActionPerformed);
-        panel_citas_pendientes8.add(btn_iniciars8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 210, 40));
-
-        lbl_imagenmascota7.setText("Raza: Promeranian");
-        panel_citas_pendientes8.add(lbl_imagenmascota7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, -1, -1));
-
-        lbl_nombremascota7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl_nombremascota7.setText("Max");
-        panel_citas_pendientes8.add(lbl_nombremascota7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, -1, -1));
-
-        lbl_estatusarchivo8.setText("Perro");
-        panel_citas_pendientes8.add(lbl_estatusarchivo8, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, -1, -1));
-
-        lbl_fecha6.setText("Peso 3kg");
-        panel_citas_pendientes8.add(lbl_fecha6, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, -1, -1));
-
-        jLabel18.setText("3 años");
-        panel_citas_pendientes8.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, -1, -1));
-
-        lbl_imagenagenda7.setText("imagen");
-        panel_citas_pendientes8.add(lbl_imagenagenda7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, -1));
-
-        panel_citas_pendientes7.add(panel_citas_pendientes8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 600, 170));
-
-        panel_citas_pendientes9.setBackground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lbl_acceder9.setForeground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes9.add(lbl_acceder9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
-
-        usuario9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        usuario9.setForeground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes9.add(usuario9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
-
-        btn_iniciars9.setText("Iniciar Sesión");
-        btn_iniciars9.addActionListener(this::btn_iniciars9ActionPerformed);
-        panel_citas_pendientes9.add(btn_iniciars9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 210, 40));
-
-        lbl_imagenmascota8.setText("Raza: Promeranian");
-        panel_citas_pendientes9.add(lbl_imagenmascota8, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, -1, -1));
-
-        lbl_nombremascota8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl_nombremascota8.setText("Max");
-        panel_citas_pendientes9.add(lbl_nombremascota8, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, -1, -1));
-
-        lbl_estatusarchivo9.setText("Perro");
-        panel_citas_pendientes9.add(lbl_estatusarchivo9, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, -1, -1));
-
-        lbl_fecha7.setText("Peso 3kg");
-        panel_citas_pendientes9.add(lbl_fecha7, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, -1, -1));
-
-        jLabel19.setText("3 años");
-        panel_citas_pendientes9.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, -1, -1));
-
-        lbl_imagenagenda8.setText("imagen");
-        panel_citas_pendientes9.add(lbl_imagenagenda8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, -1));
-
-        panel_citas_pendientes10.setBackground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lbl_acceder10.setForeground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes10.add(lbl_acceder10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
-
-        usuario10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        usuario10.setForeground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes10.add(usuario10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
-
-        btn_iniciars10.setText("Iniciar Sesión");
-        btn_iniciars10.addActionListener(this::btn_iniciars10ActionPerformed);
-        panel_citas_pendientes10.add(btn_iniciars10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 210, 40));
-
-        lbl_imagenmascota9.setText("Raza: Promeranian");
-        panel_citas_pendientes10.add(lbl_imagenmascota9, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, -1, -1));
-
-        lbl_nombremascota9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl_nombremascota9.setText("Max");
-        panel_citas_pendientes10.add(lbl_nombremascota9, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, -1, -1));
-
-        lbl_estatusarchivo10.setText("Perro");
-        panel_citas_pendientes10.add(lbl_estatusarchivo10, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, -1, -1));
-
-        lbl_fecha8.setText("Peso 3kg");
-        panel_citas_pendientes10.add(lbl_fecha8, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, -1, -1));
-
-        jLabel20.setText("3 años");
-        panel_citas_pendientes10.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, -1, -1));
-
-        lbl_imagenagenda9.setText("imagen");
-        panel_citas_pendientes10.add(lbl_imagenagenda9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, -1));
-
-        panel_citas_pendientes9.add(panel_citas_pendientes10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 600, 170));
-
-        panel_citas_pendientes7.add(panel_citas_pendientes9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 600, 170));
-
-        panel_citas_pendientes3.add(panel_citas_pendientes7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 600, 170));
-
-        jPanel1.add(panel_citas_pendientes3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 840, 180));
+        jPanel1.add(lbl_configuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 160, 50));
 
         botonSwing3.setBackground(new java.awt.Color(108, 135, 118));
+        botonSwing3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/lapiz.png"))); // NOI18N
         botonSwing3.setText("Próximas citas");
         botonSwing3.addActionListener(this::botonSwing3ActionPerformed);
-        jPanel1.add(botonSwing3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, -1, -1));
+        jPanel1.add(botonSwing3, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 60, -1, -1));
+        jPanel1.add(panelPaciente1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, -1, -1));
+        jPanel1.add(panelPaciente2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 380, -1, -1));
+        jPanel1.add(panelPaciente3, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 140, -1, -1));
+        jPanel1.add(panelPaciente4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 380, -1, -1));
 
-        panel_citas_pendientes5.setBackground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        botonSwing2.setBackground(new java.awt.Color(108, 135, 118));
+        botonSwing2.setText("Regresar");
+        botonSwing2.addActionListener(this::botonSwing2ActionPerformed);
+        jPanel1.add(botonSwing2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 670, 160, 60));
 
-        lbl_acceder5.setForeground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes5.add(lbl_acceder5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
+        jPanel2.setBackground(new java.awt.Color(108, 135, 118));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        usuario5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        usuario5.setForeground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes5.add(usuario5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+        jLabel6.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel6.setText("Nombre");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, -1, -1));
 
-        btn_iniciars5.setText("Iniciar Sesión");
-        btn_iniciars5.addActionListener(this::btn_iniciars5ActionPerformed);
-        panel_citas_pendientes5.add(btn_iniciars5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 210, 40));
+        jLabel15.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel15.setText("PatitasCare");
+        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
-        lbl_imagenmascota4.setText("Raza: Husky");
-        panel_citas_pendientes5.add(lbl_imagenmascota4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, -1, -1));
+        jLabel16.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel16.setText("Propetario");
+        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
 
-        lbl_nombremascota4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl_nombremascota4.setText("Duki");
-        panel_citas_pendientes5.add(lbl_nombremascota4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, -1, -1));
+        boton_menu.setBackground(new java.awt.Color(228, 230, 217));
+        boton_menu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbl_estatusarchivo5.setText("Perro");
-        panel_citas_pendientes5.add(lbl_estatusarchivo5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, -1, -1));
+        jLabel21.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel21.setText("Menú principal");
+        boton_menu.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
 
-        lbl_fecha3.setText("Peso 30kg");
-        panel_citas_pendientes5.add(lbl_fecha3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, -1, -1));
+        jPanel2.add(boton_menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 60));
 
-        jLabel12.setText("3 años");
-        panel_citas_pendientes5.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, -1, -1));
+        boton_salir.setBackground(new java.awt.Color(228, 230, 217));
+        boton_salir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbl_imagenagenda4.setText("imagen");
-        panel_citas_pendientes5.add(lbl_imagenagenda4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, -1));
+        jLabel22.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel22.setText("Salir");
+        boton_salir.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
 
-        panel_citas_pendientes6.setBackground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jButton1.setText("->");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
+        boton_salir.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 50, -1));
 
-        lbl_acceder6.setForeground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes6.add(lbl_acceder6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
+        jPanel2.add(boton_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 250, 60));
 
-        usuario6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        usuario6.setForeground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes6.add(usuario6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+        panelRedondeado1.setBackground(new java.awt.Color(228, 230, 217));
 
-        btn_iniciars6.setText("Iniciar Sesión");
-        btn_iniciars6.addActionListener(this::btn_iniciars6ActionPerformed);
-        panel_citas_pendientes6.add(btn_iniciars6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 210, 40));
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setText("Mis archivos");
 
-        lbl_imagenmascota5.setText("Raza: Promeranian");
-        panel_citas_pendientes6.add(lbl_imagenmascota5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, -1, -1));
+        javax.swing.GroupLayout panelRedondeado1Layout = new javax.swing.GroupLayout(panelRedondeado1);
+        panelRedondeado1.setLayout(panelRedondeado1Layout);
+        panelRedondeado1Layout.setHorizontalGroup(
+            panelRedondeado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado1Layout.createSequentialGroup()
+                .addContainerGap(55, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49))
+        );
+        panelRedondeado1Layout.setVerticalGroup(
+            panelRedondeado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado1Layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18))
+        );
 
-        lbl_nombremascota5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl_nombremascota5.setText("Max");
-        panel_citas_pendientes6.add(lbl_nombremascota5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, -1, -1));
+        jPanel2.add(panelRedondeado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 250, 60));
 
-        lbl_estatusarchivo6.setText("Perro");
-        panel_citas_pendientes6.add(lbl_estatusarchivo6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, -1, -1));
+        panelRedondeado3.setBackground(new java.awt.Color(228, 230, 217));
 
-        lbl_fecha4.setText("Peso 3kg");
-        panel_citas_pendientes6.add(lbl_fecha4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, -1, -1));
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel4.setText("Calendario");
 
-        jLabel13.setText("3 años");
-        panel_citas_pendientes6.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, -1, -1));
+        javax.swing.GroupLayout panelRedondeado3Layout = new javax.swing.GroupLayout(panelRedondeado3);
+        panelRedondeado3.setLayout(panelRedondeado3Layout);
+        panelRedondeado3Layout.setHorizontalGroup(
+            panelRedondeado3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado3Layout.createSequentialGroup()
+                .addContainerGap(64, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
+        );
+        panelRedondeado3Layout.setVerticalGroup(
+            panelRedondeado3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRedondeado3Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel4)
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
 
-        lbl_imagenagenda5.setText("imagen");
-        panel_citas_pendientes6.add(lbl_imagenagenda5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, -1));
+        jPanel2.add(panelRedondeado3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, -1, -1));
 
-        panel_citas_pendientes5.add(panel_citas_pendientes6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 600, 170));
+        panelRedondeado4.setBackground(new java.awt.Color(228, 230, 217));
 
-        jPanel1.add(panel_citas_pendientes5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 370, 840, 180));
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel7.setText("Reporte");
 
-        botonSwing4.setBackground(new java.awt.Color(108, 135, 118));
-        botonSwing4.setText("Regresar");
-        botonSwing4.addActionListener(this::botonSwing4ActionPerformed);
-        jPanel1.add(botonSwing4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 660, -1, -1));
+        javax.swing.GroupLayout panelRedondeado4Layout = new javax.swing.GroupLayout(panelRedondeado4);
+        panelRedondeado4.setLayout(panelRedondeado4Layout);
+        panelRedondeado4Layout.setHorizontalGroup(
+            panelRedondeado4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado4Layout.createSequentialGroup()
+                .addContainerGap(64, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
+        );
+        panelRedondeado4Layout.setVerticalGroup(
+            panelRedondeado4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRedondeado4Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel7)
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+
+        jPanel2.add(panelRedondeado4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, -1, -1));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/mascota2.jpeg"))); // NOI18N
+        jLabel8.setText("jLabel8");
+
+        javax.swing.GroupLayout panelRedondeado2Layout = new javax.swing.GroupLayout(panelRedondeado2);
+        panelRedondeado2.setLayout(panelRedondeado2Layout);
+        panelRedondeado2Layout.setHorizontalGroup(
+            panelRedondeado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRedondeado2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 78, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelRedondeado2Layout.setVerticalGroup(
+            panelRedondeado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRedondeado2Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8)
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        jPanel2.add(panelRedondeado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 90, 80));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -485,75 +238,40 @@ public class MenuPropietario_MisMscotas extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
-        dispose();
-    }//GEN-LAST:event_btn_SalirActionPerformed
-
-    private void btn_iniciars3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_iniciars3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_iniciars3ActionPerformed
-
-    private void btn_iniciars4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_iniciars4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_iniciars4ActionPerformed
-
-    private void btn_iniciars5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_iniciars5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_iniciars5ActionPerformed
-
-    private void btn_iniciars6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_iniciars6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_iniciars6ActionPerformed
-
-    private void btn_iniciars7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_iniciars7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_iniciars7ActionPerformed
-
-    private void btn_iniciars8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_iniciars8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_iniciars8ActionPerformed
-
-    private void btn_iniciars9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_iniciars9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_iniciars9ActionPerformed
-
-    private void btn_iniciars10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_iniciars10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_iniciars10ActionPerformed
-
-    private void botonSwing3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing3ActionPerformed
-        // TODO add your handling code here:
-       boolean hayCitas = true;
-       if(!hayCitas){
-           JOptionPane.showMessageDialog(this, "No tienes citas pendientes");
-    } else {
-        JOptionPane.showMessageDialog(this, "Tienes citas pendientes, revisa el apartado de citas");
-        
-        // opcional: abrir ventana de citas
-        new MenuPropietario_CitasPendientes().setVisible(true);
-    }
-       
-           
-    }//GEN-LAST:event_botonSwing3ActionPerformed
-
-    private void botonSwing4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing4ActionPerformed
-Menupropietario_Principal menu = new Menupropietario_Principal();
-menu.setVisible(true);
-this.dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_botonSwing4ActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void botonSwing3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing3ActionPerformed
+        // TODO add your handling code here:
+        boolean hayCitas = true;
+        if(!hayCitas){
+            JOptionPane.showMessageDialog(this, "No tienes citas pendientes");
+        } else {
+            JOptionPane.showMessageDialog(this, "Tienes citas pendientes, revisa el apartado de citas");
+
+            // opcional: abrir ventana de citas
+            new MenuPropietario_CitasPendientes().setVisible(true);
+        }
+
+    }//GEN-LAST:event_botonSwing3ActionPerformed
+
+    private void botonSwing2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing2ActionPerformed
+        Menupropietario_Principal menu = new Menupropietario_Principal();
+        menu.setVisible(true);
+        this.dispose();        // TODO add your handling code here:
+
+    }//GEN-LAST:event_botonSwing2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -581,100 +299,30 @@ this.dispose();        // TODO add your handling code here:
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private provet.componentes.botonSwing botonSwing1;
+    private provet.componentes.botonSwing botonSwing2;
     private provet.componentes.botonSwing botonSwing3;
-    private provet.componentes.botonSwing botonSwing4;
-    private provet.componentes.botonSwing btn_Calendario;
-    private provet.componentes.botonSwing btn_MenuP;
-    private provet.componentes.botonSwing btn_Reportes;
-    private provet.componentes.botonSwing btn_Salir;
-    private provet.componentes.boton_redondo btn_iniciars10;
-    private provet.componentes.boton_redondo btn_iniciars3;
-    private provet.componentes.boton_redondo btn_iniciars4;
-    private provet.componentes.boton_redondo btn_iniciars5;
-    private provet.componentes.boton_redondo btn_iniciars6;
-    private provet.componentes.boton_redondo btn_iniciars7;
-    private provet.componentes.boton_redondo btn_iniciars8;
-    private provet.componentes.boton_redondo btn_iniciars9;
+    private provet.componentes.PanelRedondeado boton_menu;
+    private provet.componentes.PanelRedondeado boton_salir;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel lbl_acceder10;
-    private javax.swing.JLabel lbl_acceder3;
-    private javax.swing.JLabel lbl_acceder4;
-    private javax.swing.JLabel lbl_acceder5;
-    private javax.swing.JLabel lbl_acceder6;
-    private javax.swing.JLabel lbl_acceder7;
-    private javax.swing.JLabel lbl_acceder8;
-    private javax.swing.JLabel lbl_acceder9;
     private javax.swing.JLabel lbl_configuracion;
-    private javax.swing.JLabel lbl_estatusarchivo10;
-    private javax.swing.JLabel lbl_estatusarchivo3;
-    private javax.swing.JLabel lbl_estatusarchivo4;
-    private javax.swing.JLabel lbl_estatusarchivo5;
-    private javax.swing.JLabel lbl_estatusarchivo6;
-    private javax.swing.JLabel lbl_estatusarchivo7;
-    private javax.swing.JLabel lbl_estatusarchivo8;
-    private javax.swing.JLabel lbl_estatusarchivo9;
-    private javax.swing.JLabel lbl_fecha1;
-    private javax.swing.JLabel lbl_fecha2;
-    private javax.swing.JLabel lbl_fecha3;
-    private javax.swing.JLabel lbl_fecha4;
-    private javax.swing.JLabel lbl_fecha5;
-    private javax.swing.JLabel lbl_fecha6;
-    private javax.swing.JLabel lbl_fecha7;
-    private javax.swing.JLabel lbl_fecha8;
-    private javax.swing.JLabel lbl_imagenagenda2;
-    private javax.swing.JLabel lbl_imagenagenda3;
-    private javax.swing.JLabel lbl_imagenagenda4;
-    private javax.swing.JLabel lbl_imagenagenda5;
-    private javax.swing.JLabel lbl_imagenagenda6;
-    private javax.swing.JLabel lbl_imagenagenda7;
-    private javax.swing.JLabel lbl_imagenagenda8;
-    private javax.swing.JLabel lbl_imagenagenda9;
-    private javax.swing.JLabel lbl_imagenmascota2;
-    private javax.swing.JLabel lbl_imagenmascota3;
-    private javax.swing.JLabel lbl_imagenmascota4;
-    private javax.swing.JLabel lbl_imagenmascota5;
-    private javax.swing.JLabel lbl_imagenmascota6;
-    private javax.swing.JLabel lbl_imagenmascota7;
-    private javax.swing.JLabel lbl_imagenmascota8;
-    private javax.swing.JLabel lbl_imagenmascota9;
-    private javax.swing.JLabel lbl_nombremascota2;
-    private javax.swing.JLabel lbl_nombremascota3;
-    private javax.swing.JLabel lbl_nombremascota4;
-    private javax.swing.JLabel lbl_nombremascota5;
-    private javax.swing.JLabel lbl_nombremascota6;
-    private javax.swing.JLabel lbl_nombremascota7;
-    private javax.swing.JLabel lbl_nombremascota8;
-    private javax.swing.JLabel lbl_nombremascota9;
-    private provet.componentes.PanelRedondeado panel_citas_pendientes10;
-    private provet.componentes.PanelRedondeado panel_citas_pendientes3;
-    private provet.componentes.PanelRedondeado panel_citas_pendientes4;
-    private provet.componentes.PanelRedondeado panel_citas_pendientes5;
-    private provet.componentes.PanelRedondeado panel_citas_pendientes6;
-    private provet.componentes.PanelRedondeado panel_citas_pendientes7;
-    private provet.componentes.PanelRedondeado panel_citas_pendientes8;
-    private provet.componentes.PanelRedondeado panel_citas_pendientes9;
-    private javax.swing.JLabel usuario10;
-    private javax.swing.JLabel usuario3;
-    private javax.swing.JLabel usuario4;
-    private javax.swing.JLabel usuario5;
-    private javax.swing.JLabel usuario6;
-    private javax.swing.JLabel usuario7;
-    private javax.swing.JLabel usuario8;
-    private javax.swing.JLabel usuario9;
+    private provet.componentes.PanelPaciente panelPaciente1;
+    private provet.componentes.PanelPaciente panelPaciente2;
+    private provet.componentes.PanelPaciente panelPaciente3;
+    private provet.componentes.PanelPaciente panelPaciente4;
+    private provet.componentes.PanelRedondeado panelRedondeado1;
+    private provet.componentes.PanelRedondeado panelRedondeado2;
+    private provet.componentes.PanelRedondeado panelRedondeado3;
+    private provet.componentes.PanelRedondeado panelRedondeado4;
     // End of variables declaration//GEN-END:variables
 }
