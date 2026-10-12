@@ -59,17 +59,20 @@ public class MenuAdmin extends javax.swing.JFrame {
 
         btn_usuariosM.setBackground(new java.awt.Color(228, 230, 217));
         btn_usuariosM.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_usuariosM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesAdministrativo/USUARIO2.png"))); // NOI18N
         btn_usuariosM.setText("Usuarios");
         btn_usuariosM.addActionListener(this::btn_usuariosMActionPerformed);
 
         btn_reportesM.setBackground(new java.awt.Color(228, 230, 217));
         btn_reportesM.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_reportesM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesAdministrativo/REPORTES2.png"))); // NOI18N
         btn_reportesM.setText("Reportes");
         btn_reportesM.setPreferredSize(new java.awt.Dimension(97, 29));
         btn_reportesM.addActionListener(this::btn_reportesMActionPerformed);
 
         btn_notificacionesM.setBackground(new java.awt.Color(228, 230, 217));
         btn_notificacionesM.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_notificacionesM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesAdministrativo/NOTIFICACION2.png"))); // NOI18N
         btn_notificacionesM.setText("Notificaciones");
         btn_notificacionesM.addActionListener(this::btn_notificacionesMActionPerformed);
 
@@ -80,6 +83,7 @@ public class MenuAdmin extends javax.swing.JFrame {
 
         lbl_menuU.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lbl_menuU.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_menuU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesAdministrativo/CASA.png"))); // NOI18N
         lbl_menuU.setText("Menu Principal");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -100,16 +104,13 @@ public class MenuAdmin extends javax.swing.JFrame {
                             .addComponent(lbl_administrador_menu))))
                 .addContainerGap(77, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(104, 104, 104)
-                .addComponent(lbl_menuU)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btn_usuariosM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_reportesM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_notificacionesM, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                    .addComponent(btn_salidaM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btn_salidaM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbl_menuU, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -127,15 +128,15 @@ public class MenuAdmin extends javax.swing.JFrame {
                         .addComponent(lbl_admin_menu)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lbl_administrador_menu)
-                        .addGap(103, 103, 103)
-                        .addComponent(lbl_menuU)
-                        .addGap(37, 37, 37)))
-                .addComponent(btn_usuariosM, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(btn_reportesM, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(btn_notificacionesM, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(172, 172, 172)
+                        .addGap(65, 65, 65)))
+                .addComponent(lbl_menuU, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_usuariosM)
+                .addGap(32, 32, 32)
+                .addComponent(btn_reportesM, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(btn_notificacionesM)
+                .addGap(128, 128, 128)
                 .addComponent(btn_salidaM, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
         );
@@ -327,7 +328,8 @@ public class MenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_reportesMActionPerformed
 
     private void btn_salidaMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salidaMActionPerformed
-  
+     new Login().setVisible(true); 
+    this.dispose();  
     }//GEN-LAST:event_btn_salidaMActionPerformed
 
     private void btn_usuariosMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_usuariosMActionPerformed

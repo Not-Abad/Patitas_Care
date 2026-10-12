@@ -68,10 +68,10 @@
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   <Component id="lbl_reportes" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -91,17 +91,17 @@
                           <Component id="lbl_admin_menu" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="lbl_administrador_menu" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="btn_menuR" min="-2" pref="40" max="-2" attributes="0"/>
+                  <Component id="btn_menuR" min="-2" pref="62" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                  <Component id="btn_usuariosR" min="-2" pref="40" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                  <Component id="lbl_reportes" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_usuariosR" min="-2" pref="62" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                  <Component id="btn_notificacionesR" min="-2" pref="40" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="172" max="-2" attributes="0"/>
+                  <Component id="lbl_reportes" min="-2" pref="63" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btn_notificacionesR" min="-2" pref="62" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
                   <Component id="btn_salidaR" min="-2" pref="40" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               </Group>
@@ -156,6 +156,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="18" style="0"/>
             </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/ImagenesAdministrativo/CASA.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Menu Principal"/>
           </Properties>
           <Events>
@@ -169,6 +172,9 @@
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="18" style="0"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/ImagenesAdministrativo/NOTIFICACION2.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Notificaciones"/>
           </Properties>
@@ -186,6 +192,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Salida"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_salidaRActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_reportes">
           <Properties>
@@ -194,6 +203,9 @@
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/ImagenesAdministrativo/REPORTES2.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Reportes"/>
           </Properties>
@@ -205,6 +217,9 @@
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="18" style="0"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/ImagenesAdministrativo/USUARIO2.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Usuarios"/>
           </Properties>

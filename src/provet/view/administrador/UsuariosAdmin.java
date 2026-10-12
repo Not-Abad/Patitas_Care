@@ -1,5 +1,5 @@
 package provet.view.administrador;
-
+import java.awt.Component;
 public class UsuariosAdmin extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(UsuariosAdmin.class.getName());
@@ -8,30 +8,42 @@ private final java.awt.Color C_FONDO = new java.awt.Color(228,230,217);
 private final java.awt.Color C_CARD = new java.awt.Color(167,184,156);
 private final java.awt.Color C_OSCURO = new java.awt.Color(84,104,94);
 
-// Modelo en memoria
-private java.util.List<Usuario> listaUsuarios = new java.util.ArrayList<>();
 private javax.swing.JPanel panelLista;
+public static java.util.List<Usuario> listaUsuarios = new java.util.ArrayList<>();
 private javax.swing.JTextField txtBuscar;
 private String filtroActual = "Todos";
-
-// Clase interna (evita errores)
+private javax.swing.JLabel lblTotal;
+ 
 class Usuario {
     String nombre;
     String rol;
     String id;
 
-    Usuario(String n, String r, String i){
+    Usuario(String n, String r, String i) {
         nombre = n;
         rol = r;
         id = i;
     }
-}
-    public UsuariosAdmin() {
-        initComponents();
-        construirUI();
-    cargarEjemplo();
-    }
 
+    public String getNombre() { return nombre; }
+    public String getRol() { return rol; }
+    public String getId() { return id; }
+
+    public void setNombre(String n) { nombre = n; }
+    public void setRol(String r) { rol = r; }
+}
+
+public UsuariosAdmin() {
+    initComponents();
+    construirUI();
+
+    // Usuario de ejemplo
+    if (listaUsuarios.isEmpty()) {
+    listaUsuarios.add(new Usuario("Admin Principal", "Administrador", "001"));
+}
+
+    cargarUsuarios();
+}
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -70,12 +82,14 @@ class Usuario {
 
         btn_reportesU.setBackground(new java.awt.Color(228, 230, 217));
         btn_reportesU.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_reportesU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesAdministrativo/REPORTES2.png"))); // NOI18N
         btn_reportesU.setText("Reportes");
         btn_reportesU.setPreferredSize(new java.awt.Dimension(97, 29));
         btn_reportesU.addActionListener(this::btn_reportesUActionPerformed);
 
         btn_notificacionesU.setBackground(new java.awt.Color(228, 230, 217));
         btn_notificacionesU.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_notificacionesU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesAdministrativo/NOTIFICACION2.png"))); // NOI18N
         btn_notificacionesU.setText("Notificaciones");
         btn_notificacionesU.addActionListener(this::btn_notificacionesUActionPerformed);
 
@@ -85,10 +99,12 @@ class Usuario {
 
         lbl_usuariosU.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lbl_usuariosU.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_usuariosU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesAdministrativo/USUARIO2.png"))); // NOI18N
         lbl_usuariosU.setText("Usuarios");
 
         btn_menuU.setBackground(new java.awt.Color(228, 230, 217));
         btn_menuU.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_menuU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesAdministrativo/CASA.png"))); // NOI18N
         btn_menuU.setText("Menu Principal");
         btn_menuU.addActionListener(this::btn_menuUActionPerformed);
 
@@ -108,17 +124,17 @@ class Usuario {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_admin_menu)
                             .addComponent(lbl_administrador_menu))))
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 47, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btn_reportesU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_notificacionesU, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
                     .addComponent(btn_salidaU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_menuU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(130, 130, 130)
+                .addGap(94, 94, 94)
                 .addComponent(lbl_usuariosU)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -137,15 +153,15 @@ class Usuario {
                         .addComponent(lbl_admin_menu)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lbl_administrador_menu)
-                        .addGap(95, 95, 95)))
-                .addComponent(btn_menuU, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addComponent(lbl_usuariosU)
-                .addGap(40, 40, 40)
-                .addComponent(btn_reportesU, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(btn_notificacionesU, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(170, 170, 170)
+                        .addGap(85, 85, 85)))
+                .addComponent(btn_menuU, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(lbl_usuariosU, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(btn_reportesU, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(btn_notificacionesU, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(101, 101, 101)
                 .addComponent(btn_salidaU, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
         );
@@ -172,156 +188,180 @@ class Usuario {
 
     private void btn_reportesUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reportesUActionPerformed
     new ReportesAdmin().setVisible(true); 
-    this.dispose();
+    this.setVisible(false);
     }//GEN-LAST:event_btn_reportesUActionPerformed
 
     private void btn_menuUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_menuUActionPerformed
     new MenuAdmin().setVisible(true); 
-    this.dispose();
+    this.setVisible(false);
     }//GEN-LAST:event_btn_menuUActionPerformed
 
     private void btn_notificacionesUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_notificacionesUActionPerformed
     new NotificacionesAdmin().setVisible(true); 
-    this.dispose();
+    this.setVisible(false);
     }//GEN-LAST:event_btn_notificacionesUActionPerformed
 
     private void construirUI() {
-    jPanel2.setLayout(null);
-    jPanel2.setBackground(C_FONDO);
 
-    // TÍTULO
-    javax.swing.JLabel titulo = new javax.swing.JLabel("Usuarios");
-    titulo.setBounds(30, 20, 200, 30);
-    titulo.setFont(new java.awt.Font("Tahoma", 1, 20));
-    jPanel2.add(titulo);
+    jPanel2.setLayout(new java.awt.BorderLayout());
 
-    // BUSCADOR
-    txtBuscar = new javax.swing.JTextField();
-    txtBuscar.setBounds(30, 60, 200, 30);
-    jPanel2.add(txtBuscar);
+    javax.swing.JPanel barraTop = new javax.swing.JPanel();
+    barraTop.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 15));
+    barraTop.setBackground(new java.awt.Color(228,230,217));
+    barraTop.setPreferredSize(new java.awt.Dimension(1150, 60));
+    lblTotal = new javax.swing.JLabel("Total usuarios: 0");
+    lblTotal.setFont(new java.awt.Font("Tahoma", 0, 14));
 
-    txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
-        public void keyReleased(java.awt.event.KeyEvent e) {
-            refrescarLista();
+    javax.swing.JButton btnNuevo = new javax.swing.JButton("+ Nuevo usuario");
+    btnNuevo.setBackground(new java.awt.Color(108,135,118));
+    btnNuevo.setForeground(java.awt.Color.WHITE); // letras blancas
+    btnNuevo.setFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 14)); 
+    btnNuevo.setOpaque(true);
+    btnNuevo.setBorderPainted(true);
+    btnNuevo.setFocusPainted(true);
+    btnNuevo.setPreferredSize(new java.awt.Dimension(180, 35));
+    btnNuevo.addActionListener(e -> abrirFormularioNuevo());
+
+    barraTop.add(lblTotal);
+    barraTop.add(btnNuevo);
+    
+    panelLista = new javax.swing.JPanel();
+    panelLista.setLayout(new javax.swing.BoxLayout(panelLista, javax.swing.BoxLayout.Y_AXIS));
+    panelLista.setBackground(new java.awt.Color(228,230,217));
+
+    javax.swing.JScrollPane scroll = new javax.swing.JScrollPane(panelLista);
+    scroll.setBorder(null);
+
+    jPanel2.add(barraTop, java.awt.BorderLayout.NORTH);
+    jPanel2.add(scroll, java.awt.BorderLayout.CENTER);
+}
+    
+ private void cargarUsuarios() {
+    panelLista.removeAll();
+    int totalUsuarios = listaUsuarios.size(); 
+    for (Usuario u : listaUsuarios) {
+        panelLista.add(crearCard(u));
+        panelLista.add(javax.swing.Box.createRigidArea(new java.awt.Dimension(0,10)));
+    }
+    lblTotal.setText("Total usuarios: " + totalUsuarios);
+    panelLista.revalidate();
+    panelLista.repaint();
+}
+    
+    private javax.swing.JPanel crearCard(Usuario u) {
+
+    javax.swing.JPanel card = new javax.swing.JPanel();
+    card.setLayout(new java.awt.BorderLayout());
+    card.setBackground(new java.awt.Color(192,207,178));
+    card.setBorder(javax.swing.BorderFactory.createEmptyBorder(20,20,20,20));
+    card.setMaximumSize(new java.awt.Dimension(Integer.MAX_VALUE, 120));
+
+    javax.swing.JPanel panelIzq = new javax.swing.JPanel();
+    panelIzq.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+    panelIzq.setOpaque(false);
+
+    javax.swing.JButton ver = new javax.swing.JButton("Ver datos");
+    javax.swing.JButton editar = new javax.swing.JButton("Editar");
+
+    panelIzq.add(ver);
+    panelIzq.add(editar);
+
+    javax.swing.JPanel panelCentro = new javax.swing.JPanel();
+    panelCentro.setLayout(new javax.swing.BoxLayout(panelCentro, javax.swing.BoxLayout.Y_AXIS));
+    panelCentro.setOpaque(false);
+
+    javax.swing.JLabel nombre = new javax.swing.JLabel(u.getNombre());
+    nombre.setFont(new java.awt.Font("Tahoma", 1, 18));
+    nombre.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+    javax.swing.JLabel id = new javax.swing.JLabel("ID: " + u.getId());
+    id.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+
+    javax.swing.JLabel rol = new javax.swing.JLabel(u.getRol());
+    rol.setOpaque(true);
+    rol.setBackground(new java.awt.Color(90,110,90));
+    rol.setForeground(java.awt.Color.WHITE);
+    rol.setBorder(javax.swing.BorderFactory.createEmptyBorder(5,10,5,10));
+    rol.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+    panelCentro.add(nombre);
+    panelCentro.add(id);
+    panelCentro.add(javax.swing.Box.createRigidArea(new java.awt.Dimension(0,5)));
+    panelCentro.add(rol);
+
+
+    card.add(panelIzq, java.awt.BorderLayout.WEST);
+    card.add(panelCentro, java.awt.BorderLayout.CENTER);
+
+    // 🔹 EVENTOS
+    ver.addActionListener(e -> {
+        javax.swing.JOptionPane.showMessageDialog(this,
+            "Nombre: " + u.getNombre() +
+            "\nID: " + u.getId() +
+            "\nRol: " + u.getRol(),
+            "Datos del usuario",
+            javax.swing.JOptionPane.INFORMATION_MESSAGE
+        );
+    });
+
+    editar.addActionListener(e -> {
+        FormUsuario1 form = new FormUsuario1(this, u);
+        form.setVisible(true);
+
+        if (form.isGuardado()) {
+            u.setNombre(form.getNombre());
+            u.setRol(form.getRol());
+            cargarUsuarios();
         }
     });
 
-    // BOTONES FILTRO
-    String[] roles = {"Todos","Administrador","Veterinario","Secretario","Propietario"};
-    int x = 250;
-
-    for(String rol : roles){
-        javax.swing.JButton btn = new javax.swing.JButton(rol);
-        btn.setBounds(x, 60, 130, 30);
-        jPanel2.add(btn);
-
-        btn.addActionListener(e -> {
-            filtroActual = rol;
-            refrescarLista();
-        });
-
-        x += 140;
-    }
-
-    // BOTÓN NUEVO
-    javax.swing.JButton btnNuevo = new javax.swing.JButton("+ Nuevo usuario");
-    btnNuevo.setBounds(900, 20, 200, 30);
-    btnNuevo.setBackground(C_OSCURO);
-    btnNuevo.setForeground(java.awt.Color.WHITE);
-    jPanel2.add(btnNuevo);
-
-    btnNuevo.addActionListener(e -> agregarUsuario());
-
-    // PANEL LISTA
-    panelLista = new javax.swing.JPanel();
-    panelLista.setLayout(new javax.swing.BoxLayout(panelLista, javax.swing.BoxLayout.Y_AXIS));
-    panelLista.setBackground(C_FONDO);
-
-    javax.swing.JScrollPane scroll = new javax.swing.JScrollPane(panelLista);
-    scroll.setBounds(30, 120, 1080, 580);
-    scroll.setBorder(null);
-
-    jPanel2.add(scroll);
+    return card;
 }
-    private void cargarEjemplo() {
-    listaUsuarios.add(new Usuario("Admin Principal","Administrador","001"));
-    refrescarLista();
-}
-    private void agregarUsuario() {
-    String nombre = "Usuario " + (listaUsuarios.size()+1);
-    String[] roles = {"Administrador","Veterinario","Secretario","Propietario"};
-    String rol = roles[(int)(Math.random()*roles.length)];
-
-    listaUsuarios.add(new Usuario(nombre, rol, "00" + listaUsuarios.size()));
-    refrescarLista();
-}
-    private void refrescarLista() {
+        
+    private void filtrar(String rol) {
     panelLista.removeAll();
 
-    String busqueda = txtBuscar.getText().toLowerCase();
-
-    for(Usuario u : listaUsuarios){
-
-        boolean coincideBusqueda = u.nombre.toLowerCase().contains(busqueda);
-        boolean coincideFiltro = filtroActual.equals("Todos") || u.rol.equals(filtroActual);
-
-       if(coincideBusqueda && coincideFiltro){
-    panelLista.add(crearCard(u));
-    panelLista.add(javax.swing.Box.createRigidArea(new java.awt.Dimension(0,10)));
-}
+    for (Usuario u : listaUsuarios) {
+        if (rol.equals("Todos") || u.getRol().equals(rol)) {
+            panelLista.add(crearCard(u));
+            panelLista.add(javax.swing.Box.createRigidArea(new java.awt.Dimension(0,10)));
+        }
     }
 
     panelLista.revalidate();
     panelLista.repaint();
 }
-    private javax.swing.JPanel crearCard(Usuario u){
-    javax.swing.JPanel card = new javax.swing.JPanel();
-    card.setLayout(null);
-    card.setBackground(C_CARD);
+    
+    private void abrirFormularioNuevo() {
+    FormUsuario1 form = new FormUsuario1(this);
+    form.setVisible(true);
 
-    // Iniciales
-    javax.swing.JLabel inicial = new javax.swing.JLabel(u.nombre.substring(0,1));
-    inicial.setBounds(10,10,40,40);
-    inicial.setOpaque(true);
-    inicial.setBackground(C_OSCURO);
-    inicial.setForeground(java.awt.Color.WHITE);
-    inicial.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-    card.setMaximumSize(new java.awt.Dimension(1000, 130));
-    card.setPreferredSize(new java.awt.Dimension(1000, 130));
-
-    // Nombre
-    javax.swing.JLabel nombre = new javax.swing.JLabel(u.nombre);
-    nombre.setBounds(60,10,200,20);
-
-    // ID
-    javax.swing.JLabel id = new javax.swing.JLabel("ID: " + u.id);
-    id.setBounds(60,30,200,20);
-
-    // Rol
-    javax.swing.JLabel rol = new javax.swing.JLabel(u.rol);
-    rol.setBounds(10,60,150,20);
-    rol.setOpaque(true);
-    rol.setBackground(C_OSCURO);
-    rol.setForeground(java.awt.Color.WHITE);
-
-    // Botones
-    javax.swing.JButton ver = new javax.swing.JButton("Ver datos");
-    ver.setBounds(10,90,120,25);
-
-    javax.swing.JButton editar = new javax.swing.JButton("Editar");
-    editar.setBounds(140,90,120,25);
-    editar.setBackground(C_OSCURO);
-    editar.setForeground(java.awt.Color.WHITE);
-
-    card.add(inicial);
-    card.add(nombre);
-    card.add(id);
-    card.add(rol);
-    card.add(ver);
-    card.add(editar);
-
-    return card;
+    if (form.isGuardado()) {
+        agregarUsuario(form.getNombre(), form.getRol(), form.getId());
+    }
 }
+    
+    private void agregarUsuario(String nombre, String rol, String id) {
+    // Validar ID duplicado
+    for (Usuario u : listaUsuarios) {
+        if (u.getId().equals(id)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "ID ya existe");
+            return;
+        }
+    }
+    
+    listaUsuarios.add(new Usuario(nombre, rol, id));
+    cargarUsuarios();
+    NotificacionesAdmin.agregarNotificacionGlobal(
+        "Nuevo usuario",
+        "Se creó el usuario: " + nombre,
+        "hoy"
+    );
+
+cargarUsuarios();
+    }
+ 
     
     public static void main(String args[]) {
 

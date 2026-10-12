@@ -1,19 +1,20 @@
 package provet.view.administrador;
 
+import provet.view.inicio.Login;
+
 public class NotificacionesAdmin extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(NotificacionesAdmin.class.getName());
-// ── COLORES ─────────────────────────────
+private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(NotificacionesAdmin.class.getName());
+
 private static final java.awt.Color C_FONDO = new java.awt.Color(228,230,217);
 private static final java.awt.Color C_OSCURO = new java.awt.Color(39,53,38);
 private static final java.awt.Color C_SUAVE = new java.awt.Color(108,135,118);
 private static final java.awt.Color C_CARD = new java.awt.Color(192,207,178);
 
-// ── MODELO ─────────────────────────────
 public static class Notificacion {
     String titulo, desc, tiempo, seccion;
     boolean leida = false;
-
+    
     public Notificacion(String t, String d, String ti, String s) {
         titulo = t;
         desc = d;
@@ -21,11 +22,10 @@ public static class Notificacion {
         seccion = s;
     }
 }
-// ── DATOS ─────────────────────────────
-private final java.util.List<Notificacion> lista = new java.util.ArrayList<>();
-private int sinLeer = 0;
 
-// ── UI DINÁMICO ─────────────────────────
+public static java.util.List<Notificacion> listaGlobal = new java.util.ArrayList<>();
+private static int sinLeer = 0;
+
 private javax.swing.JPanel panelLista;
 private javax.swing.JLabel lblBadge;
 private javax.swing.JLabel lblFecha;
@@ -72,11 +72,13 @@ private javax.swing.JLabel lblFecha;
 
         btn_MenuN.setBackground(new java.awt.Color(228, 230, 217));
         btn_MenuN.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_MenuN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesAdministrativo/CASA.png"))); // NOI18N
         btn_MenuN.setText("Menu Principal");
         btn_MenuN.addActionListener(this::btn_MenuNActionPerformed);
 
         btn_reportesN.setBackground(new java.awt.Color(228, 230, 217));
         btn_reportesN.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_reportesN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesAdministrativo/REPORTES2.png"))); // NOI18N
         btn_reportesN.setText("Reportes");
         btn_reportesN.setPreferredSize(new java.awt.Dimension(97, 29));
         btn_reportesN.addActionListener(this::btn_reportesNActionPerformed);
@@ -84,17 +86,20 @@ private javax.swing.JLabel lblFecha;
         btn_salida1.setBackground(new java.awt.Color(228, 230, 217));
         btn_salida1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btn_salida1.setText("Salida");
+        btn_salida1.addActionListener(this::btn_salida1ActionPerformed);
 
         btn_usuariosN.setBackground(new java.awt.Color(228, 230, 217));
         btn_usuariosN.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_usuariosN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesAdministrativo/USUARIO2.png"))); // NOI18N
         btn_usuariosN.setText("Usuarios");
         btn_usuariosN.addActionListener(this::btn_usuariosNActionPerformed);
 
         jLabel3.setBackground(new java.awt.Color(108, 135, 118));
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesAdministrativo/NOTIFICACION2.png"))); // NOI18N
         jLabel3.setText("Notificaciones");
         jLabel3.setToolTipText("");
-        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jLabel3.setOpaque(true);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -117,19 +122,16 @@ private javax.swing.JLabel lblFecha;
                                     .addComponent(lbl_admin_menu)
                                     .addComponent(lbl_administrador_menu)))
                             .addComponent(btn_reportesN, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(59, 59, 59)
-                                .addComponent(jLabel3)))))
+                            .addComponent(btn_usuariosN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(37, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btn_salida1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(55, 55, 55)
-                    .addComponent(btn_usuariosN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(40, 40, 40)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(65, 65, 65))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,24 +144,21 @@ private javax.swing.JLabel lblFecha;
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                         .addComponent(lbl_admin_menu)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lbl_administrador_menu)
-                        .addGap(95, 95, 95)
-                        .addComponent(btn_MenuN, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(107, 107, 107)))
-                .addComponent(btn_reportesN, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(73, 73, 73)))
+                .addComponent(btn_MenuN, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(174, 174, 174)
+                .addComponent(btn_usuariosN, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(btn_reportesN, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(119, 119, 119)
                 .addComponent(btn_salida1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(320, 320, 320)
-                    .addComponent(btn_usuariosN, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(380, Short.MAX_VALUE)))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 330, 740));
@@ -184,18 +183,23 @@ private javax.swing.JLabel lblFecha;
 
     private void btn_reportesNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reportesNActionPerformed
     new ReportesAdmin().setVisible(true); 
-    this.dispose();
+    this.setVisible(false);
     }//GEN-LAST:event_btn_reportesNActionPerformed
 
     private void btn_MenuNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_MenuNActionPerformed
     new MenuAdmin().setVisible(true); 
-    this.dispose();        // TODO add your handling code here:
+    this.setVisible(false);
     }//GEN-LAST:event_btn_MenuNActionPerformed
 
     private void btn_usuariosNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_usuariosNActionPerformed
      new UsuariosAdmin().setVisible(true); 
-    this.dispose();
+    this.setVisible(false);
     }//GEN-LAST:event_btn_usuariosNActionPerformed
+
+    private void btn_salida1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salida1ActionPerformed
+     new Login().setVisible(true); 
+    this.dispose(); 
+    }//GEN-LAST:event_btn_salida1ActionPerformed
 
     private void construirUI() {
 
@@ -203,21 +207,18 @@ private javax.swing.JLabel lblFecha;
     jPanel2.setLayout(null);
     jPanel2.setBackground(C_FONDO);
 
-    // TÍTULO
     javax.swing.JLabel titulo = new javax.swing.JLabel("Notificaciones");
     titulo.setBounds(30, 20, 300, 30);
     titulo.setFont(new java.awt.Font("Tahoma", 1, 22));
     titulo.setForeground(C_OSCURO);
     jPanel2.add(titulo);
 
-    // FECHA AUTOMÁTICA
     lblFecha = new javax.swing.JLabel();
     lblFecha.setBounds(30, 50, 300, 20);
     lblFecha.setForeground(C_SUAVE);
     actualizarFecha();
     jPanel2.add(lblFecha);
 
-    // BADGE
     lblBadge = new javax.swing.JLabel("", javax.swing.SwingConstants.CENTER);
     lblBadge.setBounds(980, 25, 140, 25);
     lblBadge.setOpaque(true);
@@ -225,7 +226,6 @@ private javax.swing.JLabel lblFecha;
     lblBadge.setForeground(java.awt.Color.WHITE);
     jPanel2.add(lblBadge);
 
-    // LISTA
     panelLista = new javax.swing.JPanel();
     panelLista.setLayout(new javax.swing.BoxLayout(panelLista, javax.swing.BoxLayout.Y_AXIS));
     panelLista.setBackground(C_FONDO);
@@ -246,20 +246,6 @@ private void actualizarFecha() {
     lblFecha.setText(hoy.format(f));
 }
 
-// ── AGREGAR NOTIFICACIÓN ──
-public void agregarNotificacion(String titulo, String desc, String tiempo) {
-
-    String seccion = (tiempo.contains("min") || tiempo.contains("hora")) ? "HOY" : "ANTES";
-
-    Notificacion n = new Notificacion(titulo, desc, tiempo, seccion);
-    lista.add(0, n);
-
-    sinLeer++;
-    actualizarBadge();
-    renderizar();
-}
-
-// ── BADGE ──
 private void actualizarBadge() {
     if (sinLeer == 0) {
         lblBadge.setVisible(false);
@@ -269,7 +255,6 @@ private void actualizarBadge() {
     }
 }
 
-// ── RENDER ──
 private void renderizar() {
 
     panelLista.removeAll();
@@ -279,7 +264,7 @@ private void renderizar() {
     for (String sec : secciones) {
 
         boolean hay = false;
-        for (Notificacion n : lista) {
+        for (Notificacion n : listaGlobal) {
             if (n.seccion.equals(sec)) {
                 hay = true;
                 break;
@@ -293,7 +278,7 @@ private void renderizar() {
         lbl.setBorder(javax.swing.BorderFactory.createEmptyBorder(10,5,5,0));
         panelLista.add(lbl);
 
-        for (Notificacion n : lista) {
+        for (Notificacion n : listaGlobal) {
             if (n.seccion.equals(sec)) {
                 panelLista.add(crearFila(n));
             }
@@ -304,7 +289,6 @@ private void renderizar() {
     panelLista.repaint();
 }
 
-// ── FILA ──
 private javax.swing.JPanel crearFila(Notificacion n) {
 
     java.awt.Color fondo = n.leida ? C_CARD : C_FONDO;
@@ -329,13 +313,17 @@ private javax.swing.JPanel crearFila(Notificacion n) {
         "<html><b>" + n.titulo + "</b><br>" +
         n.desc + "<br><small>" + n.tiempo + "</small></html>"
     );
-
     txt.setBorder(javax.swing.BorderFactory.createEmptyBorder(5,10,5,5));
     p.add(txt, java.awt.BorderLayout.CENTER);
-
     return p;
-}
+    }
+ 
    
+    public static void agregarNotificacionGlobal(String titulo, String desc, String tiempo) {
+    String seccion = (tiempo.contains("min") || tiempo.contains("hora")) ? "HOY" : "ANTES";
+    Notificacion n = new Notificacion(titulo, desc, tiempo, seccion);
+    listaGlobal.add(0, n);
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

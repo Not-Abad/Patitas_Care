@@ -1,26 +1,41 @@
 package provet.view.administrador;
 
+import provet.view.inicio.Login;
+
 public class ReportesAdmin extends javax.swing.JFrame {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ReportesAdmin.class.getName());
-// Colores del diseño
+   
+private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ReportesAdmin.class.getName());
+public static java.util.List<Reporte> listaReportes = new java.util.ArrayList<>();
+
 private final java.awt.Color C_FONDO = new java.awt.Color(228,230,217);
 private final java.awt.Color C_CARD = new java.awt.Color(167, 184, 156);
 private final java.awt.Color C_OSCURO = new java.awt.Color(84, 104, 94);
 private final java.awt.Color C_TEXTO = new java.awt.Color(60,60,60);
 
-// Datos en memoria (sin base de datos)
+class Reporte {
+    String titulo;
+    String descripcion;
+    public Reporte(String t, String d) {
+        titulo = t;
+        descripcion = d;
+ 
+    }
+}
+
 private int citas = 0;
 private int nuevosPacientes = 0;
 private int usuariosActivos = 0;
 
-// Componentes dinámicos
 private javax.swing.JLabel lblCitas, lblPacientes, lblUsuarios;
 private javax.swing.JPanel panelHistorial;
 
     public ReportesAdmin() {
-        initComponents();
-        construirUI();
+    initComponents();
+    construirUI();
+    if (listaReportes.isEmpty()) {
+    listaReportes.add(new Reporte("Ejemplo", "Demo"));
+    }
+    renderizarHistorial();
     }
 
     @SuppressWarnings("unchecked")
@@ -61,24 +76,29 @@ private javax.swing.JPanel panelHistorial;
 
         btn_menuR.setBackground(new java.awt.Color(228, 230, 217));
         btn_menuR.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_menuR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesAdministrativo/CASA.png"))); // NOI18N
         btn_menuR.setText("Menu Principal");
         btn_menuR.addActionListener(this::btn_menuRActionPerformed);
 
         btn_notificacionesR.setBackground(new java.awt.Color(228, 230, 217));
         btn_notificacionesR.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_notificacionesR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesAdministrativo/NOTIFICACION2.png"))); // NOI18N
         btn_notificacionesR.setText("Notificaciones");
         btn_notificacionesR.addActionListener(this::btn_notificacionesRActionPerformed);
 
         btn_salidaR.setBackground(new java.awt.Color(228, 230, 217));
         btn_salidaR.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btn_salidaR.setText("Salida");
+        btn_salidaR.addActionListener(this::btn_salidaRActionPerformed);
 
         lbl_reportes.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lbl_reportes.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_reportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesAdministrativo/REPORTES2.png"))); // NOI18N
         lbl_reportes.setText("Reportes");
 
         btn_usuariosR.setBackground(new java.awt.Color(228, 230, 217));
         btn_usuariosR.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_usuariosR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesAdministrativo/USUARIO2.png"))); // NOI18N
         btn_usuariosR.setText("Usuarios");
         btn_usuariosR.addActionListener(this::btn_usuariosRActionPerformed);
 
@@ -107,10 +127,10 @@ private javax.swing.JPanel panelHistorial;
                     .addComponent(btn_salidaR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_usuariosR, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(129, 129, 129)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(lbl_reportes)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(94, 94, 94))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,15 +147,15 @@ private javax.swing.JPanel panelHistorial;
                         .addComponent(lbl_admin_menu)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lbl_administrador_menu)
-                        .addGap(102, 102, 102)))
-                .addComponent(btn_menuR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80)))
+                .addComponent(btn_menuR, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
-                .addComponent(btn_usuariosR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(lbl_reportes)
+                .addComponent(btn_usuariosR, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
-                .addComponent(btn_notificacionesR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(172, 172, 172)
+                .addComponent(lbl_reportes, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_notificacionesR, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(101, 101, 101)
                 .addComponent(btn_salidaR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
         );
@@ -162,24 +182,28 @@ private javax.swing.JPanel panelHistorial;
 
     private void btn_menuRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_menuRActionPerformed
      new MenuAdmin().setVisible(true); 
-    this.dispose();
+    this.setVisible(false);
     }//GEN-LAST:event_btn_menuRActionPerformed
 
     private void btn_usuariosRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_usuariosRActionPerformed
     new UsuariosAdmin().setVisible(true); 
-    this.dispose();
+    this.setVisible(false);
     }//GEN-LAST:event_btn_usuariosRActionPerformed
 
     private void btn_notificacionesRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_notificacionesRActionPerformed
     new NotificacionesAdmin().setVisible(true); 
-    this.dispose();
+    this.setVisible(false);
     }//GEN-LAST:event_btn_notificacionesRActionPerformed
+
+    private void btn_salidaRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salidaRActionPerformed
+     new Login().setVisible(true); 
+    this.dispose(); 
+    }//GEN-LAST:event_btn_salidaRActionPerformed
 
     private void construirUI() {
     jPanel2.setLayout(null);
     jPanel2.setBackground(C_FONDO);
 
-    // TÍTULO
     javax.swing.JLabel titulo = new javax.swing.JLabel("Reportes administrativos");
     titulo.setBounds(30, 20, 400, 30);
     titulo.setFont(new java.awt.Font("Tahoma", 1, 20));
@@ -190,7 +214,6 @@ private javax.swing.JPanel panelHistorial;
     subtitulo.setForeground(C_TEXTO);
     jPanel2.add(subtitulo);
 
-    // BOTÓN
     javax.swing.JButton btnGenerar = new javax.swing.JButton("+ Generar reporte");
     btnGenerar.setBounds(900, 20, 200, 30);
     btnGenerar.setBackground(C_OSCURO);
@@ -199,12 +222,10 @@ private javax.swing.JPanel panelHistorial;
 
     btnGenerar.addActionListener(e -> generarDatos());
 
-    // CARDS
     lblCitas = crearCard("Citas totales", 50);
     lblPacientes = crearCard("Nuevos pacientes", 300);
     lblUsuarios = crearCard("Usuarios activos", 550);
 
-    // HISTORIAL
     panelHistorial = new javax.swing.JPanel();
     panelHistorial.setLayout(new javax.swing.BoxLayout(panelHistorial, javax.swing.BoxLayout.Y_AXIS));
 
@@ -230,11 +251,11 @@ private javax.swing.JPanel panelHistorial;
     card.add(lblValor);
 
     jPanel2.add(card);
-
+    card.setVisible(true);;
     return lblValor;
 }
+    
     private void generarDatos() {
-    // Simulación dinámica
     citas += (int)(Math.random() * 10);
     nuevosPacientes += (int)(Math.random() * 5);
     usuariosActivos += (int)(Math.random() * 3);
@@ -243,20 +264,37 @@ private javax.swing.JPanel panelHistorial;
     lblPacientes.setText(String.valueOf(nuevosPacientes));
     lblUsuarios.setText(String.valueOf(usuariosActivos));
 
-    agregarHistorial();
+    listaReportes.add(new Reporte("Reporte generado", "Datos actualizados"));
+    
+    renderizarHistorial();
+
+    NotificacionesAdmin.agregarNotificacionGlobal(
+        "Nuevo reporte",
+        "Se generó un reporte",
+        "hoy"
+    );
 }
-    private void agregarHistorial() {
-    javax.swing.JPanel fila = new javax.swing.JPanel();
-    fila.setLayout(new java.awt.GridLayout(1, 3));
-    fila.setMaximumSize(new java.awt.Dimension(1000, 30));
+    
+    private void renderizarHistorial() {
+    panelHistorial.removeAll();
 
-    fila.add(new javax.swing.JLabel("Reporte generado"));
-    fila.add(new javax.swing.JLabel(java.time.LocalDate.now().toString()));
-    fila.add(new javax.swing.JLabel("Generado"));
+    for (Reporte r : listaReportes) {
 
-    panelHistorial.add(fila);
+        javax.swing.JPanel fila = new javax.swing.JPanel();
+        fila.setLayout(new java.awt.GridLayout(1, 3));
+        fila.setMaximumSize(new java.awt.Dimension(1000, 30));
+
+        fila.add(new javax.swing.JLabel(r.titulo));
+        fila.add(new javax.swing.JLabel(java.time.LocalDate.now().toString()));
+        fila.add(new javax.swing.JLabel(r.descripcion));
+
+        panelHistorial.add(fila);
+    }
+
     panelHistorial.revalidate();
+    panelHistorial.repaint();
 }
+    
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
