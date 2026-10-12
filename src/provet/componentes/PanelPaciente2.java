@@ -230,4 +230,17 @@ public class PanelPaciente2 extends javax.swing.JPanel {
     private javax.swing.JLabel lblVacunas;
     private javax.swing.JLabel lblfoto;
     // End of variables declaration//GEN-END:variables
+
+    public void setDatos(Paciente p) {
+    lblID.setText(String.valueOf(p.getID()));
+    lblNombre.setText(p.getNombre());
+    lblRaza.setText(p.getRaza());
+    lblEdad.setText(String.valueOf(p.getEdad()));
+    lblPeso.setText(String.valueOf(p.getPeso()));
+    lblSexo.setText(p.getSexo());
+    lblEspecie.setText(p.getEspecie());
+    lblAlergias.setText(p.getAlergias());
+    lblVacunas.setText(p.getVacunas());
+    
+}
 }

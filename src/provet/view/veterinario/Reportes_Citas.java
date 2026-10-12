@@ -18,9 +18,6 @@ public class Reportes_Citas extends javax.swing.JFrame {
 
         jMenu1 = new javax.swing.JMenu();
         jPanel1 = new javax.swing.JPanel();
-        contenedorArchivos = new provet.componentes.Contenedor_Cartas();
-        contenedorArchivos.setEje(1);
-        panelPaciente2 = new provet.componentes.PanelPaciente();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -41,12 +38,6 @@ public class Reportes_Citas extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(228, 230, 217));
         jPanel1.setPreferredSize(new java.awt.Dimension(1291, 70));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        contenedorArchivos.setBackground(new java.awt.Color(108, 135, 118));
-        contenedorArchivos.add(panelPaciente2, new java.awt.GridBagConstraints());
-
-        jPanel1.add(contenedorArchivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 970, 590));
-
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, 1200, 740));
 
         jPanel2.setBackground(new java.awt.Color(108, 135, 118));
@@ -74,9 +65,19 @@ public class Reportes_Citas extends javax.swing.JFrame {
         jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, -1, -1));
 
         btn_MenuP.setText("Menú Principal");
+        btn_MenuP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_MenuPActionPerformed(evt);
+            }
+        });
         jPanel2.add(btn_MenuP, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 60));
 
         botonSwing1.setText("Pacientes");
+        botonSwing1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSwing1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(botonSwing1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 250, 60));
 
         btn_Calendario.setText("Calendario");
@@ -119,6 +120,18 @@ public class Reportes_Citas extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btn_SalirActionPerformed
 
+    private void btn_MenuPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_MenuPActionPerformed
+        Menu_Principal m = new Menu_Principal(); 
+        m.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_MenuPActionPerformed
+
+    private void botonSwing1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing1ActionPerformed
+        Pacientes p = new Pacientes(); 
+        p.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_botonSwing1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -150,7 +163,6 @@ public class Reportes_Citas extends javax.swing.JFrame {
     private provet.componentes.botonSwing btn_MenuP;
     private provet.componentes.botonSwing btn_Reportes;
     private provet.componentes.botonSwing btn_Salir;
-    private provet.componentes.Contenedor_Cartas contenedorArchivos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -158,6 +170,5 @@ public class Reportes_Citas extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private provet.componentes.PanelPaciente panelPaciente2;
     // End of variables declaration//GEN-END:variables
 }

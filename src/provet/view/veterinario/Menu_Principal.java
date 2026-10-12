@@ -54,9 +54,9 @@ public class Menu_Principal extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         btn_MenuP = new provet.componentes.botonSwing();
-        botonSwing1 = new provet.componentes.botonSwing();
+        btnPacientes = new provet.componentes.botonSwing();
         btn_Calendario = new provet.componentes.botonSwing();
-        btn_Reportes = new provet.componentes.botonSwing();
+        btnReportes = new provet.componentes.botonSwing();
         btn_Salir = new provet.componentes.botonSwing();
 
         jMenu1.setText("jMenu1");
@@ -252,14 +252,24 @@ public class Menu_Principal extends javax.swing.JFrame {
         btn_MenuP.setText("Menú Principal");
         jPanel2.add(btn_MenuP, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 60));
 
-        botonSwing1.setText("Pacientes");
-        jPanel2.add(botonSwing1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 250, 60));
+        btnPacientes.setText("Pacientes");
+        btnPacientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPacientesActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnPacientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 250, 60));
 
         btn_Calendario.setText("Calendario");
         jPanel2.add(btn_Calendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 250, 60));
 
-        btn_Reportes.setText("Reportes");
-        jPanel2.add(btn_Reportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 250, 60));
+        btnReportes.setText("Reportes");
+        btnReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportesActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 250, 60));
 
         btn_Salir.setText("Salir");
         btn_Salir.addActionListener(new java.awt.event.ActionListener() {
@@ -311,6 +321,18 @@ public class Menu_Principal extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btn_SalirActionPerformed
 
+    private void btnPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacientesActionPerformed
+        Pacientes p = new Pacientes(); 
+        p.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnPacientesActionPerformed
+
+    private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
+        Reportes_Citas r = new Reportes_Citas(); 
+        r.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnReportesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -339,10 +361,10 @@ public class Menu_Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bienvenido;
     private javax.swing.JLabel bienvenido1;
-    private provet.componentes.botonSwing botonSwing1;
+    private provet.componentes.botonSwing btnPacientes;
+    private provet.componentes.botonSwing btnReportes;
     private provet.componentes.botonSwing btn_Calendario;
     private provet.componentes.botonSwing btn_MenuP;
-    private provet.componentes.botonSwing btn_Reportes;
     private provet.componentes.botonSwing btn_Salir;
     private provet.componentes.boton_redondo btn_iniciars;
     private provet.componentes.boton_redondo btn_iniciars1;

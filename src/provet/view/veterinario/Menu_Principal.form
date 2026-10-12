@@ -629,10 +629,13 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="provet.componentes.botonSwing" name="botonSwing1">
+        <Component class="provet.componentes.botonSwing" name="btnPacientes">
           <Properties>
             <Property name="text" type="java.lang.String" value="Pacientes"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPacientesActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="10" y="300" width="250" height="60"/>
@@ -649,10 +652,13 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="provet.componentes.botonSwing" name="btn_Reportes">
+        <Component class="provet.componentes.botonSwing" name="btnReportes">
           <Properties>
             <Property name="text" type="java.lang.String" value="Reportes"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReportesActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="10" y="460" width="250" height="60"/>
