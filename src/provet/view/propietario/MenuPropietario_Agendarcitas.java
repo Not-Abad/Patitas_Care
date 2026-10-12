@@ -19,6 +19,7 @@ public class MenuPropietario_Agendarcitas extends javax.swing.JFrame {
      */
     public MenuPropietario_Agendarcitas() {
         initComponents();
+       
     }
 
     /**
@@ -224,16 +225,16 @@ public class MenuPropietario_Agendarcitas extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(39, 53, 38));
         jLabel9.setText("Descripción:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 400, 140, 30));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 410, 140, 30));
 
         jLabel10.setBackground(new java.awt.Color(51, 255, 51));
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(39, 53, 38));
         jLabel10.setText("Agendar cita");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 360, 50));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 360, 50));
 
         comboVeterinario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Juan Diaz", "Ramon Hernandez" }));
-        jPanel1.add(comboVeterinario, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 240, 320, -1));
+        jPanel1.add(comboVeterinario, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 240, 470, 30));
 
         txtmascota.setBackground(new java.awt.Color(51, 255, 51));
         txtmascota.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -242,7 +243,7 @@ public class MenuPropietario_Agendarcitas extends javax.swing.JFrame {
         jPanel1.add(txtmascota, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 120, 220, 20));
 
         comboMotivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vomito", "Diarrea", "Consulta general", "Vacunacion", "otro" }));
-        jPanel1.add(comboMotivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 360, 320, -1));
+        jPanel1.add(comboMotivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 360, 470, 30));
 
         txtveterinario.setBackground(new java.awt.Color(51, 255, 51));
         txtveterinario.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -252,10 +253,10 @@ public class MenuPropietario_Agendarcitas extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(txtFecha);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 280, 320, -1));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 280, 470, 30));
 
         comboespecie.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Perro", "Gato", "Especie diferente" }));
-        jPanel1.add(comboespecie, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, 320, -1));
+        jPanel1.add(comboespecie, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, 470, 30));
 
         txtfecha.setBackground(new java.awt.Color(51, 255, 51));
         txtfecha.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -271,7 +272,7 @@ public class MenuPropietario_Agendarcitas extends javax.swing.JFrame {
 
         comboHorario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "9:00 am", "10:00 am", "11:00 am", "12:00 pm", "3:00pm", "4:00pm", "5:00pm" }));
         comboHorario.addActionListener(this::comboHorarioActionPerformed);
-        jPanel1.add(comboHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 320, 320, -1));
+        jPanel1.add(comboHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 320, 470, 30));
 
         jLabel17.setBackground(new java.awt.Color(51, 255, 51));
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -281,19 +282,19 @@ public class MenuPropietario_Agendarcitas extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(txtDescripcion);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 400, 330, 190));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 410, 470, 190));
 
         txtbotonconfirmarcita.setBackground(new java.awt.Color(108, 135, 118));
         txtbotonconfirmarcita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/guardar_1.png"))); // NOI18N
         txtbotonconfirmarcita.setText("Confirmar cita");
         txtbotonconfirmarcita.addActionListener(this::txtbotonconfirmarcitaActionPerformed);
-        jPanel1.add(txtbotonconfirmarcita, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 620, -1, -1));
+        jPanel1.add(txtbotonconfirmarcita, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 670, -1, -1));
 
         txtbotoncancelar.setBackground(new java.awt.Color(108, 135, 118));
         txtbotoncancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/clean.png"))); // NOI18N
         txtbotoncancelar.setText("Cancelar");
         txtbotoncancelar.addActionListener(this::txtbotoncancelarActionPerformed);
-        jPanel1.add(txtbotoncancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 620, 160, 40));
+        jPanel1.add(txtbotoncancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 670, 160, 40));
 
         botonSwing2.setBackground(new java.awt.Color(108, 135, 118));
         botonSwing2.setText("Regresar");
@@ -312,7 +313,7 @@ public class MenuPropietario_Agendarcitas extends javax.swing.JFrame {
         jPanel1.add(txtmascota1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, -1, 29));
 
         txt_nombremascota.addActionListener(this::txt_nombremascotaActionPerformed);
-        jPanel1.add(txt_nombremascota, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, 320, -1));
+        jPanel1.add(txt_nombremascota, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, 470, 30));
 
         txtmascota2.setBackground(new java.awt.Color(51, 255, 51));
         txtmascota2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -321,7 +322,7 @@ public class MenuPropietario_Agendarcitas extends javax.swing.JFrame {
         jPanel1.add(txtmascota2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 160, -1, 29));
 
         txt_raza.addActionListener(this::txt_razaActionPerformed);
-        jPanel1.add(txt_raza, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 160, 320, -1));
+        jPanel1.add(txt_raza, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 160, 470, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -361,32 +362,51 @@ public class MenuPropietario_Agendarcitas extends javax.swing.JFrame {
     private void txtbotonconfirmarcitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbotonconfirmarcitaActionPerformed
         // TODO add your handling code here:
 
-        String raza = txt_raza.getText().trim();
-        String nombre = txt_nombremascota.getText().trim();
-        String especie = comboespecie.getSelectedItem().toString();
-        String veterinario = comboVeterinario.getSelectedItem().toString();
-        String fecha = txtFecha.getText().trim();
-        String horario = comboHorario.getSelectedItem().toString();
-        String motivo = comboMotivo.getSelectedItem().toString();
-        String descripcion = txtDescripcion.getText().trim();
+       // 1. Captura de datos (Tu código base)
+String raza = txt_raza.getText().trim();
+String nombre = txt_nombremascota.getText().trim();
+String especie = comboespecie.getSelectedItem().toString();
+String veterinario = comboVeterinario.getSelectedItem().toString();
+String fecha = txtFecha.getText().trim();
+String horario = comboHorario.getSelectedItem().toString();
+String motivo = comboMotivo.getSelectedItem().toString();
+String descripcion = txtDescripcion.getText().trim();
 
-        // Validación (Agregamos nombre y raza a la validación)
-        if (nombre.isEmpty() || raza.isEmpty() || fecha.isEmpty() || descripcion.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor completa todos los campos");
-            return;
-        }
+// 2. Validación
+if (nombre.isEmpty() || raza.isEmpty() || fecha.isEmpty() || descripcion.isEmpty()) {
+    JOptionPane.showMessageDialog(this, "Por favor completa todos los campos");
+    return;
+}
 
-        // 1. Crear la ventana de citas
-        MenuPropietario_miscitass citas = new MenuPropietario_miscitass();
+// 3. OBTENER LA INSTANCIA DE LA TABLA (Para no crear una nueva y borrar todo)
+// Si la ventana no existe, la creamos una sola vez
+if (MenuPropietario_miscitass.instanciaUnica == null) {
+    MenuPropietario_miscitass.instanciaUnica = new MenuPropietario_miscitass();
+}
 
-        // 2. ENVIAR LOS 8 DATOS (Importante el orden)
-        citas.insertarCita(nombre, raza, especie, veterinario, fecha, horario, motivo, descripcion);
+// 4. AGREGAR A LA TABLA VISUALMENTE
+MenuPropietario_miscitass.instanciaUnica.insertarCita(nombre, raza, especie, veterinario, fecha, horario, motivo, descripcion);
 
-        // 3. Mostrar y cerrar actual
-        citas.setVisible(true);
-        JOptionPane.showMessageDialog(this, "Tu cita se ha agendado correctamente");
-        JOptionPane.showMessageDialog(null, "Recuerda llegar 10 min antes a tu cita");
-        this.dispose();
+// 5. GUARDAR EN ARCHIVO PLANO (Igual que el código de las flores)
+try {
+    // El "true" es vital para que no borre las citas anteriores en el archivo
+    java.io.FileWriter archivo = new java.io.FileWriter("citas.txt", true);
+    java.io.PrintWriter escribir = new java.io.PrintWriter(archivo);
+
+    // Guardamos los 8 datos separados por comas
+    escribir.println(nombre + "," + raza + "," + especie + "," + veterinario + "," + fecha + "," + horario + "," + motivo + "," + descripcion);
+
+    escribir.close();
+} catch (Exception e) {
+    JOptionPane.showMessageDialog(this, "Error al guardar en archivo: " + e.getMessage());
+}
+
+// 6. Finalización
+MenuPropietario_miscitass.instanciaUnica.setVisible(true);
+JOptionPane.showMessageDialog(this, "Tu cita se ha agendado correctamente");
+JOptionPane.showMessageDialog(null, "Recuerda llegar 10 min antes a tu cita");
+
+this.dispose();
     }//GEN-LAST:event_txtbotonconfirmarcitaActionPerformed
 
     private void txtbotoncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbotoncancelarActionPerformed

@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
  * @author mayel
  */
 public class MenuPropietario_miscitass extends javax.swing.JFrame {
-    
+    public static MenuPropietario_miscitass instanciaUnica;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MenuPropietario_miscitass.class.getName());
 
     /**
@@ -23,22 +23,24 @@ public class MenuPropietario_miscitass extends javax.swing.JFrame {
     }
     public void insertarCita(String nom, String raza, String esp, String vet, String fec, String hor, String mot, String desc) {
     try {
+        // Obtenemos el modelo actual de la tabla
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         
-        // Creamos el arreglo con los 8 datos en el orden de tus columnas
+        // Creamos la fila con los datos recibidos
         Object[] fila = {nom, raza, esp, vet, fec, hor, mot, desc};
         
-        // Insertamos en la posición 0 para que aparezca hasta arriba
-        modelo.insertRow(0, fila);
+        // CAMBIO AQUÍ: insertRow(0, ...) coloca la nueva cita en la posición inicial (arriba)
+        modelo.insertRow(0, fila); 
         
-        // Forzamos la actualización visual
+        // Refrescar visualmente
         jTable1.revalidate();
         jTable1.repaint();
-        
+
     } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "Error al insertar en tabla: " + e.getMessage());
+        JOptionPane.showMessageDialog(null, "Error al actualizar tabla: " + e.getMessage());
     }
 }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -227,11 +229,11 @@ public class MenuPropietario_miscitass extends javax.swing.JFrame {
         lbl_configuracion.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lbl_configuracion.setForeground(new java.awt.Color(39, 53, 38));
         lbl_configuracion.setText("Mis citas");
-        jPanel1.add(lbl_configuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, -1, 29));
+        jPanel1.add(lbl_configuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, 29));
 
         botonSwing3.setBackground(new java.awt.Color(108, 135, 118));
         botonSwing3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/lapiz.png"))); // NOI18N
-        botonSwing3.setText("Próximas citas");
+        botonSwing3.setText("Agendar una nueva cita");
         botonSwing3.addActionListener(this::botonSwing3ActionPerformed);
         jPanel1.add(botonSwing3, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 80, -1, -1));
 
@@ -239,13 +241,14 @@ public class MenuPropietario_miscitass extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(39, 53, 38));
         jLabel7.setText("Historial de citas");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
 
         botonSwing2.setBackground(new java.awt.Color(108, 135, 118));
         botonSwing2.setText("Regresar");
         botonSwing2.addActionListener(this::botonSwing2ActionPerformed);
         jPanel1.add(botonSwing2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 650, 160, 60));
 
+        jTable1.setBackground(new java.awt.Color(228, 230, 217));
         jTable1.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -260,7 +263,7 @@ public class MenuPropietario_miscitass extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 1040, 330));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 1100, 450));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -287,9 +290,9 @@ public class MenuPropietario_miscitass extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void botonSwing3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing3ActionPerformed
-        MenuPropietario_CitasPendientes ventana = new MenuPropietario_CitasPendientes();
-        ventana.setVisible(true);
-        dispose();          // TODO add your handling code here:
+        MenuPropietario_Agendarcitas menu = new MenuPropietario_Agendarcitas();
+        menu.setVisible(true);
+        this.dispose();         // TODO add your handling code here:
     }//GEN-LAST:event_botonSwing3ActionPerformed
 
     private void botonSwing2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing2ActionPerformed

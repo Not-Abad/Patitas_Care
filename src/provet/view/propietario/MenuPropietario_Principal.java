@@ -95,12 +95,12 @@ public class MenuPropietario_Principal extends javax.swing.JFrame {
 
         btn_EntrarCitaspendientes.setText("Entrar");
         btn_EntrarCitaspendientes.addActionListener(this::btn_EntrarCitaspendientesActionPerformed);
-        panel_citas_pendientes.add(btn_EntrarCitaspendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, -1));
+        panel_citas_pendientes.add(btn_EntrarCitaspendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--calendar-day.png"))); // NOI18N
-        panel_citas_pendientes.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
+        panel_citas_pendientes.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
 
-        jPanel1.add(panel_citas_pendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 270, 240, 310));
+        jPanel1.add(panel_citas_pendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 270, 240, 460));
 
         jLabel9.setBackground(new java.awt.Color(51, 255, 51));
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -130,12 +130,12 @@ public class MenuPropietario_Principal extends javax.swing.JFrame {
 
         btn_EntraragendarCitas.setText("Entrar");
         btn_EntraragendarCitas.addActionListener(this::btn_EntraragendarCitasActionPerformed);
-        panel_citas_pendientes1.add(btn_EntraragendarCitas, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, -1, -1));
+        panel_citas_pendientes1.add(btn_EntraragendarCitas, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 390, -1, -1));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--calendar.png"))); // NOI18N
-        panel_citas_pendientes1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
+        panel_citas_pendientes1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, -1, -1));
 
-        jPanel1.add(panel_citas_pendientes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 270, 240, 310));
+        jPanel1.add(panel_citas_pendientes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 270, 240, 460));
 
         panel_citas_pendientes2.setBackground(new java.awt.Color(192, 207, 178));
         panel_citas_pendientes2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -151,13 +151,13 @@ public class MenuPropietario_Principal extends javax.swing.JFrame {
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(39, 53, 38));
         jLabel17.setText("Mis macotas");
-        panel_citas_pendientes2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 29));
+        panel_citas_pendientes2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, 29));
 
         btn_Entrarmismascotas.setText("Entrar");
         btn_Entrarmismascotas.addActionListener(this::btn_EntrarmismascotasActionPerformed);
-        panel_citas_pendientes2.add(btn_Entrarmismascotas, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, -1, -1));
+        panel_citas_pendientes2.add(btn_Entrarmismascotas, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 390, -1, -1));
 
-        jPanel1.add(panel_citas_pendientes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 270, 240, 310));
+        jPanel1.add(panel_citas_pendientes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 270, 240, 450));
 
         btn_notificaciones.setBackground(new java.awt.Color(108, 135, 118));
         btn_notificaciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/system-uicons--bell.png"))); // NOI18N
@@ -348,7 +348,9 @@ public class MenuPropietario_Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_EntraragendarCitasActionPerformed
 
     private void btn_EntrarmismascotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EntrarmismascotasActionPerformed
-
+    MenuPropietario_Mismascotas menu = new MenuPropietario_Mismascotas();
+        menu.setVisible(true);
+        this.dispose(); 
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_EntrarmismascotasActionPerformed
