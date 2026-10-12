@@ -10,21 +10,29 @@ import provet.componentes.PanelPaciente;
 import provet.componentes.PanelPaciente2;
 import java.awt.GridLayout;
 import javax.swing.JDialog;
+import provet.model.ControlUsuarios;
+import provet.model.Usuario;
 
 public class Pacientes extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Pacientes.class.getName());
+    private Usuario usuario;
     
-   public Pacientes() {
+   public Pacientes(Usuario usuario) {
     initComponents();
-//contenedor_Cartas1.remove(panelPacientes1);
     this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    this.usuario = usuario;
 
-    // Scroll suave
-    jScrollPane1.getVerticalScrollBar().setUnitIncrement(16);
+    if (usuario != null) {
+    lblNombreVet.setText(usuario.getNombre());
+    } else {
+    lblNombreVet.setText("Sin usuario");
+    }
+    
+    
 
     contenedor_Cartas1.setLayout(new GridLayout(0, 2, 20, 20));
-    contenedor_Cartas1.setPreferredSize(null); // 🔥 importante
+    contenedor_Cartas1.setPreferredSize(null); 
 
     // DATOS DE PRUEBA
     ControlPacientes.listaPacientes.add(
@@ -111,7 +119,7 @@ public class Pacientes extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        lblNombreVet = new javax.swing.JLabel();
         btn_MenuP = new provet.componentes.botonSwing();
         botonSwing1 = new provet.componentes.botonSwing();
         btn_Calendario = new provet.componentes.botonSwing();
@@ -120,7 +128,7 @@ public class Pacientes extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
         contenedor_Cartas1 = new provet.componentes.Contenedor_Cartas();
-        panelPacientes1 = new provet.componentes.PanelPaciente();
+        contenedor_Cartas2 = new provet.componentes.Contenedor_Cartas();
 
         jMenu1.setText("jMenu1");
 
@@ -146,11 +154,11 @@ public class Pacientes extends javax.swing.JFrame {
         jLabel15.setText("PatitasCare");
         jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
 
-        jLabel16.setBackground(new java.awt.Color(51, 255, 51));
-        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel16.setText("Veterinario");
-        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, -1, -1));
+        lblNombreVet.setBackground(new java.awt.Color(51, 255, 51));
+        lblNombreVet.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblNombreVet.setForeground(new java.awt.Color(39, 53, 38));
+        lblNombreVet.setText("Veterinario");
+        jPanel2.add(lblNombreVet, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, -1, -1));
 
         btn_MenuP.setText("Menú Principal");
         btn_MenuP.addActionListener(new java.awt.event.ActionListener() {
@@ -193,7 +201,7 @@ public class Pacientes extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         contenedor_Cartas1.setBackground(new java.awt.Color(108, 135, 118));
-        contenedor_Cartas1.add(panelPacientes1, new java.awt.GridBagConstraints());
+        contenedor_Cartas1.add(contenedor_Cartas2, new java.awt.GridBagConstraints());
 
         jPanel3.add(contenedor_Cartas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 940, 570));
 
@@ -226,15 +234,15 @@ public class Pacientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_SalirActionPerformed
 
     private void btn_MenuPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_MenuPActionPerformed
-        Menu_Principal m = new Menu_Principal(); 
+        Menu_Principal m = new Menu_Principal(ControlUsuarios.usuarioActivo); 
         m.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btn_MenuPActionPerformed
 
     private void btn_ReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReportesActionPerformed
-        Reportes_Citas r = new Reportes_Citas(); 
+        Reportes_Citas r = new Reportes_Citas(usuario);
         r.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_btn_ReportesActionPerformed
 
     private void botonSwing1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing1ActionPerformed
@@ -263,7 +271,7 @@ public class Pacientes extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Pacientes().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new Pacientes(ControlUsuarios.usuarioActivo).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -273,14 +281,14 @@ public class Pacientes extends javax.swing.JFrame {
     private provet.componentes.botonSwing btn_Reportes;
     private provet.componentes.botonSwing btn_Salir;
     private provet.componentes.Contenedor_Cartas contenedor_Cartas1;
+    private provet.componentes.Contenedor_Cartas contenedor_Cartas2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private provet.componentes.PanelPaciente panelPacientes1;
+    private javax.swing.JLabel lblNombreVet;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,32 +4,30 @@
  */
 package provet.componentes;
 
+import java.awt.Color;
 import provet.model.Paciente;
+import provet.view.veterinario.Reportes_Citas;
+import provet.model.Reporte;
 /**
  *
  * @author anguv
  */
-public class PanelCitas_Editable extends javax.swing.JPanel {
+public class PanelCitas_Editable extends PanelRedondeado {
 
-    /**
-     * Creates new form PanelPaciente2
-     */
-    public PanelCitas_Editable() {
-        initComponents();
-    }
     
-/*- - - - - - AGREGUE ESTO PARA QUE EL CLEAN AND BUILD FUNCIONARA!!!! - - - - - -*/
-    private Runnable clickListener;
+    public PanelCitas_Editable(Reporte r) {
+    initComponents();
+    setBackground(new Color(228,230,217));
 
-    public void setClickListener(Runnable clickListener) {
-        this.clickListener = clickListener;
-    }
-
-    private void ejecutarClick() {
-        if (clickListener != null) {
-            clickListener.run();
-        }
-    }
+    lblID.setText(String.valueOf(r.getID()));
+    Motivo.setText(r.getNombre());
+    lblEspecie.setText(r.getEspecie());
+    lblFecha1.setText(r.getFecha());
+    lblVet1.setText(r.getVeterinario());
+    lblAnalisis1.setText(r.getAnalisis());
+    lblMed1.setText(r.getMedicamentos());
+    lblMotivo.setText(r.getMotivo());
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -40,220 +38,144 @@ public class PanelCitas_Editable extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        Vacunas = new javax.swing.JLabel();
-        lblID = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
-        lblfoto = new javax.swing.JLabel();
-        lblNombre = new javax.swing.JLabel();
-        lblEspecie = new javax.swing.JLabel();
-        Edad = new javax.swing.JLabel();
-        Peso = new javax.swing.JLabel();
-        Sexo = new javax.swing.JLabel();
+        panelRedondeado1 = new provet.componentes.PanelRedondeado();
         jPanel3 = new javax.swing.JPanel();
-        lblAlergias = new javax.swing.JLabel();
-        Alergias = new javax.swing.JLabel();
-        lblVacunas = new javax.swing.JLabel();
-        Raza1 = new javax.swing.JLabel();
-        lblRaza = new javax.swing.JLabel();
-        lblEdad = new javax.swing.JLabel();
-        lblPeso = new javax.swing.JLabel();
-        lblSexo = new javax.swing.JLabel();
-        btnHistorial = new provet.componentes.botonSwing();
+        lblfoto = new javax.swing.JLabel();
+        lblID = new javax.swing.JLabel();
+        Motivo = new javax.swing.JLabel();
+        lblEspecie = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        lblNombre = new javax.swing.JLabel();
+        lblMotivo = new javax.swing.JLabel();
+        lblNombre3 = new javax.swing.JLabel();
+        lblNombre4 = new javax.swing.JLabel();
+        lblNombre5 = new javax.swing.JLabel();
+        lblNombre6 = new javax.swing.JLabel();
+        lblFecha1 = new javax.swing.JLabel();
+        lblVet1 = new javax.swing.JLabel();
+        lblAnalisis1 = new javax.swing.JLabel();
+        lblMed1 = new javax.swing.JLabel();
 
-        jPanel1.setBackground(new java.awt.Color(228, 230, 217));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setBackground(new java.awt.Color(192, 207, 178));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Vacunas.setBackground(new java.awt.Color(51, 255, 51));
-        Vacunas.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        Vacunas.setForeground(new java.awt.Color(108, 135, 118));
-        Vacunas.setText("Vacunas : ");
-        jPanel1.add(Vacunas, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, -1, 29));
+        panelRedondeado1.setBackground(new java.awt.Color(228, 230, 217));
+        panelRedondeado1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblfoto.setText("foto");
+        jPanel3.add(lblfoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 58, -1, -1));
+
+        panelRedondeado1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 131, 131));
 
         lblID.setBackground(new java.awt.Color(51, 255, 51));
         lblID.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lblID.setForeground(new java.awt.Color(192, 207, 178));
+        lblID.setForeground(new java.awt.Color(39, 53, 38));
         lblID.setText("ID");
-        jPanel1.add(lblID, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 29));
+        panelRedondeado1.add(lblID, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        Motivo.setBackground(new java.awt.Color(51, 255, 51));
+        Motivo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Motivo.setForeground(new java.awt.Color(39, 53, 38));
+        Motivo.setText("Motivo : ");
+        panelRedondeado1.add(Motivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, -1, -1));
+
+        lblEspecie.setBackground(new java.awt.Color(51, 255, 51));
+        lblEspecie.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblEspecie.setForeground(new java.awt.Color(39, 53, 38));
+        lblEspecie.setText("Especie");
+        panelRedondeado1.add(lblEspecie, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 20, -1, -1));
 
         jSeparator1.setBackground(new java.awt.Color(39, 53, 38));
         jSeparator1.setForeground(new java.awt.Color(192, 207, 178));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 570, 20));
-
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblfoto.setText("foto");
-        jPanel2.add(lblfoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 58, -1, -1));
-
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 131, 131));
+        panelRedondeado1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 680, 10));
 
         lblNombre.setBackground(new java.awt.Color(51, 255, 51));
         lblNombre.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblNombre.setForeground(new java.awt.Color(39, 53, 38));
-        lblNombre.setText("NOMBRE MASCOTA");
-        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, -1, 29));
+        lblNombre.setText("Nombre");
+        panelRedondeado1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
 
-        lblEspecie.setBackground(new java.awt.Color(51, 255, 51));
-        lblEspecie.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lblEspecie.setForeground(new java.awt.Color(108, 135, 118));
-        lblEspecie.setText("ESPECIE");
-        jPanel1.add(lblEspecie, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, -1, 29));
+        lblMotivo.setBackground(new java.awt.Color(51, 255, 51));
+        lblMotivo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblMotivo.setForeground(new java.awt.Color(39, 53, 38));
+        lblMotivo.setText("M");
+        panelRedondeado1.add(lblMotivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, -1, -1));
 
-        Edad.setBackground(new java.awt.Color(51, 255, 51));
-        Edad.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        Edad.setForeground(new java.awt.Color(108, 135, 118));
-        Edad.setText("Edad : ");
-        jPanel1.add(Edad, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, -1, 29));
+        lblNombre3.setBackground(new java.awt.Color(51, 255, 51));
+        lblNombre3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblNombre3.setForeground(new java.awt.Color(39, 53, 38));
+        lblNombre3.setText("Veterinario : ");
+        panelRedondeado1.add(lblNombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, -1, -1));
 
-        Peso.setBackground(new java.awt.Color(51, 255, 51));
-        Peso.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        Peso.setForeground(new java.awt.Color(108, 135, 118));
-        Peso.setText("Peso : ");
-        jPanel1.add(Peso, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, -1, 29));
+        lblNombre4.setBackground(new java.awt.Color(51, 255, 51));
+        lblNombre4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblNombre4.setForeground(new java.awt.Color(39, 53, 38));
+        lblNombre4.setText("Análisis : ");
+        panelRedondeado1.add(lblNombre4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, -1, -1));
 
-        Sexo.setBackground(new java.awt.Color(51, 255, 51));
-        Sexo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        Sexo.setForeground(new java.awt.Color(108, 135, 118));
-        Sexo.setText("Sexo : ");
-        jPanel1.add(Sexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, -1, 29));
+        lblNombre5.setBackground(new java.awt.Color(51, 255, 51));
+        lblNombre5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblNombre5.setForeground(new java.awt.Color(39, 53, 38));
+        lblNombre5.setText("Medicamentos : ");
+        panelRedondeado1.add(lblNombre5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, -1, -1));
 
-        jPanel3.setBackground(new java.awt.Color(217, 225, 209));
+        lblNombre6.setBackground(new java.awt.Color(51, 255, 51));
+        lblNombre6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblNombre6.setForeground(new java.awt.Color(39, 53, 38));
+        lblNombre6.setText("Fecha : ");
+        panelRedondeado1.add(lblNombre6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, -1, -1));
 
-        lblAlergias.setBackground(new java.awt.Color(51, 255, 51));
-        lblAlergias.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblAlergias.setForeground(new java.awt.Color(108, 135, 118));
-        lblAlergias.setText("r");
+        lblFecha1.setBackground(new java.awt.Color(51, 255, 51));
+        lblFecha1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblFecha1.setForeground(new java.awt.Color(39, 53, 38));
+        lblFecha1.setText("F");
+        panelRedondeado1.add(lblFecha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, -1, -1));
 
-        Alergias.setBackground(new java.awt.Color(102, 255, 102));
-        Alergias.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        Alergias.setForeground(new java.awt.Color(108, 135, 118));
-        Alergias.setText("Alergias :");
+        lblVet1.setBackground(new java.awt.Color(51, 255, 51));
+        lblVet1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblVet1.setForeground(new java.awt.Color(39, 53, 38));
+        lblVet1.setText("V");
+        panelRedondeado1.add(lblVet1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, -1, -1));
 
-        lblVacunas.setBackground(new java.awt.Color(51, 255, 51));
-        lblVacunas.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblVacunas.setForeground(new java.awt.Color(108, 135, 118));
-        lblVacunas.setText("r");
+        lblAnalisis1.setBackground(new java.awt.Color(51, 255, 51));
+        lblAnalisis1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblAnalisis1.setForeground(new java.awt.Color(39, 53, 38));
+        lblAnalisis1.setText("A");
+        panelRedondeado1.add(lblAnalisis1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, -1, -1));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(Alergias)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblVacunas)
-                    .addComponent(lblAlergias))
-                .addContainerGap(489, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAlergias, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Alergias, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(lblVacunas, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(10, Short.MAX_VALUE))
-        );
+        lblMed1.setBackground(new java.awt.Color(51, 255, 51));
+        lblMed1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblMed1.setForeground(new java.awt.Color(39, 53, 38));
+        lblMed1.setText("M");
+        panelRedondeado1.add(lblMed1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 150, -1, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 590, -1));
-
-        Raza1.setBackground(new java.awt.Color(51, 255, 51));
-        Raza1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        Raza1.setForeground(new java.awt.Color(108, 135, 118));
-        Raza1.setText("Raza : ");
-        jPanel1.add(Raza1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, -1, 29));
-
-        lblRaza.setBackground(new java.awt.Color(51, 255, 51));
-        lblRaza.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblRaza.setForeground(new java.awt.Color(108, 135, 118));
-        lblRaza.setText("r");
-        jPanel1.add(lblRaza, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, -1, 29));
-
-        lblEdad.setBackground(new java.awt.Color(51, 255, 51));
-        lblEdad.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblEdad.setForeground(new java.awt.Color(108, 135, 118));
-        lblEdad.setText("r");
-        jPanel1.add(lblEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, -1, 29));
-
-        lblPeso.setBackground(new java.awt.Color(51, 255, 51));
-        lblPeso.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblPeso.setForeground(new java.awt.Color(108, 135, 118));
-        lblPeso.setText("r");
-        jPanel1.add(lblPeso, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, -1, 29));
-
-        lblSexo.setBackground(new java.awt.Color(51, 255, 51));
-        lblSexo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblSexo.setForeground(new java.awt.Color(108, 135, 118));
-        lblSexo.setText("r");
-        jPanel1.add(lblSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 260, -1, 29));
-
-        btnHistorial.setBackground(new java.awt.Color(108, 135, 118));
-        btnHistorial.setForeground(new java.awt.Color(39, 53, 38));
-        btnHistorial.setText("Subir");
-        btnHistorial.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnHistorial.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHistorialActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, 250, 40));
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 637, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
-        );
+        add(panelRedondeado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 710, 220));
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnHistorialActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Alergias;
-    private javax.swing.JLabel Edad;
-    private javax.swing.JLabel Peso;
-    private javax.swing.JLabel Raza1;
-    private javax.swing.JLabel Sexo;
-    private javax.swing.JLabel Vacunas;
-    private provet.componentes.botonSwing btnHistorial;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel Motivo;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lblAlergias;
-    private javax.swing.JLabel lblEdad;
+    private javax.swing.JLabel lblAnalisis1;
     private javax.swing.JLabel lblEspecie;
+    private javax.swing.JLabel lblFecha1;
     private javax.swing.JLabel lblID;
+    private javax.swing.JLabel lblMed1;
+    private javax.swing.JLabel lblMotivo;
     private javax.swing.JLabel lblNombre;
-    private javax.swing.JLabel lblPeso;
-    private javax.swing.JLabel lblRaza;
-    private javax.swing.JLabel lblSexo;
-    private javax.swing.JLabel lblVacunas;
+    private javax.swing.JLabel lblNombre3;
+    private javax.swing.JLabel lblNombre4;
+    private javax.swing.JLabel lblNombre5;
+    private javax.swing.JLabel lblNombre6;
+    private javax.swing.JLabel lblVet1;
     private javax.swing.JLabel lblfoto;
+    private provet.componentes.PanelRedondeado panelRedondeado1;
     // End of variables declaration//GEN-END:variables
 
-    public void setDatos(Paciente p) {
-    lblID.setText(String.valueOf(p.getID()));
-    lblNombre.setText(p.getNombre());
-    lblRaza.setText(p.getRaza());
-    lblEdad.setText(String.valueOf(p.getEdad()));
-    lblPeso.setText(String.valueOf(p.getPeso()));
-    lblSexo.setText(p.getSexo());
-    lblEspecie.setText(p.getEspecie());
-    lblAlergias.setText(p.getAlergias());
-    lblVacunas.setText(p.getVacunas());
     
-}
 }

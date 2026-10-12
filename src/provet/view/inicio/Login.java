@@ -6,7 +6,8 @@ package provet.view.inicio;
 
 import javax.swing.JOptionPane;
 import provet.view.veterinario.Menu_Principal;
-
+import provet.model.ControlUsuarios;
+import provet.model.Usuario;
 public class Login extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Login.class.getName());
@@ -180,7 +181,22 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_iniciarsActionPerformed
 
     private void btn_AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AceptarActionPerformed
-        verificar_Datos();
+    String Nombre = txt_Usuario.getText().trim();
+
+    if (Nombre.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Por favor ingresa un nombre.");
+        return;
+    }
+
+    Usuario nuevoUsuario = new Usuario(Nombre);
+    ControlUsuarios.usuarioActivo = nuevoUsuario;
+
+    ControlUsuarios.listaUsuarios.add(nuevoUsuario);
+
+    Menu_Principal menu = new Menu_Principal(nuevoUsuario);
+    menu.setVisible(true);
+    this.dispose();
+
     }//GEN-LAST:event_btn_AceptarActionPerformed
 
     private void link_nuevaCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_link_nuevaCuentaMouseClicked
@@ -198,16 +214,11 @@ public class Login extends javax.swing.JFrame {
         
     }//GEN-LAST:event_link_recuperarContraMouseClicked
 
-    public void verificar_Datos(){
-        // Aquí iría tu lógica (ej: if usuario y pass son correctos...)
-    
-        // 1. Abrir la ventana del menú principal
-        Menu_Principal menu = new Menu_Principal();
-        menu.setVisible(true);
-    
-        // 2. Cerrar la ventana actual de Login
-        this.dispose();
-    }
+    public void verificar_Datos(Usuario nuevoUsuario) {
+    Menu_Principal menu = new Menu_Principal(nuevoUsuario);
+    menu.setVisible(true);
+    this.dispose();
+}
     
         public static void main(String args[]) {
         /* Set the Nimbus look and feel */

@@ -2,16 +2,25 @@
 package provet.view.veterinario;
 
 import javax.swing.JFrame;
+import provet.model.Usuario;
+import provet.model.ControlUsuarios;
+
 
 public class Menu_Principal extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Menu_Principal.class.getName());
+    private Usuario usuario;
 
-    public Menu_Principal() {
-        initComponents();
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    public Menu_Principal(Usuario usuario) {
+    initComponents();
+    this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    this.usuario = usuario;
+    if (usuario != null) {
+    lblNombreVet.setText(usuario.getNombre());
+    } else {
+    lblNombreVet.setText("Sin usuario");
     }
-
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -20,30 +29,23 @@ public class Menu_Principal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         panel_citas_notificaciones = new provet.componentes.PanelRedondeado();
         lbl_acceder4 = new javax.swing.JLabel();
-        usuario4 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         panel_citas_completados = new provet.componentes.PanelRedondeado();
         lbl_acceder3 = new javax.swing.JLabel();
-        usuario3 = new javax.swing.JLabel();
         btn_iniciars3 = new provet.componentes.boton_redondo();
         jLabel10 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         panel_horario = new provet.componentes.PanelRedondeado();
         lbl_acceder2 = new javax.swing.JLabel();
-        usuario2 = new javax.swing.JLabel();
         btn_iniciars2 = new provet.componentes.boton_redondo();
         jLabel14 = new javax.swing.JLabel();
         panel_cirugias_pendientes = new provet.componentes.PanelRedondeado();
-        bienvenido1 = new javax.swing.JLabel();
         lbl_acceder1 = new javax.swing.JLabel();
-        usuario1 = new javax.swing.JLabel();
         btn_iniciars1 = new provet.componentes.boton_redondo();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         panel_citas_pendientes = new provet.componentes.PanelRedondeado();
-        bienvenido = new javax.swing.JLabel();
         lbl_acceder = new javax.swing.JLabel();
-        usuario = new javax.swing.JLabel();
         btn_iniciars = new provet.componentes.boton_redondo();
         jLabel5 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -52,7 +54,7 @@ public class Menu_Principal extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        lblNombreVet = new javax.swing.JLabel();
         btn_MenuP = new provet.componentes.botonSwing();
         btnPacientes = new provet.componentes.botonSwing();
         btn_Calendario = new provet.componentes.botonSwing();
@@ -75,10 +77,6 @@ public class Menu_Principal extends javax.swing.JFrame {
         lbl_acceder4.setForeground(new java.awt.Color(255, 255, 255));
         panel_citas_notificaciones.add(lbl_acceder4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
 
-        usuario4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        usuario4.setForeground(new java.awt.Color(255, 255, 255));
-        panel_citas_notificaciones.add(usuario4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
-
         jLabel11.setBackground(new java.awt.Color(51, 255, 51));
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(39, 53, 38));
@@ -92,10 +90,6 @@ public class Menu_Principal extends javax.swing.JFrame {
 
         lbl_acceder3.setForeground(new java.awt.Color(255, 255, 255));
         panel_citas_completados.add(lbl_acceder3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
-
-        usuario3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        usuario3.setForeground(new java.awt.Color(255, 255, 255));
-        panel_citas_completados.add(usuario3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
 
         btn_iniciars3.setText("Iniciar Sesión");
         btn_iniciars3.addActionListener(new java.awt.event.ActionListener() {
@@ -125,10 +119,6 @@ public class Menu_Principal extends javax.swing.JFrame {
         lbl_acceder2.setForeground(new java.awt.Color(255, 255, 255));
         panel_horario.add(lbl_acceder2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
 
-        usuario2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        usuario2.setForeground(new java.awt.Color(255, 255, 255));
-        panel_horario.add(usuario2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
-
         btn_iniciars2.setText("Iniciar Sesión");
         btn_iniciars2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,16 +138,8 @@ public class Menu_Principal extends javax.swing.JFrame {
         panel_cirugias_pendientes.setBackground(new java.awt.Color(192, 207, 178));
         panel_cirugias_pendientes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        bienvenido1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        bienvenido1.setForeground(new java.awt.Color(255, 255, 255));
-        panel_cirugias_pendientes.add(bienvenido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 240, 30));
-
         lbl_acceder1.setForeground(new java.awt.Color(255, 255, 255));
         panel_cirugias_pendientes.add(lbl_acceder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
-
-        usuario1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        usuario1.setForeground(new java.awt.Color(255, 255, 255));
-        panel_cirugias_pendientes.add(usuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
 
         btn_iniciars1.setText("Iniciar Sesión");
         btn_iniciars1.addActionListener(new java.awt.event.ActionListener() {
@@ -184,16 +166,8 @@ public class Menu_Principal extends javax.swing.JFrame {
         panel_citas_pendientes.setBackground(new java.awt.Color(192, 207, 178));
         panel_citas_pendientes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        bienvenido.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        bienvenido.setForeground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes.add(bienvenido, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 240, 30));
-
         lbl_acceder.setForeground(new java.awt.Color(255, 255, 255));
         panel_citas_pendientes.add(lbl_acceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
-
-        usuario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        usuario.setForeground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes.add(usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
 
         btn_iniciars.setText("Iniciar Sesión");
         btn_iniciars.addActionListener(new java.awt.event.ActionListener() {
@@ -243,11 +217,11 @@ public class Menu_Principal extends javax.swing.JFrame {
         jLabel15.setText("PatitasCare");
         jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
 
-        jLabel16.setBackground(new java.awt.Color(51, 255, 51));
-        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel16.setText("Veterinario");
-        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, -1, -1));
+        lblNombreVet.setBackground(new java.awt.Color(51, 255, 51));
+        lblNombreVet.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblNombreVet.setForeground(new java.awt.Color(39, 53, 38));
+        lblNombreVet.setText("Veterinario");
+        jPanel2.add(lblNombreVet, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, -1, -1));
 
         btn_MenuP.setText("Menú Principal");
         btn_MenuP.addActionListener(new java.awt.event.ActionListener() {
@@ -327,15 +301,15 @@ public class Menu_Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_SalirActionPerformed
 
     private void btnPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacientesActionPerformed
-        Pacientes p = new Pacientes(); 
+        Pacientes p = new Pacientes(usuario);
         p.setVisible(true);
-        this.setVisible(false);
+        this.dispose(); 
     }//GEN-LAST:event_btnPacientesActionPerformed
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
-        Reportes_Citas r = new Reportes_Citas(); 
+        Reportes_Citas r = new Reportes_Citas(usuario);
         r.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void btn_MenuPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_MenuPActionPerformed
@@ -346,30 +320,25 @@ public class Menu_Principal extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Menu_Principal().setVisible(true));
+    try {
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                break;
+            }
+        }
+    } catch (Exception ex) {
+        ex.printStackTrace();
     }
 
+    java.awt.EventQueue.invokeLater(() -> {
+        Menu_Principal m = new Menu_Principal(ControlUsuarios.usuarioActivo);
+        m.setVisible(true);
+    });
+}
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel bienvenido;
-    private javax.swing.JLabel bienvenido1;
     private provet.componentes.botonSwing btnPacientes;
     private provet.componentes.botonSwing btnReportes;
     private provet.componentes.botonSwing btn_Calendario;
@@ -386,7 +355,6 @@ public class Menu_Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -395,6 +363,7 @@ public class Menu_Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblNombreVet;
     private javax.swing.JLabel lbl_acceder;
     private javax.swing.JLabel lbl_acceder1;
     private javax.swing.JLabel lbl_acceder2;
@@ -405,10 +374,5 @@ public class Menu_Principal extends javax.swing.JFrame {
     private provet.componentes.PanelRedondeado panel_citas_notificaciones;
     private provet.componentes.PanelRedondeado panel_citas_pendientes;
     private provet.componentes.PanelRedondeado panel_horario;
-    private javax.swing.JLabel usuario;
-    private javax.swing.JLabel usuario1;
-    private javax.swing.JLabel usuario2;
-    private javax.swing.JLabel usuario3;
-    private javax.swing.JLabel usuario4;
     // End of variables declaration//GEN-END:variables
 }
