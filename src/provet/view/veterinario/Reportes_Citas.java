@@ -48,7 +48,7 @@ public class Reportes_Citas extends javax.swing.JFrame {
 }
     
     public void agregarPaciente(Paciente p) {
-    PanelPacientes panel = new PanelPacientes();
+    PanelCitas panel = new PanelCitas();
     panel.setDatos(p);
 
     contenedor_Cartas1.add(panel);
@@ -60,7 +60,7 @@ public class Reportes_Citas extends javax.swing.JFrame {
     contenedor_Cartas1.removeAll();
 
     for (Paciente p : ControlPacientes.listaPacientes) {
-    PanelPacientes panel = new PanelPacientes();
+    PanelCitas panel = new PanelCitas();
     panel.setDatos(p);
 
     panel.setClickListener(() -> {
@@ -95,7 +95,7 @@ public class Reportes_Citas extends javax.swing.JFrame {
     JDialog dialog = new JDialog(this, true);
     dialog.setTitle("Detalle del paciente");
 
-    PanelPaciente2 panel = new PanelPaciente2();
+    PanelCitas panel = new PanelCitas();
     panel.setDatos(p); // 👈 importante
 
     dialog.add(panel);
