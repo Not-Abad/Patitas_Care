@@ -51,24 +51,114 @@ public class Menupropietario_Principal extends javax.swing.JFrame {
         panel_citas_pendientes = new provet.componentes.PanelRedondeado();
         lbl_acceder = new javax.swing.JLabel();
         usuario = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        btn_EntrarCitaspendientes = new provet.componentes.botonSwing();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        panel_citas_pendientes1 = new provet.componentes.PanelRedondeado();
-        lbl_acceder5 = new javax.swing.JLabel();
-        usuario5 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        btn_EntraragendarCitas = new provet.componentes.botonSwing();
-        jLabel10 = new javax.swing.JLabel();
-        panel_citas_pendientes2 = new provet.componentes.PanelRedondeado();
-        lbl_acceder6 = new javax.swing.JLabel();
-        usuario6 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         btn_Entrarmismascotas = new provet.componentes.botonSwing();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         btn_notificaciones = new provet.componentes.botonSwing();
         botonSwing2 = new provet.componentes.botonSwing();
+        panel_citas_pendientes66 = new provet.componentes.PanelRedondeado();
+        lbl_acceder1 = new javax.swing.JLabel();
+        usuario1 = new javax.swing.JLabel();
+        panel_citas_pendientes68 = new provet.componentes.PanelRedondeado();
+        lbl_acceder3 = new javax.swing.JLabel();
+        usuario3 = new javax.swing.JLabel();
+        jLabel84 = new javax.swing.JLabel();
+        btn_EntrarCitaspendientes3 = new provet.componentes.botonSwing();
+        jLabel85 = new javax.swing.JLabel();
+        panel_citas_pendientes69 = new provet.componentes.PanelRedondeado();
+        lbl_acceder4 = new javax.swing.JLabel();
+        usuario4 = new javax.swing.JLabel();
+        jLabel86 = new javax.swing.JLabel();
+        btn_EntrarCitaspendientes4 = new provet.componentes.botonSwing();
+        jLabel87 = new javax.swing.JLabel();
+        panel_citas_pendientes70 = new provet.componentes.PanelRedondeado();
+        lbl_acceder70 = new javax.swing.JLabel();
+        usuario70 = new javax.swing.JLabel();
+        jLabel88 = new javax.swing.JLabel();
+        btn_EntrarCitaspendientes5 = new provet.componentes.botonSwing();
+        jLabel89 = new javax.swing.JLabel();
+        panel_citas_pendientes71 = new provet.componentes.PanelRedondeado();
+        lbl_acceder71 = new javax.swing.JLabel();
+        usuario71 = new javax.swing.JLabel();
+        jLabel90 = new javax.swing.JLabel();
+        btn_EntrarCitaspendientes6 = new provet.componentes.botonSwing();
+        jLabel91 = new javax.swing.JLabel();
+        panel_citas_pendientes72 = new provet.componentes.PanelRedondeado();
+        lbl_acceder72 = new javax.swing.JLabel();
+        usuario72 = new javax.swing.JLabel();
+        jLabel92 = new javax.swing.JLabel();
+        btn_EntrarCitaspendientes7 = new provet.componentes.botonSwing();
+        jLabel93 = new javax.swing.JLabel();
+        panel_citas_pendientes73 = new provet.componentes.PanelRedondeado();
+        lbl_acceder73 = new javax.swing.JLabel();
+        usuario73 = new javax.swing.JLabel();
+        jLabel94 = new javax.swing.JLabel();
+        btn_EntrarCitaspendientes8 = new provet.componentes.botonSwing();
+        jLabel95 = new javax.swing.JLabel();
+        panel_citas_pendientes74 = new provet.componentes.PanelRedondeado();
+        lbl_acceder74 = new javax.swing.JLabel();
+        usuario74 = new javax.swing.JLabel();
+        jLabel96 = new javax.swing.JLabel();
+        btn_EntrarCitaspendientes9 = new provet.componentes.botonSwing();
+        jLabel97 = new javax.swing.JLabel();
+        panel_citas_pendientes75 = new provet.componentes.PanelRedondeado();
+        lbl_acceder7 = new javax.swing.JLabel();
+        usuario7 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        btn_EntrarCitaspendientes10 = new provet.componentes.botonSwing();
+        jLabel21 = new javax.swing.JLabel();
+        panel_citas_pendientes76 = new provet.componentes.PanelRedondeado();
+        lbl_acceder8 = new javax.swing.JLabel();
+        usuario8 = new javax.swing.JLabel();
+        jLabel98 = new javax.swing.JLabel();
+        btn_EntrarCitaspendientes11 = new provet.componentes.botonSwing();
+        jLabel99 = new javax.swing.JLabel();
+        panel_citas_pendientes77 = new provet.componentes.PanelRedondeado();
+        lbl_acceder9 = new javax.swing.JLabel();
+        usuario9 = new javax.swing.JLabel();
+        jLabel100 = new javax.swing.JLabel();
+        btn_EntrarCitaspendientes12 = new provet.componentes.botonSwing();
+        jLabel101 = new javax.swing.JLabel();
+        panel_citas_pendientes78 = new provet.componentes.PanelRedondeado();
+        lbl_acceder75 = new javax.swing.JLabel();
+        usuario75 = new javax.swing.JLabel();
+        jLabel102 = new javax.swing.JLabel();
+        btn_EntrarCitaspendientes13 = new provet.componentes.botonSwing();
+        jLabel103 = new javax.swing.JLabel();
+        panel_citas_pendientes79 = new provet.componentes.PanelRedondeado();
+        lbl_acceder76 = new javax.swing.JLabel();
+        usuario76 = new javax.swing.JLabel();
+        jLabel104 = new javax.swing.JLabel();
+        btn_EntrarCitaspendientes14 = new provet.componentes.botonSwing();
+        jLabel105 = new javax.swing.JLabel();
+        panel_citas_pendientes80 = new provet.componentes.PanelRedondeado();
+        lbl_acceder77 = new javax.swing.JLabel();
+        usuario77 = new javax.swing.JLabel();
+        jLabel106 = new javax.swing.JLabel();
+        btn_EntrarCitaspendientes15 = new provet.componentes.botonSwing();
+        jLabel107 = new javax.swing.JLabel();
+        panel_citas_pendientes81 = new provet.componentes.PanelRedondeado();
+        lbl_acceder78 = new javax.swing.JLabel();
+        usuario78 = new javax.swing.JLabel();
+        jLabel108 = new javax.swing.JLabel();
+        btn_EntrarCitaspendientes16 = new provet.componentes.botonSwing();
+        jLabel109 = new javax.swing.JLabel();
+        panel_citas_pendientes82 = new provet.componentes.PanelRedondeado();
+        lbl_acceder79 = new javax.swing.JLabel();
+        usuario79 = new javax.swing.JLabel();
+        jLabel110 = new javax.swing.JLabel();
+        btn_EntrarCitaspendientes17 = new provet.componentes.botonSwing();
+        jLabel111 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        btn_EntraragendarCitas = new provet.componentes.botonSwing();
+        panel_citas_pendientes67 = new provet.componentes.PanelRedondeado();
+        lbl_acceder2 = new javax.swing.JLabel();
+        usuario2 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        btn_EntrarCitaspendientes2 = new provet.componentes.botonSwing();
+        jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -228,20 +318,17 @@ public class Menupropietario_Principal extends javax.swing.JFrame {
         usuario.setForeground(new java.awt.Color(255, 255, 255));
         panel_citas_pendientes.add(usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
 
-        jLabel5.setBackground(new java.awt.Color(51, 255, 51));
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel5.setText("Citas pendientes");
-        panel_citas_pendientes.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 29));
+        jLabel17.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel17.setText("Mis macotas");
+        panel_citas_pendientes.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, 29));
 
-        btn_EntrarCitaspendientes.setText("Entrar");
-        btn_EntrarCitaspendientes.addActionListener(this::btn_EntrarCitaspendientesActionPerformed);
-        panel_citas_pendientes.add(btn_EntrarCitaspendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, -1));
+        btn_Entrarmismascotas.setText("Entrar");
+        btn_Entrarmismascotas.addActionListener(this::btn_EntrarmismascotasActionPerformed);
+        panel_citas_pendientes.add(btn_Entrarmismascotas, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--calendar-day.png"))); // NOI18N
-        panel_citas_pendientes.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
-
-        jPanel1.add(panel_citas_pendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 270, 240, 310));
+        jPanel1.add(panel_citas_pendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 220, 220, 430));
 
         jLabel9.setBackground(new java.awt.Color(51, 255, 51));
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -252,53 +339,6 @@ public class Menupropietario_Principal extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setText("Bienvenido a tu espacio PatitasCare");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 350, 30));
-
-        panel_citas_pendientes1.setBackground(new java.awt.Color(192, 207, 178));
-        panel_citas_pendientes1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lbl_acceder5.setForeground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes1.add(lbl_acceder5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
-
-        usuario5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        usuario5.setForeground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes1.add(usuario5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
-
-        jLabel23.setBackground(new java.awt.Color(51, 255, 51));
-        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel23.setText("Agendar Citas");
-        panel_citas_pendientes1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, 29));
-
-        btn_EntraragendarCitas.setText("Entrar");
-        btn_EntraragendarCitas.addActionListener(this::btn_EntraragendarCitasActionPerformed);
-        panel_citas_pendientes1.add(btn_EntraragendarCitas, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, -1, -1));
-
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--calendar.png"))); // NOI18N
-        panel_citas_pendientes1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
-
-        jPanel1.add(panel_citas_pendientes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 270, 240, 310));
-
-        panel_citas_pendientes2.setBackground(new java.awt.Color(192, 207, 178));
-        panel_citas_pendientes2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lbl_acceder6.setForeground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes2.add(lbl_acceder6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
-
-        usuario6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        usuario6.setForeground(new java.awt.Color(255, 255, 255));
-        panel_citas_pendientes2.add(usuario6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
-
-        jLabel17.setBackground(new java.awt.Color(51, 255, 51));
-        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel17.setText("Mis macotas");
-        panel_citas_pendientes2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 29));
-
-        btn_Entrarmismascotas.setText("Entrar");
-        btn_Entrarmismascotas.addActionListener(this::btn_EntrarmismascotasActionPerformed);
-        panel_citas_pendientes2.add(btn_Entrarmismascotas, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, -1, -1));
-
-        jPanel1.add(panel_citas_pendientes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 270, 240, 310));
 
         btn_notificaciones.setBackground(new java.awt.Color(108, 135, 118));
         btn_notificaciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/system-uicons--bell.png"))); // NOI18N
@@ -312,23 +352,449 @@ public class Menupropietario_Principal extends javax.swing.JFrame {
         botonSwing2.addActionListener(this::botonSwing2ActionPerformed);
         jPanel1.add(botonSwing2, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 80, 230, 40));
 
+        panel_citas_pendientes66.setBackground(new java.awt.Color(192, 207, 178));
+        panel_citas_pendientes66.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_acceder1.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes66.add(lbl_acceder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
+
+        usuario1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        usuario1.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes66.add(usuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+
+        panel_citas_pendientes68.setBackground(new java.awt.Color(192, 207, 178));
+        panel_citas_pendientes68.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_acceder3.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes68.add(lbl_acceder3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
+
+        usuario3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        usuario3.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes68.add(usuario3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+
+        jLabel84.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel84.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel84.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel84.setText("Citas pendientes");
+        panel_citas_pendientes68.add(jLabel84, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 29));
+
+        btn_EntrarCitaspendientes3.setText("Entrar");
+        btn_EntrarCitaspendientes3.addActionListener(this::btn_EntrarCitaspendientes3ActionPerformed);
+        panel_citas_pendientes68.add(btn_EntrarCitaspendientes3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, -1));
+
+        jLabel85.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--calendar-day.png"))); // NOI18N
+        panel_citas_pendientes68.add(jLabel85, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
+
+        panel_citas_pendientes66.add(panel_citas_pendientes68, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 220, 430));
+
+        panel_citas_pendientes69.setBackground(new java.awt.Color(192, 207, 178));
+        panel_citas_pendientes69.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_acceder4.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes69.add(lbl_acceder4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
+
+        usuario4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        usuario4.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes69.add(usuario4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+
+        jLabel86.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel86.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel86.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel86.setText("Citas pendientes");
+        panel_citas_pendientes69.add(jLabel86, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 29));
+
+        btn_EntrarCitaspendientes4.setText("Entrar");
+        btn_EntrarCitaspendientes4.addActionListener(this::btn_EntrarCitaspendientes4ActionPerformed);
+        panel_citas_pendientes69.add(btn_EntrarCitaspendientes4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, -1));
+
+        jLabel87.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--calendar-day.png"))); // NOI18N
+        panel_citas_pendientes69.add(jLabel87, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
+
+        panel_citas_pendientes70.setBackground(new java.awt.Color(192, 207, 178));
+        panel_citas_pendientes70.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_acceder70.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes70.add(lbl_acceder70, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
+
+        usuario70.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        usuario70.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes70.add(usuario70, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+
+        jLabel88.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel88.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel88.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel88.setText("Citas pendientes");
+        panel_citas_pendientes70.add(jLabel88, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 29));
+
+        btn_EntrarCitaspendientes5.setText("Entrar");
+        btn_EntrarCitaspendientes5.addActionListener(this::btn_EntrarCitaspendientes5ActionPerformed);
+        panel_citas_pendientes70.add(btn_EntrarCitaspendientes5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, -1));
+
+        jLabel89.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--calendar-day.png"))); // NOI18N
+        panel_citas_pendientes70.add(jLabel89, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
+
+        panel_citas_pendientes69.add(panel_citas_pendientes70, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 220, 430));
+
+        panel_citas_pendientes66.add(panel_citas_pendientes69, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 220, 430));
+
+        panel_citas_pendientes71.setBackground(new java.awt.Color(192, 207, 178));
+        panel_citas_pendientes71.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_acceder71.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes71.add(lbl_acceder71, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
+
+        usuario71.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        usuario71.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes71.add(usuario71, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+
+        jLabel90.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel90.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel90.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel90.setText("Citas pendientes");
+        panel_citas_pendientes71.add(jLabel90, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 29));
+
+        btn_EntrarCitaspendientes6.setText("Entrar");
+        btn_EntrarCitaspendientes6.addActionListener(this::btn_EntrarCitaspendientes6ActionPerformed);
+        panel_citas_pendientes71.add(btn_EntrarCitaspendientes6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, -1));
+
+        jLabel91.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--calendar-day.png"))); // NOI18N
+        panel_citas_pendientes71.add(jLabel91, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
+
+        panel_citas_pendientes72.setBackground(new java.awt.Color(192, 207, 178));
+        panel_citas_pendientes72.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_acceder72.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes72.add(lbl_acceder72, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
+
+        usuario72.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        usuario72.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes72.add(usuario72, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+
+        jLabel92.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel92.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel92.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel92.setText("Citas pendientes");
+        panel_citas_pendientes72.add(jLabel92, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 29));
+
+        btn_EntrarCitaspendientes7.setText("Entrar");
+        btn_EntrarCitaspendientes7.addActionListener(this::btn_EntrarCitaspendientes7ActionPerformed);
+        panel_citas_pendientes72.add(btn_EntrarCitaspendientes7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, -1));
+
+        jLabel93.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--calendar-day.png"))); // NOI18N
+        panel_citas_pendientes72.add(jLabel93, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
+
+        panel_citas_pendientes71.add(panel_citas_pendientes72, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 220, 430));
+
+        panel_citas_pendientes73.setBackground(new java.awt.Color(192, 207, 178));
+        panel_citas_pendientes73.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_acceder73.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes73.add(lbl_acceder73, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
+
+        usuario73.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        usuario73.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes73.add(usuario73, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+
+        jLabel94.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel94.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel94.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel94.setText("Citas pendientes");
+        panel_citas_pendientes73.add(jLabel94, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 29));
+
+        btn_EntrarCitaspendientes8.setText("Entrar");
+        btn_EntrarCitaspendientes8.addActionListener(this::btn_EntrarCitaspendientes8ActionPerformed);
+        panel_citas_pendientes73.add(btn_EntrarCitaspendientes8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, -1));
+
+        jLabel95.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--calendar-day.png"))); // NOI18N
+        panel_citas_pendientes73.add(jLabel95, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
+
+        panel_citas_pendientes74.setBackground(new java.awt.Color(192, 207, 178));
+        panel_citas_pendientes74.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_acceder74.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes74.add(lbl_acceder74, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
+
+        usuario74.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        usuario74.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes74.add(usuario74, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+
+        jLabel96.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel96.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel96.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel96.setText("Citas pendientes");
+        panel_citas_pendientes74.add(jLabel96, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 29));
+
+        btn_EntrarCitaspendientes9.setText("Entrar");
+        btn_EntrarCitaspendientes9.addActionListener(this::btn_EntrarCitaspendientes9ActionPerformed);
+        panel_citas_pendientes74.add(btn_EntrarCitaspendientes9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, -1));
+
+        jLabel97.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--calendar-day.png"))); // NOI18N
+        panel_citas_pendientes74.add(jLabel97, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
+
+        panel_citas_pendientes73.add(panel_citas_pendientes74, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 220, 430));
+
+        panel_citas_pendientes71.add(panel_citas_pendientes73, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 220, 430));
+
+        panel_citas_pendientes66.add(panel_citas_pendientes71, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 220, 430));
+
+        panel_citas_pendientes75.setBackground(new java.awt.Color(192, 207, 178));
+        panel_citas_pendientes75.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_acceder7.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes75.add(lbl_acceder7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
+
+        usuario7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        usuario7.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes75.add(usuario7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+
+        jLabel20.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel20.setText("Citas pendientes");
+        panel_citas_pendientes75.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 29));
+
+        btn_EntrarCitaspendientes10.setText("Entrar");
+        btn_EntrarCitaspendientes10.addActionListener(this::btn_EntrarCitaspendientes10ActionPerformed);
+        panel_citas_pendientes75.add(btn_EntrarCitaspendientes10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, -1));
+
+        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--calendar-day.png"))); // NOI18N
+        panel_citas_pendientes75.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
+
+        panel_citas_pendientes76.setBackground(new java.awt.Color(192, 207, 178));
+        panel_citas_pendientes76.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_acceder8.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes76.add(lbl_acceder8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
+
+        usuario8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        usuario8.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes76.add(usuario8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+
+        jLabel98.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel98.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel98.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel98.setText("Citas pendientes");
+        panel_citas_pendientes76.add(jLabel98, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 29));
+
+        btn_EntrarCitaspendientes11.setText("Entrar");
+        btn_EntrarCitaspendientes11.addActionListener(this::btn_EntrarCitaspendientes11ActionPerformed);
+        panel_citas_pendientes76.add(btn_EntrarCitaspendientes11, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, -1));
+
+        jLabel99.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--calendar-day.png"))); // NOI18N
+        panel_citas_pendientes76.add(jLabel99, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
+
+        panel_citas_pendientes75.add(panel_citas_pendientes76, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 220, 430));
+
+        panel_citas_pendientes77.setBackground(new java.awt.Color(192, 207, 178));
+        panel_citas_pendientes77.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_acceder9.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes77.add(lbl_acceder9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
+
+        usuario9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        usuario9.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes77.add(usuario9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+
+        jLabel100.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel100.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel100.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel100.setText("Citas pendientes");
+        panel_citas_pendientes77.add(jLabel100, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 29));
+
+        btn_EntrarCitaspendientes12.setText("Entrar");
+        btn_EntrarCitaspendientes12.addActionListener(this::btn_EntrarCitaspendientes12ActionPerformed);
+        panel_citas_pendientes77.add(btn_EntrarCitaspendientes12, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, -1));
+
+        jLabel101.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--calendar-day.png"))); // NOI18N
+        panel_citas_pendientes77.add(jLabel101, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
+
+        panel_citas_pendientes78.setBackground(new java.awt.Color(192, 207, 178));
+        panel_citas_pendientes78.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_acceder75.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes78.add(lbl_acceder75, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
+
+        usuario75.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        usuario75.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes78.add(usuario75, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+
+        jLabel102.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel102.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel102.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel102.setText("Citas pendientes");
+        panel_citas_pendientes78.add(jLabel102, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 29));
+
+        btn_EntrarCitaspendientes13.setText("Entrar");
+        btn_EntrarCitaspendientes13.addActionListener(this::btn_EntrarCitaspendientes13ActionPerformed);
+        panel_citas_pendientes78.add(btn_EntrarCitaspendientes13, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, -1));
+
+        jLabel103.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--calendar-day.png"))); // NOI18N
+        panel_citas_pendientes78.add(jLabel103, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
+
+        panel_citas_pendientes77.add(panel_citas_pendientes78, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 220, 430));
+
+        panel_citas_pendientes75.add(panel_citas_pendientes77, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 220, 430));
+
+        panel_citas_pendientes79.setBackground(new java.awt.Color(192, 207, 178));
+        panel_citas_pendientes79.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_acceder76.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes79.add(lbl_acceder76, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
+
+        usuario76.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        usuario76.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes79.add(usuario76, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+
+        jLabel104.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel104.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel104.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel104.setText("Citas pendientes");
+        panel_citas_pendientes79.add(jLabel104, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 29));
+
+        btn_EntrarCitaspendientes14.setText("Entrar");
+        btn_EntrarCitaspendientes14.addActionListener(this::btn_EntrarCitaspendientes14ActionPerformed);
+        panel_citas_pendientes79.add(btn_EntrarCitaspendientes14, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, -1));
+
+        jLabel105.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--calendar-day.png"))); // NOI18N
+        panel_citas_pendientes79.add(jLabel105, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
+
+        panel_citas_pendientes80.setBackground(new java.awt.Color(192, 207, 178));
+        panel_citas_pendientes80.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_acceder77.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes80.add(lbl_acceder77, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
+
+        usuario77.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        usuario77.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes80.add(usuario77, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+
+        jLabel106.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel106.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel106.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel106.setText("Citas pendientes");
+        panel_citas_pendientes80.add(jLabel106, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 29));
+
+        btn_EntrarCitaspendientes15.setText("Entrar");
+        btn_EntrarCitaspendientes15.addActionListener(this::btn_EntrarCitaspendientes15ActionPerformed);
+        panel_citas_pendientes80.add(btn_EntrarCitaspendientes15, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, -1));
+
+        jLabel107.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--calendar-day.png"))); // NOI18N
+        panel_citas_pendientes80.add(jLabel107, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
+
+        panel_citas_pendientes79.add(panel_citas_pendientes80, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 220, 430));
+
+        panel_citas_pendientes81.setBackground(new java.awt.Color(192, 207, 178));
+        panel_citas_pendientes81.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_acceder78.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes81.add(lbl_acceder78, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
+
+        usuario78.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        usuario78.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes81.add(usuario78, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+
+        jLabel108.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel108.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel108.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel108.setText("Citas pendientes");
+        panel_citas_pendientes81.add(jLabel108, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 29));
+
+        btn_EntrarCitaspendientes16.setText("Entrar");
+        btn_EntrarCitaspendientes16.addActionListener(this::btn_EntrarCitaspendientes16ActionPerformed);
+        panel_citas_pendientes81.add(btn_EntrarCitaspendientes16, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, -1));
+
+        jLabel109.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--calendar-day.png"))); // NOI18N
+        panel_citas_pendientes81.add(jLabel109, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
+
+        panel_citas_pendientes82.setBackground(new java.awt.Color(192, 207, 178));
+        panel_citas_pendientes82.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_acceder79.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes82.add(lbl_acceder79, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
+
+        usuario79.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        usuario79.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes82.add(usuario79, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+
+        jLabel110.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel110.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel110.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel110.setText("Citas pendientes");
+        panel_citas_pendientes82.add(jLabel110, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 29));
+
+        btn_EntrarCitaspendientes17.setText("Entrar");
+        btn_EntrarCitaspendientes17.addActionListener(this::btn_EntrarCitaspendientes17ActionPerformed);
+        panel_citas_pendientes82.add(btn_EntrarCitaspendientes17, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, -1));
+
+        jLabel111.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--calendar-day.png"))); // NOI18N
+        panel_citas_pendientes82.add(jLabel111, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
+
+        panel_citas_pendientes81.add(panel_citas_pendientes82, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 220, 430));
+
+        panel_citas_pendientes79.add(panel_citas_pendientes81, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 220, 430));
+
+        panel_citas_pendientes75.add(panel_citas_pendientes79, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 220, 430));
+
+        panel_citas_pendientes66.add(panel_citas_pendientes75, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, 220, 430));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--calendar.png"))); // NOI18N
+        panel_citas_pendientes66.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, -1, -1));
+
+        jLabel23.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel23.setText("Agendar Citas");
+        panel_citas_pendientes66.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, 29));
+
+        btn_EntraragendarCitas.setText("Entrar");
+        btn_EntraragendarCitas.addActionListener(this::btn_EntraragendarCitasActionPerformed);
+        panel_citas_pendientes66.add(btn_EntraragendarCitas, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, -1, -1));
+
+        jPanel1.add(panel_citas_pendientes66, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 220, 220, 430));
+
+        panel_citas_pendientes67.setBackground(new java.awt.Color(192, 207, 178));
+        panel_citas_pendientes67.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_acceder2.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes67.add(lbl_acceder2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
+
+        usuario2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        usuario2.setForeground(new java.awt.Color(255, 255, 255));
+        panel_citas_pendientes67.add(usuario2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+
+        jLabel13.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel13.setText("Citas pendientes");
+        panel_citas_pendientes67.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 29));
+
+        btn_EntrarCitaspendientes2.setText("Entrar");
+        btn_EntrarCitaspendientes2.addActionListener(this::btn_EntrarCitaspendientes2ActionPerformed);
+        panel_citas_pendientes67.add(btn_EntrarCitaspendientes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, -1, -1));
+
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--calendar-day.png"))); // NOI18N
+        panel_citas_pendientes67.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, -1, -1));
+
+        jPanel1.add(panel_citas_pendientes67, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 220, 430));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 100, Short.MAX_VALUE))
+                .addGap(94, 94, 94))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(752, Short.MAX_VALUE))
         );
 
         pack();
@@ -362,12 +828,6 @@ dispose();
 // TODO add your handling code here:
     }//GEN-LAST:event_btn_EntraragendarCitasActionPerformed
 
-    private void btn_EntrarCitaspendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EntrarCitaspendientesActionPerformed
-MenuPropietario_CitasPendientes ventana = new MenuPropietario_CitasPendientes();
-ventana.setVisible(true);
-dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_EntrarCitaspendientesActionPerformed
-
     private void btn_EntrarmismascotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EntrarmismascotasActionPerformed
 MenuPropietario_MisMscotas ventana = new MenuPropietario_MisMscotas();
 ventana.setVisible(true);
@@ -375,6 +835,72 @@ dispose();
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_EntrarmismascotasActionPerformed
+
+    private void btn_EntrarCitaspendientes2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EntrarCitaspendientes2ActionPerformed
+MenuPropietario_CitasPendientes ventana = new MenuPropietario_CitasPendientes ();
+ventana.setVisible(true);
+dispose();// TODO add your handling code here:
+    }//GEN-LAST:event_btn_EntrarCitaspendientes2ActionPerformed
+
+    private void btn_EntrarCitaspendientes3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EntrarCitaspendientes3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_EntrarCitaspendientes3ActionPerformed
+
+    private void btn_EntrarCitaspendientes4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EntrarCitaspendientes4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_EntrarCitaspendientes4ActionPerformed
+
+    private void btn_EntrarCitaspendientes5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EntrarCitaspendientes5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_EntrarCitaspendientes5ActionPerformed
+
+    private void btn_EntrarCitaspendientes6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EntrarCitaspendientes6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_EntrarCitaspendientes6ActionPerformed
+
+    private void btn_EntrarCitaspendientes7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EntrarCitaspendientes7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_EntrarCitaspendientes7ActionPerformed
+
+    private void btn_EntrarCitaspendientes8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EntrarCitaspendientes8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_EntrarCitaspendientes8ActionPerformed
+
+    private void btn_EntrarCitaspendientes9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EntrarCitaspendientes9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_EntrarCitaspendientes9ActionPerformed
+
+    private void btn_EntrarCitaspendientes10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EntrarCitaspendientes10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_EntrarCitaspendientes10ActionPerformed
+
+    private void btn_EntrarCitaspendientes11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EntrarCitaspendientes11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_EntrarCitaspendientes11ActionPerformed
+
+    private void btn_EntrarCitaspendientes12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EntrarCitaspendientes12ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_EntrarCitaspendientes12ActionPerformed
+
+    private void btn_EntrarCitaspendientes13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EntrarCitaspendientes13ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_EntrarCitaspendientes13ActionPerformed
+
+    private void btn_EntrarCitaspendientes14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EntrarCitaspendientes14ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_EntrarCitaspendientes14ActionPerformed
+
+    private void btn_EntrarCitaspendientes15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EntrarCitaspendientes15ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_EntrarCitaspendientes15ActionPerformed
+
+    private void btn_EntrarCitaspendientes16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EntrarCitaspendientes16ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_EntrarCitaspendientes16ActionPerformed
+
+    private void btn_EntrarCitaspendientes17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EntrarCitaspendientes17ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_EntrarCitaspendientes17ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -405,41 +931,131 @@ dispose();
     private provet.componentes.botonSwing botonSwing2;
     private provet.componentes.PanelRedondeado boton_menu;
     private provet.componentes.PanelRedondeado boton_salir;
-    private provet.componentes.botonSwing btn_EntrarCitaspendientes;
+    private provet.componentes.botonSwing btn_EntrarCitaspendientes10;
+    private provet.componentes.botonSwing btn_EntrarCitaspendientes11;
+    private provet.componentes.botonSwing btn_EntrarCitaspendientes12;
+    private provet.componentes.botonSwing btn_EntrarCitaspendientes13;
+    private provet.componentes.botonSwing btn_EntrarCitaspendientes14;
+    private provet.componentes.botonSwing btn_EntrarCitaspendientes15;
+    private provet.componentes.botonSwing btn_EntrarCitaspendientes16;
+    private provet.componentes.botonSwing btn_EntrarCitaspendientes17;
+    private provet.componentes.botonSwing btn_EntrarCitaspendientes2;
+    private provet.componentes.botonSwing btn_EntrarCitaspendientes3;
+    private provet.componentes.botonSwing btn_EntrarCitaspendientes4;
+    private provet.componentes.botonSwing btn_EntrarCitaspendientes5;
+    private provet.componentes.botonSwing btn_EntrarCitaspendientes6;
+    private provet.componentes.botonSwing btn_EntrarCitaspendientes7;
+    private provet.componentes.botonSwing btn_EntrarCitaspendientes8;
+    private provet.componentes.botonSwing btn_EntrarCitaspendientes9;
     private provet.componentes.botonSwing btn_EntraragendarCitas;
     private provet.componentes.botonSwing btn_Entrarmismascotas;
     private provet.componentes.botonSwing btn_notificaciones;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel100;
+    private javax.swing.JLabel jLabel101;
+    private javax.swing.JLabel jLabel102;
+    private javax.swing.JLabel jLabel103;
+    private javax.swing.JLabel jLabel104;
+    private javax.swing.JLabel jLabel105;
+    private javax.swing.JLabel jLabel106;
+    private javax.swing.JLabel jLabel107;
+    private javax.swing.JLabel jLabel108;
+    private javax.swing.JLabel jLabel109;
+    private javax.swing.JLabel jLabel110;
+    private javax.swing.JLabel jLabel111;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel84;
+    private javax.swing.JLabel jLabel85;
+    private javax.swing.JLabel jLabel86;
+    private javax.swing.JLabel jLabel87;
+    private javax.swing.JLabel jLabel88;
+    private javax.swing.JLabel jLabel89;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel90;
+    private javax.swing.JLabel jLabel91;
+    private javax.swing.JLabel jLabel92;
+    private javax.swing.JLabel jLabel93;
+    private javax.swing.JLabel jLabel94;
+    private javax.swing.JLabel jLabel95;
+    private javax.swing.JLabel jLabel96;
+    private javax.swing.JLabel jLabel97;
+    private javax.swing.JLabel jLabel98;
+    private javax.swing.JLabel jLabel99;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lbl_acceder;
-    private javax.swing.JLabel lbl_acceder5;
-    private javax.swing.JLabel lbl_acceder6;
+    private javax.swing.JLabel lbl_acceder1;
+    private javax.swing.JLabel lbl_acceder2;
+    private javax.swing.JLabel lbl_acceder3;
+    private javax.swing.JLabel lbl_acceder4;
+    private javax.swing.JLabel lbl_acceder7;
+    private javax.swing.JLabel lbl_acceder70;
+    private javax.swing.JLabel lbl_acceder71;
+    private javax.swing.JLabel lbl_acceder72;
+    private javax.swing.JLabel lbl_acceder73;
+    private javax.swing.JLabel lbl_acceder74;
+    private javax.swing.JLabel lbl_acceder75;
+    private javax.swing.JLabel lbl_acceder76;
+    private javax.swing.JLabel lbl_acceder77;
+    private javax.swing.JLabel lbl_acceder78;
+    private javax.swing.JLabel lbl_acceder79;
+    private javax.swing.JLabel lbl_acceder8;
+    private javax.swing.JLabel lbl_acceder9;
     private provet.componentes.PanelRedondeado panelRedondeado1;
     private provet.componentes.PanelRedondeado panelRedondeado2;
     private provet.componentes.PanelRedondeado panelRedondeado3;
     private provet.componentes.PanelRedondeado panelRedondeado4;
     private provet.componentes.PanelRedondeado panel_citas_pendientes;
-    private provet.componentes.PanelRedondeado panel_citas_pendientes1;
-    private provet.componentes.PanelRedondeado panel_citas_pendientes2;
+    private provet.componentes.PanelRedondeado panel_citas_pendientes66;
+    private provet.componentes.PanelRedondeado panel_citas_pendientes67;
+    private provet.componentes.PanelRedondeado panel_citas_pendientes68;
+    private provet.componentes.PanelRedondeado panel_citas_pendientes69;
+    private provet.componentes.PanelRedondeado panel_citas_pendientes70;
+    private provet.componentes.PanelRedondeado panel_citas_pendientes71;
+    private provet.componentes.PanelRedondeado panel_citas_pendientes72;
+    private provet.componentes.PanelRedondeado panel_citas_pendientes73;
+    private provet.componentes.PanelRedondeado panel_citas_pendientes74;
+    private provet.componentes.PanelRedondeado panel_citas_pendientes75;
+    private provet.componentes.PanelRedondeado panel_citas_pendientes76;
+    private provet.componentes.PanelRedondeado panel_citas_pendientes77;
+    private provet.componentes.PanelRedondeado panel_citas_pendientes78;
+    private provet.componentes.PanelRedondeado panel_citas_pendientes79;
+    private provet.componentes.PanelRedondeado panel_citas_pendientes80;
+    private provet.componentes.PanelRedondeado panel_citas_pendientes81;
+    private provet.componentes.PanelRedondeado panel_citas_pendientes82;
     private javax.swing.JLabel usuario;
-    private javax.swing.JLabel usuario5;
-    private javax.swing.JLabel usuario6;
+    private javax.swing.JLabel usuario1;
+    private javax.swing.JLabel usuario2;
+    private javax.swing.JLabel usuario3;
+    private javax.swing.JLabel usuario4;
+    private javax.swing.JLabel usuario7;
+    private javax.swing.JLabel usuario70;
+    private javax.swing.JLabel usuario71;
+    private javax.swing.JLabel usuario72;
+    private javax.swing.JLabel usuario73;
+    private javax.swing.JLabel usuario74;
+    private javax.swing.JLabel usuario75;
+    private javax.swing.JLabel usuario76;
+    private javax.swing.JLabel usuario77;
+    private javax.swing.JLabel usuario78;
+    private javax.swing.JLabel usuario79;
+    private javax.swing.JLabel usuario8;
+    private javax.swing.JLabel usuario9;
     // End of variables declaration//GEN-END:variables
 }

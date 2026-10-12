@@ -33,11 +33,20 @@ public class MenuPropietario_MisMscotas extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         lbl_configuracion = new javax.swing.JLabel();
         botonSwing3 = new provet.componentes.botonSwing();
-        panelPaciente1 = new provet.componentes.PanelPaciente();
-        panelPaciente2 = new provet.componentes.PanelPaciente();
-        panelPaciente3 = new provet.componentes.PanelPaciente();
-        panelPaciente4 = new provet.componentes.PanelPaciente();
         botonSwing2 = new provet.componentes.botonSwing();
+        panelRedondeado5 = new provet.componentes.PanelRedondeado();
+        panelPaciente11 = new provet.componentes.PanelPaciente();
+        jPanel3 = new javax.swing.JPanel();
+        lbl_configuracion1 = new javax.swing.JLabel();
+        botonSwing4 = new provet.componentes.botonSwing();
+        panelPaciente5 = new provet.componentes.PanelPaciente();
+        panelPaciente6 = new provet.componentes.PanelPaciente();
+        panelPaciente7 = new provet.componentes.PanelPaciente();
+        botonSwing5 = new provet.componentes.botonSwing();
+        panelRedondeado6 = new provet.componentes.PanelRedondeado();
+        panelPaciente8 = new provet.componentes.PanelPaciente();
+        panelRedondeado7 = new provet.componentes.PanelRedondeado();
+        panelPaciente9 = new provet.componentes.PanelPaciente();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -73,15 +82,94 @@ public class MenuPropietario_MisMscotas extends javax.swing.JFrame {
         botonSwing3.setText("Próximas citas");
         botonSwing3.addActionListener(this::botonSwing3ActionPerformed);
         jPanel1.add(botonSwing3, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 60, -1, -1));
-        jPanel1.add(panelPaciente1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, -1, -1));
-        jPanel1.add(panelPaciente2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 380, -1, -1));
-        jPanel1.add(panelPaciente3, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 140, -1, -1));
-        jPanel1.add(panelPaciente4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 380, -1, -1));
 
         botonSwing2.setBackground(new java.awt.Color(108, 135, 118));
         botonSwing2.setText("Regresar");
         botonSwing2.addActionListener(this::botonSwing2ActionPerformed);
         jPanel1.add(botonSwing2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 670, 160, 60));
+
+        javax.swing.GroupLayout panelRedondeado5Layout = new javax.swing.GroupLayout(panelRedondeado5);
+        panelRedondeado5.setLayout(panelRedondeado5Layout);
+        panelRedondeado5Layout.setHorizontalGroup(
+            panelRedondeado5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRedondeado5Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(panelPaciente11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+        panelRedondeado5Layout.setVerticalGroup(
+            panelRedondeado5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRedondeado5Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(panelPaciente11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(panelRedondeado5, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 170, 410, 170));
+
+        jPanel3.setBackground(new java.awt.Color(228, 230, 217));
+        jPanel3.setPreferredSize(new java.awt.Dimension(1291, 70));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_configuracion1.setBackground(new java.awt.Color(51, 255, 51));
+        lbl_configuracion1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbl_configuracion1.setForeground(new java.awt.Color(39, 53, 38));
+        lbl_configuracion1.setText("Mis mascotas");
+        jPanel3.add(lbl_configuracion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 160, 50));
+
+        botonSwing4.setBackground(new java.awt.Color(108, 135, 118));
+        botonSwing4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/lapiz.png"))); // NOI18N
+        botonSwing4.setText("Próximas citas");
+        botonSwing4.addActionListener(this::botonSwing4ActionPerformed);
+        jPanel3.add(botonSwing4, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 60, -1, -1));
+        jPanel3.add(panelPaciente5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 360, -1, -1));
+        jPanel3.add(panelPaciente6, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 150, -1, -1));
+        jPanel3.add(panelPaciente7, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 360, -1, -1));
+
+        botonSwing5.setBackground(new java.awt.Color(108, 135, 118));
+        botonSwing5.setText("Regresar");
+        botonSwing5.addActionListener(this::botonSwing5ActionPerformed);
+        jPanel3.add(botonSwing5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 670, 160, 60));
+
+        javax.swing.GroupLayout panelRedondeado6Layout = new javax.swing.GroupLayout(panelRedondeado6);
+        panelRedondeado6.setLayout(panelRedondeado6Layout);
+        panelRedondeado6Layout.setHorizontalGroup(
+            panelRedondeado6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRedondeado6Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(panelPaciente8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+        panelRedondeado6Layout.setVerticalGroup(
+            panelRedondeado6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRedondeado6Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(panelPaciente8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        jPanel3.add(panelRedondeado6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 410, 170));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        javax.swing.GroupLayout panelRedondeado7Layout = new javax.swing.GroupLayout(panelRedondeado7);
+        panelRedondeado7.setLayout(panelRedondeado7Layout);
+        panelRedondeado7Layout.setHorizontalGroup(
+            panelRedondeado7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRedondeado7Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(panelPaciente9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+        panelRedondeado7Layout.setVerticalGroup(
+            panelRedondeado7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRedondeado7Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(panelPaciente9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(panelRedondeado7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(108, 135, 118));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -273,6 +361,14 @@ public class MenuPropietario_MisMscotas extends javax.swing.JFrame {
 
     }//GEN-LAST:event_botonSwing2ActionPerformed
 
+    private void botonSwing4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonSwing4ActionPerformed
+
+    private void botonSwing5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonSwing5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -301,6 +397,8 @@ public class MenuPropietario_MisMscotas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private provet.componentes.botonSwing botonSwing2;
     private provet.componentes.botonSwing botonSwing3;
+    private provet.componentes.botonSwing botonSwing4;
+    private provet.componentes.botonSwing botonSwing5;
     private provet.componentes.PanelRedondeado boton_menu;
     private provet.componentes.PanelRedondeado boton_salir;
     private javax.swing.JButton jButton1;
@@ -315,14 +413,21 @@ public class MenuPropietario_MisMscotas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lbl_configuracion;
-    private provet.componentes.PanelPaciente panelPaciente1;
-    private provet.componentes.PanelPaciente panelPaciente2;
-    private provet.componentes.PanelPaciente panelPaciente3;
-    private provet.componentes.PanelPaciente panelPaciente4;
+    private javax.swing.JLabel lbl_configuracion1;
+    private provet.componentes.PanelPaciente panelPaciente11;
+    private provet.componentes.PanelPaciente panelPaciente5;
+    private provet.componentes.PanelPaciente panelPaciente6;
+    private provet.componentes.PanelPaciente panelPaciente7;
+    private provet.componentes.PanelPaciente panelPaciente8;
+    private provet.componentes.PanelPaciente panelPaciente9;
     private provet.componentes.PanelRedondeado panelRedondeado1;
     private provet.componentes.PanelRedondeado panelRedondeado2;
     private provet.componentes.PanelRedondeado panelRedondeado3;
     private provet.componentes.PanelRedondeado panelRedondeado4;
+    private provet.componentes.PanelRedondeado panelRedondeado5;
+    private provet.componentes.PanelRedondeado panelRedondeado6;
+    private provet.componentes.PanelRedondeado panelRedondeado7;
     // End of variables declaration//GEN-END:variables
 }
