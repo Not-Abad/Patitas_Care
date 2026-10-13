@@ -175,6 +175,7 @@ public class Recuperar_Contraseña extends JFrame {
         System.err.println("Error al pegar: " + ex.getMessage());
     }
 }
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 

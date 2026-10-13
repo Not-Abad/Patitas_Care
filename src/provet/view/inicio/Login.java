@@ -2,6 +2,7 @@
 //Paquete al que pertenece la ventana
 package provet.view.inicio;
 
+//Importamos librerias
 import javax.swing.JOptionPane;
 import provet.model.ControlUsuarios;
 import provet.model.Usuario;
@@ -20,6 +21,27 @@ public class Login extends javax.swing.JFrame {
         provet.model.InicializadorDatos.cargarUsuarios();    
     }
 
+    //Método encontrar Usuario
+    public Usuario encontrarUsuario(String nombreUsuario){
+        //Variable local
+        Usuario usuarioEncontrado = null;
+
+        //Revisamos la posición de toda la lista de usuarios
+        for (Usuario u : ControlUsuarios.listaUsuarios) {
+            //Si usuario actual es igual a usuario nombre, entonces...
+            if (u.getNombre().equalsIgnoreCase(nombreUsuario)) {
+                usuarioEncontrado = u;  //Guarda al usuario actual
+                break;                  //Detenemos la búsqueda porque ya lo hallamos
+            }
+        }
+        
+        //Si se encontro el usuario, entonces...
+        if(usuarioEncontrado != null){
+            return usuarioEncontrado;           //...Retornalo
+        }else{          //Si no se encontro....
+            return null;                        //Retorna nulo
+        }
+    }
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -194,15 +216,8 @@ public class Login extends javax.swing.JFrame {
             return;
         }
 
-        //BUSCAMOS al usuario en la lista global
-        Usuario usuarioEncontrado = null;
-
-        for (Usuario u : ControlUsuarios.listaUsuarios) {
-            if (u.getNombre().equalsIgnoreCase(nombreIngresado)) {
-                usuarioEncontrado = u;
-                break; // Detenemos la búsqueda porque ya lo hallamos
-            }
-        }
+        //Revisamos si el usuario existe
+        Usuario usuarioEncontrado = encontrarUsuario(nombreIngresado);
 
         //Si el usuario existe, Entonces ...
         if (usuarioEncontrado != null) {            
