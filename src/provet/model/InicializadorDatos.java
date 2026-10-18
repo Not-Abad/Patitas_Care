@@ -60,7 +60,7 @@ public class InicializadorDatos {
             "123456",    
             "Secretaria", 
             "2281112233", 
-            "mayela@patitascare.com", 
+                "0905chucho@gmail.com", 
             "/provet/view/imagenes/mascota2.jpeg"
         ));
         

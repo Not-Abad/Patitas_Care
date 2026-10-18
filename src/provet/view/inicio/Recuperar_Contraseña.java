@@ -60,7 +60,7 @@ public class Recuperar_Contraseña extends JFrame {
                 String cuerpoHtml = service.obtenerContenidoTemplate("recuperacion.html", variables);
                 
                 //Creamos y enviamos
-                service.createEmail("0905chucho@gmail.com", "Código de autenticación - PatitasCare", cuerpoHtml);
+                service.createEmail("mayelasanchezzz@outlook.com", "Código de autenticación - PatitasCare", cuerpoHtml);
                 service.sendEmail();
                 
                 // Notificamos al usuario en el hilo de la interfaz

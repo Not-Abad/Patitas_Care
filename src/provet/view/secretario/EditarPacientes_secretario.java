@@ -171,6 +171,12 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jScrollPane1.setViewportView(jTableBuscarPaciente);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 1120, 380));
+
+        jTextField_bucarPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_bucarPacienteActionPerformed(evt);
+            }
+        });
         jPanel1.add(jTextField_bucarPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 840, 40));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Filtrar", "Item 2", "Item 3", "Item 4" }));
@@ -245,6 +251,10 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     menu.setVisible(true);
     this.dispose();    // TODO add your handling code here:
     }//GEN-LAST:event_btn_ReportesActionPerformed
+
+    private void jTextField_bucarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_bucarPacienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_bucarPacienteActionPerformed
 
     /**
      * @param args the command line arguments
