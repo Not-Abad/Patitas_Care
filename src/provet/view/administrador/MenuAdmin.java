@@ -1,5 +1,7 @@
 package provet.view.administrador;
+import javax.swing.JOptionPane;
 import provet.view.inicio.Login;
+import provet.componentes.botonSwing;
 public class MenuAdmin extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MenuAdmin.class.getName());
@@ -13,138 +15,107 @@ public class MenuAdmin extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        lbl_patitas_menu = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        lbl_admin_menu = new javax.swing.JLabel();
-        lbl_administrador_menu = new javax.swing.JLabel();
-        btn_usuariosM = new javax.swing.JButton();
-        btn_reportesM = new javax.swing.JButton();
-        btn_notificacionesM = new javax.swing.JButton();
-        btn_salidaM = new javax.swing.JButton();
-        lbl_menuU = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        panelRedondeado2 = new provet.componentes.PanelRedondeado();
+        jLabel8 = new javax.swing.JLabel();
+        botonSwing4 = new botonSwing();
+        botonSwing1 = new botonSwing();
+        btn_Calendario = new botonSwing();
+        btn_Reportes = new botonSwing();
+        btn_Salir = new botonSwing();
         jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        jPanel3 = new provet.componentes.PanelRedondeado();
         lbl_usuario_menu = new javax.swing.JLabel();
-        btn_usuarios2 = new javax.swing.JButton();
+        btn_usuarios2 = new botonSwing();
         jLabel2 = new javax.swing.JLabel();
         lbl_bienvenido_menu = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
+        jPanel4 = new provet.componentes.PanelRedondeado();
         lbl_reportes_menu = new javax.swing.JLabel();
-        btn_reportes2 = new javax.swing.JButton();
+        btn_reportes2 = new botonSwing();
         jLabel4 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
+        jPanel5 = new provet.componentes.PanelRedondeado();
         lbl_notificaciones_menu = new javax.swing.JLabel();
-        btn_notificaciones = new javax.swing.JButton();
+        btn_notificaciones = new botonSwing();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(108, 135, 118));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbl_patitas_menu.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        lbl_patitas_menu.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_patitas_menu.setText("Patitas Care");
-        lbl_patitas_menu.setAutoscrolls(true);
+        jLabel6.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel6.setText("Nombre");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, -1, -1));
 
-        jLabel6.setText("Foto");
+        jLabel15.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel15.setText("PatitasCare");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
-        lbl_admin_menu.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl_admin_menu.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_admin_menu.setText("Admin");
+        jLabel16.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel16.setText("Administrador");
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
 
-        lbl_administrador_menu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lbl_administrador_menu.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_administrador_menu.setText("Administrador");
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesAdministrativo/usuario.png"))); // NOI18N
+        jLabel8.setText("jLabel8");
 
-        btn_usuariosM.setBackground(new java.awt.Color(228, 230, 217));
-        btn_usuariosM.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btn_usuariosM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesAdministrativo/USUARIO2.png"))); // NOI18N
-        btn_usuariosM.setText("Usuarios");
-        btn_usuariosM.addActionListener(this::btn_usuariosMActionPerformed);
-
-        btn_reportesM.setBackground(new java.awt.Color(228, 230, 217));
-        btn_reportesM.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btn_reportesM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesAdministrativo/REPORTES2.png"))); // NOI18N
-        btn_reportesM.setText("Reportes");
-        btn_reportesM.setPreferredSize(new java.awt.Dimension(97, 29));
-        btn_reportesM.addActionListener(this::btn_reportesMActionPerformed);
-
-        btn_notificacionesM.setBackground(new java.awt.Color(228, 230, 217));
-        btn_notificacionesM.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btn_notificacionesM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesAdministrativo/NOTIFICACION2.png"))); // NOI18N
-        btn_notificacionesM.setText("Notificaciones");
-        btn_notificacionesM.addActionListener(this::btn_notificacionesMActionPerformed);
-
-        btn_salidaM.setBackground(new java.awt.Color(228, 230, 217));
-        btn_salidaM.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btn_salidaM.setText("Salida");
-        btn_salidaM.addActionListener(this::btn_salidaMActionPerformed);
-
-        lbl_menuU.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lbl_menuU.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_menuU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesAdministrativo/CASA.png"))); // NOI18N
-        lbl_menuU.setText("Menu Principal");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(lbl_patitas_menu))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(jLabel6)
-                        .addGap(62, 62, 62)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_admin_menu)
-                            .addComponent(lbl_administrador_menu))))
-                .addContainerGap(77, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_usuariosM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_reportesM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_notificacionesM, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                    .addComponent(btn_salidaM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lbl_menuU, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        javax.swing.GroupLayout panelRedondeado2Layout = new javax.swing.GroupLayout(panelRedondeado2);
+        panelRedondeado2.setLayout(panelRedondeado2Layout);
+        panelRedondeado2Layout.setHorizontalGroup(
+            panelRedondeado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRedondeado2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 78, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(lbl_patitas_menu)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                        .addComponent(lbl_admin_menu)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbl_administrador_menu)
-                        .addGap(65, 65, 65)))
-                .addComponent(lbl_menuU, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+        panelRedondeado2Layout.setVerticalGroup(
+            panelRedondeado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRedondeado2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(btn_usuariosM)
-                .addGap(32, 32, 32)
-                .addComponent(btn_reportesM, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(btn_notificacionesM)
-                .addGap(128, 128, 128)
-                .addComponent(btn_salidaM, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
+                .addComponent(jLabel8)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 330, 740));
+        jPanel1.add(panelRedondeado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 90, 80));
+
+        botonSwing4.setText("Menú Principal");
+        botonSwing4.addActionListener(this::botonSwing4ActionPerformed);
+        jPanel1.add(botonSwing4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 60));
+
+        botonSwing1.setForeground(new java.awt.Color(39, 53, 38));
+        botonSwing1.setText("Usuarios");
+        botonSwing1.addActionListener(this::botonSwing1ActionPerformed);
+        jPanel1.add(botonSwing1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 250, 60));
+
+        btn_Calendario.setForeground(new java.awt.Color(39, 53, 38));
+        btn_Calendario.setText("Notificaciones");
+        btn_Calendario.addActionListener(this::btn_CalendarioActionPerformed);
+        jPanel1.add(btn_Calendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 250, 60));
+
+        btn_Reportes.setText("Reportes");
+        btn_Reportes.addActionListener(this::btn_ReportesActionPerformed);
+        jPanel1.add(btn_Reportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 250, 60));
+
+        btn_Salir.setText("Salir");
+        btn_Salir.addActionListener(this::btn_SalirActionPerformed);
+        jPanel1.add(btn_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 250, 60));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 740));
 
         jPanel2.setBackground(new java.awt.Color(228, 230, 217));
 
+        lbl_bienvenido_menu.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lbl_bienvenido_menu.setText("Bienvenido Admin");
+
+        jPanel3 = new provet.componentes.PanelRedondeado();
         jPanel3.setBackground(new java.awt.Color(192, 207, 178));
         jPanel3.setMaximumSize(new java.awt.Dimension(300, 600));
 
@@ -152,7 +123,8 @@ public class MenuAdmin extends javax.swing.JFrame {
         lbl_usuario_menu.setText("Usuarios");
 
         btn_usuarios2.setBackground(new java.awt.Color(228, 230, 217));
-        btn_usuarios2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_usuarios2.setFont(new java.awt.Font("Tahoma", 0, 18));
+        btn_usuarios2.setForeground(java.awt.Color.BLACK);
         btn_usuarios2.setText("ENTRAR");
         btn_usuarios2.setPreferredSize(new java.awt.Dimension(215, 70));
         btn_usuarios2.addActionListener(this::btn_usuarios2ActionPerformed);
@@ -189,9 +161,7 @@ public class MenuAdmin extends javax.swing.JFrame {
                 .addGap(42, 42, 42))
         );
 
-        lbl_bienvenido_menu.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        lbl_bienvenido_menu.setText("Bienvenido Admin");
-
+        jPanel4 = new provet.componentes.PanelRedondeado();
         jPanel4.setBackground(new java.awt.Color(192, 207, 178));
         jPanel4.setMaximumSize(new java.awt.Dimension(300, 150));
         jPanel4.setPreferredSize(new java.awt.Dimension(300, 150));
@@ -200,7 +170,8 @@ public class MenuAdmin extends javax.swing.JFrame {
         lbl_reportes_menu.setText("Reportes");
 
         btn_reportes2.setBackground(new java.awt.Color(228, 230, 217));
-        btn_reportes2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_reportes2.setFont(new java.awt.Font("Tahoma", 0, 18));
+        btn_reportes2.setForeground(java.awt.Color.BLACK);
         btn_reportes2.setText("ENTRAR");
         btn_reportes2.setPreferredSize(new java.awt.Dimension(215, 70));
         btn_reportes2.addActionListener(this::btn_reportes2ActionPerformed);
@@ -236,13 +207,15 @@ public class MenuAdmin extends javax.swing.JFrame {
                 .addGap(41, 41, 41))
         );
 
+        jPanel5 = new provet.componentes.PanelRedondeado();
         jPanel5.setBackground(new java.awt.Color(192, 207, 178));
 
         lbl_notificaciones_menu.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lbl_notificaciones_menu.setText("Notificaciones");
 
         btn_notificaciones.setBackground(new java.awt.Color(228, 230, 217));
-        btn_notificaciones.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_notificaciones.setFont(new java.awt.Font("Tahoma", 0, 18));
+        btn_notificaciones.setForeground(java.awt.Color.BLACK);
         btn_notificaciones.setText("ENTRAR");
         btn_notificaciones.setPreferredSize(new java.awt.Dimension(215, 70));
         btn_notificaciones.addActionListener(this::btn_notificacionesActionPerformed);
@@ -282,9 +255,9 @@ public class MenuAdmin extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(64, 64, 64)
+                .addGap(76, 76, 76)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(64, 64, 64)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -301,16 +274,22 @@ public class MenuAdmin extends javax.swing.JFrame {
                 .addComponent(lbl_bienvenido_menu)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE))
                 .addGap(100, 100, 100))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(326, 0, 1150, 740));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, 1210, 740));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botonSwing4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing4ActionPerformed
+    // Menú Principal - recargar la misma ventana
+    this.dispose();
+    new MenuAdmin().setVisible(true);
+    }//GEN-LAST:event_botonSwing4ActionPerformed
 
     private void btn_usuarios2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_usuarios2ActionPerformed
     new UsuariosAdmin().setVisible(true); 
@@ -322,30 +301,40 @@ public class MenuAdmin extends javax.swing.JFrame {
     this.dispose(); 
     }//GEN-LAST:event_btn_reportes2ActionPerformed
 
-    private void btn_reportesMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reportesMActionPerformed
-    new ReportesAdmin().setVisible(true); 
-    this.dispose();        
-    }//GEN-LAST:event_btn_reportesMActionPerformed
-
-    private void btn_salidaMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salidaMActionPerformed
-     new Login().setVisible(true); 
-    this.dispose();  
-    }//GEN-LAST:event_btn_salidaMActionPerformed
-
-    private void btn_usuariosMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_usuariosMActionPerformed
-    new UsuariosAdmin().setVisible(true); 
-    this.dispose();       
-    }//GEN-LAST:event_btn_usuariosMActionPerformed
-
-    private void btn_notificacionesMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_notificacionesMActionPerformed
-        new NotificacionesAdmin().setVisible(true); 
-    this.dispose();
-    }//GEN-LAST:event_btn_notificacionesMActionPerformed
-
     private void btn_notificacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_notificacionesActionPerformed
         new NotificacionesAdmin().setVisible(true); 
         this.dispose();
     }//GEN-LAST:event_btn_notificacionesActionPerformed
+
+    private void botonSwing1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing1ActionPerformed
+    new UsuariosAdmin().setVisible(true); 
+    this.dispose();
+    }//GEN-LAST:event_botonSwing1ActionPerformed
+
+    private void btn_CalendarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CalendarioActionPerformed
+    new NotificacionesAdmin().setVisible(true); 
+    this.dispose();
+    }//GEN-LAST:event_btn_CalendarioActionPerformed
+
+    private void btn_ReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReportesActionPerformed
+    new ReportesAdmin().setVisible(true); 
+    this.dispose();
+    }//GEN-LAST:event_btn_ReportesActionPerformed
+
+    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
+        int op = JOptionPane.showConfirmDialog(
+            this,
+            "¿Estás seguro de que deseas salir?",
+            "Confirmar salida",
+            JOptionPane.YES_NO_OPTION
+        );
+        
+        if (op == JOptionPane.YES_OPTION) {
+            new Login().setVisible(true); 
+            this.dispose();
+        }
+    }//GEN-LAST:event_btn_SalirActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -373,22 +362,27 @@ public class MenuAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_notificaciones;
-    private javax.swing.JButton btn_notificacionesM;
-    private javax.swing.JButton btn_reportes2;
-    private javax.swing.JButton btn_reportesM;
-    private javax.swing.JButton btn_salidaM;
-    private javax.swing.JButton btn_usuarios2;
-    private javax.swing.JButton btn_usuariosM;
+    private botonSwing botonSwing1;
+    private botonSwing botonSwing4;
+    private botonSwing btn_Calendario;
+    private botonSwing btn_Reportes;
+    private botonSwing btn_Salir;
+    private botonSwing btn_notificaciones;
+    private botonSwing btn_reportes2;
+    private botonSwing btn_usuarios2;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
+    private provet.componentes.PanelRedondeado jPanel3;
+    private provet.componentes.PanelRedondeado jPanel4;
+    private provet.componentes.PanelRedondeado jPanel5;
+    private provet.componentes.PanelRedondeado panelRedondeado2;
     private javax.swing.JLabel lbl_admin_menu;
     private javax.swing.JLabel lbl_administrador_menu;
     private javax.swing.JLabel lbl_bienvenido_menu;

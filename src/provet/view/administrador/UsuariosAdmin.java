@@ -1,5 +1,8 @@
 package provet.view.administrador;
 import java.awt.Component;
+import javax.swing.JOptionPane;
+import provet.view.inicio.Login;
+import provet.componentes.botonSwing;
 public class UsuariosAdmin extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(UsuariosAdmin.class.getName());
@@ -18,6 +21,12 @@ class Usuario {
     String nombre;
     String rol;
     String id;
+    String apellido = "";
+    String correo = "";
+    String telefono = "";
+    String especialidad = "";
+    String cedula = "";
+    String estado = "Activo";
 
     Usuario(String n, String r, String i) {
         nombre = n;
@@ -28,9 +37,21 @@ class Usuario {
     public String getNombre() { return nombre; }
     public String getRol() { return rol; }
     public String getId() { return id; }
+    public String getApellido() { return apellido; }
+    public String getCorreo() { return correo; }
+    public String getTelefono() { return telefono; }
+    public String getEspecialidad() { return especialidad; }
+    public String getCedula() { return cedula; }
+    public String getEstado() { return estado; }
 
     public void setNombre(String n) { nombre = n; }
     public void setRol(String r) { rol = r; }
+    public void setApellido(String a) { apellido = a; }
+    public void setCorreo(String c) { correo = c; }
+    public void setTelefono(String t) { telefono = t; }
+    public void setEspecialidad(String e) { especialidad = e; }
+    public void setCedula(String c) { cedula = c; }
+    public void setEstado(String e) { estado = e; }
 }
 
 public UsuariosAdmin() {
@@ -49,124 +70,86 @@ public UsuariosAdmin() {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        lbl_patitas_menu = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        lbl_admin_menu = new javax.swing.JLabel();
-        lbl_administrador_menu = new javax.swing.JLabel();
-        btn_reportesU = new javax.swing.JButton();
-        btn_notificacionesU = new javax.swing.JButton();
-        btn_salidaU = new javax.swing.JButton();
-        lbl_usuariosU = new javax.swing.JLabel();
-        btn_menuU = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        panelRedondeado2 = new provet.componentes.PanelRedondeado();
+        jLabel8 = new javax.swing.JLabel();
+        botonSwing4 = new botonSwing();
+        botonSwing1 = new botonSwing();
+        btn_Calendario = new botonSwing();
+        btn_Reportes = new botonSwing();
+        btn_Salir = new botonSwing();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(108, 135, 118));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbl_patitas_menu.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        lbl_patitas_menu.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_patitas_menu.setText("Patitas Care");
-        lbl_patitas_menu.setAutoscrolls(true);
+        jLabel6.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel6.setText("Nombre");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, -1, -1));
 
-        jLabel6.setText("Foto");
+        jLabel15.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel15.setText("PatitasCare");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
-        lbl_admin_menu.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl_admin_menu.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_admin_menu.setText("Admin");
+        jLabel16.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel16.setText("Administrador");
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
 
-        lbl_administrador_menu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lbl_administrador_menu.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_administrador_menu.setText("Administrador");
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesAdministrativo/usuario.png"))); // NOI18N
+        jLabel8.setText("jLabel8");
 
-        btn_reportesU.setBackground(new java.awt.Color(228, 230, 217));
-        btn_reportesU.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btn_reportesU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesAdministrativo/REPORTES2.png"))); // NOI18N
-        btn_reportesU.setText("Reportes");
-        btn_reportesU.setPreferredSize(new java.awt.Dimension(97, 29));
-        btn_reportesU.addActionListener(this::btn_reportesUActionPerformed);
-
-        btn_notificacionesU.setBackground(new java.awt.Color(228, 230, 217));
-        btn_notificacionesU.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btn_notificacionesU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesAdministrativo/NOTIFICACION2.png"))); // NOI18N
-        btn_notificacionesU.setText("Notificaciones");
-        btn_notificacionesU.addActionListener(this::btn_notificacionesUActionPerformed);
-
-        btn_salidaU.setBackground(new java.awt.Color(228, 230, 217));
-        btn_salidaU.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btn_salidaU.setText("Salida");
-
-        lbl_usuariosU.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lbl_usuariosU.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_usuariosU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesAdministrativo/USUARIO2.png"))); // NOI18N
-        lbl_usuariosU.setText("Usuarios");
-
-        btn_menuU.setBackground(new java.awt.Color(228, 230, 217));
-        btn_menuU.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btn_menuU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesAdministrativo/CASA.png"))); // NOI18N
-        btn_menuU.setText("Menu Principal");
-        btn_menuU.addActionListener(this::btn_menuUActionPerformed);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(lbl_patitas_menu))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(jLabel6)
-                        .addGap(62, 62, 62)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_admin_menu)
-                            .addComponent(lbl_administrador_menu))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 47, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_reportesU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_notificacionesU, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                    .addComponent(btn_salidaU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_menuU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(48, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(94, 94, 94)
-                .addComponent(lbl_usuariosU)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        javax.swing.GroupLayout panelRedondeado2Layout = new javax.swing.GroupLayout(panelRedondeado2);
+        panelRedondeado2.setLayout(panelRedondeado2Layout);
+        panelRedondeado2Layout.setHorizontalGroup(
+            panelRedondeado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRedondeado2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 78, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(lbl_patitas_menu)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                        .addComponent(lbl_admin_menu)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbl_administrador_menu)
-                        .addGap(85, 85, 85)))
-                .addComponent(btn_menuU, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(lbl_usuariosU, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(btn_reportesU, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(btn_notificacionesU, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(101, 101, 101)
-                .addComponent(btn_salidaU, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
+        panelRedondeado2Layout.setVerticalGroup(
+            panelRedondeado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRedondeado2Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 330, 740));
+        jPanel1.add(panelRedondeado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 90, 80));
+
+        botonSwing4.setText("Menú Principal");
+        botonSwing4.addActionListener(this::botonSwing4ActionPerformed);
+        jPanel1.add(botonSwing4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 60));
+
+        botonSwing1.setForeground(new java.awt.Color(39, 53, 38));
+        botonSwing1.setText("Usuarios");
+        jPanel1.add(botonSwing1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 250, 60));
+
+        btn_Calendario.setForeground(new java.awt.Color(39, 53, 38));
+        btn_Calendario.setText("Notificaciones");
+        btn_Calendario.addActionListener(this::btn_CalendarioActionPerformed);
+        jPanel1.add(btn_Calendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 250, 60));
+
+        btn_Reportes.setText("Reportes");
+        btn_Reportes.addActionListener(this::btn_ReportesActionPerformed);
+        jPanel1.add(btn_Reportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 250, 60));
+
+        btn_Salir.setText("Salir");
+        btn_Salir.addActionListener(this::btn_SalirActionPerformed);
+        jPanel1.add(btn_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 250, 60));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 740));
 
         jPanel2.setBackground(new java.awt.Color(228, 230, 217));
 
@@ -181,25 +164,39 @@ public UsuariosAdmin() {
             .addGap(0, 740, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(326, 0, 1150, 740));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, 1210, 740));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_reportesUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reportesUActionPerformed
-    new ReportesAdmin().setVisible(true); 
-    this.setVisible(false);
-    }//GEN-LAST:event_btn_reportesUActionPerformed
-
-    private void btn_menuUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_menuUActionPerformed
+    private void botonSwing4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing4ActionPerformed
     new MenuAdmin().setVisible(true); 
     this.setVisible(false);
-    }//GEN-LAST:event_btn_menuUActionPerformed
+    }//GEN-LAST:event_botonSwing4ActionPerformed
 
-    private void btn_notificacionesUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_notificacionesUActionPerformed
+    private void btn_CalendarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CalendarioActionPerformed
     new NotificacionesAdmin().setVisible(true); 
     this.setVisible(false);
-    }//GEN-LAST:event_btn_notificacionesUActionPerformed
+    }//GEN-LAST:event_btn_CalendarioActionPerformed
+
+    private void btn_ReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReportesActionPerformed
+    new ReportesAdmin().setVisible(true); 
+    this.setVisible(false);
+    }//GEN-LAST:event_btn_ReportesActionPerformed
+
+    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
+        int op = JOptionPane.showConfirmDialog(
+            this,
+            "¿Estás seguro de que deseas salir?",
+            "Confirmar salida",
+            JOptionPane.YES_NO_OPTION
+        );
+        
+        if (op == JOptionPane.YES_OPTION) {
+            new Login().setVisible(true); 
+            this.dispose(); 
+        }
+    }//GEN-LAST:event_btn_SalirActionPerformed
 
     private void construirUI() {
 
@@ -212,13 +209,11 @@ public UsuariosAdmin() {
     lblTotal = new javax.swing.JLabel("Total usuarios: 0");
     lblTotal.setFont(new java.awt.Font("Tahoma", 0, 14));
 
-    javax.swing.JButton btnNuevo = new javax.swing.JButton("+ Nuevo usuario");
+    botonSwing btnNuevo = new botonSwing();
+    btnNuevo.setText("+ Nuevo usuario");
     btnNuevo.setBackground(new java.awt.Color(108,135,118));
-    btnNuevo.setForeground(java.awt.Color.WHITE); // letras blancas
+    btnNuevo.setForeground(java.awt.Color.BLACK);
     btnNuevo.setFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 14)); 
-    btnNuevo.setOpaque(true);
-    btnNuevo.setBorderPainted(true);
-    btnNuevo.setFocusPainted(true);
     btnNuevo.setPreferredSize(new java.awt.Dimension(180, 35));
     btnNuevo.addActionListener(e -> abrirFormularioNuevo());
 
@@ -248,9 +243,9 @@ public UsuariosAdmin() {
     panelLista.repaint();
 }
     
-    private javax.swing.JPanel crearCard(Usuario u) {
+    private provet.componentes.PanelRedondeado crearCard(Usuario u) {
 
-    javax.swing.JPanel card = new javax.swing.JPanel();
+    provet.componentes.PanelRedondeado card = new provet.componentes.PanelRedondeado();
     card.setLayout(new java.awt.BorderLayout());
     card.setBackground(new java.awt.Color(192,207,178));
     card.setBorder(javax.swing.BorderFactory.createEmptyBorder(20,20,20,20));
@@ -260,8 +255,12 @@ public UsuariosAdmin() {
     panelIzq.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
     panelIzq.setOpaque(false);
 
-    javax.swing.JButton ver = new javax.swing.JButton("Ver datos");
-    javax.swing.JButton editar = new javax.swing.JButton("Editar");
+    botonSwing ver = new botonSwing();
+    ver.setText("Ver datos");
+    ver.setForeground(java.awt.Color.BLACK);
+    botonSwing editar = new botonSwing();
+    editar.setText("Editar");
+    editar.setForeground(java.awt.Color.BLACK);
 
     panelIzq.add(ver);
     panelIzq.add(editar);
@@ -296,17 +295,12 @@ public UsuariosAdmin() {
 
     // 🔹 EVENTOS
     ver.addActionListener(e -> {
-        javax.swing.JOptionPane.showMessageDialog(this,
-            "Nombre: " + u.getNombre() +
-            "\nID: " + u.getId() +
-            "\nRol: " + u.getRol(),
-            "Datos del usuario",
-            javax.swing.JOptionPane.INFORMATION_MESSAGE
-        );
+        UsuariosRegistro form = new UsuariosRegistro(this, "ver", u);
+        form.setVisible(true);
     });
 
     editar.addActionListener(e -> {
-        FormUsuario1 form = new FormUsuario1(this, u);
+        UsuariosRegistro form = new UsuariosRegistro(this, "editar", u);
         form.setVisible(true);
 
         if (form.isGuardado()) {
@@ -334,7 +328,7 @@ public UsuariosAdmin() {
 }
     
     private void abrirFormularioNuevo() {
-    FormUsuario1 form = new FormUsuario1(this);
+    UsuariosRegistro form = new UsuariosRegistro(this, "nuevo", null);
     form.setVisible(true);
 
     if (form.isGuardado()) {
@@ -369,16 +363,17 @@ cargarUsuarios();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_menuU;
-    private javax.swing.JButton btn_notificacionesU;
-    private javax.swing.JButton btn_reportesU;
-    private javax.swing.JButton btn_salidaU;
+    private botonSwing botonSwing1;
+    private botonSwing botonSwing4;
+    private botonSwing btn_Calendario;
+    private botonSwing btn_Reportes;
+    private botonSwing btn_Salir;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel lbl_admin_menu;
-    private javax.swing.JLabel lbl_administrador_menu;
-    private javax.swing.JLabel lbl_patitas_menu;
-    private javax.swing.JLabel lbl_usuariosU;
+    private provet.componentes.PanelRedondeado panelRedondeado2;
     // End of variables declaration//GEN-END:variables
 }
