@@ -18,23 +18,8 @@ public class notifi_secretario extends javax.swing.JFrame {
      */
     public notifi_secretario() {
         initComponents();
-        if (isUndecorated()) {
-    dispose();
-    setUndecorated(false);
-}
-
-// paneles se estiran
-getContentPane().removeAll();
-getContentPane().setLayout(new java.awt.BorderLayout());
-getContentPane().add(jPanel2, java.awt.BorderLayout.WEST);    // sidebar
-getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);  // contenido
-
-// 3) Sidebar mantiene 270px de ancho fijo
-jPanel2.setPreferredSize(new java.awt.Dimension(270, 0));
-
-// 4) Maximizar y cierre limpio
-setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /**
@@ -255,7 +240,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jLabel9.setText("NOTIFICACIONES");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, -1, 29));
 
-        jLabel96.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--calendar.png"))); // NOI18N
+        jLabel96.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/calendar.png"))); // NOI18N
 
         jLabel97.setBackground(new java.awt.Color(51, 255, 51));
         jLabel97.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -292,7 +277,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelRedondeado30Layout.createSequentialGroup()
                         .addComponent(text_field_notificacione_solicitud_cita27, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
                         .addComponent(text_field_fecha_notificacion_solicitud_cita28, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27))))
         );
@@ -308,12 +293,12 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
                             .addComponent(text_field_notificacione_solicitud_cita27, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(text_field_fecha_notificacion_solicitud_cita28, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel96))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         jPanel1.add(panelRedondeado30, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 1030, 120));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--error.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/cancel.png"))); // NOI18N
 
         jLabel29.setBackground(new java.awt.Color(51, 255, 51));
         jLabel29.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -345,7 +330,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelRedondeado2Layout.createSequentialGroup()
                         .addComponent(text_field_notificacione_solicitud_cancelacion, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
                         .addComponent(text_field_fecha_notificacion_cancelacion_cita, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28))))
         );
@@ -361,12 +346,12 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
                             .addComponent(text_field_notificacione_solicitud_cancelacion, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(text_field_fecha_notificacion_cancelacion_cita, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel3))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jPanel1.add(panelRedondeado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, 1030, 120));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--cloud-upload.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/cloud.png"))); // NOI18N
 
         jLabel30.setBackground(new java.awt.Color(51, 255, 51));
         jLabel30.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -403,7 +388,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelRedondeado3Layout.createSequentialGroup()
                         .addComponent(text_field_notificacione_cliente_subioArchivos, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
                         .addComponent(text_field_fecha_notificacion_subio_archivos, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31))))
         );
@@ -419,7 +404,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
                             .addComponent(text_field_notificacione_cliente_subioArchivos, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(text_field_fecha_notificacion_subio_archivos, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel4))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         jPanel1.add(panelRedondeado3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 480, 1030, 120));
@@ -494,14 +479,14 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
 
     private void btn_CalendarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CalendarioActionPerformed
         EditarPacientes_secretario menu = new EditarPacientes_secretario();
-        menu.setVisible(true);
-        this.dispose();  // TODO add your handling code here:
+    menu.setVisible(true);
+    this.dispose();  // TODO add your handling code here:
     }//GEN-LAST:event_btn_CalendarioActionPerformed
 
     private void btn_ReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReportesActionPerformed
     Reporte_secretario menu = new Reporte_secretario();
     menu.setVisible(true);
-    this.dispose();    // TODO add your handling code here:
+    this.dispose();   // TODO add your handling code here:
     }//GEN-LAST:event_btn_ReportesActionPerformed
 
     /**

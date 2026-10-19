@@ -6,6 +6,7 @@ package provet.view.secretario;
 
 import javax.swing.JFrame;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,25 +18,118 @@ public class EditarPacientes_secretario extends javax.swing.JFrame {
      * Creates new form EditarPacientes_secretario
      */
     public EditarPacientes_secretario() {
-        initComponents();
-        if (isUndecorated()) {
-    dispose();
-    setUndecorated(false);
-}
+    initComponents();
 
-// paneles se estiran
-getContentPane().removeAll();
-getContentPane().setLayout(new java.awt.BorderLayout());
-getContentPane().add(jPanel2, java.awt.BorderLayout.WEST);    // sidebar
-getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);  // contenido
+    // Poblar combo de filtro con especies reales
+    jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(
+        new String[]{"Todos", "Perro", "Gato", "Hamster", "Ardilla", "Uron", "Cuyo", "Conejo", "Especie diferente"}
+    ));
 
-// 3) Sidebar mantiene 270px de ancho fijo
-jPanel2.setPreferredSize(new java.awt.Dimension(270, 0));
+    cargarTabla();
 
-// 4) Maximizar y cierre limpio
-setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-setExtendedState(JFrame.MAXIMIZED_BOTH);
+    // --- Búsqueda en tiempo real ---
+    jTextField_bucarPaciente.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+        public void insertUpdate(javax.swing.event.DocumentEvent e)  { filtrarTabla(); }
+        public void removeUpdate(javax.swing.event.DocumentEvent e)  { filtrarTabla(); }
+        public void changedUpdate(javax.swing.event.DocumentEvent e) { filtrarTabla(); }
+    });
+
+    // --- Filtro por especie ---
+    jComboBox1.addActionListener(e -> filtrarTabla());
+
+    // --- Selección de fila ---
+    jTableBuscarPaciente.getSelectionModel().addListSelectionListener(e -> {
+        int fila = jTableBuscarPaciente.getSelectedRow();
+        if (fila != -1) {
+            System.out.println("Paciente seleccionado: " + jTableBuscarPaciente.getValueAt(fila, 1));
+        }
+    });
+
+    // --- Dar de baja ---
+    boton_dar_de_baja.addActionListener(e -> {
+        int fila = jTableBuscarPaciente.getSelectedRow();
+        if (fila == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Selecciona un paciente de la tabla primero.", "Sin selección", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        String idSeleccionado = jTableBuscarPaciente.getValueAt(fila, 0).toString();
+        String nombreSeleccionado = jTableBuscarPaciente.getValueAt(fila, 1).toString();
+        int confirm = javax.swing.JOptionPane.showConfirmDialog(this,
+            "¿Seguro que deseas dar de baja a \"" + nombreSeleccionado + "\"?",
+            "Confirmar baja", javax.swing.JOptionPane.YES_NO_OPTION, javax.swing.JOptionPane.WARNING_MESSAGE);
+        if (confirm == javax.swing.JOptionPane.YES_OPTION) {
+            Datos.pacientes.removeIf(p -> p.getId().equals(idSeleccionado));
+            Datos.sincronizarConVeterinario();
+            cargarTabla();
+            javax.swing.JOptionPane.showMessageDialog(this, "Paciente dado de baja correctamente.");
+        }
+    });
+
+    // --- Ver detalles ---
+    boton_ver_detalles.addActionListener(e -> {
+        int fila = jTableBuscarPaciente.getSelectedRow();
+        if (fila == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Selecciona un paciente de la tabla primero.", "Sin selección", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        String idSeleccionado = jTableBuscarPaciente.getValueAt(fila, 0).toString();
+        for (Paciente p : Datos.pacientes) {
+            if (p.getId().equals(idSeleccionado)) {
+                String detalles = "ID: " + p.getId() + "\n"
+                    + "Nombre: " + p.getNombre() + "\n"
+                    + "Especie: " + p.getEspecie() + "\n"
+                    + "Raza: " + p.getRaza() + "\n"
+                    + "Edad: " + p.getEdad() + " años\n"
+                    + "Peso: " + p.getPeso() + " kg\n"
+                    + "Sexo: " + p.getSexo() + "\n"
+                    + "Estado: " + p.getEstado() + "\n"
+                    + "Alergias: " + p.getAlergias() + "\n"
+                    + "Vacunas: " + p.getVacunas();
+                javax.swing.JOptionPane.showMessageDialog(this, detalles, "Detalle del paciente", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                break;
+            }
+        }
+    });
+
+    if(isUndecorated()){
+
+        dispose();
+
+        setUndecorated(false);
+
     }
+
+    getContentPane().removeAll();
+
+    getContentPane().setLayout(
+        new java.awt.BorderLayout()
+    );
+
+    getContentPane().add(
+        jPanel2,
+        java.awt.BorderLayout.WEST
+    );
+
+    getContentPane().add(
+        jPanel1,
+        java.awt.BorderLayout.CENTER
+    );
+
+    jPanel2.setPreferredSize(
+        new java.awt.Dimension(
+            270,
+            0
+        )
+    );
+
+    setDefaultCloseOperation(
+        DISPOSE_ON_CLOSE
+    );
+
+    setExtendedState(
+        JFrame.MAXIMIZED_BOTH
+    );
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -171,14 +265,9 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jScrollPane1.setViewportView(jTableBuscarPaciente);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 1120, 380));
-
-        jTextField_bucarPaciente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_bucarPacienteActionPerformed(evt);
-            }
-        });
         jPanel1.add(jTextField_bucarPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 840, 40));
 
+        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Filtrar", "Item 2", "Item 3", "Item 4" }));
         jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 70, 250, 40));
 
@@ -190,6 +279,11 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         boton_editar.setBackground(new java.awt.Color(108, 135, 118));
         boton_editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/lapiz.png"))); // NOI18N
         boton_editar.setText("Editar");
+        boton_editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_editarActionPerformed(evt);
+            }
+        });
         jPanel1.add(boton_editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 609, 240, 50));
 
         boton_ver_detalles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/eye.png"))); // NOI18N
@@ -252,10 +346,67 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     this.dispose();    // TODO add your handling code here:
     }//GEN-LAST:event_btn_ReportesActionPerformed
 
-    private void jTextField_bucarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_bucarPacienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_bucarPacienteActionPerformed
+    private void boton_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_editarActionPerformed
+        int fila = jTableBuscarPaciente.getSelectedRow();
+        if (fila == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Selecciona un paciente de la tabla primero.", "Sin selección", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        String idSeleccionado = jTableBuscarPaciente.getValueAt(fila, 0).toString();
+        for (Paciente p : Datos.pacientes) {
+            if (p.getId().equals(idSeleccionado)) {
+                int idx = Datos.pacientes.indexOf(p);
+                editar_paciente editor = new editar_paciente(p, idx, null);
+                editor.setVisible(true);
+                EditarPacientes_secretario.this.dispose();
+                break;
+            }
+        }
+    }//GEN-LAST:event_boton_editarActionPerformed
 
+    private void cargarTabla() {
+        javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) jTableBuscarPaciente.getModel();
+        modelo.setRowCount(0);
+        for (Paciente p : Datos.pacientes) {
+            modelo.addRow(new Object[]{
+                p.getId(),
+                p.getNombre(),
+                p.getEspecie(),
+                p.getRaza(),
+                p.getEdad(),
+                p.getEstado()
+            });
+        }
+    }
+
+    private void filtrarTabla() {
+        String textoBusqueda = jTextField_bucarPaciente.getText().trim().toLowerCase();
+        String especieFiltro = jComboBox1.getSelectedItem() != null ? jComboBox1.getSelectedItem().toString() : "Todos";
+
+        javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) jTableBuscarPaciente.getModel();
+        modelo.setRowCount(0);
+
+        for (Paciente p : Datos.pacientes) {
+            boolean coincideTexto = textoBusqueda.isEmpty()
+                || p.getId().toLowerCase().contains(textoBusqueda)
+                || p.getNombre().toLowerCase().contains(textoBusqueda)
+                || p.getRaza().toLowerCase().contains(textoBusqueda);
+
+            boolean coincideEspecie = especieFiltro.equals("Todos")
+                || p.getEspecie().equalsIgnoreCase(especieFiltro);
+
+            if (coincideTexto && coincideEspecie) {
+                modelo.addRow(new Object[]{
+                    p.getId(),
+                    p.getNombre(),
+                    p.getEspecie(),
+                    p.getRaza(),
+                    p.getEdad(),
+                    p.getEstado()
+                });
+            }
+        }
+    }
     /**
      * @param args the command line arguments
      */

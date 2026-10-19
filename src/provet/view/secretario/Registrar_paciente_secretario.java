@@ -5,6 +5,7 @@
 package provet.view.secretario;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
@@ -61,19 +62,19 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jLabel12 = new javax.swing.JLabel();
         jTextField_id = new javax.swing.JTextField();
         jTextField_nombre = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jTextField_raza = new javax.swing.JTextField();
         jTextField_edad = new javax.swing.JTextField();
         jTextField_peso = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        jCombo_sexo = new javax.swing.JComboBox<>();
+        jCombo_estado = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea_alergias = new javax.swing.JTextArea();
+        jTextArea_alergia = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea_vacunas = new javax.swing.JTextArea();
+        jCombo_especie = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -116,11 +117,21 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         boton_guardar.setBackground(new java.awt.Color(108, 135, 118));
         boton_guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/guardar_1.png"))); // NOI18N
         boton_guardar.setText("Guardar");
+        boton_guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_guardarActionPerformed(evt);
+            }
+        });
         jPanel1.add(boton_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 609, 240, 50));
 
         boton_limpiar.setBackground(new java.awt.Color(108, 135, 118));
         boton_limpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/clean.png"))); // NOI18N
         boton_limpiar.setText("Limpiar");
+        boton_limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_limpiarActionPerformed(evt);
+            }
+        });
         jPanel1.add(boton_limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 610, 240, 50));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -142,11 +153,14 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel12.setText("Edad:");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 160, -1, -1));
+
+        jTextField_id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_idActionPerformed(evt);
+            }
+        });
         jPanel1.add(jTextField_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 152, 300, 30));
         jPanel1.add(jTextField_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 242, 300, 30));
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 342, 300, 30));
 
         jTextField_raza.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,11 +175,13 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jLabel13.setText("Peso:");
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 250, -1, -1));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 342, 130, 30));
+        jCombo_sexo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCombo_sexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Macho", "Hembra", "No binario" }));
+        jPanel1.add(jCombo_sexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 342, 130, 30));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 452, 120, 30));
+        jCombo_estado.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCombo_estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Muy bien", "Bien", "Normal", "Mal", "Muy mal" }));
+        jPanel1.add(jCombo_estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 452, 120, 30));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel14.setText("Años.");
@@ -175,9 +191,9 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jLabel17.setText("Alergias:");
         jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 160, -1, -1));
 
-        jTextArea_alergias.setColumns(20);
-        jTextArea_alergias.setRows(5);
-        jScrollPane1.setViewportView(jTextArea_alergias);
+        jTextArea_alergia.setColumns(20);
+        jTextArea_alergia.setRows(5);
+        jScrollPane1.setViewportView(jTextArea_alergia);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 150, 280, 160));
 
@@ -186,6 +202,10 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jScrollPane2.setViewportView(jTextArea_vacunas);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 340, 280, 170));
+
+        jCombo_especie.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCombo_especie.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Perro", "Gato", "Hamster", "Ardilla", "Uron", "Cuyo", "Conejo", "Especie diferente" }));
+        jPanel1.add(jCombo_especie, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 340, 300, 30));
 
         jPanel2.setBackground(new java.awt.Color(108, 135, 118));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -313,6 +333,72 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     this.dispose();     // TODO add your handling code here:
     }//GEN-LAST:event_btn_ReportesActionPerformed
 
+    private void boton_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_guardarActionPerformed
+        String id     = jTextField_id.getText().trim();
+        String nombre = jTextField_nombre.getText().trim();
+        String raza   = jTextField_raza.getText().trim();
+        String edadTxt = jTextField_edad.getText().trim();
+        String pesoTxt = jTextField_peso.getText().trim();
+
+        // Validaciones básicas
+        if (id.isEmpty() || nombre.isEmpty() || raza.isEmpty() || edadTxt.isEmpty() || pesoTxt.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor completa todos los campos obligatorios.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Verificar ID duplicado
+        for (Paciente existente : Datos.pacientes) {
+            if (existente.getId().equalsIgnoreCase(id)) {
+                JOptionPane.showMessageDialog(this, "Ya existe un paciente con ese ID.", "ID duplicado", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+
+        int edad, peso;
+        try {
+            edad = Integer.parseInt(edadTxt);
+            peso = Integer.parseInt(pesoTxt);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Edad y Peso deben ser números enteros.", "Datos inválidos", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String especie  = jCombo_especie.getSelectedItem().toString();
+        String estado   = jCombo_estado.getSelectedItem().toString();
+        String sexo     = jCombo_sexo.getSelectedItem().toString();
+        String alergias = jTextArea_alergia.getText().trim();
+        String vacunas  = jTextArea_vacunas.getText().trim();
+
+        // Guardar en la lista del secretario
+        Paciente p = new Paciente(id, nombre, especie, raza, edad, peso, sexo, estado, alergias, vacunas);
+        Datos.pacientes.add(p);
+
+        // *** Sincronizar con el módulo del veterinario ***
+        Datos.sincronizarConVeterinario();
+
+        JOptionPane.showMessageDialog(this, "Paciente \"" + nombre + "\" registrado correctamente.\nYa está disponible en el módulo del veterinario.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+        // Limpiar formulario
+        boton_limpiarActionPerformed(null);
+    }//GEN-LAST:event_boton_guardarActionPerformed
+
+    private void boton_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_limpiarActionPerformed
+        jTextField_id.setText("");
+        jTextField_nombre.setText("");
+        jTextField_raza.setText("");
+        jTextField_edad.setText("");
+        jTextField_peso.setText("");
+        jTextArea_alergia.setText("");
+        jTextArea_vacunas.setText("");
+        jCombo_especie.setSelectedIndex(0);
+        jCombo_estado.setSelectedIndex(0);
+        jCombo_sexo.setSelectedIndex(0);
+    }//GEN-LAST:event_boton_limpiarActionPerformed
+
+    private void jTextField_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_idActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_idActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -356,9 +442,9 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     private provet.componentes.botonSwing btn_Calendario;
     private provet.componentes.botonSwing btn_Reportes;
     private provet.componentes.botonSwing btn_Salir;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> jCombo_especie;
+    private javax.swing.JComboBox<String> jCombo_estado;
+    private javax.swing.JComboBox<String> jCombo_sexo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -380,7 +466,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea_alergias;
+    private javax.swing.JTextArea jTextArea_alergia;
     private javax.swing.JTextArea jTextArea_vacunas;
     private javax.swing.JTextField jTextField_edad;
     private javax.swing.JTextField jTextField_id;

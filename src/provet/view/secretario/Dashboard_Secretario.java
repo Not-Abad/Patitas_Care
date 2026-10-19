@@ -18,6 +18,20 @@ public class Dashboard_Secretario extends javax.swing.JFrame {
      */
     public Dashboard_Secretario() {
         initComponents();
+        actualizarDashboard();
+
+        // Botones que no tienen ActionListener en el initComponents generado
+        boton_pendientes.addActionListener(e -> {
+            pendiente_secretario menu = new pendiente_secretario();
+            menu.setVisible(true);
+            this.dispose();
+        });
+        boton_entrar_notificaciones.addActionListener(e -> {
+            notifi_secretario menu = new notifi_secretario();
+            menu.setVisible(true);
+            this.dispose();
+        });
+
         if (isUndecorated()) {
     dispose();
     setUndecorated(false);
@@ -52,20 +66,20 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jLabel17 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        jLabel_notificaciones = new javax.swing.JLabel();
         boton_entrar_notificaciones = new provet.componentes.botonSwing();
         panel_cirugias_pendientes = new provet.componentes.PanelRedondeado();
         jLabel7 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
+        jLabel_reportes = new javax.swing.JLabel();
         boton_entrar_reportes = new provet.componentes.botonSwing();
         panel_citas_pendientes = new provet.componentes.PanelRedondeado();
         jLabel5 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
+        jLabel_citas = new javax.swing.JLabel();
         boton_entrar_citasPendientes = new provet.componentes.botonSwing();
         jLabel9 = new javax.swing.JLabel();
         panel_cirugias_pendientes2 = new provet.componentes.PanelRedondeado();
@@ -106,11 +120,15 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jLabel13.setText("Nuevas notificaciones");
         panel_cirugias_pendientes1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
 
-        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
-        jLabel14.setText("0");
-        panel_cirugias_pendientes1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, -1, -1));
+        jLabel_notificaciones.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        panel_cirugias_pendientes1.add(jLabel_notificaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, 30, 50));
 
         boton_entrar_notificaciones.setText("Entrar");
+        boton_entrar_notificaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_entrar_notificacionesActionPerformed(evt);
+            }
+        });
         panel_cirugias_pendientes1.add(boton_entrar_notificaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, -1, -1));
 
         jPanel1.add(panel_cirugias_pendientes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 210, 270, 410));
@@ -131,9 +149,8 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jLabel10.setText("Reportes disponibles");
         panel_cirugias_pendientes.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
 
-        jLabel27.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
-        jLabel27.setText("0");
-        panel_cirugias_pendientes.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, -1, -1));
+        jLabel_reportes.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        panel_cirugias_pendientes.add(jLabel_reportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, 30, 50));
 
         boton_entrar_reportes.setText("Entrar");
         boton_entrar_reportes.addActionListener(new java.awt.event.ActionListener() {
@@ -167,9 +184,8 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jLabel11.setText("Citas para hoy");
         panel_citas_pendientes.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, -1, -1));
 
-        jLabel24.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
-        jLabel24.setText("0");
-        panel_citas_pendientes.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, -1, -1));
+        jLabel_citas.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        panel_citas_pendientes.add(jLabel_citas, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 30, 50));
 
         boton_entrar_citasPendientes.setText("Entrar");
         boton_entrar_citasPendientes.addActionListener(new java.awt.event.ActionListener() {
@@ -308,21 +324,26 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     }// </editor-fold>//GEN-END:initComponents
 
     private void boton_notificacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_notificacionesActionPerformed
-        // TODO add your handling code here:
+        notifi_secretario menu = new notifi_secretario();
+        menu.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_boton_notificacionesActionPerformed
 
     private void boton_entrar_citasPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_entrar_citasPendientesActionPerformed
-        // TODO add your handling code here:
+        Citas_pendientes_secretario citas = new Citas_pendientes_secretario();
+        citas.setVisible(true);
+        this.dispose(); // opcional (cierra el menú)
     }//GEN-LAST:event_boton_entrar_citasPendientesActionPerformed
 
     private void boton_entrar_reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_entrar_reportesActionPerformed
-        // TODO add your handling code here:
+        Reporte_secretario menu = new Reporte_secretario();
+        menu.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_boton_entrar_reportesActionPerformed
 
     private void botonSwing3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing3ActionPerformed
-        Dashboard_Secretario menu = new Dashboard_Secretario();
-        menu.setVisible(true);
-        this.dispose();
+        // Ya estamos en el Dashboard, solo recargar contadores
+        actualizarDashboard();
     }//GEN-LAST:event_botonSwing3ActionPerformed
 
     private void botonSwing1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing1ActionPerformed
@@ -347,6 +368,21 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     this.dispose();    // TODO add your handling code here:
     }//GEN-LAST:event_btn_ReportesActionPerformed
 
+    private void boton_entrar_notificacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_entrar_notificacionesActionPerformed
+        notifi_secretario menu = new notifi_secretario();
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_boton_entrar_notificacionesActionPerformed
+
+    public void refrescar() {
+    actualizarDashboard();
+    }
+    
+    private void actualizarDashboard() {
+        jLabel_citas.setText(String.valueOf(Datos.citas.size()));
+        jLabel_reportes.setText(String.valueOf(Datos.pacientes.size()));
+        jLabel_notificaciones.setText("3");
+    }
     /**
      * @param args the command line arguments
      */
@@ -399,13 +435,10 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -413,6 +446,9 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel_citas;
+    private javax.swing.JLabel jLabel_notificaciones;
+    private javax.swing.JLabel jLabel_reportes;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private provet.componentes.PanelRedondeado panel_cirugias_pendientes;

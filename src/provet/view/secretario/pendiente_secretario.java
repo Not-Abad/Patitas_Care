@@ -152,7 +152,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jLabel9.setText("NOTIFICACIONES");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, -1, 29));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--calendar.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/calendar.png"))); // NOI18N
 
         jLabel17.setBackground(new java.awt.Color(51, 255, 51));
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -164,7 +164,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         boton_numero_solicitudCita.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         boton_flecha_solicitudCita.setBackground(new java.awt.Color(242, 242, 242));
-        boton_flecha_solicitudCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/arrow.png"))); // NOI18N
+        boton_flecha_solicitudCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/arrow.png"))); // NOI18N
         boton_flecha_solicitudCita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boton_flecha_solicitudCitaActionPerformed(evt);
@@ -180,7 +180,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel17)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 535, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 532, Short.MAX_VALUE)
                 .addComponent(boton_numero_solicitudCita, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
                 .addComponent(boton_flecha_solicitudCita, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -191,7 +191,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
             .addGroup(panelRedondeado1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel2)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelRedondeado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -204,7 +204,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         jPanel1.add(panelRedondeado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 1030, 120));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--error.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/cancel.png"))); // NOI18N
 
         jLabel23.setBackground(new java.awt.Color(51, 255, 51));
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -216,7 +216,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         boton_numero_cancelacionCita.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         boton_flecha_cancelacionCita.setBackground(new java.awt.Color(242, 242, 242));
-        boton_flecha_cancelacionCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/arrow.png"))); // NOI18N
+        boton_flecha_cancelacionCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/arrow.png"))); // NOI18N
         boton_flecha_cancelacionCita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boton_flecha_cancelacionCitaActionPerformed(evt);
@@ -243,7 +243,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
             .addGroup(panelRedondeado2Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel3)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelRedondeado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,7 +256,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         jPanel1.add(panelRedondeado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 1030, 120));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ix--cloud-upload.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/cloud.png"))); // NOI18N
 
         jLabel24.setBackground(new java.awt.Color(51, 255, 51));
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -268,7 +268,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         boton_cliente_ArchivoRevisar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         botonSwing8.setBackground(new java.awt.Color(242, 242, 242));
-        botonSwing8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/arrow.png"))); // NOI18N
+        botonSwing8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/arrow.png"))); // NOI18N
         botonSwing8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonSwing8ActionPerformed(evt);
@@ -284,7 +284,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel24)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 554, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 548, Short.MAX_VALUE)
                 .addComponent(boton_cliente_ArchivoRevisar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
                 .addComponent(botonSwing8, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -303,7 +303,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
                             .addGroup(panelRedondeado3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(boton_cliente_ArchivoRevisar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel24)))))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         jPanel1.add(panelRedondeado3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 440, 1030, 120));
