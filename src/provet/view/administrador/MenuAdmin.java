@@ -2,6 +2,9 @@ package provet.view.administrador;
 import javax.swing.JOptionPane;
 import provet.view.inicio.Login;
 import provet.componentes.botonSwing;
+import provet.componentes.PanelRedondeado;
+import javax.swing.*;
+import java.awt.*;
 public class MenuAdmin extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MenuAdmin.class.getName());
@@ -31,6 +34,7 @@ public class MenuAdmin extends javax.swing.JFrame {
         btn_usuarios2 = new botonSwing();
         jLabel2 = new javax.swing.JLabel();
         lbl_bienvenido_menu = new javax.swing.JLabel();
+        lbl_bienvenido_sub = new javax.swing.JLabel();
         jPanel4 = new provet.componentes.PanelRedondeado();
         lbl_reportes_menu = new javax.swing.JLabel();
         btn_reportes2 = new botonSwing();
@@ -112,21 +116,22 @@ public class MenuAdmin extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(228, 230, 217));
 
-        lbl_bienvenido_menu.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        lbl_bienvenido_menu.setText("Bienvenido Admin");
+        lbl_bienvenido_menu.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbl_bienvenido_menu.setForeground(new java.awt.Color(39, 53, 38));
+        lbl_bienvenido_menu.setText("¡HOLA ADMINISTRADOR!");
+
+        lbl_bienvenido_sub.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbl_bienvenido_sub.setText("Bienvenido a tu espacio PatitasCare");
 
         jPanel3 = new provet.componentes.PanelRedondeado();
         jPanel3.setBackground(new java.awt.Color(192, 207, 178));
         jPanel3.setMaximumSize(new java.awt.Dimension(300, 600));
+        jPanel3.setPreferredSize(new java.awt.Dimension(300, 600));
 
         lbl_usuario_menu.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lbl_usuario_menu.setText("Usuarios");
 
-        btn_usuarios2.setBackground(new java.awt.Color(228, 230, 217));
-        btn_usuarios2.setFont(new java.awt.Font("Tahoma", 0, 18));
-        btn_usuarios2.setForeground(java.awt.Color.BLACK);
-        btn_usuarios2.setText("ENTRAR");
-        btn_usuarios2.setPreferredSize(new java.awt.Dimension(215, 70));
+        btn_usuarios2.setText("Entrar");
         btn_usuarios2.addActionListener(this::btn_usuarios2ActionPerformed);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesAdministrativo/usuario.png"))); // NOI18N
@@ -135,30 +140,24 @@ public class MenuAdmin extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(73, 73, 73))
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(btn_usuarios2, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
-                        .addComponent(lbl_usuario_menu)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(lbl_usuario_menu)
+                    .addComponent(jLabel2)
+                    .addComponent(btn_usuarios2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(120, 120, 120)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbl_usuario_menu)
-                .addGap(51, 51, 51)
+                .addGap(46, 46, 46)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
-                .addComponent(btn_usuarios2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42))
+                .addGap(85, 85, 85)
+                .addComponent(btn_usuarios2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41))
         );
 
         jPanel4 = new provet.componentes.PanelRedondeado();
@@ -169,11 +168,7 @@ public class MenuAdmin extends javax.swing.JFrame {
         lbl_reportes_menu.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lbl_reportes_menu.setText("Reportes");
 
-        btn_reportes2.setBackground(new java.awt.Color(228, 230, 217));
-        btn_reportes2.setFont(new java.awt.Font("Tahoma", 0, 18));
-        btn_reportes2.setForeground(java.awt.Color.BLACK);
-        btn_reportes2.setText("ENTRAR");
-        btn_reportes2.setPreferredSize(new java.awt.Dimension(215, 70));
+        btn_reportes2.setText("Entrar");
         btn_reportes2.addActionListener(this::btn_reportes2ActionPerformed);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesAdministrativo/reportes.png"))); // NOI18N
@@ -183,17 +178,12 @@ public class MenuAdmin extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(46, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(btn_reportes2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(79, 79, 79))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(lbl_reportes_menu)
-                        .addGap(92, 92, 92))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(lbl_reportes_menu)
+                    .addComponent(jLabel4)
+                    .addComponent(btn_reportes2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,15 +199,13 @@ public class MenuAdmin extends javax.swing.JFrame {
 
         jPanel5 = new provet.componentes.PanelRedondeado();
         jPanel5.setBackground(new java.awt.Color(192, 207, 178));
+        jPanel5.setMaximumSize(new java.awt.Dimension(300, 600));
+        jPanel5.setPreferredSize(new java.awt.Dimension(300, 600));
 
         lbl_notificaciones_menu.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lbl_notificaciones_menu.setText("Notificaciones");
 
-        btn_notificaciones.setBackground(new java.awt.Color(228, 230, 217));
-        btn_notificaciones.setFont(new java.awt.Font("Tahoma", 0, 18));
-        btn_notificaciones.setForeground(java.awt.Color.BLACK);
-        btn_notificaciones.setText("ENTRAR");
-        btn_notificaciones.setPreferredSize(new java.awt.Dimension(215, 70));
+        btn_notificaciones.setText("Entrar");
         btn_notificaciones.addActionListener(this::btn_notificacionesActionPerformed);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesAdministrativo/notificacion.png"))); // NOI18N
@@ -227,27 +215,23 @@ public class MenuAdmin extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(btn_notificaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbl_notificaciones_menu)
-                            .addComponent(jLabel3))
-                        .addGap(78, 78, 78))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(lbl_notificaciones_menu)
+                    .addComponent(jLabel3)
+                    .addComponent(btn_notificaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbl_notificaciones_menu)
-                .addGap(55, 55, 55)
+                .addGap(46, 46, 46)
                 .addComponent(jLabel3)
-                .addGap(75, 75, 75)
+                .addGap(85, 85, 85)
                 .addComponent(btn_notificaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43))
+                .addGap(41, 41, 41))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -255,16 +239,18 @@ public class MenuAdmin extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(76, 76, 76)
+                .addGap(50, 50, 50)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65))
+                .addGap(50, 50, 50))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(74, 74, 74)
-                .addComponent(lbl_bienvenido_menu)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_bienvenido_menu)
+                    .addComponent(lbl_bienvenido_sub))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -272,7 +258,9 @@ public class MenuAdmin extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(53, 53, 53)
                 .addComponent(lbl_bienvenido_menu)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addGap(10, 10, 10)
+                .addComponent(lbl_bienvenido_sub)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
@@ -322,18 +310,60 @@ public class MenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_ReportesActionPerformed
 
     private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
-        int op = JOptionPane.showConfirmDialog(
-            this,
+        mostrarDialogoConfirmacion(
             "¿Estás seguro de que deseas salir?",
             "Confirmar salida",
-            JOptionPane.YES_NO_OPTION
+            () -> {
+                new Login().setVisible(true);
+                this.dispose();
+            }
         );
-        
-        if (op == JOptionPane.YES_OPTION) {
-            new Login().setVisible(true); 
-            this.dispose();
-        }
     }//GEN-LAST:event_btn_SalirActionPerformed
+
+    private void mostrarDialogoConfirmacion(String mensaje, String titulo, Runnable accionConfirmar) {
+        JDialog dialog = new JDialog(this, titulo, true);
+        dialog.setLayout(new BorderLayout());
+        dialog.setSize(450, 220);
+        dialog.setLocationRelativeTo(this);
+        dialog.setUndecorated(true);
+
+        PanelRedondeado panel = new PanelRedondeado();
+        panel.setLayout(new BorderLayout());
+        panel.setBackground(new java.awt.Color(192, 207, 178));
+        panel.setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
+
+        JLabel lblMensaje = new JLabel(mensaje, SwingConstants.CENTER);
+        lblMensaje.setFont(new java.awt.Font("Tahoma", 0, 14));
+        lblMensaje.setForeground(new java.awt.Color(39, 53, 38));
+
+        JPanel panelBotones = new JPanel();
+        panelBotones.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 15));
+        panelBotones.setOpaque(false);
+
+        botonSwing btnSi = new botonSwing();
+        btnSi.setText("Sí");
+        btnSi.setForeground(new java.awt.Color(39, 53, 38));
+        btnSi.setPreferredSize(new Dimension(120, 45));
+        btnSi.addActionListener(e -> {
+            accionConfirmar.run();
+            dialog.dispose();
+        });
+
+        botonSwing btnNo = new botonSwing();
+        btnNo.setText("No");
+        btnNo.setForeground(new java.awt.Color(39, 53, 38));
+        btnNo.setPreferredSize(new Dimension(120, 45));
+        btnNo.addActionListener(e -> dialog.dispose());
+
+        panelBotones.add(btnSi);
+        panelBotones.add(btnNo);
+
+        panel.add(lblMensaje, BorderLayout.CENTER);
+        panel.add(panelBotones, BorderLayout.SOUTH);
+
+        dialog.add(panel);
+        dialog.setVisible(true);
+    }
 
 
     /**
@@ -386,6 +416,7 @@ public class MenuAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_admin_menu;
     private javax.swing.JLabel lbl_administrador_menu;
     private javax.swing.JLabel lbl_bienvenido_menu;
+    private javax.swing.JLabel lbl_bienvenido_sub;
     private javax.swing.JLabel lbl_menuU;
     private javax.swing.JLabel lbl_notificaciones_menu;
     private javax.swing.JLabel lbl_patitas_menu;

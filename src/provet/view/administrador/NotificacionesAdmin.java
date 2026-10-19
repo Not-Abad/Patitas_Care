@@ -4,6 +4,8 @@ import javax.swing.JOptionPane;
 import provet.view.inicio.Login;
 import provet.componentes.botonSwing;
 import provet.componentes.PanelRedondeado;
+import javax.swing.*;
+import java.awt.*;
 
 public class NotificacionesAdmin extends javax.swing.JFrame {
     
@@ -153,17 +155,59 @@ private javax.swing.JLabel lblFecha;
     }
 
     private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {
-        int op = JOptionPane.showConfirmDialog(
-            this,
+        mostrarDialogoConfirmacion(
             "¿Estás seguro de que deseas salir?",
             "Confirmar salida",
-            JOptionPane.YES_NO_OPTION
+            () -> {
+                new Login().setVisible(true);
+                this.dispose();
+            }
         );
-        
-        if (op == JOptionPane.YES_OPTION) {
-            new Login().setVisible(true);
-            this.dispose();
-        }
+    }
+
+    private void mostrarDialogoConfirmacion(String mensaje, String titulo, Runnable accionConfirmar) {
+        JDialog dialog = new JDialog(this, titulo, true);
+        dialog.setLayout(new BorderLayout());
+        dialog.setSize(450, 220);
+        dialog.setLocationRelativeTo(this);
+        dialog.setUndecorated(true);
+
+        PanelRedondeado panel = new PanelRedondeado();
+        panel.setLayout(new BorderLayout());
+        panel.setBackground(new java.awt.Color(192, 207, 178));
+        panel.setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
+
+        JLabel lblMensaje = new JLabel(mensaje, SwingConstants.CENTER);
+        lblMensaje.setFont(new java.awt.Font("Tahoma", 0, 14));
+        lblMensaje.setForeground(new java.awt.Color(39, 53, 38));
+
+        JPanel panelBotones = new JPanel();
+        panelBotones.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 15));
+        panelBotones.setOpaque(false);
+
+        botonSwing btnSi = new botonSwing();
+        btnSi.setText("Sí");
+        btnSi.setForeground(new java.awt.Color(39, 53, 38));
+        btnSi.setPreferredSize(new Dimension(120, 45));
+        btnSi.addActionListener(e -> {
+            accionConfirmar.run();
+            dialog.dispose();
+        });
+
+        botonSwing btnNo = new botonSwing();
+        btnNo.setText("No");
+        btnNo.setForeground(new java.awt.Color(39, 53, 38));
+        btnNo.setPreferredSize(new Dimension(120, 45));
+        btnNo.addActionListener(e -> dialog.dispose());
+
+        panelBotones.add(btnSi);
+        panelBotones.add(btnNo);
+
+        panel.add(lblMensaje, BorderLayout.CENTER);
+        panel.add(panelBotones, BorderLayout.SOUTH);
+
+        dialog.add(panel);
+        dialog.setVisible(true);
     }
 
     private void construirUI() {
@@ -185,10 +229,11 @@ private javax.swing.JLabel lblFecha;
     jPanel2.add(lblFecha);
 
     lblBadge = new javax.swing.JLabel("", javax.swing.SwingConstants.CENTER);
-    lblBadge.setBounds(980, 25, 140, 25);
+    lblBadge.setBounds(960, 20, 160, 35);
     lblBadge.setOpaque(true);
-    lblBadge.setBackground(C_OSCURO);
-    lblBadge.setForeground(java.awt.Color.WHITE);
+    lblBadge.setBackground(C_CARD);
+    lblBadge.setForeground(new java.awt.Color(39, 53, 38));
+    lblBadge.setFont(new java.awt.Font("Tahoma", 1, 14));
     jPanel2.add(lblBadge);
 
     panelLista = new javax.swing.JPanel();
@@ -258,8 +303,9 @@ private javax.swing.JPanel crearFila(Notificacion n) {
 
     java.awt.Color fondo = n.leida ? C_CARD : C_FONDO;
 
-    javax.swing.JPanel p = new javax.swing.JPanel(new java.awt.BorderLayout());
-    p.setMaximumSize(new java.awt.Dimension(Integer.MAX_VALUE, 70));
+    PanelRedondeado p = new PanelRedondeado();
+    p.setLayout(new java.awt.BorderLayout());
+    p.setMaximumSize(new java.awt.Dimension(Integer.MAX_VALUE, 80));
     p.setBackground(fondo);
     p.setBorder(javax.swing.BorderFactory.createLineBorder(C_CARD));
 
@@ -278,7 +324,9 @@ private javax.swing.JPanel crearFila(Notificacion n) {
         "<html><b>" + n.titulo + "</b><br>" +
         n.desc + "<br><small>" + n.tiempo + "</small></html>"
     );
-    txt.setBorder(javax.swing.BorderFactory.createEmptyBorder(5,10,5,5));
+    txt.setFont(new java.awt.Font("Tahoma", 0, 14));
+    txt.setBorder(javax.swing.BorderFactory.createEmptyBorder(10,15,10,15));
+    txt.setForeground(new java.awt.Color(39, 53, 38));
     p.add(txt, java.awt.BorderLayout.CENTER);
     return p;
     }

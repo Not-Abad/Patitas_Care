@@ -3,6 +3,10 @@ package provet.view.administrador;
 import javax.swing.JOptionPane;
 import provet.view.inicio.Login;
 import provet.componentes.botonSwing;
+import provet.componentes.PanelRedondeado;
+import provet.dao.UsuarioAdminDAO;
+import javax.swing.*;
+import java.awt.*;
 
 public class ReportesAdmin extends javax.swing.JFrame {
    
@@ -160,18 +164,60 @@ private javax.swing.JPanel panelHistorial;
     }//GEN-LAST:event_btn_CalendarioActionPerformed
 
     private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
-        int op = JOptionPane.showConfirmDialog(
-            this,
+        mostrarDialogoConfirmacion(
             "¿Estás seguro de que deseas salir?",
             "Confirmar salida",
-            JOptionPane.YES_NO_OPTION
+            () -> {
+                new Login().setVisible(true);
+                this.dispose();
+            }
         );
-        
-        if (op == JOptionPane.YES_OPTION) {
-            new Login().setVisible(true); 
-            this.dispose(); 
-        }
     }//GEN-LAST:event_btn_SalirActionPerformed
+
+    private void mostrarDialogoConfirmacion(String mensaje, String titulo, Runnable accionConfirmar) {
+        JDialog dialog = new JDialog(this, titulo, true);
+        dialog.setLayout(new BorderLayout());
+        dialog.setSize(450, 220);
+        dialog.setLocationRelativeTo(this);
+        dialog.setUndecorated(true);
+
+        PanelRedondeado panel = new PanelRedondeado();
+        panel.setLayout(new BorderLayout());
+        panel.setBackground(new java.awt.Color(192, 207, 178));
+        panel.setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
+
+        JLabel lblMensaje = new JLabel(mensaje, SwingConstants.CENTER);
+        lblMensaje.setFont(new java.awt.Font("Tahoma", 0, 14));
+        lblMensaje.setForeground(new java.awt.Color(39, 53, 38));
+
+        JPanel panelBotones = new JPanel();
+        panelBotones.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 15));
+        panelBotones.setOpaque(false);
+
+        botonSwing btnSi = new botonSwing();
+        btnSi.setText("Sí");
+        btnSi.setForeground(new java.awt.Color(39, 53, 38));
+        btnSi.setPreferredSize(new Dimension(120, 45));
+        btnSi.addActionListener(e -> {
+            accionConfirmar.run();
+            dialog.dispose();
+        });
+
+        botonSwing btnNo = new botonSwing();
+        btnNo.setText("No");
+        btnNo.setForeground(new java.awt.Color(39, 53, 38));
+        btnNo.setPreferredSize(new Dimension(120, 45));
+        btnNo.addActionListener(e -> dialog.dispose());
+
+        panelBotones.add(btnSi);
+        panelBotones.add(btnNo);
+
+        panel.add(lblMensaje, BorderLayout.CENTER);
+        panel.add(panelBotones, BorderLayout.SOUTH);
+
+        dialog.add(panel);
+        dialog.setVisible(true);
+    }
 
     private void construirUI() {
     jPanel2.setLayout(null);
@@ -190,8 +236,8 @@ private javax.swing.JPanel panelHistorial;
     botonSwing btnGenerar = new botonSwing();
     btnGenerar.setText("+ Generar reporte");
     btnGenerar.setBounds(900, 20, 200, 30);
-    btnGenerar.setBackground(C_OSCURO);
-    btnGenerar.setForeground(java.awt.Color.BLACK);
+    btnGenerar.setBackground(C_CARD);
+    btnGenerar.setForeground(new java.awt.Color(39, 53, 38));
     jPanel2.add(btnGenerar);
 
     btnGenerar.addActionListener(e -> generarDatos());
@@ -230,9 +276,14 @@ private javax.swing.JPanel panelHistorial;
 }
     
     private void generarDatos() {
+    // Conectar con base de datos para usuarios activos
+    UsuarioAdminDAO usuarioDAO = new UsuarioAdminDAO();
+    java.util.List<UsuarioAdminDAO.UsuarioAdmin> usuariosBD = usuarioDAO.selectAll();
+    usuariosActivos = usuariosBD.size();
+    
+    // Para citas y pacientes, mantener valores aleatorios ya que no hay DAOs específicos
     citas += (int)(Math.random() * 10);
     nuevosPacientes += (int)(Math.random() * 5);
-    usuariosActivos += (int)(Math.random() * 3);
 
     lblCitas.setText(String.valueOf(citas));
     lblPacientes.setText(String.valueOf(nuevosPacientes));

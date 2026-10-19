@@ -3,6 +3,10 @@ import java.awt.Component;
 import javax.swing.JOptionPane;
 import provet.view.inicio.Login;
 import provet.componentes.botonSwing;
+import provet.componentes.PanelRedondeado;
+import provet.dao.UsuarioAdminDAO;
+import javax.swing.*;
+import java.awt.*;
 public class UsuariosAdmin extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(UsuariosAdmin.class.getName());
@@ -27,6 +31,9 @@ class Usuario {
     String especialidad = "";
     String cedula = "";
     String estado = "Activo";
+    String usuario = "";
+    String sueldoBase = "";
+    String fechaContratacion = "";
 
     Usuario(String n, String r, String i) {
         nombre = n;
@@ -43,6 +50,9 @@ class Usuario {
     public String getEspecialidad() { return especialidad; }
     public String getCedula() { return cedula; }
     public String getEstado() { return estado; }
+    public String getUsuario() { return usuario; }
+    public String getSueldoBase() { return sueldoBase; }
+    public String getFechaContratacion() { return fechaContratacion; }
 
     public void setNombre(String n) { nombre = n; }
     public void setRol(String r) { rol = r; }
@@ -52,18 +62,16 @@ class Usuario {
     public void setEspecialidad(String e) { especialidad = e; }
     public void setCedula(String c) { cedula = c; }
     public void setEstado(String e) { estado = e; }
+    public void setUsuario(String u) { usuario = u; }
+    public void setSueldoBase(String s) { sueldoBase = s; }
+    public void setFechaContratacion(String f) { fechaContratacion = f; }
 }
 
 public UsuariosAdmin() {
     initComponents();
     construirUI();
 
-    // Usuario de ejemplo
-    if (listaUsuarios.isEmpty()) {
-    listaUsuarios.add(new Usuario("Admin Principal", "Administrador", "001"));
-}
-
-    cargarUsuarios();
+    cargarUsuariosDesdeBD();
 }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -185,18 +193,60 @@ public UsuariosAdmin() {
     }//GEN-LAST:event_btn_ReportesActionPerformed
 
     private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
-        int op = JOptionPane.showConfirmDialog(
-            this,
+        mostrarDialogoConfirmacion(
             "¿Estás seguro de que deseas salir?",
             "Confirmar salida",
-            JOptionPane.YES_NO_OPTION
+            () -> {
+                new Login().setVisible(true);
+                this.dispose();
+            }
         );
-        
-        if (op == JOptionPane.YES_OPTION) {
-            new Login().setVisible(true); 
-            this.dispose(); 
-        }
     }//GEN-LAST:event_btn_SalirActionPerformed
+
+    private void mostrarDialogoConfirmacion(String mensaje, String titulo, Runnable accionConfirmar) {
+        JDialog dialog = new JDialog(this, titulo, true);
+        dialog.setLayout(new BorderLayout());
+        dialog.setSize(450, 220);
+        dialog.setLocationRelativeTo(this);
+        dialog.setUndecorated(true);
+
+        PanelRedondeado panel = new PanelRedondeado();
+        panel.setLayout(new BorderLayout());
+        panel.setBackground(new java.awt.Color(192, 207, 178));
+        panel.setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
+
+        JLabel lblMensaje = new JLabel(mensaje, SwingConstants.CENTER);
+        lblMensaje.setFont(new java.awt.Font("Tahoma", 0, 14));
+        lblMensaje.setForeground(new java.awt.Color(39, 53, 38));
+
+        JPanel panelBotones = new JPanel();
+        panelBotones.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 15));
+        panelBotones.setOpaque(false);
+
+        botonSwing btnSi = new botonSwing();
+        btnSi.setText("Sí");
+        btnSi.setForeground(new java.awt.Color(39, 53, 38));
+        btnSi.setPreferredSize(new Dimension(120, 45));
+        btnSi.addActionListener(e -> {
+            accionConfirmar.run();
+            dialog.dispose();
+        });
+
+        botonSwing btnNo = new botonSwing();
+        btnNo.setText("No");
+        btnNo.setForeground(new java.awt.Color(39, 53, 38));
+        btnNo.setPreferredSize(new Dimension(120, 45));
+        btnNo.addActionListener(e -> dialog.dispose());
+
+        panelBotones.add(btnSi);
+        panelBotones.add(btnNo);
+
+        panel.add(lblMensaje, BorderLayout.CENTER);
+        panel.add(panelBotones, BorderLayout.SOUTH);
+
+        dialog.add(panel);
+        dialog.setVisible(true);
+    }
 
     private void construirUI() {
 
@@ -231,8 +281,26 @@ public UsuariosAdmin() {
     jPanel2.add(scroll, java.awt.BorderLayout.CENTER);
 }
     
- private void cargarUsuarios() {
+ private void cargarUsuariosDesdeBD() {
     panelLista.removeAll();
+    
+    UsuarioAdminDAO dao = new UsuarioAdminDAO();
+    java.util.List<UsuarioAdminDAO.UsuarioAdmin> usuariosBD = dao.selectAll();
+    
+    // Convertir usuarios de BD a formato local
+    listaUsuarios.clear();
+    for (UsuarioAdminDAO.UsuarioAdmin uBD : usuariosBD) {
+        Usuario u = new Usuario(uBD.getNombre() + " " + uBD.getApellido(), uBD.getRol(), String.valueOf(uBD.getId()));
+        u.setApellido(uBD.getApellido());
+        u.setCorreo(uBD.getCorreo());
+        u.setTelefono(uBD.getTelefono());
+        u.setEstado(uBD.getEstado());
+        u.setUsuario(uBD.getUsuario());
+        u.setSueldoBase(String.valueOf(uBD.getSueldoBase()));
+        u.setFechaContratacion(uBD.getFechaContratacion() != null ? uBD.getFechaContratacion().toString() : "");
+        listaUsuarios.add(u);
+    }
+    
     int totalUsuarios = listaUsuarios.size(); 
     for (Usuario u : listaUsuarios) {
         panelLista.add(crearCard(u));
@@ -304,9 +372,50 @@ public UsuariosAdmin() {
         form.setVisible(true);
 
         if (form.isGuardado()) {
-            u.setNombre(form.getNombre());
-            u.setRol(form.getRol());
-            cargarUsuarios();
+            if (form.isEliminado()) {
+                // Eliminar usuario usando DAO
+                UsuarioAdminDAO dao = new UsuarioAdminDAO();
+                int resultado = dao.delete(Integer.parseInt(u.getId()));
+                
+                if (resultado > 0) {
+                    cargarUsuariosDesdeBD();
+                    NotificacionesAdmin.agregarNotificacionGlobal(
+                        "Usuario eliminado",
+                        "Se eliminó el usuario: " + u.getNombre(),
+                        "hoy"
+                    );
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Error al eliminar usuario en base de datos");
+                }
+            } else {
+                // Actualizar usuario usando DAO
+                UsuarioAdminDAO.UsuarioAdmin uBD = new UsuarioAdminDAO.UsuarioAdmin();
+                uBD.setId(Integer.parseInt(u.getId()));
+                uBD.setNombre(form.getNombre());
+                uBD.setApellido(form.getApellido());
+                uBD.setCorreo(form.getCorreo());
+                uBD.setTelefono(form.getTelefono());
+                uBD.setUsuario(form.getUsuario());
+                uBD.setSueldoBase(Double.parseDouble(form.getSueldoBase().isEmpty() ? "0" : form.getSueldoBase()));
+                uBD.setFechaContratacion(new java.util.Date()); // Fecha actual
+                uBD.setRol(form.getRol());
+                uBD.setPassword("123456"); // Password por defecto
+                uBD.setFotoPerfil("");
+                
+                UsuarioAdminDAO dao = new UsuarioAdminDAO();
+                int resultado = dao.update(uBD);
+                
+                if (resultado > 0) {
+                    cargarUsuariosDesdeBD();
+                    NotificacionesAdmin.agregarNotificacionGlobal(
+                        "Usuario actualizado",
+                        "Se actualizó el usuario: " + form.getNombre(),
+                        "hoy"
+                    );
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Error al actualizar usuario en base de datos");
+                }
+            }
         }
     });
 
@@ -332,7 +441,32 @@ public UsuariosAdmin() {
     form.setVisible(true);
 
     if (form.isGuardado()) {
-        agregarUsuario(form.getNombre(), form.getRol(), form.getId());
+        // Crear objeto UsuarioAdminDAO para guardar en BD
+        UsuarioAdminDAO.UsuarioAdmin uBD = new UsuarioAdminDAO.UsuarioAdmin();
+        uBD.setNombre(form.getNombre());
+        uBD.setApellido(form.getApellido());
+        uBD.setCorreo(form.getCorreo());
+        uBD.setTelefono(form.getTelefono());
+        uBD.setUsuario(form.getUsuario());
+        uBD.setSueldoBase(Double.parseDouble(form.getSueldoBase().isEmpty() ? "0" : form.getSueldoBase()));
+        uBD.setFechaContratacion(new java.util.Date()); // Fecha actual
+        uBD.setRol(form.getRol());
+        uBD.setPassword("123456"); // Password por defecto
+        uBD.setFotoPerfil("");
+        
+        UsuarioAdminDAO dao = new UsuarioAdminDAO();
+        int resultado = dao.insert(uBD);
+        
+        if (resultado > 0) {
+            cargarUsuariosDesdeBD();
+            NotificacionesAdmin.agregarNotificacionGlobal(
+                "Nuevo usuario",
+                "Se creó el usuario: " + form.getNombre(),
+                "hoy"
+            );
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al crear usuario en base de datos");
+        }
     }
 }
     
@@ -346,14 +480,14 @@ public UsuariosAdmin() {
     }
     
     listaUsuarios.add(new Usuario(nombre, rol, id));
-    cargarUsuarios();
+    cargarUsuariosDesdeBD();
     NotificacionesAdmin.agregarNotificacionGlobal(
         "Nuevo usuario",
         "Se creó el usuario: " + nombre,
         "hoy"
     );
 
-cargarUsuarios();
+cargarUsuariosDesdeBD();
     }
  
     
