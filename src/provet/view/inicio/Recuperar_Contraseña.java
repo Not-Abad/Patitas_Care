@@ -209,8 +209,8 @@ public class Recuperar_Contraseña extends JFrame {
         pnl_NuevaContra = new provet.componentes.PanelRedondeado();
         txt_NuevaPass = new javax.swing.JTextField();
         pnl_ValidarContra = new provet.componentes.PanelRedondeado();
-        txt_ConfirmarPass = new javax.swing.JPasswordField();
         chk_Ojo = new javax.swing.JCheckBox();
+        txt_ConfirmarPass = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Patitas Care");
@@ -424,7 +424,7 @@ public class Recuperar_Contraseña extends JFrame {
         pnl_NuevaContra.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txt_NuevaPass.setBackground(new java.awt.Color(228, 230, 217));
-        txt_NuevaPass.setFont(new java.awt.Font("Verdana", 1, 48)); // NOI18N
+        txt_NuevaPass.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
         txt_NuevaPass.setForeground(new java.awt.Color(39, 53, 38));
         txt_NuevaPass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_NuevaPass.setToolTipText("Usuario");
@@ -439,12 +439,6 @@ public class Recuperar_Contraseña extends JFrame {
         pnl_ValidarContra.setBackground(new java.awt.Color(228, 230, 217));
         pnl_ValidarContra.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txt_ConfirmarPass.setBackground(new java.awt.Color(228, 230, 217));
-        txt_ConfirmarPass.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        txt_ConfirmarPass.setForeground(new java.awt.Color(39, 53, 38));
-        txt_ConfirmarPass.setBorder(null);
-        pnl_ValidarContra.add(txt_ConfirmarPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 5, 280, 30));
-
         chk_Ojo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/basil--eye-closed-solid.png"))); // NOI18N
         chk_Ojo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -452,6 +446,13 @@ public class Recuperar_Contraseña extends JFrame {
             }
         });
         pnl_ValidarContra.add(chk_Ojo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 5, 40, 30));
+
+        txt_ConfirmarPass.setBackground(new java.awt.Color(228, 230, 217));
+        txt_ConfirmarPass.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
+        txt_ConfirmarPass.setForeground(new java.awt.Color(39, 53, 38));
+        txt_ConfirmarPass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_ConfirmarPass.setBorder(null);
+        pnl_ValidarContra.add(txt_ConfirmarPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 5, 330, 30));
 
         pnl_CambiarContraseña.add(pnl_ValidarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 190, 350, 40));
 
