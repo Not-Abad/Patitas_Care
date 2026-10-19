@@ -47,7 +47,6 @@ public class PanelPaciente2 extends javax.swing.JPanel {
         lblEdad = new javax.swing.JLabel();
         lblPeso = new javax.swing.JLabel();
         lblSexo = new javax.swing.JLabel();
-        btnHistorial = new provet.componentes.botonSwing();
 
         jPanel1.setBackground(new java.awt.Color(228, 230, 217));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -179,17 +178,6 @@ public class PanelPaciente2 extends javax.swing.JPanel {
         lblSexo.setText("r");
         jPanel1.add(lblSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 260, -1, 29));
 
-        btnHistorial.setBackground(new java.awt.Color(108, 135, 118));
-        btnHistorial.setForeground(new java.awt.Color(39, 53, 38));
-        btnHistorial.setText("Historial");
-        btnHistorial.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnHistorial.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHistorialActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, 250, 40));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -202,10 +190,6 @@ public class PanelPaciente2 extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnHistorialActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Alergias;
@@ -214,7 +198,6 @@ public class PanelPaciente2 extends javax.swing.JPanel {
     private javax.swing.JLabel Raza1;
     private javax.swing.JLabel Sexo;
     private javax.swing.JLabel Vacunas;
-    private provet.componentes.botonSwing btnHistorial;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

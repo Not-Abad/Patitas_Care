@@ -229,7 +229,7 @@ public void agregarReporte(Reporte reporte) {
     PanelCitas panel = new PanelCitas(this);
 
     JDialog dialog = new JDialog(this, "Nuevo Reporte", true);
-    dialog.setSize(655, 700);
+    dialog.setSize(477, 611);
     dialog.setLocationRelativeTo(this);
     dialog.add(panel);
     dialog.setVisible(true);
