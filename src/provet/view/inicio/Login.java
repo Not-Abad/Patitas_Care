@@ -11,6 +11,7 @@ import provet.view.veterinario.Menu_Principal;
 import provet.view.secretario.Dashboard_Secretario;
 import provet.dao.EmpleadoDAO;
 import provet.model.Empleado;
+import provet.utilidades.Sesion;
 
 //Inicio de la clase Login, que hereda de la clase JFrame
 public class Login extends javax.swing.JFrame {
@@ -230,65 +231,58 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_iniciarsActionPerformed
 
     private void btn_AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AceptarActionPerformed
-        
-        
-        String user = txt_Usuario.getText();
+ String user = txt_Usuario.getText().trim();
         String pass = new String(txt_contraseña.getPassword()); 
 
-        Empleado usuarioValido = procesarLogin(user, pass);
-
-        if (usuarioValido != null) {
-            this.dispose(); // Cierra la ventana de login
-            MenuAdmin mpAdmin = new MenuAdmin();
-            mpAdmin.setVisible(true);
-        }
-        
-        /*
-        String nombreIngresado = txt_Usuario.getText().trim();
-        String passwordIngresada = String.valueOf(txt_contraseña.getPassword());
-        
-        if (nombreIngresado.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor ingresa un nombre.");
+        //Validaciones básicas de campos vacíos
+        if (user.isEmpty() || pass.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor ingresa usuario y contraseña.");
             return;
         }
 
-        //Revisamos si el usuario existe
-        Usuario usuarioEncontrado = encontrarUsuario(nombreIngresado);
+        //Revisamos si el usuario existe y coincide la contraseña en MariaDB
+        Empleado usuarioValido = procesarLogin(user, pass);
 
-        //Si el usuario existe, Entonces ...
-        if (usuarioEncontrado != null) {            
-            if (usuarioEncontrado.getContraseña().equals(passwordIngresada)) {
-                // CASO: TODO CORRECTO
-                ControlUsuarios.usuarioActivo = usuarioEncontrado;
-                String rol = usuarioEncontrado.getTipo_Usuario();
+        //Si el usuario existe y las credenciales son correctas...
+        if (usuarioValido != null) {
+            
+            //Guardamos la Sesión Global
+            Sesion.setEmpleadoActual(usuarioValido);
+            
+            // Obtenemos el ID del puesto para saber qué pantalla abrir
+            int idPuesto = usuarioValido.getIdPuesto();
 
-        // Estructura para abrir la ventana según el rol
-        switch (rol) {
-            case "Administrador":
-                MenuAdmin mpAdmin = new MenuAdmin();
-                mpAdmin.setVisible(true);
-                break;
-            case "Veterinario":
-                Menu_Principal mpVet = new Menu_Principal(usuarioEncontrado);
-                mpVet.setVisible(true);
-                break;
-            case "Recepcionista":
-                Dashboard_Secretario mpSec = new Dashboard_Secretario();
-                mpSec.setVisible(true);
+            //Estructura para abrir la ventana según el id_puesto
+            switch (idPuesto) {
+                case 2: // ID 1 = Administrador (Verifica este número en tu tabla cat_puesto)
+                    MenuAdmin mpAdmin = new MenuAdmin();
+                    mpAdmin.setVisible(true);
+                    break;
+                    
+                case 3: // ID 2 = Veterinario
+                    Menu_Principal mpVet = new Menu_Principal();
+                    mpVet.setVisible(true);
+                    break;
+                    
+                case 4: // ID 3 = Recepcionista / Cajero
+                    Dashboard_Secretario mpSec = new Dashboard_Secretario();
+                    mpSec.setVisible(true);
+                    break;
+                    
+                default:
+                    JOptionPane.showMessageDialog(this, "Tu usuario no tiene un rol válido asignado.");
+                    return; // Detenemos la ejecución para que no cierre el login
+            }
+            
+            // Cierra la ventana de login
+            this.dispose(); 
+            
+        } else {
+            // CASO: CREDENCIALES INCORRECTAS
+            JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos. Inténtalo de nuevo.");
+            txt_contraseña.setText(""); // Limpiamos el campo por seguridad
+            txt_contraseña.requestFocus();
         }
-        this.dispose();
-    } else {
-        // CASO: CONTRASEÑA INCORRECTA
-        JOptionPane.showMessageDialog(this, "La contraseña es incorrecta. Inténtalo de nuevo.");
-        txt_contraseña.setText(""); // Limpiamos el campo por seguridad
-        txt_contraseña.requestFocus();
-    }
-    
-        } else {        //Si el usuario NO existe, Entonces ...
-            JOptionPane.showMessageDialog(this, "El usuario '" + nombreIngresado + "' no existe. Por favor, crea una cuenta.");
- 
-}
-        */
     }//GEN-LAST:event_btn_AceptarActionPerformed
 
     private void link_nuevaCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_link_nuevaCuentaMouseClicked

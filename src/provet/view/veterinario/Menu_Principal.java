@@ -11,16 +11,22 @@ public class Menu_Principal extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Menu_Principal.class.getName());
     private Usuario usuario;
 
-    public Menu_Principal(Usuario usuario) {
+    public Menu_Principal(){
+        initComponents();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    }
+    
+public Menu_Principal(Usuario usuario) {
     initComponents();
     this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     this.usuario = usuario;
     if (usuario != null) {
-    lblNombreVet.setText(usuario.getNombre());
+        lblNombreVet.setText(usuario.getNombre());
     } else {
-    lblNombreVet.setText("Sin usuario");
+        lblNombreVet.setText("Sin usuario");
     }
-    }
+}
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
