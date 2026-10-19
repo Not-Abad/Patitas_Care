@@ -12,7 +12,6 @@ import java.awt.GridLayout;
 import javax.swing.JDialog;
 import provet.model.ControlUsuarios;
 import provet.model.Usuario;
-
 public class Pacientes extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Pacientes.class.getName());
@@ -122,13 +121,14 @@ public class Pacientes extends javax.swing.JFrame {
         lblNombreVet = new javax.swing.JLabel();
         btn_MenuP = new provet.componentes.botonSwing();
         botonSwing1 = new provet.componentes.botonSwing();
-        btn_Calendario = new provet.componentes.botonSwing();
         btn_Reportes = new provet.componentes.botonSwing();
         btn_Salir = new provet.componentes.botonSwing();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
         contenedor_Cartas1 = new provet.componentes.Contenedor_Cartas();
         contenedor_Cartas2 = new provet.componentes.Contenedor_Cartas();
+        txtBuscar = new javax.swing.JTextField();
+        btnBuscar = new provet.componentes.botonSwing();
 
         jMenu1.setText("jMenu1");
 
@@ -176,16 +176,13 @@ public class Pacientes extends javax.swing.JFrame {
         });
         jPanel2.add(botonSwing1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 250, 60));
 
-        btn_Calendario.setText("Calendario");
-        jPanel2.add(btn_Calendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 250, 60));
-
         btn_Reportes.setText("Reportes");
         btn_Reportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ReportesActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_Reportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 250, 60));
+        jPanel2.add(btn_Reportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 250, 60));
 
         btn_Salir.setText("Salir");
         btn_Salir.addActionListener(new java.awt.event.ActionListener() {
@@ -204,10 +201,20 @@ public class Pacientes extends javax.swing.JFrame {
         contenedor_Cartas1.add(contenedor_Cartas2, new java.awt.GridBagConstraints());
 
         jPanel3.add(contenedor_Cartas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 940, 570));
+        jPanel3.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 740, 30));
+
+        btnBuscar.setBackground(new java.awt.Color(108, 135, 118));
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 60, 170, -1));
 
         jScrollPane1.setViewportView(jPanel3);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, -8, 1010, 750));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, -8, 1060, 750));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -249,6 +256,40 @@ public class Pacientes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_botonSwing1ActionPerformed
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        String texto = txtBuscar.getText().trim().toLowerCase();
+
+    contenedor_Cartas1.removeAll();
+
+    for (Paciente p : ControlPacientes.listaPacientes) {
+
+        boolean coincideNombre =
+                p.getNombre().toLowerCase().contains(texto);
+
+        boolean coincideID =
+                String.valueOf(p.getID()).contains(texto);
+
+        if (coincideNombre || coincideID) {
+
+            PanelPaciente panel = new PanelPaciente();
+            panel.setDatos(p);
+
+            panel.setClickListener(() -> {
+                abrirPanelConDatos(p);
+            });
+
+            panel.setCursor(
+                new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR)
+            );
+
+            contenedor_Cartas1.add(panel);
+        }
+    }
+
+    contenedor_Cartas1.revalidate();
+    contenedor_Cartas1.repaint();
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -276,7 +317,7 @@ public class Pacientes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private provet.componentes.botonSwing botonSwing1;
-    private provet.componentes.botonSwing btn_Calendario;
+    private provet.componentes.botonSwing btnBuscar;
     private provet.componentes.botonSwing btn_MenuP;
     private provet.componentes.botonSwing btn_Reportes;
     private provet.componentes.botonSwing btn_Salir;
@@ -290,5 +331,6 @@ public class Pacientes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblNombreVet;
+    private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

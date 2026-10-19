@@ -16,6 +16,7 @@ import provet.componentes.PanelCitas_Editable;
 import provet.model.ControlUsuarios;
 import provet.model.Usuario;
 import provet.model.Reporte;
+import provet.model.ControlReportes;
 
 public class Reportes_Citas extends javax.swing.JFrame {
     
@@ -53,11 +54,15 @@ public class Reportes_Citas extends javax.swing.JFrame {
     
 }
 public void agregarReporte(Reporte reporte) {
+    ControlReportes.listaReportes.add(reporte);
+
     PanelCitas_Editable carta = new PanelCitas_Editable(reporte);
+
     contenedor.add(carta);
+
     contenedor.revalidate();
     contenedor.repaint();
-}    
+} 
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -78,6 +83,8 @@ public void agregarReporte(Reporte reporte) {
         jPanel3 = new javax.swing.JPanel();
         contenedor = new provet.componentes.Contenedor_Cartas();
         btnSubir = new provet.componentes.botonSwing();
+        txtBuscar = new javax.swing.JTextField();
+        btnBuscar = new provet.componentes.botonSwing();
 
         jMenu1.setText("jMenu1");
 
@@ -161,7 +168,18 @@ public void agregarReporte(Reporte reporte) {
                 btnSubirActionPerformed(evt);
             }
         });
-        jPanel3.add(btnSubir, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 50, 160, 50));
+        jPanel3.add(btnSubir, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 60, 170, 30));
+        jPanel3.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 550, 30));
+
+        btnBuscar.setBackground(new java.awt.Color(108, 135, 118));
+        btnBuscar.setText("Buscar");
+        btnBuscar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 60, 170, 30));
 
         jScrollPane1.setViewportView(jPanel3);
 
@@ -218,6 +236,33 @@ public void agregarReporte(Reporte reporte) {
 
     }//GEN-LAST:event_btnSubirActionPerformed
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        String texto = txtBuscar.getText().trim().toLowerCase();
+
+        contenedor.removeAll();
+
+    for (Reporte r : ControlReportes.listaReportes) {
+
+    boolean coincideID =
+            String.valueOf(r.getID()).contains(texto);
+
+    boolean coincideNombre =
+            r.getNombre().toLowerCase().contains(texto);
+
+    if (coincideID || coincideNombre) {
+
+        PanelCitas_Editable panel =
+                new PanelCitas_Editable(r);
+
+        contenedor.add(panel);
+    }
+}
+
+contenedor.revalidate();
+contenedor.repaint();
+                 
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -245,6 +290,7 @@ public void agregarReporte(Reporte reporte) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private provet.componentes.botonSwing botonSwing1;
+    private provet.componentes.botonSwing btnBuscar;
     private provet.componentes.botonSwing btnSubir;
     private provet.componentes.botonSwing btn_Calendario;
     private provet.componentes.botonSwing btn_MenuP;
@@ -259,5 +305,6 @@ public void agregarReporte(Reporte reporte) {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblNombreVet;
+    private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }
