@@ -9,16 +9,19 @@ import provet.model.Usuario;
 import provet.view.administrador.MenuAdmin;
 import provet.view.veterinario.Menu_Principal;
 import provet.view.secretario.Dashboard_Secretario;
+import provet.dao.EmpleadoDAO;
+import provet.model.Empleado;
 
 //Inicio de la clase Login, que hereda de la clase JFrame
 public class Login extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Login.class.getName());
-
+    private EmpleadoDAO empleadoDAO;
+    
     @SuppressWarnings("unchecked")
     public Login() {
         initComponents();
-        provet.model.InicializadorDatos.cargarUsuarios();    
+        this.empleadoDAO = new EmpleadoDAO();
     }
 
     //Método encontrar Usuario
@@ -40,6 +43,26 @@ public class Login extends javax.swing.JFrame {
             return usuarioEncontrado;           //...Retornalo
         }else{          //Si no se encontro....
             return null;                        //Retorna nulo
+        }
+    }
+    
+    public Empleado procesarLogin(String usuario, String contrasena) {
+        // Validaciones básicas de campos vacíos
+        if (usuario.trim().isEmpty() || contrasena.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor, ingresa usuario y contraseña.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
+            return null;
+        }
+
+        // Llamada al DAO
+        Empleado empleado = empleadoDAO.autenticarUsuario(usuario, contrasena);
+
+        if (empleado != null) {
+            System.out.println("Login exitoso. Bienvenido: " + empleado.getUsuario());
+            // Aquí registrarías en tu tabla 'bit_movimientos' que este empleado Inició Sesión (id_accion = 6)
+            return empleado;
+        } else {
+            JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos.", "Error de Autenticación", JOptionPane.ERROR_MESSAGE);
+            return null;
         }
     }
     
@@ -208,6 +231,19 @@ public class Login extends javax.swing.JFrame {
 
     private void btn_AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AceptarActionPerformed
         
+        
+        String user = txt_Usuario.getText();
+        String pass = new String(txt_contraseña.getPassword()); 
+
+        Empleado usuarioValido = procesarLogin(user, pass);
+
+        if (usuarioValido != null) {
+            this.dispose(); // Cierra la ventana de login
+            MenuAdmin mpAdmin = new MenuAdmin();
+            mpAdmin.setVisible(true);
+        }
+        
+        /*
         String nombreIngresado = txt_Usuario.getText().trim();
         String passwordIngresada = String.valueOf(txt_contraseña.getPassword());
         
@@ -252,6 +288,7 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "El usuario '" + nombreIngresado + "' no existe. Por favor, crea una cuenta.");
  
 }
+        */
     }//GEN-LAST:event_btn_AceptarActionPerformed
 
     private void link_nuevaCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_link_nuevaCuentaMouseClicked

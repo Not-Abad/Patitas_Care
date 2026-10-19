@@ -1,32 +1,32 @@
 
+//Indica a que paquete pertenece
 package provet.utilidades;
 
+//Importamos la librerias para usar la base de datos
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+//Inicio de la clase
 public class Conexion {
 
-    // Atributos privados según el diagrama UML
-    private static final String URL = "jdbc:mysql://localhost:3306/patitas_care"; // Modifica con el nombre real de tu BD
-    private static final String USER = "root"; // Atributo -USER: String [cite: 221, 222]
-    private static final String PASS = "tu_contraseña"; // Atributo -PASS: String [cite: 223, 224]
+    // Atributos de la conexión
+    private static final String URL = "jdbc:mariadb://localhost:3306/patitas_care";
+    private static final String USER = "root"; 
+    private static final String PASS = "";    
     
     // Objeto Connection que almacena el estado de la conexión
-    private static Connection conexion = null; // Atributo conexion: Connection [cite: 218, 219]
+    private static Connection conexion = null; 
 
-    // Constructor privado/vacío según el UML: Conexion() [cite: 225]
-    public Conexion() {
+    // Constructor privado y vacio porque es una clase estatica
+    private Conexion() {
     }
 
-    /**
-     * Método público que establece y retorna la conexión activa.
-     * Corresponde a +getConexion(): Connection en el UML[cite: 226].
-     */
+    //Método público que establece y retorna la conexión activa
     public static Connection getConexion() {
         try {
-            // Cargar el driver de la base de datos (opcional en versiones modernas de JDBC, pero recomendado)
-            Class.forName("com.mysql.cj.jdbc.Driver"); 
+            // Cargar el driver de la base de datos 
+            Class.forName("org.mariadb.jdbc.Driver");            
             
             // Si la conexión es nula o se encuentra cerrada, se crea una nueva
             if (conexion == null || conexion.isClosed()) {
@@ -43,10 +43,6 @@ public class Conexion {
         return conexion;
     }
 
-    /**
-     * Método público para cerrar de forma segura la conexión y liberar recursos.
-     * Corresponde a +cerrarConexion(): void en el UML[cite: 227].
-     */
     public static void cerrarConexion() {
         try {
             if (conexion != null && !conexion.isClosed()) {
