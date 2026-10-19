@@ -1,4 +1,3 @@
-
 //Indicamos a que paquete pertenece
 package provet.view.inicio;
 
@@ -8,7 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import provet.utilidades.Servicio_Email; //Importamos la clase Servicio_Email
+import provet.utilidades.Servicio_Email;
+import provet.dao.EmpleadoDAO;
 
 //Inicio de la clase
 public class Recuperar_Contraseña extends JFrame {
@@ -20,6 +20,7 @@ public class Recuperar_Contraseña extends JFrame {
 
     // Constructor por defecto (por si se abre sin nombre)
     public Recuperar_Contraseña() {
+        pnl_CambiarContraseña.setVisible(false);
         prepararVentana();
     }
 
@@ -34,9 +35,9 @@ public class Recuperar_Contraseña extends JFrame {
     // Método para no repetir código
     private void prepararVentana() {
         initComponents();
-        enviarCorreoRecuperacion(); // Esto ya usa this.nombreUsuario
+        enviarCorreoRecuperacion();
     
-        // Configuración de focos (lo que ya tenías)
+        // Configuración de focos
         configurarFoco(txt1, txt2, null);
         configurarFoco(txt2, txt3, txt1);
         configurarFoco(txt3, txt4, txt2);
@@ -45,33 +46,44 @@ public class Recuperar_Contraseña extends JFrame {
         configurarFoco(txt6, null, txt5);
     }
 
-    //Método Enviar correo
+    //Método Enviar correo (Ajustado a los estándares con MariaDB)
     private void enviarCorreoRecuperacion() {
         new Thread(() -> {
             try {
-                //Atributos del método
-                Servicio_Email service = new Servicio_Email();                  //Instanciamos el servicio
-                this.codigoEnviado = service.generarCodigoRandom();             // Generamos el código
-                Map<String, String> variables = new HashMap<>();                //Preparamos las variables para el HTML 
+                //Buscamos el correo real en la base de datos usando el DAO
+                EmpleadoDAO dao = new EmpleadoDAO();
+                String correoDestino = dao.obtenerEmailPorUsuario(this.nombreUsuario);
+
+                if (correoDestino == null || correoDestino.trim().isEmpty()) {
+                    SwingUtilities.invokeLater(() -> {
+                        JOptionPane.showMessageDialog(this, "El usuario '" + nombreUsuario + "' no existe o no tiene un correo registrado.", "Error", JOptionPane.ERROR_MESSAGE);
+                    });
+                    return; // Detenemos el proceso
+                }
+
+                //Preparamos el servicio de email
+                Servicio_Email service = new Servicio_Email();                  
+                this.codigoEnviado = service.generarCodigoRandom();             
+                Map<String, String> variables = new HashMap<>();                
                 variables.put("codigo", String.valueOf(codigoEnviado));
                 variables.put("nombre", nombreUsuario);
 
-                //Cargamos la plantilla externa
+                //Cargamos la plantilla HTML y enviamos el correo
                 String cuerpoHtml = service.obtenerContenidoTemplate("recuperacion.html", variables);
-                
-                //Creamos y enviamos
-                service.createEmail("mayelasanchezzz@outlook.com", "Código de autenticación - PatitasCare", cuerpoHtml);
+                service.createEmail(correoDestino, "Código de autenticación - PatitasCare", cuerpoHtml);
                 service.sendEmail();
                 
-                // Notificamos al usuario en el hilo de la interfaz
+                // Ocultamos parcialmente el correo por seguridad visual
+                String correoOculto = correoDestino.replaceAll("(^[^@]{3}|(?!^)\\G)[^@]", "$1*");
+                
                 SwingUtilities.invokeLater(() -> {
-                    JOptionPane.showMessageDialog(this, "Te hemos enviado un código a tu correo.");
+                    JOptionPane.showMessageDialog(this, "Te hemos enviado un código al correo:\n" + correoOculto);
                 });
 
             } catch (Exception ex) {
                 logger.log(Level.SEVERE, "Error al procesar el correo de recuperación", ex);
                 SwingUtilities.invokeLater(() -> {
-                    JOptionPane.showMessageDialog(this, "Error al enviar el correo: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(this, "Error al enviar el correo: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 });
             }
         }).start();
@@ -89,107 +101,86 @@ public class Recuperar_Contraseña extends JFrame {
 
         if (ingresado.equals(String.valueOf(codigoEnviado))) {
             JOptionPane.showMessageDialog(this, "¡Éxito! El código coincide.");
-            // Aquí procedes a la ventana de "Nueva Contraseña"
+            pnl_CambiarContraseña.setVisible(true);
+            pnl_IngresarDatos.setVisible(false);
         } else {
             JOptionPane.showMessageDialog(this, "Código incorrecto. Revisa tu correo.");
         }
     }
     
     private void configurarFoco(javax.swing.JTextField actual, javax.swing.JTextField siguiente, javax.swing.JTextField anterior) {
-    actual.addKeyListener(new java.awt.event.KeyAdapter() {
-        @Override
-        public void keyTyped(java.awt.event.KeyEvent e) {
-            char c = e.getKeyChar();
-            
-            //Validar que solo sea un número
-            if (!Character.isDigit(c)) {
-                e.consume(); // Bloquea letras, símbolos o espacios
-                return;
-            }
+        actual.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyTyped(java.awt.event.KeyEvent e) {
+                char c = e.getKeyChar();
+                
+                if (!Character.isDigit(c)) {
+                    e.consume(); 
+                    return;
+                }
 
-            //Limitar a solo 1 carácter
-            if (actual.getText().length() >= 1) {
-                e.consume();
-            }
-        }
-
-        @Override
-        public void keyReleased(java.awt.event.KeyEvent e) {
-            // Si escribió un número, pasar al siguiente campo
-            if (actual.getText().length() == 1 && siguiente != null) {
-                siguiente.requestFocus();
-            }
-        }
-
-        @Override
-        public void keyPressed(java.awt.event.KeyEvent e) {
-            //Detectar si el usuario presionó Ctrl + V
-            if ((e.isControlDown() || e.isMetaDown()) && e.getKeyCode() == java.awt.event.KeyEvent.VK_V) {
-                e.consume(); // Detenemos el pegado normal de Java
-                repartirCodigoPegado();
-                return;
-            }
-
-            // Si presiona borrar y el campo está vacío, regresar al anterior
-            if (e.getKeyCode() == java.awt.event.KeyEvent.VK_BACK_SPACE) {
-                if (actual.getText().isEmpty() && anterior != null) {
-                    anterior.setText("");
-                    anterior.requestFocus();
+                if (actual.getText().length() >= 1) {
+                    e.consume();
                 }
             }
-        }
-    });
-}
+
+            @Override
+            public void keyReleased(java.awt.event.KeyEvent e) {
+                if (actual.getText().length() == 1 && siguiente != null) {
+                    siguiente.requestFocus();
+                }
+            }
+
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent e) {
+                if ((e.isControlDown() || e.isMetaDown()) && e.getKeyCode() == java.awt.event.KeyEvent.VK_V) {
+                    e.consume(); 
+                    repartirCodigoPegado();
+                    return;
+                }
+
+                if (e.getKeyCode() == java.awt.event.KeyEvent.VK_BACK_SPACE) {
+                    if (actual.getText().isEmpty() && anterior != null) {
+                        anterior.setText("");
+                        anterior.requestFocus();
+                    }
+                }
+            }
+        });
+    }
 
     private void repartirCodigoPegado() {
-    try {
-        //Acceder al portapapeles del sistema
-        String data = (String) java.awt.Toolkit.getDefaultToolkit()
-                .getSystemClipboard().getData(java.awt.datatransfer.DataFlavor.stringFlavor);
+        try {
+            String data = (String) java.awt.Toolkit.getDefaultToolkit()
+                    .getSystemClipboard().getData(java.awt.datatransfer.DataFlavor.stringFlavor);
 
-        //Limpiar el texto: solo nos quedamos con los números y máximo 6
-        String soloNumeros = data.replaceAll("[^0-9]", "");
-        if (soloNumeros.length() > 6) {
-            soloNumeros = soloNumeros.substring(0, 6);
+            String soloNumeros = data.replaceAll("[^0-9]", "");
+            if (soloNumeros.length() > 6) {
+                soloNumeros = soloNumeros.substring(0, 6);
+            }
+
+            javax.swing.JTextField[] campos = {txt1, txt2, txt3, txt4, txt5, txt6};
+
+            for (int i = 0; i < soloNumeros.length(); i++) {
+                campos[i].setText(String.valueOf(soloNumeros.charAt(i)));
+            }
+
+            if (soloNumeros.length() > 0) {
+                int proximoFoco = Math.min(soloNumeros.length(), 5);
+                campos[proximoFoco].requestFocus();
+            }
+            
+            verificarCodigo();
+            
+        } catch (Exception ex) {
+            System.err.println("Error al pegar: " + ex.getMessage());
         }
-
-        //Creamos un arreglo con los campos para iterar fácil
-        javax.swing.JTextField[] campos = {txt1, txt2, txt3, txt4, txt5, txt6};
-
-        //Repartirmos cada carácter en su respectivo cuadro
-        for (int i = 0; i < soloNumeros.length(); i++) {
-            campos[i].setText(String.valueOf(soloNumeros.charAt(i)));
-        }
-
-        //Movemos el foco al último campo llenado para que el usuario pueda seguir
-        if (soloNumeros.length() > 0) {
-            int proximoFoco = Math.min(soloNumeros.length(), 5);
-            campos[proximoFoco].requestFocus();
-        }
-        
-        //De una vez verificamos el Código que escribio
-        verificarCodigo();
-        
-    } catch (Exception ex) {
-        // Si el portapapeles no tiene texto o algo falla, no hacemos nada
-        System.err.println("Error al pegar: " + ex.getMessage());
     }
-}
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         pnl_Operativo = new javax.swing.JPanel();
-        pnl_CambiarContraseña = new provet.componentes.PanelRedondeado();
-        lbl_Titulo1 = new javax.swing.JLabel();
-        lbl_Informacion4 = new javax.swing.JLabel();
-        lbl_Informacion6 = new javax.swing.JLabel();
-        btn_Actualizar = new provet.componentes.botonSwing();
-        pnl_NuevaContra = new provet.componentes.PanelRedondeado();
-        txt7 = new javax.swing.JTextField();
-        pnl_ValidarContra = new provet.componentes.PanelRedondeado();
-        txt_contraseña = new javax.swing.JPasswordField();
-        chk_Ojo = new javax.swing.JCheckBox();
         pnl_IngresarDatos = new provet.componentes.PanelRedondeado();
         lbl_Titulo = new javax.swing.JLabel();
         lbl_Informacion1 = new javax.swing.JLabel();
@@ -210,10 +201,19 @@ public class Recuperar_Contraseña extends JFrame {
         txt5 = new javax.swing.JTextField();
         pnl_Valor6 = new provet.componentes.PanelRedondeado();
         txt6 = new javax.swing.JTextField();
+        pnl_CambiarContraseña = new provet.componentes.PanelRedondeado();
+        lbl_Titulo1 = new javax.swing.JLabel();
+        lbl_Informacion4 = new javax.swing.JLabel();
+        lbl_Informacion6 = new javax.swing.JLabel();
+        btn_Actualizar = new provet.componentes.botonSwing();
+        pnl_NuevaContra = new provet.componentes.PanelRedondeado();
+        txt_NuevaPass = new javax.swing.JTextField();
+        pnl_ValidarContra = new provet.componentes.PanelRedondeado();
+        txt_ConfirmarPass = new javax.swing.JPasswordField();
+        chk_Ojo = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Patitas Care");
-        setMaximumSize(new java.awt.Dimension(450, 450));
         setMinimumSize(new java.awt.Dimension(450, 450));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -224,73 +224,6 @@ public class Recuperar_Contraseña extends JFrame {
         pnl_Operativo.setMinimumSize(new java.awt.Dimension(450, 450));
         pnl_Operativo.setPreferredSize(new java.awt.Dimension(450, 450));
         pnl_Operativo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        pnl_CambiarContraseña.setBackground(new java.awt.Color(192, 207, 178));
-        pnl_CambiarContraseña.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lbl_Titulo1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        lbl_Titulo1.setForeground(new java.awt.Color(39, 53, 38));
-        lbl_Titulo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_Titulo1.setText("Nueva Contraseña");
-        pnl_CambiarContraseña.add(lbl_Titulo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 350, -1));
-
-        lbl_Informacion4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lbl_Informacion4.setForeground(new java.awt.Color(39, 53, 38));
-        lbl_Informacion4.setText("Ingresa una nueva Contraseña:");
-        pnl_CambiarContraseña.add(lbl_Informacion4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 320, -1));
-
-        lbl_Informacion6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lbl_Informacion6.setForeground(new java.awt.Color(39, 53, 38));
-        lbl_Informacion6.setText("Confirma la Contraseña:");
-        pnl_CambiarContraseña.add(lbl_Informacion6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 310, -1));
-
-        btn_Actualizar.setBackground(new java.awt.Color(69, 98, 78));
-        btn_Actualizar.setForeground(new java.awt.Color(228, 230, 217));
-        btn_Actualizar.setText("Actualizar Contraseña");
-        btn_Actualizar.setToolTipText("");
-        btn_Actualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_ActualizarActionPerformed(evt);
-            }
-        });
-        pnl_CambiarContraseña.add(btn_Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 230, 50));
-
-        pnl_NuevaContra.setBackground(new java.awt.Color(228, 230, 217));
-        pnl_NuevaContra.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txt7.setBackground(new java.awt.Color(228, 230, 217));
-        txt7.setFont(new java.awt.Font("Verdana", 1, 48)); // NOI18N
-        txt7.setForeground(new java.awt.Color(39, 53, 38));
-        txt7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txt7.setToolTipText("Usuario");
-        txt7.setActionCommand("<Not Set>");
-        txt7.setAutoscrolls(false);
-        txt7.setBorder(null);
-        txt7.setCaretColor(new java.awt.Color(39, 53, 38));
-        pnl_NuevaContra.add(txt7, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 5, 330, 30));
-
-        pnl_CambiarContraseña.add(pnl_NuevaContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 100, 350, 40));
-
-        pnl_ValidarContra.setBackground(new java.awt.Color(228, 230, 217));
-        pnl_ValidarContra.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txt_contraseña.setBackground(new java.awt.Color(228, 230, 217));
-        txt_contraseña.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        txt_contraseña.setForeground(new java.awt.Color(39, 53, 38));
-        txt_contraseña.setBorder(null);
-        pnl_ValidarContra.add(txt_contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 5, 280, 30));
-
-        chk_Ojo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/basil--eye-closed-solid.png"))); // NOI18N
-        chk_Ojo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chk_OjoActionPerformed(evt);
-            }
-        });
-        pnl_ValidarContra.add(chk_Ojo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 5, 40, 30));
-
-        pnl_CambiarContraseña.add(pnl_ValidarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 190, 350, 40));
-
-        pnl_Operativo.add(pnl_CambiarContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 37, 400, 330));
 
         pnl_IngresarDatos.setBackground(new java.awt.Color(192, 207, 178));
         pnl_IngresarDatos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -457,6 +390,73 @@ public class Recuperar_Contraseña extends JFrame {
 
         pnl_Operativo.add(pnl_IngresarDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 37, 400, 330));
 
+        pnl_CambiarContraseña.setBackground(new java.awt.Color(192, 207, 178));
+        pnl_CambiarContraseña.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_Titulo1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        lbl_Titulo1.setForeground(new java.awt.Color(39, 53, 38));
+        lbl_Titulo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_Titulo1.setText("Nueva Contraseña");
+        pnl_CambiarContraseña.add(lbl_Titulo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 350, -1));
+
+        lbl_Informacion4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbl_Informacion4.setForeground(new java.awt.Color(39, 53, 38));
+        lbl_Informacion4.setText("Ingresa una nueva Contraseña:");
+        pnl_CambiarContraseña.add(lbl_Informacion4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 320, -1));
+
+        lbl_Informacion6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbl_Informacion6.setForeground(new java.awt.Color(39, 53, 38));
+        lbl_Informacion6.setText("Confirma la Contraseña:");
+        pnl_CambiarContraseña.add(lbl_Informacion6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 310, -1));
+
+        btn_Actualizar.setBackground(new java.awt.Color(69, 98, 78));
+        btn_Actualizar.setForeground(new java.awt.Color(228, 230, 217));
+        btn_Actualizar.setText("Actualizar Contraseña");
+        btn_Actualizar.setToolTipText("");
+        btn_Actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ActualizarActionPerformed(evt);
+            }
+        });
+        pnl_CambiarContraseña.add(btn_Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 230, 50));
+
+        pnl_NuevaContra.setBackground(new java.awt.Color(228, 230, 217));
+        pnl_NuevaContra.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txt_NuevaPass.setBackground(new java.awt.Color(228, 230, 217));
+        txt_NuevaPass.setFont(new java.awt.Font("Verdana", 1, 48)); // NOI18N
+        txt_NuevaPass.setForeground(new java.awt.Color(39, 53, 38));
+        txt_NuevaPass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_NuevaPass.setToolTipText("Usuario");
+        txt_NuevaPass.setActionCommand("<Not Set>");
+        txt_NuevaPass.setAutoscrolls(false);
+        txt_NuevaPass.setBorder(null);
+        txt_NuevaPass.setCaretColor(new java.awt.Color(39, 53, 38));
+        pnl_NuevaContra.add(txt_NuevaPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 5, 330, 30));
+
+        pnl_CambiarContraseña.add(pnl_NuevaContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 100, 350, 40));
+
+        pnl_ValidarContra.setBackground(new java.awt.Color(228, 230, 217));
+        pnl_ValidarContra.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txt_ConfirmarPass.setBackground(new java.awt.Color(228, 230, 217));
+        txt_ConfirmarPass.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        txt_ConfirmarPass.setForeground(new java.awt.Color(39, 53, 38));
+        txt_ConfirmarPass.setBorder(null);
+        pnl_ValidarContra.add(txt_ConfirmarPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 5, 280, 30));
+
+        chk_Ojo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/basil--eye-closed-solid.png"))); // NOI18N
+        chk_Ojo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chk_OjoActionPerformed(evt);
+            }
+        });
+        pnl_ValidarContra.add(chk_Ojo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 5, 40, 30));
+
+        pnl_CambiarContraseña.add(pnl_ValidarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 190, 350, 40));
+
+        pnl_Operativo.add(pnl_CambiarContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 37, 400, 330));
+
         getContentPane().add(pnl_Operativo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 450));
 
         pack();
@@ -468,6 +468,7 @@ public class Recuperar_Contraseña extends JFrame {
 
     private void btn_ContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ContinuarActionPerformed
         verificarCodigo();
+        
     }//GEN-LAST:event_btn_ContinuarActionPerformed
 
     private void link_reenviarCorreoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_link_reenviarCorreoMouseClicked
@@ -491,15 +492,41 @@ public class Recuperar_Contraseña extends JFrame {
     }//GEN-LAST:event_txt6ActionPerformed
 
     private void btn_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ActualizarActionPerformed
-        // TODO add your handling code here:
+        String nuevaPass = txt_NuevaPass.getText().trim();
+        String confirmarPass = new String(txt_ConfirmarPass.getPassword()).trim();
+
+        if (nuevaPass.isEmpty() || confirmarPass.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, completa ambos campos.");
+            return;
+        }
+
+        if (nuevaPass.equals(confirmarPass)) {
+            
+            // Instanciamos el DAO y llamamos a actualizarPassword
+            EmpleadoDAO dao = new EmpleadoDAO();
+            boolean exito = dao.actualizarPassword(this.nombreUsuario, nuevaPass);
+            
+            if (exito) {
+                javax.swing.JOptionPane.showMessageDialog(this, "¡Contraseña actualizada exitosamente en PatitasCare!");
+                this.dispose(); // Cierra y permite que el usuario regrese al Login
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Hubo un error al actualizar en la base de datos.", "Error SQL", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden. Inténtalo de nuevo.", "Error de seguridad", javax.swing.JOptionPane.ERROR_MESSAGE);
+            txt_NuevaPass.setText("");
+            txt_ConfirmarPass.setText("");
+            txt_NuevaPass.requestFocus(); 
+        }
     }//GEN-LAST:event_btn_ActualizarActionPerformed
 
     private void chk_OjoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chk_OjoActionPerformed
         if(chk_Ojo.isSelected()){
-            txt_contraseña.setEchoChar((char)0);
+            txt_ConfirmarPass.setEchoChar((char)0);
             chk_Ojo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/basil--eye-solid.png")));
         }else{
-            txt_contraseña.setEchoChar('•');
+            txt_ConfirmarPass.setEchoChar('•');
             chk_Ojo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/basil--eye-closed-solid.png")));
         }
     }//GEN-LAST:event_chk_OjoActionPerformed
@@ -560,7 +587,7 @@ public class Recuperar_Contraseña extends JFrame {
     private javax.swing.JTextField txt4;
     private javax.swing.JTextField txt5;
     private javax.swing.JTextField txt6;
-    private javax.swing.JTextField txt7;
-    private javax.swing.JPasswordField txt_contraseña;
+    private javax.swing.JPasswordField txt_ConfirmarPass;
+    private javax.swing.JTextField txt_NuevaPass;
     // End of variables declaration//GEN-END:variables
 }

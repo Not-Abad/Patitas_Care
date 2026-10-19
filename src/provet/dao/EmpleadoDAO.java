@@ -1,6 +1,5 @@
 
 /** @author jesus-abad */
-
 package provet.dao;
 
 import provet.model.Empleado;
@@ -15,7 +14,9 @@ import java.util.List;
 
 public class EmpleadoDAO {
 
-    //Insertar un nuevo empleado
+    // ==========================================
+    // MÉTODO CREATE: Insertar un nuevo empleado
+    // ==========================================
     public int insert(Empleado empleado) {
         int filasAfectadas = 0;
         String sql = "INSERT INTO mts_empleado (id_persona, id_puesto, usuario, password, foto_perfil, sueldo_base, fecha_contratacion) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -40,7 +41,9 @@ public class EmpleadoDAO {
         return filasAfectadas;
     }
 
-    //Leer un empleado por su ID
+    // ==========================================
+    // MÉTODO READ: Leer un empleado por su ID
+    // ==========================================
     public Empleado selectById(int idEmpleado) {
         Empleado empleado = null;
         String sql = "SELECT * FROM mts_empleado WHERE id_empleado = ?";
@@ -70,7 +73,9 @@ public class EmpleadoDAO {
         return empleado;
     }
 
-    //Leer todos los empleados
+    // ==========================================
+    // MÉTODO READ: Leer todos los empleados
+    // ==========================================
     public List<Empleado> selectAll() {
         List<Empleado> listaEmpleados = new ArrayList<>();
         String sql = "SELECT * FROM mts_empleado";
@@ -100,7 +105,9 @@ public class EmpleadoDAO {
         return listaEmpleados;
     }
 
-    //Actualizar un empleado
+    // ==========================================
+    // MÉTODO UPDATE: Actualizar un empleado
+    // ==========================================
     public boolean update(Empleado empleado) {
         boolean actualizado = false;
         String sql = "UPDATE mts_empleado SET id_persona=?, id_puesto=?, usuario=?, password=?, foto_perfil=?, sueldo_base=?, fecha_contratacion=? WHERE id_empleado=?";
@@ -129,7 +136,9 @@ public class EmpleadoDAO {
         return actualizado;
     }
 
-    //Eliminar un empleado
+    // ==========================================
+    // MÉTODO DELETE: Eliminar un empleado
+    // ==========================================
     public boolean delete(int idEmpleado) {
         boolean eliminado = false;
         String sql = "DELETE FROM mts_empleado WHERE id_empleado = ?";
@@ -151,16 +160,16 @@ public class EmpleadoDAO {
         return eliminado;
     }
     
-    //Autenticar usuario
+    // ==========================================
+    // MÉTODO LOGIN: Autenticar usuario
+    // ==========================================
     public Empleado autenticarUsuario(String usuario, String contrasena) {
         Empleado empleadoLogueado = null;
         String sql = "SELECT * FROM mts_empleado WHERE usuario = ? AND password = ?";
         
-        //Obtenemos la conexión AFUERA del try para que no se cierre automáticamente
         Connection conn = Conexion.getConexion();
 
         if (conn != null) {
-            //Solo el PreparedStatement va en el try para que se cierre al terminar
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 
                 pstmt.setString(1, usuario);
@@ -184,5 +193,52 @@ public class EmpleadoDAO {
             }
         }
         return empleadoLogueado;
+    }
+
+    // ==========================================
+    // MÉTODO EXTRA: Obtener email para recuperación
+    // ==========================================
+    public String obtenerEmailPorUsuario(String usuario) {
+        String email = null;
+        // Unimos la tabla empleado con persona usando su id_persona para sacar el email
+        String sql = "SELECT p.email FROM mts_empleado e INNER JOIN mts_persona p ON e.id_persona = p.id_persona WHERE e.usuario = ?";
+        Connection conn = Conexion.getConexion();
+        
+        if (conn != null) {
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, usuario);
+                ResultSet rs = pstmt.executeQuery();
+                
+                if (rs.next()) {
+                    email = rs.getString("email");
+                }
+            } catch (SQLException e) {
+                System.err.println("Error al buscar el email: " + e.getMessage());
+            }
+        }
+        return email;
+    }
+
+    // ==========================================
+    // MÉTODO EXTRA: Actualizar solo la contraseña
+    // ==========================================
+    public boolean actualizarPassword(String usuario, String nuevaPassword) {
+        boolean actualizado = false;
+        String sql = "UPDATE mts_empleado SET password = ? WHERE usuario = ?";
+        Connection conn = Conexion.getConexion();
+        
+        if (conn != null) {
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, nuevaPassword);
+                pstmt.setString(2, usuario);
+                
+                if (pstmt.executeUpdate() > 0) {
+                    actualizado = true;
+                }
+            } catch (SQLException e) {
+                System.err.println("Error al actualizar contraseña: " + e.getMessage());
+            }
+        }
+        return actualizado;
     }
 }
