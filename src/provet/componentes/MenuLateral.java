@@ -77,7 +77,6 @@ public class MenuLateral extends javax.swing.JPanel {
         lbl_NombreUsuario = new javax.swing.JLabel();
         lbl_Foto = new javax.swing.JLabel();
         lbl_Puesto = new javax.swing.JLabel();
-        btn_Salir = new provet.componentes.botonSwing();
 
         jPanel2.setBackground(new java.awt.Color(108, 135, 118));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -96,10 +95,6 @@ public class MenuLateral extends javax.swing.JPanel {
         lbl_Puesto.setForeground(new java.awt.Color(39, 53, 38));
         lbl_Puesto.setText("Sin especificar");
         jPanel2.add(lbl_Puesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
-
-        btn_Salir.setText("Salir");
-        btn_Salir.addActionListener(this::btn_SalirActionPerformed);
-        jPanel2.add(btn_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 250, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -123,13 +118,8 @@ public class MenuLateral extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
-        
-    }//GEN-LAST:event_btn_SalirActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private provet.componentes.botonSwing btn_Salir;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lbl_Foto;
     private javax.swing.JLabel lbl_NombreUsuario;

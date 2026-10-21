@@ -32,13 +32,16 @@ public class Conexion {
             if (conexion == null || conexion.isClosed()) {
                 conexion = DriverManager.getConnection(URL, USER, PASS);
                 System.out.println("Conexión establecida exitosamente con Patitas Care.");
+                
+                Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                    cerrarConexion();
+                }));
             }
         } catch (ClassNotFoundException e) {
-            System.err.println("Error: No se encontró el Driver de la base de datos.");
-            e.printStackTrace();
+            System.err.println("Error crítico: No se encontró el driver MariaDB. Verifica tus dependencias.");
         } catch (SQLException e) {
-            System.err.println("Error al intentar conectar a la base de datos.");
-            e.printStackTrace();
+            System.err.println("No se pudo conectar a la base de datos.");
+            System.err.println("Causa: " + e.getMessage());
         }
         return conexion;
     }
@@ -51,7 +54,6 @@ public class Conexion {
             }
         } catch (SQLException e) {
             System.err.println("Error al intentar cerrar la conexión.");
-            e.printStackTrace();
         }
     }
 }

@@ -505,7 +505,7 @@ public class Recuperar_Contraseña extends JFrame {
             
             // Instanciamos el DAO y llamamos a actualizarPassword
             EmpleadoDAO dao = new EmpleadoDAO();
-            boolean exito = dao.actualizarPassword(this.nombreUsuario, nuevaPass);
+            boolean exito = dao.actualizarContraseña(this.nombreUsuario, nuevaPass);
             
             if (exito) {
                 javax.swing.JOptionPane.showMessageDialog(this, "¡Contraseña actualizada exitosamente en PatitasCare!");

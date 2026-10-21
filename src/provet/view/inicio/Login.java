@@ -3,43 +3,86 @@
 package provet.view.inicio;
 
 //Importamos librerias
+import java.sql.Connection;
 import javax.swing.JOptionPane;
 import provet.view.administrador.MenuAdmin;
 import provet.view.veterinario.Menu_Principal;
 import provet.view.secretario.Dashboard_Secretario;
 import provet.dao.EmpleadoDAO;
 import provet.model.Empleado;
+import provet.utilidades.Conexion;
 import provet.utilidades.Sesion;
 
 //Inicio de la clase Login, que hereda de la clase JFrame
 public class Login extends javax.swing.JFrame {
     
+    //Atributos de la clase
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Login.class.getName());
-    private EmpleadoDAO empleadoDAO;
+    private final EmpleadoDAO empleadoDAO;
+    public final Connection conn = Conexion.getConexion();
     
-    @SuppressWarnings("unchecked")
+    //Constructor de la clase Login
     public Login() {
-        initComponents();
-        this.empleadoDAO = new EmpleadoDAO();
+        initComponents();                                 //Inicia los componentes de la clase
+        this.empleadoDAO = new EmpleadoDAO();             //Indicamos que empleadoDAO es un nuevo objeto de la clase
+        
+        //Si no existe conexión con la base de datos, Entonces...
+        if (conn == null) {
+            btn_Aceptar.setEnabled(false);              //Desactiva el boton Aceptar
+            link_recuperarContra.setVisible(false);  //Oculta la recuperación de contraseña
+            lbl_Pregunta2.setVisible(false);         //Oculta el label de recuperación
+            
+        } else {    //Sino...
+            btn_Aceptar.setEnabled(true);               //Habilita el botón Aceptar
+            link_recuperarContra.setVisible(true);   //Muesta la recuperación de contraseña
+            lbl_Pregunta2.setVisible(true);          //Muestra el label de recuperación
+        }
     }
-    
-    public Empleado procesarLogin(String usuario, String contrasena) {
+
+    //Validamos los datos del Empleado
+    public void validarEmpleado() {
+        
+        //Variables del método
+        String usuario = txt_Usuario.getText().trim();                   //El usuario = el texto de txt_Usuario
+        String contra  = new String(txt_contraseña.getPassword());  //La contraseña = el texto de txt_contraseña
+
         // Validaciones básicas de campos vacíos
-        if (usuario.trim().isEmpty() || contrasena.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Por favor, ingresa usuario y contraseña.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
-            return null;
+        if (usuario.isEmpty() || contra.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor ingresa usuario y contraseña.");
+            return;
         }
 
-        // Llamada al DAO
-        Empleado empleado = empleadoDAO.autenticarUsuario(usuario, contrasena);
+        // Revisamos si el usuario existe y coincide la contraseña en MariaDB
+        Empleado usuarioValido = empleadoDAO.autenticarUsuario(usuario, contra);
 
-        if (empleado != null) {
-            System.out.println("Login exitoso. Bienvenido: " + empleado.getUsuario());
-            // Aquí registrarías en tu tabla 'bit_movimientos' que este empleado Inició Sesión (id_accion = 6)
-            return empleado;
+        // Si el usuario existe y las credenciales son correctas...
+        if (usuarioValido != null) {
+            
+            // Guardamos la Sesión Global
+            Sesion.setEmpleadoActual(usuarioValido);
+            
+            // Obtenemos el ID del puesto para saber qué pantalla abrir
+            int idPuesto = usuarioValido.getIdPuesto();
+
+            // Estructura para abrir la ventana según el id_puesto
+            switch (idPuesto) {
+                case 2 -> new MenuAdmin().setVisible(true);             // ID 2 = Administrador
+                case 3 -> new Menu_Principal().setVisible(true);        // ID 3 = Veterinario
+                case 4 -> new Dashboard_Secretario().setVisible(true);  // ID 4 = Secretario
+                default -> {
+                    JOptionPane.showMessageDialog(this, "Tu usuario no tiene un rol válido asignado.");
+                    return; // Detenemos la ejecución para que no cierre el login
+                }
+            }
+            
+            // Cierra la ventana de login
+            this.dispose(); 
+            
         } else {
-            JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos.", "Error de Autenticación", JOptionPane.ERROR_MESSAGE);
-            return null;
+            // CASO: CREDENCIALES INCORRECTAS
+            JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos. Inténtalo de nuevo.");
+            txt_contraseña.setText(""); // Limpiamos el campo por seguridad
+            txt_contraseña.requestFocus();
         }
     }
     
@@ -87,7 +130,7 @@ public class Login extends javax.swing.JFrame {
                 link_recuperarContraMouseClicked(evt);
             }
         });
-        pnl_Operativo.add(link_recuperarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 330, -1, -1));
+        pnl_Operativo.add(link_recuperarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 330, -1, -1));
 
         txt_Usuario.setBackground(new java.awt.Color(216, 218, 203));
         txt_Usuario.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
@@ -97,14 +140,25 @@ public class Login extends javax.swing.JFrame {
         txt_Usuario.setAutoscrolls(false);
         txt_Usuario.setBorder(null);
         txt_Usuario.setCaretColor(new java.awt.Color(39, 53, 38));
+        txt_Usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_UsuarioActionPerformed(evt);
+            }
+        });
         pnl_Operativo.add(txt_Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 320, 50));
 
         txt_contraseña.setBackground(new java.awt.Color(216, 218, 203));
         txt_contraseña.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
         txt_contraseña.setForeground(new java.awt.Color(39, 53, 38));
         txt_contraseña.setBorder(null);
+        txt_contraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_contraseñaActionPerformed(evt);
+            }
+        });
         pnl_Operativo.add(txt_contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 270, 50));
 
+        chk_Ojo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         chk_Ojo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/basil--eye-closed-solid.png"))); // NOI18N
         chk_Ojo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,7 +175,7 @@ public class Login extends javax.swing.JFrame {
                 btn_AceptarActionPerformed(evt);
             }
         });
-        pnl_Operativo.add(btn_Aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, 230, 50));
+        pnl_Operativo.add(btn_Aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 230, 50));
 
         lbl_Usuario.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         lbl_Usuario.setForeground(new java.awt.Color(242, 242, 242));
@@ -136,7 +190,7 @@ public class Login extends javax.swing.JFrame {
         lbl_Pregunta2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_Pregunta2.setForeground(new java.awt.Color(242, 242, 242));
         lbl_Pregunta2.setText("¿Olvidaste tu contraseña?");
-        pnl_Operativo.add(lbl_Pregunta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, 180, -1));
+        pnl_Operativo.add(lbl_Pregunta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, 180, -1));
 
         lbl_MarcoContraseña.setBackground(new java.awt.Color(216, 218, 203));
         lbl_MarcoContraseña.setOpaque(true);
@@ -164,58 +218,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_iniciarsActionPerformed
 
     private void btn_AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AceptarActionPerformed
- String user = txt_Usuario.getText().trim();
-        String pass = new String(txt_contraseña.getPassword()); 
-
-        //Validaciones básicas de campos vacíos
-        if (user.isEmpty() || pass.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor ingresa usuario y contraseña.");
-            return;
-        }
-
-        //Revisamos si el usuario existe y coincide la contraseña en MariaDB
-        Empleado usuarioValido = procesarLogin(user, pass);
-
-        //Si el usuario existe y las credenciales son correctas...
-        if (usuarioValido != null) {
-            
-            //Guardamos la Sesión Global
-            Sesion.setEmpleadoActual(usuarioValido);
-            
-            // Obtenemos el ID del puesto para saber qué pantalla abrir
-            int idPuesto = usuarioValido.getIdPuesto();
-
-            //Estructura para abrir la ventana según el id_puesto
-            switch (idPuesto) {
-                case 2: // ID 1 = Administrador
-                    MenuAdmin mpAdmin = new MenuAdmin();
-                    mpAdmin.setVisible(true);
-                    break;
-                    
-                case 3: // ID 2 = Veterinario
-                    Menu_Principal mpVet = new Menu_Principal();
-                    mpVet.setVisible(true);
-                    break;
-                    
-                case 4: // ID 3 = Recepcionista / Cajero
-                    Dashboard_Secretario mpSec = new Dashboard_Secretario();
-                    mpSec.setVisible(true);
-                    break;
-                    
-                default:
-                    JOptionPane.showMessageDialog(this, "Tu usuario no tiene un rol válido asignado.");
-                    return; // Detenemos la ejecución para que no cierre el login
-            }
-            
-            // Cierra la ventana de login
-            this.dispose(); 
-            
-        } else {
-            // CASO: CREDENCIALES INCORRECTAS
-            JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos. Inténtalo de nuevo.");
-            txt_contraseña.setText(""); // Limpiamos el campo por seguridad
-            txt_contraseña.requestFocus();
-        }
+        validarEmpleado();
     }//GEN-LAST:event_btn_AceptarActionPerformed
 
     private void link_recuperarContraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_link_recuperarContraMouseClicked
@@ -241,6 +244,14 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_chk_OjoActionPerformed
 
+    private void txt_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_UsuarioActionPerformed
+        txt_contraseña.requestFocus();
+    }//GEN-LAST:event_txt_UsuarioActionPerformed
+
+    private void txt_contraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_contraseñaActionPerformed
+        validarEmpleado();
+    }//GEN-LAST:event_txt_contraseñaActionPerformed
+
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -262,6 +273,7 @@ public class Login extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new Login().setVisible(true));
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
