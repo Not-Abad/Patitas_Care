@@ -76,6 +76,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jTextArea_vacunas = new javax.swing.JTextArea();
         jCombo_especie = new javax.swing.JComboBox<>();
         botonSwing2 = new provet.componentes.botonSwing();
+        botonSwing4 = new provet.componentes.botonSwing();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -209,13 +210,22 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jPanel1.add(jCombo_especie, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 340, 300, 30));
 
         botonSwing2.setBackground(new java.awt.Color(108, 135, 118));
-        botonSwing2.setText("Regresar");
+        botonSwing2.setText("Editar paciente");
         botonSwing2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonSwing2ActionPerformed(evt);
             }
         });
-        jPanel1.add(botonSwing2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 650, 160, 60));
+        jPanel1.add(botonSwing2, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 40, 200, 60));
+
+        botonSwing4.setBackground(new java.awt.Color(108, 135, 118));
+        botonSwing4.setText("Regresar");
+        botonSwing4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSwing4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(botonSwing4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 660, 160, 60));
 
         jPanel2.setBackground(new java.awt.Color(108, 135, 118));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -410,10 +420,16 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     }//GEN-LAST:event_jTextField_idActionPerformed
 
     private void botonSwing2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing2ActionPerformed
-        Dashboard_Secretario menu = new Dashboard_Secretario();
+        EditarPacientes_secretario menu = new EditarPacientes_secretario();
         menu.setVisible(true);
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_botonSwing2ActionPerformed
+
+    private void botonSwing4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing4ActionPerformed
+        Dashboard_Secretario menu = new Dashboard_Secretario();
+        menu.setVisible(true);
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_botonSwing4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -454,6 +470,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     private provet.componentes.botonSwing botonSwing1;
     private provet.componentes.botonSwing botonSwing2;
     private provet.componentes.botonSwing botonSwing3;
+    private provet.componentes.botonSwing botonSwing4;
     private provet.componentes.botonSwing boton_guardar;
     private provet.componentes.botonSwing boton_limpiar;
     private provet.componentes.botonSwing btn_Calendario;

@@ -5,7 +5,6 @@
 package provet.view.propietario;
 
 import provet.view.secretario.MenuPropietario_miscitass;
-import provet.view.secretario.MenuPropietario_CitasPendientes;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
@@ -249,16 +248,7 @@ if (nombre.trim().isEmpty()) {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonSwing3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing3ActionPerformed
-        // TODO add your handling code here:
-        boolean hayCitas = true;
-        if(!hayCitas){
-            JOptionPane.showMessageDialog(this, "No tienes citas pendientes");
-        } else {
-            JOptionPane.showMessageDialog(this, "Tienes citas pendientes, revisa el apartado de citas");
-
-            // opcional: abrir ventana de citas
-            new MenuPropietario_CitasPendientes().setVisible(true);
-        }
+        // TODO 
     }//GEN-LAST:event_botonSwing3ActionPerformed
 
     private void botonSwing2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing2ActionPerformed

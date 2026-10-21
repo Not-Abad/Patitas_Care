@@ -109,7 +109,7 @@ EditarPacientes_secretario padre){
                 boton_dar_de_bajaActionPerformed(evt);
             }
         });
-        jPanel1.add(boton_dar_de_baja, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 490, 240, 50));
+        jPanel1.add(boton_dar_de_baja, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 490, 240, 50));
 
         boton_editar.setBackground(new java.awt.Color(108, 135, 118));
         boton_editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/lapiz.png"))); // NOI18N
@@ -119,7 +119,7 @@ EditarPacientes_secretario padre){
                 boton_editarActionPerformed(evt);
             }
         });
-        jPanel1.add(boton_editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 490, 240, 50));
+        jPanel1.add(boton_editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 490, 240, 50));
 
         txtEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -180,9 +180,7 @@ EditarPacientes_secretario padre){
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1200, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -17,6 +17,27 @@ public class Citas_pendientes_secretario extends javax.swing.JFrame {
     /**
      * Creates new form Citas_pendientes_secretario
      */
+    public void actualizarFila(
+        int fila,
+        String mascota,
+        String fecha,
+        String hora,
+        String motivo
+) {
+
+table_citasPendientes
+.setValueAt(mascota,fila,1);
+
+table_citasPendientes
+.setValueAt(fecha,fila,2);
+
+table_citasPendientes
+.setValueAt(hora,fila,3);
+
+table_citasPendientes
+.setValueAt(motivo,fila,4);
+
+}
     public Citas_pendientes_secretario() {
         initComponents();
         cargarCitas();
@@ -66,6 +87,8 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jLabel_especie = new javax.swing.JLabel();
         jLabel_motivo = new javax.swing.JLabel();
         jLabel_veterinario = new javax.swing.JLabel();
+        boton_editar = new provet.componentes.botonSwing();
+        boton_dar_de_baja = new provet.componentes.botonSwing();
         botonSwing2 = new provet.componentes.botonSwing();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -217,6 +240,26 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         jPanel1.add(panelRedondeado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, 1120, 250));
 
+        boton_editar.setBackground(new java.awt.Color(108, 135, 118));
+        boton_editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/lapiz.png"))); // NOI18N
+        boton_editar.setText("Editar");
+        boton_editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_editarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(boton_editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 660, 240, 50));
+
+        boton_dar_de_baja.setBackground(new java.awt.Color(255, 51, 51));
+        boton_dar_de_baja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/exit.png"))); // NOI18N
+        boton_dar_de_baja.setText("Dar de baja");
+        boton_dar_de_baja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_dar_de_bajaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(boton_dar_de_baja, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 660, 240, 50));
+
         botonSwing2.setBackground(new java.awt.Color(108, 135, 118));
         botonSwing2.setText("Regresar");
         botonSwing2.addActionListener(new java.awt.event.ActionListener() {
@@ -224,7 +267,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
                 botonSwing2ActionPerformed(evt);
             }
         });
-        jPanel1.add(botonSwing2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 660, 160, 60));
+        jPanel1.add(botonSwing2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 670, 160, 60));
 
         jPanel2.setBackground(new java.awt.Color(108, 135, 118));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -348,6 +391,98 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     this.dispose();    // TODO add your handling code here:
     }//GEN-LAST:event_btn_ReportesActionPerformed
 
+    private void boton_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_editarActionPerformed
+        int fila = table_citasPendientes.getSelectedRow();
+
+if (fila == -1) {
+    javax.swing.JOptionPane.showMessageDialog(
+        this,
+        "Selecciona una cita primero"
+    );
+    return;
+}
+
+String mascota =
+table_citasPendientes.getValueAt(
+fila,
+1
+).toString();
+
+String fecha =
+table_citasPendientes.getValueAt(
+fila,
+2
+).toString();
+
+String hora =
+table_citasPendientes.getValueAt(
+fila,
+3
+).toString();
+
+String motivo =
+table_citasPendientes.getValueAt(
+fila,
+4
+).toString();
+
+editarCita ventana =
+new editarCita(
+    mascota,
+    fecha,
+    hora,
+    motivo,
+    fila
+);
+
+ventana.setVisible(true);
+
+this.dispose();
+        
+    }//GEN-LAST:event_boton_editarActionPerformed
+
+    private void boton_dar_de_bajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_dar_de_bajaActionPerformed
+        // TODO add your handling code here:
+        int fila = table_citasPendientes.getSelectedRow();
+
+    if (fila == -1) {
+        javax.swing.JOptionPane.showMessageDialog(
+            this,
+            "Selecciona una cita primero.",
+            "Sin selección",
+            javax.swing.JOptionPane.WARNING_MESSAGE
+        );
+        return;
+    }
+
+    String mascota =
+        table_citasPendientes.getValueAt(fila, 1).toString();
+
+    int confirmacion =
+        javax.swing.JOptionPane.showConfirmDialog(
+            this,
+            "¿Seguro que deseas eliminar la cita de \"" + mascota + "\"?",
+            "Confirmar eliminación",
+            javax.swing.JOptionPane.YES_NO_OPTION,
+            javax.swing.JOptionPane.WARNING_MESSAGE
+        );
+
+    if (confirmacion == javax.swing.JOptionPane.YES_OPTION) {
+
+        Datos.citas.remove(fila);
+
+        DefaultTableModel modelo =
+            (DefaultTableModel) table_citasPendientes.getModel();
+
+        modelo.removeRow(fila);
+
+        javax.swing.JOptionPane.showMessageDialog(
+            this,
+            "Cita eliminada correctamente"
+        );
+    }
+    }//GEN-LAST:event_boton_dar_de_bajaActionPerformed
+
     private void botonSwing2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing2ActionPerformed
         Dashboard_Secretario menu = new Dashboard_Secretario();
         menu.setVisible(true);
@@ -416,6 +551,8 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     private provet.componentes.botonSwing botonSwing1;
     private provet.componentes.botonSwing botonSwing2;
     private provet.componentes.botonSwing botonSwing3;
+    private provet.componentes.botonSwing boton_dar_de_baja;
+    private provet.componentes.botonSwing boton_editar;
     private provet.componentes.botonSwing btn_Reportes;
     private provet.componentes.botonSwing btn_Salir;
     private provet.componentes.botonSwing btn_editarpaciente;
@@ -444,3 +581,4 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     private javax.swing.JTable table_citasPendientes;
     // End of variables declaration//GEN-END:variables
 }
+

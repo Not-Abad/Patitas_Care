@@ -66,12 +66,6 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jLabel13 = new javax.swing.JLabel();
         jLabel_notificaciones = new javax.swing.JLabel();
         boton_entrar_notificaciones = new provet.componentes.botonSwing();
-        panel_cirugias_pendientes = new provet.componentes.PanelRedondeado();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel_reportes = new javax.swing.JLabel();
-        boton_entrar_reportes = new provet.componentes.botonSwing();
         panel_citas_pendientes = new provet.componentes.PanelRedondeado();
         jLabel5 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -80,9 +74,22 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jLabel_citas = new javax.swing.JLabel();
         boton_entrar_citasPendientes = new provet.componentes.botonSwing();
         jLabel9 = new javax.swing.JLabel();
+        boton_pendientes = new provet.componentes.botonSwing();
+        panel_cirugias_pendientes = new provet.componentes.PanelRedondeado();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        boton_entrar_reportes = new provet.componentes.botonSwing();
         panel_cirugias_pendientes2 = new provet.componentes.PanelRedondeado();
         jLabel8 = new javax.swing.JLabel();
-        boton_pendientes = new provet.componentes.botonSwing();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        boton_entrar_reportes1 = new provet.componentes.botonSwing();
+        jLabel_reportes = new javax.swing.JLabel();
+        panel_cirugias_pendientes3 = new provet.componentes.PanelRedondeado();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        boton_entrar_reportes2 = new provet.componentes.botonSwing();
+        jLabel_reportes1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -108,17 +115,17 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(39, 53, 38));
         jLabel17.setText("Pendientes");
-        panel_cirugias_pendientes1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, 29));
+        panel_cirugias_pendientes1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, -1, 29));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/notifications.png"))); // NOI18N
-        panel_cirugias_pendientes1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 140, 170));
+        panel_cirugias_pendientes1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 130, 110));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel13.setText("Nuevos pendientes");
-        panel_cirugias_pendientes1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
+        panel_cirugias_pendientes1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, -1, -1));
 
-        jLabel_notificaciones.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
-        panel_cirugias_pendientes1.add(jLabel_notificaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, 30, 50));
+        jLabel_notificaciones.setFont(new java.awt.Font("Tahoma", 1, 35));
+        panel_cirugias_pendientes1.add(jLabel_notificaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 30, 50));
 
         boton_entrar_notificaciones.setText("Entrar");
         boton_entrar_notificaciones.addActionListener(new java.awt.event.ActionListener() {
@@ -126,38 +133,9 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
                 boton_entrar_notificacionesActionPerformed(evt);
             }
         });
-        panel_cirugias_pendientes1.add(boton_entrar_notificaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, -1, -1));
+        panel_cirugias_pendientes1.add(boton_entrar_notificaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, -1, -1));
 
-        jPanel1.add(panel_cirugias_pendientes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 210, 270, 410));
-
-        panel_cirugias_pendientes.setBackground(new java.awt.Color(192, 207, 178));
-        panel_cirugias_pendientes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel7.setBackground(new java.awt.Color(51, 255, 51));
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel7.setText("Reportes");
-        panel_cirugias_pendientes.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, -1, 29));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/description.png"))); // NOI18N
-        panel_cirugias_pendientes.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, -1, -1));
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel10.setText("Reportes disponibles");
-        panel_cirugias_pendientes.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
-
-        jLabel_reportes.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
-        panel_cirugias_pendientes.add(jLabel_reportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, 30, 50));
-
-        boton_entrar_reportes.setText("Entrar");
-        boton_entrar_reportes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boton_entrar_reportesActionPerformed(evt);
-            }
-        });
-        panel_cirugias_pendientes.add(boton_entrar_reportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, -1, -1));
-
-        jPanel1.add(panel_cirugias_pendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 270, 410));
+        jPanel1.add(panel_cirugias_pendientes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 130, 270, 270));
 
         panel_citas_pendientes.setBackground(new java.awt.Color(192, 207, 178));
         panel_citas_pendientes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -166,23 +144,23 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(39, 53, 38));
         jLabel5.setText("Citas");
-        panel_citas_pendientes.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, 29));
+        panel_citas_pendientes.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 29));
 
         jLabel12.setBackground(new java.awt.Color(51, 255, 51));
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(39, 53, 38));
         jLabel12.setText("pendientes");
-        panel_citas_pendientes.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, 30));
+        panel_citas_pendientes.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, 30));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/calendario.png"))); // NOI18N
-        panel_citas_pendientes.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, -1));
+        panel_citas_pendientes.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel11.setText("Citas para hoy");
-        panel_citas_pendientes.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, -1, -1));
+        panel_citas_pendientes.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, -1, -1));
 
-        jLabel_citas.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
-        panel_citas_pendientes.add(jLabel_citas, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 30, 50));
+        jLabel_citas.setFont(new java.awt.Font("Tahoma", 1, 35));
+        panel_citas_pendientes.add(jLabel_citas, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 30, 30));
 
         boton_entrar_citasPendientes.setText("Entrar");
         boton_entrar_citasPendientes.addActionListener(new java.awt.event.ActionListener() {
@@ -190,31 +168,99 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
                 boton_entrar_citasPendientesActionPerformed(evt);
             }
         });
-        panel_citas_pendientes.add(boton_entrar_citasPendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 360, -1, -1));
+        panel_citas_pendientes.add(boton_entrar_citasPendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, -1, -1));
 
-        jPanel1.add(panel_citas_pendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 250, 410));
+        jPanel1.add(panel_citas_pendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 250, 280));
 
         jLabel9.setBackground(new java.awt.Color(51, 255, 51));
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(39, 53, 38));
         jLabel9.setText("¡HOLA SECRETARIO!");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, -1, 29));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, -1, 29));
+
+        boton_pendientes.setBackground(new java.awt.Color(192, 207, 178));
+        boton_pendientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/system-uicons--bell.png"))); // NOI18N
+        boton_pendientes.setText("Pendientes");
+        jPanel1.add(boton_pendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 50, 190, 50));
+
+        panel_cirugias_pendientes.setBackground(new java.awt.Color(192, 207, 178));
+        panel_cirugias_pendientes.setPreferredSize(new java.awt.Dimension(203, 290));
+        panel_cirugias_pendientes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel7.setText("Editar paciente");
+        panel_cirugias_pendientes.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, 29));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/description.png"))); // NOI18N
+        panel_cirugias_pendientes.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 130, -1));
+
+        boton_entrar_reportes.setText("Entrar");
+        boton_entrar_reportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_entrar_reportesActionPerformed(evt);
+            }
+        });
+        panel_cirugias_pendientes.add(boton_entrar_reportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, -1, -1));
+
+        jPanel1.add(panel_cirugias_pendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 430, 270, 260));
 
         panel_cirugias_pendientes2.setBackground(new java.awt.Color(192, 207, 178));
+        panel_cirugias_pendientes2.setPreferredSize(new java.awt.Dimension(203, 290));
         panel_cirugias_pendientes2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel8.setBackground(new java.awt.Color(51, 255, 51));
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(39, 53, 38));
         jLabel8.setText("Reportes");
-        panel_cirugias_pendientes2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, -1, 29));
+        panel_cirugias_pendientes2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, 29));
 
-        jPanel1.add(panel_cirugias_pendientes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 270, 410));
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/description.png"))); // NOI18N
+        panel_cirugias_pendientes2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 130, 130));
 
-        boton_pendientes.setBackground(new java.awt.Color(192, 207, 178));
-        boton_pendientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/system-uicons--bell.png"))); // NOI18N
-        boton_pendientes.setText("Pendientes");
-        jPanel1.add(boton_pendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 70, 190, 50));
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel18.setText("Reportes disponibles");
+        panel_cirugias_pendientes2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
+
+        boton_entrar_reportes1.setText("Entrar");
+        boton_entrar_reportes1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_entrar_reportes1ActionPerformed(evt);
+            }
+        });
+        panel_cirugias_pendientes2.add(boton_entrar_reportes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, -1, -1));
+
+        jLabel_reportes.setFont(new java.awt.Font("Tahoma", 1, 33));
+        panel_cirugias_pendientes2.add(jLabel_reportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 40, 40));
+
+        jPanel1.add(panel_cirugias_pendientes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, 270, 280));
+
+        panel_cirugias_pendientes3.setBackground(new java.awt.Color(192, 207, 178));
+        panel_cirugias_pendientes3.setPreferredSize(new java.awt.Dimension(203, 290));
+        panel_cirugias_pendientes3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel19.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(39, 53, 38));
+        jLabel19.setText("Agendar cita");
+        panel_cirugias_pendientes3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, -1, 29));
+
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/description.png"))); // NOI18N
+        panel_cirugias_pendientes3.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 130, -1));
+
+        boton_entrar_reportes2.setText("Entrar");
+        boton_entrar_reportes2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_entrar_reportes2ActionPerformed(evt);
+            }
+        });
+        panel_cirugias_pendientes3.add(boton_entrar_reportes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, -1, -1));
+
+        jPanel1.add(panel_cirugias_pendientes3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 430, 270, 250));
+
+        jLabel_reportes1.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        jPanel1.add(jLabel_reportes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 430, 30, 50));
 
         jPanel2.setBackground(new java.awt.Color(108, 135, 118));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -317,7 +363,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     }//GEN-LAST:event_boton_entrar_citasPendientesActionPerformed
 
     private void boton_entrar_reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_entrar_reportesActionPerformed
-        Reporte_secretario menu = new Reporte_secretario();
+        EditarPacientes_secretario menu = new EditarPacientes_secretario();
         menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_boton_entrar_reportesActionPerformed
@@ -349,9 +395,31 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     this.dispose();    // TODO add your handling code here:
     }//GEN-LAST:event_btn_ReportesActionPerformed
 
+    private void boton_entrar_reportes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_entrar_reportes1ActionPerformed
+        // TODO add your handling code here:
+        Reporte_secretario ventana = new Reporte_secretario();
+ventana.setVisible(true);
+
+// Opcional
+this.dispose();
+        
+    }//GEN-LAST:event_boton_entrar_reportes1ActionPerformed
+
+    private void boton_entrar_reportes2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_entrar_reportes2ActionPerformed
+        // TODO add your handling code here:
+        MenuPropietario_Agendarcitas ventana = new MenuPropietario_Agendarcitas();
+ventana.setVisible(true);
+
+// Opcional
+this.dispose();
+    }//GEN-LAST:event_boton_entrar_reportes2ActionPerformed
+
     private void boton_entrar_notificacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_entrar_notificacionesActionPerformed
-        
-        
+  pendiente_secretario ventana = new pendiente_secretario();
+ventana.setVisible(true);
+
+// Opcional
+this.dispose();
     }//GEN-LAST:event_boton_entrar_notificacionesActionPerformed
 
     public void refrescar() {
@@ -404,20 +472,25 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     private provet.componentes.botonSwing boton_entrar_citasPendientes;
     private provet.componentes.botonSwing boton_entrar_notificaciones;
     private provet.componentes.botonSwing boton_entrar_reportes;
+    private provet.componentes.botonSwing boton_entrar_reportes1;
+    private provet.componentes.botonSwing boton_entrar_reportes2;
     private provet.componentes.botonSwing boton_pendientes;
     private provet.componentes.botonSwing btn_Calendario;
     private provet.componentes.botonSwing btn_Reportes;
     private provet.componentes.botonSwing btn_Salir;
     private provet.model.ControlUsuarios controlUsuarios1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -428,11 +501,13 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     private javax.swing.JLabel jLabel_citas;
     private javax.swing.JLabel jLabel_notificaciones;
     private javax.swing.JLabel jLabel_reportes;
+    private javax.swing.JLabel jLabel_reportes1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private provet.componentes.PanelRedondeado panel_cirugias_pendientes;
     private provet.componentes.PanelRedondeado panel_cirugias_pendientes1;
     private provet.componentes.PanelRedondeado panel_cirugias_pendientes2;
+    private provet.componentes.PanelRedondeado panel_cirugias_pendientes3;
     private provet.componentes.PanelRedondeado panel_citas_pendientes;
     // End of variables declaration//GEN-END:variables
 }

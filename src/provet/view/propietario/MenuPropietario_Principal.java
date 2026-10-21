@@ -6,7 +6,6 @@ package provet.view.propietario;
 
 import provet.view.secretario.MenuPropietario_miscitass;
 import provet.view.secretario.MenuPropietario_Agendarcitas;
-import provet.view.secretario.MenuPropietario_CitasPendientes;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
@@ -273,24 +272,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
 
     private void btn_EntrarCitaspendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EntrarCitaspendientesActionPerformed
                                                           
-    // crea la ventana de tarjetas
-    MenuPropietario_CitasPendientes ventana = new MenuPropietario_CitasPendientes();
-    
-    // obtiene la tabla
-    // Verifica que la ventana 'miscitass' exista o haya sido creada
-    if (MenuPropietario_miscitass.instanciaUnica != null) {
-        javax.swing.JTable tablaDatos = MenuPropietario_miscitass.instanciaUnica.getjTable1(); 
  
-        
-        ventana.cargarDesdeTabla(tablaDatos);
-    } else {
-       
-        MenuPropietario_miscitass datosVacios = new MenuPropietario_miscitass();
-        ventana.cargarDesdeTabla(datosVacios.getjTable1());
-    }
-
-    ventana.setVisible(true);
-    dispose();
       // TODO add your handling code here:
     }//GEN-LAST:event_btn_EntrarCitaspendientesActionPerformed
 

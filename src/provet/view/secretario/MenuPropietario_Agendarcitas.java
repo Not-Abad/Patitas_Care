@@ -20,6 +20,7 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
  */
 public class MenuPropietario_Agendarcitas extends javax.swing.JFrame {
     
+    public static Citas_pendientes_secretario instanciaUnica;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MenuPropietario_Agendarcitas.class.getName());
 
     /**
@@ -61,11 +62,11 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jLabel16 = new javax.swing.JLabel();
         panelRedondeado2 = new provet.componentes.PanelRedondeado();
         jLabel8 = new javax.swing.JLabel();
-        botonSwing4 = new provet.componentes.botonSwing();
+        btn_Salir = new provet.componentes.botonSwing();
+        botonSwing5 = new provet.componentes.botonSwing();
         botonSwing1 = new provet.componentes.botonSwing();
         btn_Calendario = new provet.componentes.botonSwing();
         btn_Reportes = new provet.componentes.botonSwing();
-        btn_Salir = new provet.componentes.botonSwing();
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -111,7 +112,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jLabel16.setBackground(new java.awt.Color(51, 255, 51));
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel16.setText("Propetario");
+        jLabel16.setText("Secretario");
         jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/mascota2.jpeg"))); // NOI18N
@@ -136,25 +137,27 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         jPanel2.add(panelRedondeado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 90, 80));
 
-        botonSwing4.setText("Menú Principal");
-        botonSwing4.addActionListener(this::botonSwing4ActionPerformed);
-        jPanel2.add(botonSwing4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 60));
+        btn_Salir.setText("Salir");
+        btn_Salir.addActionListener(this::btn_SalirActionPerformed);
+        jPanel2.add(btn_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 250, 60));
+
+        botonSwing5.setText("Menú Principal");
+        botonSwing5.addActionListener(this::botonSwing5ActionPerformed);
+        jPanel2.add(botonSwing5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 60));
 
         botonSwing1.setForeground(new java.awt.Color(39, 53, 38));
-        botonSwing1.setText("Mis archivos");
+        botonSwing1.setText("Registrar Paciente");
         botonSwing1.addActionListener(this::botonSwing1ActionPerformed);
         jPanel2.add(botonSwing1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 250, 60));
 
         btn_Calendario.setForeground(new java.awt.Color(39, 53, 38));
-        btn_Calendario.setText("Calendario");
+        btn_Calendario.setText("Editar Paciente");
+        btn_Calendario.addActionListener(this::btn_CalendarioActionPerformed);
         jPanel2.add(btn_Calendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 250, 60));
 
         btn_Reportes.setText("Reportes");
+        btn_Reportes.addActionListener(this::btn_ReportesActionPerformed);
         jPanel2.add(btn_Reportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 250, 60));
-
-        btn_Salir.setText("Salir");
-        btn_Salir.addActionListener(this::btn_SalirActionPerformed);
-        jPanel2.add(btn_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 250, 60));
 
         jPanel1.setBackground(new java.awt.Color(228, 230, 217));
         jPanel1.setMinimumSize(new java.awt.Dimension(1470, 740));
@@ -316,13 +319,15 @@ if (nombre.isEmpty() || raza.isEmpty() || fecha.isEmpty() || descripcion.isEmpty
 
 // 3. OBTENER LA INSTANCIA DE LA TABLA (Para no crear una nueva y borrar todo)
 // Si la ventana no existe, la creamos una sola vez
-if (MenuPropietario_miscitass.instanciaUnica == null) {
-    MenuPropietario_miscitass.instanciaUnica = new MenuPropietario_miscitass();
-}
+Cita nueva = new Cita(
+    nombre,
+    nombre,
+    fecha,
+    horario,
+    motivo
+);
 
-// 4. AGREGAR A LA TABLA VISUALMENTE
-MenuPropietario_miscitass.instanciaUnica.insertarCita(nombre, raza, especie, veterinario, fecha, horario, motivo, descripcion);
-
+Datos.citas.add(nueva);
 // 5. GUARDAR EN ARCHIVO PLANO (Igual que el código de las flores)
 try {
     // El "true" es vital para que no borre las citas anteriores en el archivo
@@ -338,7 +343,10 @@ try {
 }
 
 // 6. Finalización
-MenuPropietario_miscitass.instanciaUnica.setVisible(true);
+Citas_pendientes_secretario ventana =
+new Citas_pendientes_secretario();
+
+ventana.setVisible(true);
 JOptionPane.showMessageDialog(this, "Tu cita se ha agendado correctamente");
 JOptionPane.showMessageDialog(null, "Recuerda llegar 10 min antes a tu cita");
 
@@ -381,21 +389,33 @@ this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_razaActionPerformed
 
-    private void botonSwing4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing4ActionPerformed
-        MenuPropietario_Principal menu = new MenuPropietario_Principal();
+    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_btn_SalirActionPerformed
+
+    private void botonSwing5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing5ActionPerformed
+        Dashboard_Secretario menu = new Dashboard_Secretario();
         menu.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_botonSwing4ActionPerformed
+    }//GEN-LAST:event_botonSwing5ActionPerformed
 
     private void botonSwing1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing1ActionPerformed
-        MenuPropietario_Archivos menu = new MenuPropietario_Archivos();
+        Registrar_paciente_secretario menu = new Registrar_paciente_secretario();
         menu.setVisible(true);
         this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_botonSwing1ActionPerformed
 
-    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
-        dispose();
-    }//GEN-LAST:event_btn_SalirActionPerformed
+    private void btn_CalendarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CalendarioActionPerformed
+        EditarPacientes_secretario menu = new EditarPacientes_secretario();
+        menu.setVisible(true);
+        this.dispose();// TODO add your handling code here:
+    }//GEN-LAST:event_btn_CalendarioActionPerformed
+
+    private void btn_ReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReportesActionPerformed
+        Reporte_secretario menu = new Reporte_secretario();
+        menu.setVisible(true);
+        this.dispose();    // TODO add your handling code here:
+    }//GEN-LAST:event_btn_ReportesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -426,7 +446,7 @@ this.dispose();
     private provet.componentes.botonSwing botonSwing1;
     private provet.componentes.botonSwing botonSwing2;
     private provet.componentes.botonSwing botonSwing3;
-    private provet.componentes.botonSwing botonSwing4;
+    private provet.componentes.botonSwing botonSwing5;
     private provet.componentes.botonSwing btn_Calendario;
     private provet.componentes.botonSwing btn_Reportes;
     private provet.componentes.botonSwing btn_Salir;
