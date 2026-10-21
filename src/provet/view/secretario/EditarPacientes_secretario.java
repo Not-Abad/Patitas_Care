@@ -160,6 +160,7 @@ public class EditarPacientes_secretario extends javax.swing.JFrame {
         boton_dar_de_baja = new provet.componentes.botonSwing();
         boton_editar = new provet.componentes.botonSwing();
         boton_ver_detalles = new provet.componentes.botonSwing();
+        botonSwing2 = new provet.componentes.botonSwing();
 
         linkLabel1.setText("linkLabel1");
 
@@ -274,7 +275,12 @@ public class EditarPacientes_secretario extends javax.swing.JFrame {
         boton_dar_de_baja.setBackground(new java.awt.Color(255, 51, 51));
         boton_dar_de_baja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/exit.png"))); // NOI18N
         boton_dar_de_baja.setText("Dar de baja");
-        jPanel1.add(boton_dar_de_baja, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 610, 240, 50));
+        boton_dar_de_baja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_dar_de_bajaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(boton_dar_de_baja, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 570, 240, 50));
 
         boton_editar.setBackground(new java.awt.Color(108, 135, 118));
         boton_editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/lapiz.png"))); // NOI18N
@@ -284,11 +290,20 @@ public class EditarPacientes_secretario extends javax.swing.JFrame {
                 boton_editarActionPerformed(evt);
             }
         });
-        jPanel1.add(boton_editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 609, 240, 50));
+        jPanel1.add(boton_editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 570, 240, 50));
 
         boton_ver_detalles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/eye.png"))); // NOI18N
         boton_ver_detalles.setText("Ver detalles");
         jPanel1.add(boton_ver_detalles, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 610, 330, 50));
+
+        botonSwing2.setBackground(new java.awt.Color(108, 135, 118));
+        botonSwing2.setText("Regresar");
+        botonSwing2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSwing2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(botonSwing2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 660, 160, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -363,6 +378,16 @@ public class EditarPacientes_secretario extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_boton_editarActionPerformed
+
+    private void boton_dar_de_bajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_dar_de_bajaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boton_dar_de_bajaActionPerformed
+
+    private void botonSwing2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing2ActionPerformed
+        Dashboard_Secretario menu = new Dashboard_Secretario();
+        menu.setVisible(true);
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_botonSwing2ActionPerformed
 
     private void cargarTabla() {
         javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) jTableBuscarPaciente.getModel();
@@ -444,6 +469,7 @@ public class EditarPacientes_secretario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private provet.componentes.botonSwing botonSwing1;
+    private provet.componentes.botonSwing botonSwing2;
     private provet.componentes.botonSwing botonSwing3;
     private provet.componentes.botonSwing boton_dar_de_baja;
     private provet.componentes.botonSwing boton_editar;

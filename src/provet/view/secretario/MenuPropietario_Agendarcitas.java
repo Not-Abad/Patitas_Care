@@ -2,10 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package provet.view.propietario;
+package provet.view.secretario;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import provet.view.propietario.MenuPropietario_Archivos;
+import provet.view.propietario.MenuPropietario_Archivos;
+import provet.view.propietario.MenuPropietario_Archivos;
+import provet.view.propietario.MenuPropietario_Principal;
+import provet.view.propietario.MenuPropietario_Principal;
+import provet.view.propietario.MenuPropietario_Principal;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
@@ -356,7 +362,7 @@ this.dispose();
     }//GEN-LAST:event_txtbotoncancelarActionPerformed
 
     private void botonSwing2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing2ActionPerformed
-        MenuPropietario_Principal menu = new MenuPropietario_Principal();
+        Dashboard_Secretario menu = new Dashboard_Secretario();
         menu.setVisible(true);
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_botonSwing2ActionPerformed

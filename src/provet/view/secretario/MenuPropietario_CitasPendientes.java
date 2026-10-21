@@ -1,10 +1,12 @@
-package provet.view.propietario;
+package provet.view.secretario;
 
 import java.awt.FlowLayout;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import provet.componentes.PanelCiPendientes;
 import javax.swing.JFrame;
+import provet.view.propietario.MenuPropietario_Archivos;
+import provet.view.propietario.MenuPropietario_Principal;
 
 public class MenuPropietario_CitasPendientes extends javax.swing.JFrame {
     

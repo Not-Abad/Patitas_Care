@@ -66,6 +66,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jLabel_especie = new javax.swing.JLabel();
         jLabel_motivo = new javax.swing.JLabel();
         jLabel_veterinario = new javax.swing.JLabel();
+        botonSwing2 = new provet.componentes.botonSwing();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -216,6 +217,15 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         jPanel1.add(panelRedondeado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, 1120, 250));
 
+        botonSwing2.setBackground(new java.awt.Color(108, 135, 118));
+        botonSwing2.setText("Regresar");
+        botonSwing2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSwing2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(botonSwing2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 660, 160, 60));
+
         jPanel2.setBackground(new java.awt.Color(108, 135, 118));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -338,6 +348,12 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     this.dispose();    // TODO add your handling code here:
     }//GEN-LAST:event_btn_ReportesActionPerformed
 
+    private void botonSwing2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing2ActionPerformed
+        Dashboard_Secretario menu = new Dashboard_Secretario();
+        menu.setVisible(true);
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_botonSwing2ActionPerformed
+
     private void cargarCitas() {
     DefaultTableModel modelo = (DefaultTableModel) table_citasPendientes.getModel();
     modelo.setRowCount(0);
@@ -398,6 +414,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private provet.componentes.botonSwing botonSwing1;
+    private provet.componentes.botonSwing botonSwing2;
     private provet.componentes.botonSwing botonSwing3;
     private provet.componentes.botonSwing btn_Reportes;
     private provet.componentes.botonSwing btn_Salir;

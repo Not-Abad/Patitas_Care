@@ -2,12 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package provet.view.propietario;
+package provet.view.secretario;
 
+import provet.view.secretario.MenuPropietario_Agendarcitas;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
+import provet.view.propietario.MenuPropietario_Archivos;
+import provet.view.propietario.MenuPropietario_Principal;
 
 /**
  *
@@ -93,9 +96,9 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         lbl_configuracion = new javax.swing.JLabel();
         botonSwing3 = new provet.componentes.botonSwing();
         jLabel7 = new javax.swing.JLabel();
-        botonSwing2 = new provet.componentes.botonSwing();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablacitas = new javax.swing.JTable();
+        botonSwing2 = new provet.componentes.botonSwing();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -186,11 +189,6 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jLabel7.setText("Historial de citas");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
 
-        botonSwing2.setBackground(new java.awt.Color(108, 135, 118));
-        botonSwing2.setText("Regresar");
-        botonSwing2.addActionListener(this::botonSwing2ActionPerformed);
-        jPanel1.add(botonSwing2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 650, 160, 60));
-
         tablacitas.setBackground(new java.awt.Color(228, 230, 217));
         tablacitas.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         tablacitas.setModel(new javax.swing.table.DefaultTableModel(
@@ -207,6 +205,11 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jScrollPane1.setViewportView(tablacitas);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 1100, 450));
+
+        botonSwing2.setBackground(new java.awt.Color(108, 135, 118));
+        botonSwing2.setText("Regresar");
+        botonSwing2.addActionListener(this::botonSwing2ActionPerformed);
+        jPanel1.add(botonSwing2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 650, 160, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -234,12 +237,6 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.dispose();         // TODO add your handling code here:
     }//GEN-LAST:event_botonSwing3ActionPerformed
 
-    private void botonSwing2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing2ActionPerformed
-        MenuPropietario_Principal menu = new MenuPropietario_Principal();
-        menu.setVisible(true);
-        this.dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_botonSwing2ActionPerformed
-
     private void botonSwing4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing4ActionPerformed
         MenuPropietario_Principal menu = new MenuPropietario_Principal();
         menu.setVisible(true);
@@ -255,6 +252,12 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
         dispose();
     }//GEN-LAST:event_btn_SalirActionPerformed
+
+    private void botonSwing2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing2ActionPerformed
+        Dashboard_Secretario menu = new Dashboard_Secretario();
+        menu.setVisible(true);
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_botonSwing2ActionPerformed
 
     /**
      * @param args the command line arguments

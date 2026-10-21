@@ -4,6 +4,9 @@
  */
 package provet.view.propietario;
 
+import provet.view.secretario.MenuPropietario_miscitass;
+import provet.view.secretario.MenuPropietario_Agendarcitas;
+import provet.view.secretario.MenuPropietario_CitasPendientes;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;

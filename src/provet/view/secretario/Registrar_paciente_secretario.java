@@ -75,6 +75,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea_vacunas = new javax.swing.JTextArea();
         jCombo_especie = new javax.swing.JComboBox<>();
+        botonSwing2 = new provet.componentes.botonSwing();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -122,7 +123,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
                 boton_guardarActionPerformed(evt);
             }
         });
-        jPanel1.add(boton_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 609, 240, 50));
+        jPanel1.add(boton_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 570, 240, 50));
 
         boton_limpiar.setBackground(new java.awt.Color(108, 135, 118));
         boton_limpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/clean.png"))); // NOI18N
@@ -132,7 +133,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
                 boton_limpiarActionPerformed(evt);
             }
         });
-        jPanel1.add(boton_limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 610, 240, 50));
+        jPanel1.add(boton_limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 570, 240, 50));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("Nombre:");
@@ -206,6 +207,15 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jCombo_especie.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jCombo_especie.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Perro", "Gato", "Hamster", "Ardilla", "Uron", "Cuyo", "Conejo", "Especie diferente" }));
         jPanel1.add(jCombo_especie, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 340, 300, 30));
+
+        botonSwing2.setBackground(new java.awt.Color(108, 135, 118));
+        botonSwing2.setText("Regresar");
+        botonSwing2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSwing2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(botonSwing2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 650, 160, 60));
 
         jPanel2.setBackground(new java.awt.Color(108, 135, 118));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -399,6 +409,12 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_idActionPerformed
 
+    private void botonSwing2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing2ActionPerformed
+        Dashboard_Secretario menu = new Dashboard_Secretario();
+        menu.setVisible(true);
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_botonSwing2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -436,6 +452,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private provet.componentes.botonSwing botonSwing1;
+    private provet.componentes.botonSwing botonSwing2;
     private provet.componentes.botonSwing botonSwing3;
     private provet.componentes.botonSwing boton_guardar;
     private provet.componentes.botonSwing boton_limpiar;

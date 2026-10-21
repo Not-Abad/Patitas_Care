@@ -27,9 +27,7 @@ public class Dashboard_Secretario extends javax.swing.JFrame {
             this.dispose();
         });
         boton_entrar_notificaciones.addActionListener(e -> {
-            notifi_secretario menu = new notifi_secretario();
-            menu.setVisible(true);
-            this.dispose();
+            
         });
 
         if (isUndecorated()) {
@@ -84,7 +82,6 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jLabel9 = new javax.swing.JLabel();
         panel_cirugias_pendientes2 = new provet.componentes.PanelRedondeado();
         jLabel8 = new javax.swing.JLabel();
-        boton_notificaciones = new provet.componentes.botonSwing();
         boton_pendientes = new provet.componentes.botonSwing();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -110,14 +107,14 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jLabel17.setBackground(new java.awt.Color(51, 255, 51));
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel17.setText("Notificaciones");
+        jLabel17.setText("Pendientes");
         panel_cirugias_pendientes1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, 29));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/notifications.png"))); // NOI18N
-        panel_cirugias_pendientes1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
+        panel_cirugias_pendientes1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 140, 170));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel13.setText("Nuevas notificaciones");
+        jLabel13.setText("Nuevos pendientes");
         panel_cirugias_pendientes1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
 
         jLabel_notificaciones.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
@@ -214,20 +211,10 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         jPanel1.add(panel_cirugias_pendientes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 270, 410));
 
-        boton_notificaciones.setBackground(new java.awt.Color(192, 207, 178));
-        boton_notificaciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/system-uicons--bell.png"))); // NOI18N
-        boton_notificaciones.setText("Notificaciones");
-        boton_notificaciones.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boton_notificacionesActionPerformed(evt);
-            }
-        });
-        jPanel1.add(boton_notificaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 50, 180, 50));
-
         boton_pendientes.setBackground(new java.awt.Color(192, 207, 178));
-        boton_pendientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/tabla.png"))); // NOI18N
+        boton_pendientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/system-uicons--bell.png"))); // NOI18N
         boton_pendientes.setText("Pendientes");
-        jPanel1.add(boton_pendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 50, 190, 50));
+        jPanel1.add(boton_pendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 70, 190, 50));
 
         jPanel2.setBackground(new java.awt.Color(108, 135, 118));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -323,12 +310,6 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void boton_notificacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_notificacionesActionPerformed
-        notifi_secretario menu = new notifi_secretario();
-        menu.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_boton_notificacionesActionPerformed
-
     private void boton_entrar_citasPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_entrar_citasPendientesActionPerformed
         Citas_pendientes_secretario citas = new Citas_pendientes_secretario();
         citas.setVisible(true);
@@ -369,9 +350,8 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     }//GEN-LAST:event_btn_ReportesActionPerformed
 
     private void boton_entrar_notificacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_entrar_notificacionesActionPerformed
-        notifi_secretario menu = new notifi_secretario();
-        menu.setVisible(true);
-        this.dispose();
+        
+        
     }//GEN-LAST:event_boton_entrar_notificacionesActionPerformed
 
     public void refrescar() {
@@ -424,7 +404,6 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     private provet.componentes.botonSwing boton_entrar_citasPendientes;
     private provet.componentes.botonSwing boton_entrar_notificaciones;
     private provet.componentes.botonSwing boton_entrar_reportes;
-    private provet.componentes.botonSwing boton_notificaciones;
     private provet.componentes.botonSwing boton_pendientes;
     private provet.componentes.botonSwing btn_Calendario;
     private provet.componentes.botonSwing btn_Reportes;

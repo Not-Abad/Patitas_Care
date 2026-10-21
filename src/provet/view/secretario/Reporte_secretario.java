@@ -62,6 +62,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jTable_tabla_reporte = new javax.swing.JTable();
         jTextField_buscar_reporte = new javax.swing.JTextField();
         boton_ver_historial = new provet.componentes.botonSwing();
+        botonSwing2 = new provet.componentes.botonSwing();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -168,6 +169,15 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         });
         jPanel1.add(boton_ver_historial, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 590, 330, 50));
 
+        botonSwing2.setBackground(new java.awt.Color(108, 135, 118));
+        botonSwing2.setText("Regresar");
+        botonSwing2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSwing2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(botonSwing2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 640, 160, 60));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -228,6 +238,12 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     this.dispose();    // TODO add your handling code here:
     }//GEN-LAST:event_btn_ReportesActionPerformed
 
+    private void botonSwing2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing2ActionPerformed
+        Dashboard_Secretario menu = new Dashboard_Secretario();
+        menu.setVisible(true);
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_botonSwing2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -265,6 +281,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private provet.componentes.botonSwing botonSwing1;
+    private provet.componentes.botonSwing botonSwing2;
     private provet.componentes.botonSwing botonSwing3;
     private provet.componentes.botonSwing boton_ver_historial;
     private provet.componentes.botonSwing btn_Calendario;

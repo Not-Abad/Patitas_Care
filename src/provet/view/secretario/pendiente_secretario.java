@@ -73,6 +73,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jLabel24 = new javax.swing.JLabel();
         boton_cliente_ArchivoRevisar = new provet.componentes.botonSwing();
         botonSwing8 = new provet.componentes.botonSwing();
+        botonSwing2 = new provet.componentes.botonSwing();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -149,7 +150,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jLabel9.setBackground(new java.awt.Color(51, 255, 51));
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(39, 53, 38));
-        jLabel9.setText("NOTIFICACIONES");
+        jLabel9.setText("Pendientes");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, -1, 29));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secretario/calendar.png"))); // NOI18N
@@ -308,6 +309,15 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         jPanel1.add(panelRedondeado3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 440, 1030, 120));
 
+        botonSwing2.setBackground(new java.awt.Color(108, 135, 118));
+        botonSwing2.setText("Regresar");
+        botonSwing2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSwing2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(botonSwing2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 650, 160, 60));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -376,6 +386,12 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     this.dispose();    // TODO add your handling code here:
     }//GEN-LAST:event_btn_ReportesActionPerformed
 
+    private void botonSwing2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing2ActionPerformed
+        Dashboard_Secretario menu = new Dashboard_Secretario();
+        menu.setVisible(true);
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_botonSwing2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -413,6 +429,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private provet.componentes.botonSwing botonSwing1;
+    private provet.componentes.botonSwing botonSwing2;
     private provet.componentes.botonSwing botonSwing3;
     private provet.componentes.botonSwing botonSwing8;
     private provet.componentes.botonSwing boton_cliente_ArchivoRevisar;
