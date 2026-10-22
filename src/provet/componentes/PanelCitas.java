@@ -5,8 +5,11 @@
 package provet.componentes;
 
 import java.awt.Color;
+import javax.swing.JDialog;
 import provet.model.Paciente;
 import provet.model.Reporte;
+import provet.model.RecetaMedica;
+import provet.componentes.ReceteMedica;
 import provet.view.veterinario.Reportes_Citas;
 
 /**
@@ -34,67 +37,60 @@ public class PanelCitas extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
-        lblVet = new javax.swing.JLabel();
-        lblAnalisi = new javax.swing.JLabel();
-        Sexo = new javax.swing.JLabel();
-        lblFecha = new javax.swing.JLabel();
-        Sexo1 = new javax.swing.JLabel();
         txtfDosis = new javax.swing.JTextField();
         txtfFecha = new javax.swing.JTextField();
         txtfVet = new javax.swing.JTextField();
         txtfAnalisis = new javax.swing.JTextField();
         txtfMed = new javax.swing.JTextField();
-        btnGuardar = new provet.componentes.botonSwing();
-        lblFecha1 = new javax.swing.JLabel();
+        btnReceta = new provet.componentes.botonSwing();
         txtfNombre = new javax.swing.JTextField();
-        lblFecha2 = new javax.swing.JLabel();
         txtfID = new javax.swing.JTextField();
-        lblFecha3 = new javax.swing.JLabel();
         txtfEspecie = new javax.swing.JTextField();
-        lblFecha4 = new javax.swing.JLabel();
         txtfMotivo = new javax.swing.JTextField();
+        btnGuardar = new provet.componentes.botonSwing();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(228, 230, 217));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jSeparator1.setBackground(new java.awt.Color(39, 53, 38));
         jSeparator1.setForeground(new java.awt.Color(192, 207, 178));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 440, 20));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 560, 40));
+        jPanel1.add(txtfDosis, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 170, 240, 30));
+        jPanel1.add(txtfFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 240, 240, 30));
+        jPanel1.add(txtfVet, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 310, 240, 30));
+        jPanel1.add(txtfAnalisis, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 240, 30));
+        jPanel1.add(txtfMed, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, 240, 30));
 
-        lblVet.setBackground(new java.awt.Color(51, 255, 51));
-        lblVet.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblVet.setForeground(new java.awt.Color(108, 135, 118));
-        lblVet.setText("Veterinario : ");
-        jPanel1.add(lblVet, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, 29));
+        btnReceta.setBackground(new java.awt.Color(108, 135, 118));
+        btnReceta.setForeground(new java.awt.Color(39, 53, 38));
+        btnReceta.setText("Generar receta");
+        btnReceta.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnReceta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRecetaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnReceta, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 440, 250, 50));
+        jPanel1.add(txtfNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 240, 30));
 
-        lblAnalisi.setBackground(new java.awt.Color(51, 255, 51));
-        lblAnalisi.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblAnalisi.setForeground(new java.awt.Color(108, 135, 118));
-        lblAnalisi.setText("Análisis requeridos : ");
-        jPanel1.add(lblAnalisi, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, 29));
-
-        Sexo.setBackground(new java.awt.Color(51, 255, 51));
-        Sexo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        Sexo.setForeground(new java.awt.Color(108, 135, 118));
-        Sexo.setText("Dosis : ");
-        jPanel1.add(Sexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, -1, 29));
-
-        lblFecha.setBackground(new java.awt.Color(51, 255, 51));
-        lblFecha.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblFecha.setForeground(new java.awt.Color(108, 135, 118));
-        lblFecha.setText("Fecha : ");
-        jPanel1.add(lblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 70, 29));
-
-        Sexo1.setBackground(new java.awt.Color(51, 255, 51));
-        Sexo1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        Sexo1.setForeground(new java.awt.Color(108, 135, 118));
-        Sexo1.setText("Medicamentos : ");
-        jPanel1.add(Sexo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, -1, 29));
-        jPanel1.add(txtfDosis, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, 340, 30));
-        jPanel1.add(txtfFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 340, 30));
-        jPanel1.add(txtfVet, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 300, 30));
-        jPanel1.add(txtfAnalisis, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 250, 240, 30));
-        jPanel1.add(txtfMed, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, 270, 30));
+        txtfID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtfIDActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtfID, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 240, 30));
+        jPanel1.add(txtfEspecie, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 240, 30));
+        jPanel1.add(txtfMotivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 550, 30));
 
         btnGuardar.setBackground(new java.awt.Color(108, 135, 118));
         btnGuardar.setForeground(new java.awt.Color(39, 53, 38));
@@ -105,47 +101,93 @@ public class PanelCitas extends javax.swing.JPanel {
                 btnGuardarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 510, 250, 50));
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 250, 50));
 
-        lblFecha1.setBackground(new java.awt.Color(51, 255, 51));
-        lblFecha1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblFecha1.setForeground(new java.awt.Color(108, 135, 118));
-        lblFecha1.setText("Nombre : ");
-        jPanel1.add(lblFecha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 90, 29));
-        jPanel1.add(txtfNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 330, 30));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(108, 135, 118));
+        jLabel1.setText("ID DEL PACIENTE:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
-        lblFecha2.setBackground(new java.awt.Color(51, 255, 51));
-        lblFecha2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblFecha2.setForeground(new java.awt.Color(108, 135, 118));
-        lblFecha2.setText("ID : ");
-        jPanel1.add(lblFecha2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 70, 29));
-        jPanel1.add(txtfID, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 370, 30));
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(108, 135, 118));
+        jLabel2.setText("¿SE REQUIEREN MEDICAMENTOS?");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, -1, -1));
 
-        lblFecha3.setBackground(new java.awt.Color(51, 255, 51));
-        lblFecha3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblFecha3.setForeground(new java.awt.Color(108, 135, 118));
-        lblFecha3.setText("Especie  : ");
-        jPanel1.add(lblFecha3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 90, 29));
-        jPanel1.add(txtfEspecie, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 400, 300, 30));
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(108, 135, 118));
+        jLabel4.setText("REPORTE DE CITA MÉDICA");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
-        lblFecha4.setBackground(new java.awt.Color(51, 255, 51));
-        lblFecha4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblFecha4.setForeground(new java.awt.Color(108, 135, 118));
-        lblFecha4.setText("Motivo :");
-        jPanel1.add(lblFecha4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, 70, 29));
-        jPanel1.add(txtfMotivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 450, 340, 30));
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(108, 135, 118));
+        jLabel5.setText("MOTIVO DE LA CONSULTA:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(108, 135, 118));
+        jLabel6.setText("¿SE REQUIEREN ANÁLISIS?");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(108, 135, 118));
+        jLabel7.setText("NOMBRE DEL PACIENTE:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(108, 135, 118));
+        jLabel8.setText("ESPECIE:");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(108, 135, 118));
+        jLabel9.setText("DÓSIS:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 150, -1, -1));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(108, 135, 118));
+        jLabel10.setText("FECHA:");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 220, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(108, 135, 118));
+        jLabel11.setText("NOMBRE DEL VETERINARIO:");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 290, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 611, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecetaActionPerformed
+    String nombre = txtfNombre.getText();
+String fecha = txtfFecha.getText();
+String especie = txtfEspecie.getText();
+
+RecetaMedica receta = new RecetaMedica(
+    nombre,
+    fecha,
+    especie,
+    "",
+    ""
+);
+
+ReceteMedica panel = new ReceteMedica(receta);
+
+JDialog dialog = new JDialog();
+dialog.setTitle("Receta Médica");
+dialog.setModal(true);
+dialog.setContentPane(panel);
+dialog.pack();
+dialog.setLocationRelativeTo(this);
+dialog.setVisible(true);
+    }//GEN-LAST:event_btnRecetaActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // VALIDAR CAMPOS VACÍOS
@@ -172,7 +214,6 @@ public class PanelCitas extends javax.swing.JPanel {
     try {
 
         int id = Integer.parseInt(txtfID.getText());
-
         String nombre = txtfNombre.getText();
         String especie = txtfEspecie.getText();
         String fecha = txtfFecha.getText();
@@ -220,20 +261,26 @@ public class PanelCitas extends javax.swing.JPanel {
     }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    private void txtfIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtfIDActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Sexo;
-    private javax.swing.JLabel Sexo1;
     private provet.componentes.botonSwing btnGuardar;
+    private provet.componentes.botonSwing btnReceta;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lblAnalisi;
-    private javax.swing.JLabel lblFecha;
-    private javax.swing.JLabel lblFecha1;
-    private javax.swing.JLabel lblFecha2;
-    private javax.swing.JLabel lblFecha3;
-    private javax.swing.JLabel lblFecha4;
-    private javax.swing.JLabel lblVet;
     private javax.swing.JTextField txtfAnalisis;
     private javax.swing.JTextField txtfDosis;
     private javax.swing.JTextField txtfEspecie;
