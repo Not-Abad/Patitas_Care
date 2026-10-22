@@ -374,6 +374,12 @@ public UsuariosAdmin() {
 
         if (form.isGuardado()) {
             if (form.isEliminado()) {
+                // Pedir contraseña antes de eliminar
+                if (!verificarContrasena()) {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Contraseña incorrecta. No se puede eliminar el usuario.");
+                    return;
+                }
+                
                 // Eliminar usuario usando DAO
                 UsuarioAdminDAO dao = new UsuarioAdminDAO();
                 int idUsuario = Sesion.getEmpleadoActual() != null ? Sesion.getEmpleadoActual().getIdEmpleado() : 0;
@@ -425,6 +431,38 @@ public UsuariosAdmin() {
     return card;
 }
         
+    private boolean verificarContrasena() {
+        // Obtener el usuario actual logueado
+        provet.model.Empleado empleadoActual = provet.utilidades.Sesion.getEmpleadoActual();
+        if (empleadoActual == null) {
+            return false;
+        }
+        
+        // Crear panel para el diálogo de contraseña
+        JPanel panel = new JPanel(new GridLayout(2, 1));
+        JLabel lblMensaje = new JLabel("Ingrese su contraseña para confirmar la eliminación:");
+        JPasswordField passwordField = new JPasswordField();
+        panel.add(lblMensaje);
+        panel.add(passwordField);
+        
+        // Mostrar diálogo
+        int option = javax.swing.JOptionPane.showConfirmDialog(
+            this,
+            panel,
+            "Confirmar Eliminación",
+            javax.swing.JOptionPane.OK_CANCEL_OPTION,
+            javax.swing.JOptionPane.QUESTION_MESSAGE
+        );
+        
+        if (option == javax.swing.JOptionPane.OK_OPTION) {
+            String contrasenaIngresada = new String(passwordField.getPassword());
+            // Verificar que la contraseña coincida
+            return contrasenaIngresada.equals(empleadoActual.getPassword());
+        }
+        
+        return false;
+    }
+    
     private void filtrar(String rol) {
     panelLista.removeAll();
 

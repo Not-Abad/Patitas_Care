@@ -206,7 +206,7 @@ public class UsuariosRegistro extends JDialog {
         comboPuesto.setEnabled(false);
     }
 
-    // 🔥 CONFIRMAR GUARDADO
+    // CONFIRMAR GUARDADO
     private void confirmarGuardar() {
         mostrarDialogoConfirmacion(
             "¿Estás seguro de guardar los cambios?",
@@ -215,8 +215,15 @@ public class UsuariosRegistro extends JDialog {
         );
     }
 
-    // 🔥 CONFIRMAR ELIMINAR
-    private void confirmarEliminar() {
+ private void confirmarEliminar() {
+    //Bloquear si es Administrador
+    if (comboPuesto.getSelectedItem().toString().equals("Administrador")) {
+        mostrarDialogoError("No se puede eliminar un usuario con puesto de Administrador.");
+        return;
+    }
+
+    // Pedir contraseña antes de confirmar
+    mostrarDialogoContrasena(() ->
         mostrarDialogoConfirmacion(
             "¿Seguro que deseas eliminar este usuario?",
             "Eliminar Usuario",
@@ -225,8 +232,9 @@ public class UsuariosRegistro extends JDialog {
                 guardado = true;
                 dispose();
             }
-        );
-    }
+        )
+    );
+}
 
     private void mostrarDialogoConfirmacion(String mensaje, String titulo, Runnable accionConfirmar) {
         JDialog dialog = new JDialog(this, titulo, true);
@@ -356,6 +364,7 @@ public class UsuariosRegistro extends JDialog {
 
         dispose();
     }
+ 
 
     private void mostrarDialogoError(String mensaje) {
         JDialog dialog = new JDialog(this, "Error", true);
@@ -406,6 +415,73 @@ public class UsuariosRegistro extends JDialog {
         dialog.add(panel);
         dialog.setVisible(true);
     }
+    
+    // ? NUEVO: Pedir contraseña para confirmar eliminación
+private void mostrarDialogoContrasena(Runnable accionSiCorrecta) {
+    JDialog dialog = new JDialog(this, "Confirmar identidad", true);
+    dialog.setLayout(new BorderLayout());
+    dialog.setSize(450, 220);
+    dialog.setLocationRelativeTo(this);
+    dialog.setUndecorated(true);
+
+    PanelRedondeado panel = new PanelRedondeado();
+    panel.setLayout(new BorderLayout());
+    panel.setBackground(new java.awt.Color(192, 207, 178));
+    panel.setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
+
+    JPanel panelCentro = new JPanel();
+    panelCentro.setLayout(new BoxLayout(panelCentro, BoxLayout.Y_AXIS));
+    panelCentro.setOpaque(false);
+
+    JLabel lblMensaje = new JLabel("Ingresa tu contraseña para continuar:", SwingConstants.CENTER);
+    lblMensaje.setFont(new java.awt.Font("Tahoma", 1, 14));
+    lblMensaje.setForeground(new java.awt.Color(39, 53, 38));
+    lblMensaje.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+    JPasswordField txtContrasena = new JPasswordField();
+    txtContrasena.setMaximumSize(new Dimension(300, 35));
+    txtContrasena.setAlignmentX(Component.CENTER_ALIGNMENT);
+    txtContrasena.setBackground(new java.awt.Color(228, 230, 217));
+    txtContrasena.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
+    panelCentro.add(lblMensaje);
+    panelCentro.add(Box.createVerticalStrut(12));
+    panelCentro.add(txtContrasena);
+
+    JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 15));
+    panelBotones.setOpaque(false);
+
+    botonSwing btnAceptar = new botonSwing();
+    btnAceptar.setText("Aceptar");
+    btnAceptar.setForeground(new java.awt.Color(39, 53, 38));
+    btnAceptar.setPreferredSize(new Dimension(120, 45));
+    btnAceptar.addActionListener(e -> {
+        String contrasena = new String(txtContrasena.getPassword());
+        // ⚙️ Cambia "admin123" por tu contraseña real o lógica de validación
+        if (contrasena.equals("admin123")) {
+            dialog.dispose();
+            accionSiCorrecta.run();
+        } else {
+            lblMensaje.setText("Contraseña incorrecta. Intenta de nuevo:");
+            lblMensaje.setForeground(new java.awt.Color(200, 50, 50));
+            txtContrasena.setText("");
+        }
+    });
+
+    botonSwing btnCancelar = new botonSwing();
+    btnCancelar.setText("Cancelar");
+    btnCancelar.setForeground(new java.awt.Color(39, 53, 38));
+    btnCancelar.setPreferredSize(new Dimension(120, 45));
+    btnCancelar.addActionListener(e -> dialog.dispose());
+
+    panelBotones.add(btnAceptar);
+    panelBotones.add(btnCancelar);
+
+    panel.add(panelCentro, BorderLayout.CENTER);
+    panel.add(panelBotones, BorderLayout.SOUTH);
+    dialog.add(panel);
+    dialog.setVisible(true);
+}
 
     private void limpiarErrores() {
         txtNombre.setBorder(javax.swing.BorderFactory.createEmptyBorder(5,5,5,5));
