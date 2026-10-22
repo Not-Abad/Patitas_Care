@@ -6,6 +6,8 @@ package provet.view.secretario;
 
 import javax.swing.JFrame;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import provet.dao.CitaSecretarioDAO;
+import provet.dao.MascotaSecretarioDAO;
 
 /**
  *
@@ -18,6 +20,8 @@ public class Reporte_secretario extends javax.swing.JFrame {
      */
     public Reporte_secretario() {
         initComponents();
+        cargarReporte();
+        configurarBusqueda();
         if (isUndecorated()) {
     dispose();
     setUndecorated(false);
@@ -207,7 +211,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     }// </editor-fold>//GEN-END:initComponents
 
     private void boton_ver_historialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_ver_historialActionPerformed
-        // TODO add your handling code here:
+        cargarReporte();
     }//GEN-LAST:event_boton_ver_historialActionPerformed
 
     private void botonSwing3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing3ActionPerformed
@@ -219,7 +223,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     private void botonSwing1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing1ActionPerformed
         Registrar_paciente_secretario menu = new Registrar_paciente_secretario();
         menu.setVisible(true);
-        this.dispose();// TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_botonSwing1ActionPerformed
 
     private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
@@ -229,20 +233,83 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     private void btn_CalendarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CalendarioActionPerformed
         EditarPacientes_secretario menu = new EditarPacientes_secretario();
         menu.setVisible(true);
-        this.dispose(); // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btn_CalendarioActionPerformed
 
     private void btn_ReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReportesActionPerformed
-    Reporte_secretario menu = new Reporte_secretario();
-    menu.setVisible(true);
-    this.dispose();    // TODO add your handling code here:
+        Reporte_secretario menu = new Reporte_secretario();
+        menu.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_ReportesActionPerformed
 
     private void botonSwing2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing2ActionPerformed
         Dashboard_Secretario menu = new Dashboard_Secretario();
         menu.setVisible(true);
-        this.dispose();        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_botonSwing2ActionPerformed
+
+    // ========== LÓGICA DE BASE DE DATOS ==========
+
+    /** Carga todas las citas de la BD en la tabla de reportes. */
+    private void cargarReporte() {
+        // Establecer columnas correctas de reporte de citas
+        javax.swing.table.DefaultTableModel modelo = new javax.swing.table.DefaultTableModel(
+            new String[]{"ID", "Cliente", "Mascota", "Especie", "Fecha", "Hora", "Motivo", "Estatus"},
+            0
+        ) {
+            @Override public boolean isCellEditable(int row, int col) { return false; }
+        };
+        jTable_tabla_reporte.setModel(modelo);
+
+        java.util.List<CitaSecretarioDAO.CitaDTO> lista = Datos.citaDAO.selectAll();
+        for (CitaSecretarioDAO.CitaDTO c : lista) {
+            String fechaStr = c.fechaProgramada != null ? c.fechaProgramada.toString().substring(0, 10) : "";
+            String horaStr  = c.fechaProgramada != null ? c.fechaProgramada.toString().substring(11, 16) : "";
+            modelo.addRow(new Object[]{
+                c.idCita,
+                c.nombreCliente  != null ? c.nombreCliente  : "Sin cliente",
+                c.nombreMascota  != null ? c.nombreMascota  : "Sin mascota",
+                c.especie        != null ? c.especie        : "",
+                fechaStr,
+                horaStr,
+                c.motivo,
+                c.estatusCita
+            });
+        }
+    }
+
+    /** Filtrado en tiempo real por el campo de búsqueda. */
+    private void configurarBusqueda() {
+        jTextField_buscar_reporte.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            public void insertUpdate(javax.swing.event.DocumentEvent e) { filtrar(); }
+            public void removeUpdate(javax.swing.event.DocumentEvent e) { filtrar(); }
+            public void changedUpdate(javax.swing.event.DocumentEvent e) { filtrar(); }
+            private void filtrar() {
+                String txt = jTextField_buscar_reporte.getText().trim().toLowerCase();
+                javax.swing.table.DefaultTableModel modelo =
+                    (javax.swing.table.DefaultTableModel) jTable_tabla_reporte.getModel();
+                modelo.setRowCount(0);
+                for (CitaSecretarioDAO.CitaDTO c : Datos.citaDAO.selectAll()) {
+                    String fechaStr = c.fechaProgramada != null ? c.fechaProgramada.toString().substring(0, 10) : "";
+                    String cliente  = c.nombreCliente  != null ? c.nombreCliente  : "";
+                    String mascota  = c.nombreMascota  != null ? c.nombreMascota  : "";
+                    if (txt.isEmpty()
+                            || cliente.toLowerCase().contains(txt)
+                            || mascota.toLowerCase().contains(txt)
+                            || (c.motivo != null && c.motivo.toLowerCase().contains(txt))
+                            || fechaStr.contains(txt)) {
+                        modelo.addRow(new Object[]{
+                            c.idCita, cliente, mascota,
+                            c.especie != null ? c.especie : "",
+                            fechaStr,
+                            c.fechaProgramada != null ? c.fechaProgramada.toString().substring(11, 16) : "",
+                            c.motivo, c.estatusCita
+                        });
+                    }
+                }
+            }
+        });
+    }
 
     /**
      * @param args the command line arguments

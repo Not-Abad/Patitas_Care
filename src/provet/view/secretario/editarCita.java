@@ -4,6 +4,8 @@
  */
 package provet.view.secretario;
 import javax.swing.JOptionPane;
+import provet.dao.CitaSecretarioDAO;
+import provet.view.secretario.Cita;
 /**
  *
  * @author Diego Rivera
@@ -14,27 +16,24 @@ public class editarCita extends javax.swing.JFrame {
     private int posicion;
     private Citas_pendientes_secretario padre;
     private int filaSeleccionada;
-    
-    public editarCita(
-    String mascota,
-    String fecha,
-    String hora,
-    String motivo,
-    int fila
-) {
-    initComponents();
+    private int idCitaBD = -1; // ID real en base de datos
 
-    getContentPane().setBackground(
-        new java.awt.Color(228, 230, 217)
-    );
+    /** Constructor principal — recibe el id_cita de BD junto con los datos de la fila. */
+    public editarCita(int idCita, String mascota, String fecha, String hora, String motivo, int fila) {
+        initComponents();
+        getContentPane().setBackground(new java.awt.Color(228, 230, 217));
+        this.idCitaBD = idCita;
+        filaSeleccionada = fila;
+        txtId.setText(mascota);
+        txtEdad.setText(fecha);
+        comboHorario.setSelectedItem(hora);
+        comboMotivo.setSelectedItem(motivo);
+    }
 
-    filaSeleccionada = fila;
-
-    txtId.setText(mascota);
-    txtEdad.setText(fecha);
-    comboHorario.setSelectedItem(hora);
-    comboMotivo.setSelectedItem(motivo);
-}
+    /** Constructor legacy sin idCita (compatibilidad). */
+    public editarCita(String mascota, String fecha, String hora, String motivo, int fila) {
+        this(-1, mascota, fecha, hora, motivo, fila);
+    }
 
     /**
      * Creates new form editarCita
@@ -77,7 +76,6 @@ public class editarCita extends javax.swing.JFrame {
         comboMotivo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1202, 570));
 
         jLabel9.setBackground(new java.awt.Color(51, 255, 51));
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -257,46 +255,65 @@ public class editarCita extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void boton_dar_de_bajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_dar_de_bajaActionPerformed
-        EditarPacientes_secretario ventana = new EditarPacientes_secretario();
-        ventana.setVisible(true);
-
+        if (idCitaBD > 0) {
+            int confirm = JOptionPane.showConfirmDialog(this,
+                "¿Deseas cancelar esta cita en la base de datos?",
+                "Cancelar cita", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (confirm == JOptionPane.YES_OPTION) {
+                boolean ok = Datos.citaDAO.actualizarEstatus(idCitaBD, 2); // 2 = Cancelada
+                if (ok) {
+                    JOptionPane.showMessageDialog(this, "Cita cancelada correctamente.");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error al cancelar la cita.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+        new Citas_pendientes_secretario().setVisible(true);
         dispose();
     }//GEN-LAST:event_boton_dar_de_bajaActionPerformed
 
     private void boton_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_editarActionPerformed
-  String mascota = txtId.getText();
+        String mascota = txtId.getText().trim();
+        String fecha   = txtEdad.getText().trim();
+        String hora    = comboHorario.getSelectedItem().toString();
+        String motivo  = comboMotivo.getSelectedItem().toString();
 
-String fecha = txtEdad.getText();
+        if (mascota.isEmpty() || fecha.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor completa la mascota y la fecha.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-String hora =
-comboHorario.getSelectedItem().toString();
+        // Construir fecha-hora
+        String fechaHora;
+        try {
+            String fechaLimpia = fecha.replace("/", "-").trim();
+            String[] partes = fechaLimpia.split("-");
+            String fechaISO = partes[0].length() == 4
+                ? fechaLimpia
+                : partes[2] + "-" + partes[1] + "-" + partes[0];
+            String hh = hora.length() >= 5 ? hora.substring(0, 5) : "09:00";
+            fechaHora = fechaISO + " " + hh + ":00";
+        } catch (Exception ex) {
+            fechaHora = java.time.LocalDate.now() + " 09:00:00";
+        }
 
-String motivo =
-comboMotivo.getSelectedItem().toString();
+        boolean ok = false;
+        if (idCitaBD > 0) {
+            // Actualizar en BD
+            ok = Datos.citaDAO.actualizar(idCitaBD, fechaHora, motivo);
+        } else {
+            // Fallback: solo muestra el mensaje (sin id de BD no podemos actualizar)
+            JOptionPane.showMessageDialog(this, "No se pudo identificar la cita en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-Cita citaActualizada =
-new Cita(
-    mascota,
-    mascota,
-    fecha,
-    hora,
-    motivo
-);
-
-Datos.citas.set(
-    filaSeleccionada,
-    citaActualizada
-);
-
-JOptionPane.showMessageDialog(
-    this,
-    "Cita actualizada"
-);
-
-new Citas_pendientes_secretario()
-.setVisible(true);
-
-dispose();
+        if (ok) {
+            JOptionPane.showMessageDialog(this, "Cita actualizada correctamente en la base de datos.");
+            new Citas_pendientes_secretario().setVisible(true);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al actualizar la cita en la base de datos.", "Error de BD", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_boton_editarActionPerformed
 
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed

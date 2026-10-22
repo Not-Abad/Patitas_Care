@@ -6,6 +6,7 @@ package provet.view.secretario;
 
 import javax.swing.JFrame;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import provet.dao.CitaSecretarioDAO;
 
 /**
  *
@@ -18,6 +19,7 @@ public class pendiente_secretario extends javax.swing.JFrame {
      */
     public pendiente_secretario() {
         initComponents();
+        actualizarContadores();
         if (isUndecorated()) {
     dispose();
     setUndecorated(false);
@@ -347,16 +349,43 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     }// </editor-fold>//GEN-END:initComponents
 
     private void boton_flecha_solicitudCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_flecha_solicitudCitaActionPerformed
-        // TODO add your handling code here:
+        Citas_pendientes_secretario ventana = new Citas_pendientes_secretario();
+        ventana.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_boton_flecha_solicitudCitaActionPerformed
 
     private void boton_flecha_cancelacionCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_flecha_cancelacionCitaActionPerformed
-        // TODO add your handling code here:
+        Citas_pendientes_secretario ventana = new Citas_pendientes_secretario();
+        ventana.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_boton_flecha_cancelacionCitaActionPerformed
 
     private void botonSwing8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing8ActionPerformed
-        // TODO add your handling code here:
+        actualizarContadores();
     }//GEN-LAST:event_botonSwing8ActionPerformed
+
+    /** Actualiza los contadores de la pantalla consultando la BD. */
+    private void actualizarContadores() {
+        try {
+            int pendientesHoy = Datos.citaDAO.contarPendientesHoy();
+            boton_numero_solicitudCita.setText(String.valueOf(pendientesHoy));
+
+            // Contar citas canceladas hoy
+            java.util.List<CitaSecretarioDAO.CitaDTO> todas = Datos.citaDAO.selectAll();
+            long canceladas = todas.stream()
+                .filter(c -> c.idEstatusCita == 2 &&
+                    c.fechaProgramada != null &&
+                    c.fechaProgramada.toLocalDateTime().toLocalDate().equals(java.time.LocalDate.now()))
+                .count();
+            boton_numero_cancelacionCita.setText(String.valueOf(canceladas));
+
+            // Contar total de mascotas registradas
+            int totalMascotas = Datos.mascotaDAO.contarMascotas();
+            boton_cliente_ArchivoRevisar.setText(String.valueOf(totalMascotas));
+        } catch (Exception e) {
+            System.err.println("Error al actualizar contadores: " + e.getMessage());
+        }
+    }
 
     private void botonSwing3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing3ActionPerformed
         Dashboard_Secretario menu = new Dashboard_Secretario();

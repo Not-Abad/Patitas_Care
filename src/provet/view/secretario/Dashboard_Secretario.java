@@ -5,6 +5,12 @@
 package provet.view.secretario;
 
 import javax.swing.JFrame;
+import provet.view.secretario.Datos;
+import provet.view.secretario.EditarPacientes_secretario;
+import provet.view.secretario.MenuPropietario_Agendarcitas;
+import provet.view.secretario.Registrar_paciente_secretario;
+import provet.view.secretario.Reporte_secretario;
+import provet.view.secretario.pendiente_secretario;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
@@ -427,9 +433,12 @@ this.dispose();
     }
     
     private void actualizarDashboard() {
-        jLabel_citas.setText(String.valueOf(Datos.citas.size()));
-        jLabel_reportes.setText(String.valueOf(Datos.pacientes.size()));
-        jLabel_notificaciones.setText("3");
+        // Contadores desde la base de datos
+        int citasHoy    = Datos.citasPendientesHoy();
+        int totalMascotas = Datos.totalMascotas();
+        jLabel_citas.setText(String.valueOf(citasHoy));
+        jLabel_reportes.setText(String.valueOf(totalMascotas));
+        jLabel_notificaciones.setText(String.valueOf(citasHoy));
     }
     /**
      * @param args the command line arguments

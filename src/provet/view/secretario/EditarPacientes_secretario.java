@@ -7,6 +7,10 @@ package provet.view.secretario;
 import javax.swing.JFrame;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
+import provet.dao.MascotaSecretarioDAO;
+import provet.view.secretario.Registrar_paciente_secretario;
+import provet.view.secretario.Reporte_secretario;
+import provet.view.secretario.editar_paciente;
 
 /**
  *
@@ -20,10 +24,18 @@ public class EditarPacientes_secretario extends javax.swing.JFrame {
     public EditarPacientes_secretario() {
     initComponents();
 
-    // Poblar combo de filtro con especies reales
-    jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(
-        new String[]{"Todos", "Perro", "Gato", "Hamster", "Ardilla", "Uron", "Cuyo", "Conejo", "Especie diferente"}
-    ));
+    // Poblar combo de filtro con especies desde BD (con fallback a lista fija)
+    try {
+        java.util.List<String> especies = Datos.mascotaDAO.getEspecies();
+        java.util.List<String> listaConTodos = new java.util.ArrayList<>();
+        listaConTodos.add("Todos");
+        listaConTodos.addAll(especies);
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(listaConTodos.toArray(new String[0])));
+    } catch (Exception ex) {
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(
+            new String[]{"Todos", "Perro", "Gato", "Hamster", "Ardilla", "Uron", "Cuyo", "Conejo", "Especie diferente"}
+        ));
+    }
 
     cargarTabla();
 
@@ -52,16 +64,20 @@ public class EditarPacientes_secretario extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "Selecciona un paciente de la tabla primero.", "Sin selección", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
-        String idSeleccionado = jTableBuscarPaciente.getValueAt(fila, 0).toString();
+        int idMascota = Integer.parseInt(jTableBuscarPaciente.getValueAt(fila, 0).toString());
         String nombreSeleccionado = jTableBuscarPaciente.getValueAt(fila, 1).toString();
         int confirm = javax.swing.JOptionPane.showConfirmDialog(this,
-            "¿Seguro que deseas dar de baja a \"" + nombreSeleccionado + "\"?",
-            "Confirmar baja", javax.swing.JOptionPane.YES_NO_OPTION, javax.swing.JOptionPane.WARNING_MESSAGE);
+            "¿Seguro que deseas eliminar a \"" + nombreSeleccionado + "\" de la base de datos?\nSus citas asociadas también serán eliminadas.",
+            "Confirmar eliminación", javax.swing.JOptionPane.YES_NO_OPTION, javax.swing.JOptionPane.WARNING_MESSAGE);
         if (confirm == javax.swing.JOptionPane.YES_OPTION) {
-            Datos.pacientes.removeIf(p -> p.getId().equals(idSeleccionado));
-            Datos.sincronizarConVeterinario();
-            cargarTabla();
-            javax.swing.JOptionPane.showMessageDialog(this, "Paciente dado de baja correctamente.");
+            boolean ok = Datos.mascotaDAO.eliminar(idMascota);
+            if (ok) {
+                Datos.sincronizarConVeterinario();
+                cargarTabla();
+                javax.swing.JOptionPane.showMessageDialog(this, "Paciente eliminado correctamente de la base de datos.");
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error al eliminar de la base de datos.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
         }
     });
 
@@ -72,22 +88,22 @@ public class EditarPacientes_secretario extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "Selecciona un paciente de la tabla primero.", "Sin selección", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
-        String idSeleccionado = jTableBuscarPaciente.getValueAt(fila, 0).toString();
-        for (Paciente p : Datos.pacientes) {
-            if (p.getId().equals(idSeleccionado)) {
-                String detalles = "ID: " + p.getId() + "\n"
-                    + "Nombre: " + p.getNombre() + "\n"
-                    + "Especie: " + p.getEspecie() + "\n"
-                    + "Raza: " + p.getRaza() + "\n"
-                    + "Edad: " + p.getEdad() + " años\n"
-                    + "Peso: " + p.getPeso() + " kg\n"
-                    + "Sexo: " + p.getSexo() + "\n"
-                    + "Estado: " + p.getEstado() + "\n"
-                    + "Alergias: " + p.getAlergias() + "\n"
-                    + "Vacunas: " + p.getVacunas();
-                javax.swing.JOptionPane.showMessageDialog(this, detalles, "Detalle del paciente", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-                break;
-            }
+        int idMascota = Integer.parseInt(jTableBuscarPaciente.getValueAt(fila, 0).toString());
+        MascotaSecretarioDAO.MascotaDTO dto = Datos.mascotaDAO.selectById(idMascota);
+        if (dto != null) {
+            String detalles = "ID BD: " + dto.idMascota + "\n"
+                + "Nombre: " + dto.nombreMascota + "\n"
+                + "Especie: " + dto.especie + "\n"
+                + "Raza: " + dto.raza + "\n"
+                + "Sexo: " + dto.sexo + "\n"
+                + "Fecha nacimiento: " + dto.fechaNacimiento + "\n"
+                + "Propietario: " + dto.nombrePropietario + "\n"
+                + "Teléfono: " + (dto.telefonoPropietario != null ? dto.telefonoPropietario : "N/A") + "\n"
+                + "Email: " + (dto.emailPropietario != null ? dto.emailPropietario : "N/A") + "\n"
+                + "Estatus cliente: " + dto.estatusCliente;
+            javax.swing.JOptionPane.showMessageDialog(this, detalles, "Detalle del paciente", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "No se encontró el paciente en la BD.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     });
 
@@ -367,20 +383,38 @@ public class EditarPacientes_secretario extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "Selecciona un paciente de la tabla primero.", "Sin selección", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
-        String idSeleccionado = jTableBuscarPaciente.getValueAt(fila, 0).toString();
-        for (Paciente p : Datos.pacientes) {
-            if (p.getId().equals(idSeleccionado)) {
-                int idx = Datos.pacientes.indexOf(p);
-                editar_paciente editor = new editar_paciente(p, idx, null);
-                editor.setVisible(true);
-                EditarPacientes_secretario.this.dispose();
-                break;
-            }
+        int idMascota = Integer.parseInt(jTableBuscarPaciente.getValueAt(fila, 0).toString());
+        MascotaSecretarioDAO.MascotaDTO dto = Datos.mascotaDAO.selectById(idMascota);
+        if (dto != null) {
+            editar_paciente editor = new editar_paciente(dto);
+            editor.setVisible(true);
+            EditarPacientes_secretario.this.dispose();
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "No se pudo cargar el paciente de la BD.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_boton_editarActionPerformed
 
     private void boton_dar_de_bajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_dar_de_bajaActionPerformed
-        // TODO add your handling code here:
+        int fila = jTableBuscarPaciente.getSelectedRow();
+        if (fila == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Selecciona un paciente de la tabla primero.", "Sin selección", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        int idMascota = Integer.parseInt(jTableBuscarPaciente.getValueAt(fila, 0).toString());
+        String nombre = jTableBuscarPaciente.getValueAt(fila, 1).toString();
+        int confirm = javax.swing.JOptionPane.showConfirmDialog(this,
+            "¿Seguro que deseas eliminar a \"" + nombre + "\" de la base de datos?\nEsta acción también borrará sus citas relacionadas.",
+            "Confirmar eliminación", javax.swing.JOptionPane.YES_NO_OPTION, javax.swing.JOptionPane.WARNING_MESSAGE);
+        if (confirm == javax.swing.JOptionPane.YES_OPTION) {
+            boolean ok = Datos.mascotaDAO.eliminar(idMascota);
+            if (ok) {
+                Datos.sincronizarConVeterinario();
+                cargarTabla();
+                javax.swing.JOptionPane.showMessageDialog(this, "Mascota eliminada correctamente de la base de datos.");
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error al eliminar de la base de datos.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_boton_dar_de_bajaActionPerformed
 
     private void botonSwing2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing2ActionPerformed
@@ -390,16 +424,18 @@ public class EditarPacientes_secretario extends javax.swing.JFrame {
     }//GEN-LAST:event_botonSwing2ActionPerformed
 
     private void cargarTabla() {
+        // Cargar desde base de datos
+        Datos.cargarMascotas();
         javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) jTableBuscarPaciente.getModel();
         modelo.setRowCount(0);
-        for (Paciente p : Datos.pacientes) {
+        for (MascotaSecretarioDAO.MascotaDTO d : Datos.mascotas) {
             modelo.addRow(new Object[]{
-                p.getId(),
-                p.getNombre(),
-                p.getEspecie(),
-                p.getRaza(),
-                p.getEdad(),
-                p.getEstado()
+                d.idMascota,
+                d.nombreMascota,
+                d.especie,
+                d.raza,
+                d.fechaNacimiento,
+                d.estatusCliente
             });
         }
     }
@@ -411,23 +447,24 @@ public class EditarPacientes_secretario extends javax.swing.JFrame {
         javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) jTableBuscarPaciente.getModel();
         modelo.setRowCount(0);
 
-        for (Paciente p : Datos.pacientes) {
+        for (MascotaSecretarioDAO.MascotaDTO d : Datos.mascotas) {
             boolean coincideTexto = textoBusqueda.isEmpty()
-                || p.getId().toLowerCase().contains(textoBusqueda)
-                || p.getNombre().toLowerCase().contains(textoBusqueda)
-                || p.getRaza().toLowerCase().contains(textoBusqueda);
+                || String.valueOf(d.idMascota).contains(textoBusqueda)
+                || d.nombreMascota.toLowerCase().contains(textoBusqueda)
+                || d.raza.toLowerCase().contains(textoBusqueda)
+                || d.nombrePropietario.toLowerCase().contains(textoBusqueda);
 
             boolean coincideEspecie = especieFiltro.equals("Todos")
-                || p.getEspecie().equalsIgnoreCase(especieFiltro);
+                || d.especie.equalsIgnoreCase(especieFiltro);
 
             if (coincideTexto && coincideEspecie) {
                 modelo.addRow(new Object[]{
-                    p.getId(),
-                    p.getNombre(),
-                    p.getEspecie(),
-                    p.getRaza(),
-                    p.getEdad(),
-                    p.getEstado()
+                    d.idMascota,
+                    d.nombreMascota,
+                    d.especie,
+                    d.raza,
+                    d.fechaNacimiento,
+                    d.estatusCliente
                 });
             }
         }

@@ -5,8 +5,7 @@
 package provet.view.secretario;
 
 import javax.swing.JOptionPane;
-import provet.view.secretario.Datos;
-import provet.view.secretario.EditarPacientes_secretario;
+import provet.dao.MascotaSecretarioDAO;
 import provet.view.secretario.Paciente;
 
 /**
@@ -15,54 +14,52 @@ import provet.view.secretario.Paciente;
  */
 public class editar_paciente extends javax.swing.JFrame {
 
-    private Paciente paciente;
+    private MascotaSecretarioDAO.MascotaDTO dto;
     private int posicion;
     private int indice;
     private EditarPacientes_secretario padre;
+
     /**
-     * Creates new form editar_paciente
+     * Constructor vacío (requerido por NetBeans).
      */
     public editar_paciente() {
         initComponents();
     }
 
-    public editar_paciente(
-Paciente paciente,
-int indice,
-EditarPacientes_secretario padre){
+    /**
+     * Constructor con MascotaDTO desde la BD.
+     */
+    public editar_paciente(MascotaSecretarioDAO.MascotaDTO dto) {
+        initComponents();
+        this.dto = dto;
+        cargarDatos();
+    }
 
-    initComponents();
+    /** @deprecated Mantener compatibilidad. */
+    public editar_paciente(Paciente paciente, int indice, EditarPacientes_secretario padre) {
+        initComponents();
+        // Convertir Paciente legacy a DTO básico
+        this.dto = new MascotaSecretarioDAO.MascotaDTO();
+        try { this.dto.idMascota = Integer.parseInt(paciente.getId()); } catch (Exception e) { this.dto.idMascota = 0; }
+        this.dto.nombreMascota = paciente.getNombre();
+        this.dto.especie = paciente.getEspecie();
+        this.dto.raza = paciente.getRaza();
+        this.dto.sexo = paciente.getSexo();
+        this.dto.fechaNacimiento = "";
+        this.indice = indice;
+        this.padre = padre;
+        cargarDatos();
+    }
 
-    this.paciente =
-            paciente;
-
-    this.indice =
-            indice;
-
-    this.padre =
-            padre;
-
-    cargarDatos();
-
-}
-    
-    private void cargarDatos(){
-
-    txtNombre.setText(
-            paciente.getNombre());
-
-    txtRaza.setText(
-            paciente.getRaza());
-
-    txtEdad.setText(
-            String.valueOf(
-                    paciente.getEdad()));
-
-    txtId.setText(
-            String.valueOf(
-                    paciente.getPeso()));
-
-}
+    private void cargarDatos() {
+        if (dto == null) return;
+        txtNombre.setText(dto.nombreMascota);
+        txtRaza.setText(dto.raza);
+        txtEspecie.setText(dto.especie);
+        txtEdad.setText(dto.fechaNacimiento != null ? dto.fechaNacimiento : "");
+        txtId.setText(String.valueOf(dto.idMascota));
+        txtEstado.setText(dto.estatusCliente != null ? dto.estatusCliente : "");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -210,52 +207,40 @@ EditarPacientes_secretario padre){
     }//GEN-LAST:event_txtEstadoActionPerformed
 
     private void boton_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_editarActionPerformed
-    try {
+        try {
+            if (dto == null) {
+                JOptionPane.showMessageDialog(this, "No hay datos cargados.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            String nuevoNombre  = txtNombre.getText().trim();
+            String nuevaRaza    = txtRaza.getText().trim();
+            String nuevaEspecie = txtEspecie.getText().trim();
+            String nuevaFecha   = txtEdad.getText().trim(); // fecha_nacimiento o edad
 
-        paciente.id =
-        txtId.getText();
+            if (nuevoNombre.isEmpty() || nuevaRaza.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "El nombre y la raza son obligatorios.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
 
-        paciente.nombre =
-        txtNombre.getText();
+            boolean ok = Datos.mascotaDAO.actualizar(
+                dto.idMascota, nuevoNombre, nuevaRaza,
+                nuevaEspecie.isEmpty() ? dto.especie : nuevaEspecie,
+                dto.sexo != null ? dto.sexo : "Macho",
+                nuevaFecha.isEmpty() ? dto.fechaNacimiento : nuevaFecha
+            );
 
-        paciente.especie =
-        txtEspecie.getText();
-
-        paciente.raza =
-        txtRaza.getText();
-
-        paciente.edad =
-        Integer.parseInt(
-        txtEdad.getText()
-        );
-
-        paciente.estado =
-        txtEstado.getText();
-
-        Datos.pacientes.set(
-        posicion,
-        paciente
-        );
-
-        JOptionPane.showMessageDialog(
-        this,
-        "Paciente actualizado"
-        );
-        EditarPacientes_secretario ventana = new EditarPacientes_secretario();
-        ventana.setVisible(true);
-
-        dispose();
-
-    }
-    catch(Exception e){
-
-        JOptionPane.showMessageDialog(
-        this,
-        "Error: "
-        + e.getMessage()
-        );
-
-    }
+            if (ok) {
+                Datos.sincronizarConVeterinario();
+                JOptionPane.showMessageDialog(this, "Paciente actualizado correctamente en la base de datos.");
+                EditarPacientes_secretario ventana = new EditarPacientes_secretario();
+                ventana.setVisible(true);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al actualizar en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+        }
     }//GEN-LAST:event_boton_editarActionPerformed
 
     private void boton_dar_de_bajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_dar_de_bajaActionPerformed

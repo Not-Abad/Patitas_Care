@@ -7,6 +7,9 @@ package provet.view.secretario;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import provet.dao.MascotaSecretarioDAO;
+import java.util.List;
+import provet.view.secretario.Reporte_secretario;
 
 /**
  *
@@ -19,6 +22,7 @@ public class Registrar_paciente_secretario extends javax.swing.JFrame {
      */
     public Registrar_paciente_secretario() {
         initComponents();
+        cargarCombosDesdeDB();
         if (isUndecorated()) {
     dispose();
     setUndecorated(false);
@@ -354,52 +358,55 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     }//GEN-LAST:event_btn_ReportesActionPerformed
 
     private void boton_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_guardarActionPerformed
-        String id     = jTextField_id.getText().trim();
-        String nombre = jTextField_nombre.getText().trim();
-        String raza   = jTextField_raza.getText().trim();
-        String edadTxt = jTextField_edad.getText().trim();
-        String pesoTxt = jTextField_peso.getText().trim();
+        // --- Leer campos ---
+        String nombre   = jTextField_nombre.getText().trim();
+        String raza     = jTextField_raza.getText().trim();
+        String edadTxt  = jTextField_edad.getText().trim();
+        String pesoTxt  = jTextField_peso.getText().trim();
+        String propNombre  = jTextField_id.getText().trim(); // campo "ID" reutilizado como nombre propietario
+        String especie  = jCombo_especie.getSelectedItem().toString();
+        String sexo     = jCombo_sexo.getSelectedItem().toString();
 
-        // Validaciones básicas
-        if (id.isEmpty() || nombre.isEmpty() || raza.isEmpty() || edadTxt.isEmpty() || pesoTxt.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor completa todos los campos obligatorios.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
+        // --- Validaciones básicas ---
+        if (nombre.isEmpty() || raza.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor completa: nombre de la mascota y raza.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        // Verificar ID duplicado
-        for (Paciente existente : Datos.pacientes) {
-            if (existente.getId().equalsIgnoreCase(id)) {
-                JOptionPane.showMessageDialog(this, "Ya existe un paciente con ese ID.", "ID duplicado", JOptionPane.WARNING_MESSAGE);
+        // Calcular fecha de nacimiento aproximada a partir de la edad
+        String fechaNacimiento = "2000-01-01"; // default
+        if (!edadTxt.isEmpty()) {
+            try {
+                int edadAnios = Integer.parseInt(edadTxt);
+                int anioActual = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
+                fechaNacimiento = (anioActual - edadAnios) + "-01-01";
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "La edad debe ser un número entero.", "Datos inválidos", JOptionPane.ERROR_MESSAGE);
                 return;
             }
         }
 
-        int edad, peso;
-        try {
-            edad = Integer.parseInt(edadTxt);
-            peso = Integer.parseInt(pesoTxt);
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Edad y Peso deben ser números enteros.", "Datos inválidos", JOptionPane.ERROR_MESSAGE);
-            return;
+        // Nombre del propietario
+        String nombreProp = propNombre.isEmpty() ? "Sin especificar" : propNombre;
+        String emailProp  = "sinregistro_" + System.currentTimeMillis() + "@patitascare.mx";
+
+        // --- Guardar en BD ---
+        int idNuevo = Datos.mascotaDAO.insertar(
+                nombre, especie, raza, sexo, fechaNacimiento,
+                nombreProp, "", "", emailProp);
+
+        if (idNuevo > 0) {
+            // Sincronizar con módulo veterinario
+            Datos.sincronizarConVeterinario();
+            JOptionPane.showMessageDialog(this,
+                "Mascota \"" + nombre + "\" registrada correctamente en la base de datos.\n(ID en BD: " + idNuevo + ")",
+                "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            boton_limpiarActionPerformed(null);
+        } else {
+            JOptionPane.showMessageDialog(this,
+                "Error al guardar en la base de datos.\nVerifica la conexión con MariaDB.",
+                "Error de BD", JOptionPane.ERROR_MESSAGE);
         }
-
-        String especie  = jCombo_especie.getSelectedItem().toString();
-        String estado   = jCombo_estado.getSelectedItem().toString();
-        String sexo     = jCombo_sexo.getSelectedItem().toString();
-        String alergias = jTextArea_alergia.getText().trim();
-        String vacunas  = jTextArea_vacunas.getText().trim();
-
-        // Guardar en la lista del secretario
-        Paciente p = new Paciente(id, nombre, especie, raza, edad, peso, sexo, estado, alergias, vacunas);
-        Datos.pacientes.add(p);
-
-        // *** Sincronizar con el módulo del veterinario ***
-        Datos.sincronizarConVeterinario();
-
-        JOptionPane.showMessageDialog(this, "Paciente \"" + nombre + "\" registrado correctamente.\nYa está disponible en el módulo del veterinario.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-
-        // Limpiar formulario
-        boton_limpiarActionPerformed(null);
     }//GEN-LAST:event_boton_guardarActionPerformed
 
     private void boton_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_limpiarActionPerformed
@@ -430,6 +437,25 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         menu.setVisible(true);
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_botonSwing4ActionPerformed
+
+    /**
+     * Carga las especies y sexos desde la base de datos en los combos.
+     * Si la BD no está disponible, deja los valores por defecto del form.
+     */
+    private void cargarCombosDesdeDB() {
+        try {
+            java.util.List<String> especies = Datos.mascotaDAO.getEspecies();
+            if (!especies.isEmpty()) {
+                jCombo_especie.setModel(new javax.swing.DefaultComboBoxModel<>(especies.toArray(new String[0])));
+            }
+            java.util.List<String> sexos = Datos.mascotaDAO.getSexos();
+            if (!sexos.isEmpty()) {
+                jCombo_sexo.setModel(new javax.swing.DefaultComboBoxModel<>(sexos.toArray(new String[0])));
+            }
+        } catch (Exception e) {
+            System.err.println("No se pudieron cargar catálogos desde BD: " + e.getMessage());
+        }
+    }
 
     /**
      * @param args the command line arguments

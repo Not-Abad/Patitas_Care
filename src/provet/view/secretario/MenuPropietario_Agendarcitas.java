@@ -12,6 +12,8 @@ import provet.view.propietario.MenuPropietario_Archivos;
 import provet.view.propietario.MenuPropietario_Principal;
 import provet.view.propietario.MenuPropietario_Principal;
 import provet.view.propietario.MenuPropietario_Principal;
+import provet.view.secretario.Registrar_paciente_secretario;
+import provet.view.secretario.Reporte_secretario;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
@@ -299,58 +301,57 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     }//GEN-LAST:event_comboHorarioActionPerformed
 
     private void txtbotonconfirmarcitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbotonconfirmarcitaActionPerformed
-        // TODO add your handling code here:
+        // 1. Captura de datos
+        String raza        = txt_raza.getText().trim();
+        String nombre      = txt_nombremascota.getText().trim();
+        String especie     = comboespecie.getSelectedItem().toString();
+        String veterinario = comboVeterinario.getSelectedItem().toString();
+        String fechaTxt    = txtFecha.getText().trim();
+        String horario     = comboHorario.getSelectedItem().toString();
+        String motivo      = comboMotivo.getSelectedItem().toString();
+        String descripcion = txtDescripcion.getText().trim();
 
-       // 1. Captura de datos (Tu código base)
-String raza = txt_raza.getText().trim();
-String nombre = txt_nombremascota.getText().trim();
-String especie = comboespecie.getSelectedItem().toString();
-String veterinario = comboVeterinario.getSelectedItem().toString();
-String fecha = txtFecha.getText().trim();
-String horario = comboHorario.getSelectedItem().toString();
-String motivo = comboMotivo.getSelectedItem().toString();
-String descripcion = txtDescripcion.getText().trim();
+        // 2. Validación
+        if (nombre.isEmpty() || fechaTxt.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor completa: nombre de mascota y fecha.");
+            return;
+        }
 
-// 2. Validación
-if (nombre.isEmpty() || raza.isEmpty() || fecha.isEmpty() || descripcion.isEmpty()) {
-    JOptionPane.showMessageDialog(this, "Por favor completa todos los campos");
-    return;
-}
+        // 3. Construir fecha-hora para la BD (formato yyyy-MM-dd HH:mm:ss)
+        String fechaHora;
+        try {
+            // fechaTxt puede venir como "dd/MM/yyyy" o "yyyy-MM-dd"
+            String fechaLimpia = fechaTxt.replace("/", "-").trim();
+            if (fechaLimpia.length() == 10) {
+                // verificar si viene en dd-MM-yyyy
+                String[] partes = fechaLimpia.split("-");
+                if (partes[0].length() == 4) {
+                    fechaHora = fechaLimpia + " " + horarioToHHMM(horario) + ":00";
+                } else {
+                    // dd-MM-yyyy → yyyy-MM-dd
+                    fechaHora = partes[2] + "-" + partes[1] + "-" + partes[0] + " " + horarioToHHMM(horario) + ":00";
+                }
+            } else {
+                fechaHora = java.time.LocalDateTime.now().toString().substring(0, 10) + " " + horarioToHHMM(horario) + ":00";
+            }
+        } catch (Exception ex) {
+            fechaHora = java.time.LocalDateTime.now().toString().substring(0, 10) + " 09:00:00";
+        }
 
-// 3. OBTENER LA INSTANCIA DE LA TABLA (Para no crear una nueva y borrar todo)
-// Si la ventana no existe, la creamos una sola vez
-Cita nueva = new Cita(
-    nombre,
-    nombre,
-    fecha,
-    horario,
-    motivo
-);
+        // 4. Guardar en base de datos
+        int idCita = Datos.citaDAO.insertarConNombre(nombre, raza, especie, fechaHora, motivo, descripcion);
 
-Datos.citas.add(nueva);
-// 5. GUARDAR EN ARCHIVO PLANO (Igual que el código de las flores)
-try {
-    // El "true" es vital para que no borre las citas anteriores en el archivo
-    java.io.FileWriter archivo = new java.io.FileWriter("citas.txt", true);
-    java.io.PrintWriter escribir = new java.io.PrintWriter(archivo);
-
-    // Guardamos los 8 datos separados por comas
-    escribir.println(nombre + "," + raza + "," + especie + "," + veterinario + "," + fecha + "," + horario + "," + motivo + "," + descripcion);
-
-    escribir.close();
-} catch (Exception e) {
-    JOptionPane.showMessageDialog(this, "Error al guardar en archivo: " + e.getMessage());
-}
-
-// 6. Finalización
-Citas_pendientes_secretario ventana =
-new Citas_pendientes_secretario();
-
-ventana.setVisible(true);
-JOptionPane.showMessageDialog(this, "Tu cita se ha agendado correctamente");
-JOptionPane.showMessageDialog(null, "Recuerda llegar 10 min antes a tu cita");
-
-this.dispose();
+        if (idCita > 0) {
+            JOptionPane.showMessageDialog(this, "Cita agendada correctamente en la base de datos.\nID de cita: " + idCita);
+            JOptionPane.showMessageDialog(null, "Recuerda llegar 10 min antes a tu cita");
+            Citas_pendientes_secretario ventana = new Citas_pendientes_secretario();
+            ventana.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this,
+                "Error al guardar la cita en la base de datos.\nVerifica la conexión con MariaDB.",
+                "Error de BD", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_txtbotonconfirmarcitaActionPerformed
 
     private void txtbotoncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbotoncancelarActionPerformed
@@ -416,6 +417,25 @@ this.dispose();
         menu.setVisible(true);
         this.dispose();    // TODO add your handling code here:
     }//GEN-LAST:event_btn_ReportesActionPerformed
+
+    /** Convierte "09:00 a.m." o "9:00 AM" al formato HH:mm (24h). */
+    private String horarioToHHMM(String horario) {
+        if (horario == null || horario.trim().isEmpty()) return "09:00";
+        try {
+            horario = horario.trim().toLowerCase();
+            boolean pm = horario.contains("p.m.") || horario.contains("pm");
+            boolean am = horario.contains("a.m.") || horario.contains("am");
+            horario = horario.replace("a.m.", "").replace("p.m.", "").replace("am", "").replace("pm", "").trim();
+            String[] partes = horario.split(":");
+            int hora   = Integer.parseInt(partes[0].trim());
+            int minuto = partes.length > 1 ? Integer.parseInt(partes[1].trim()) : 0;
+            if (pm && hora != 12) hora += 12;
+            if (am && hora == 12) hora = 0;
+            return String.format("%02d:%02d", hora, minuto);
+        } catch (Exception e) {
+            return "09:00";
+        }
+    }
 
     /**
      * @param args the command line arguments

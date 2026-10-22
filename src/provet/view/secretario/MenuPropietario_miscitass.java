@@ -4,7 +4,6 @@
  */
 package provet.view.secretario;
 
-import provet.view.secretario.MenuPropietario_Agendarcitas;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
@@ -25,8 +24,8 @@ public class MenuPropietario_miscitass extends javax.swing.JFrame {
      */
     public MenuPropietario_miscitass() {
         initComponents();
-        
         instanciaUnica = this;
+        cargarCitasDeDB();
         if (isUndecorated()) {
     dispose();
     setUndecorated(false);
@@ -65,10 +64,38 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
     }
       
+    /**
+     * Carga todas las citas desde la base de datos a la tabla.
+     */
+    private void cargarCitasDeDB() {
+        try {
+            DefaultTableModel modelo = (DefaultTableModel) tablacitas.getModel();
+            modelo.setRowCount(0);
+            java.util.List<provet.dao.CitaSecretarioDAO.CitaDTO> lista = Datos.citaDAO.selectAll();
+            for (provet.dao.CitaSecretarioDAO.CitaDTO c : lista) {
+                String fechaStr = c.fechaProgramada != null ? c.fechaProgramada.toString().substring(0, 10) : "";
+                String horaStr  = c.fechaProgramada != null ? c.fechaProgramada.toString().substring(11, 16) : "";
+                modelo.addRow(new Object[]{
+                    c.nombreCliente  != null ? c.nombreCliente  : "Sin cliente",
+                    c.nombreMascota  != null ? c.nombreMascota  : "Sin mascota",
+                    c.especie        != null ? c.especie        : "",
+                    "",   // veterinario (no disponible en este módulo)
+                    fechaStr,
+                    horaStr,
+                    c.motivo,
+                    c.estatusCita
+                });
+            }
+            tablacitas.revalidate();
+            tablacitas.repaint();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar citas de la BD: " + e.getMessage());
+        }
+    }
+
     // Este método permitirá que otras ventanas "pidan" la tabla
     public javax.swing.JTable getjTable1() {
     return tablacitas; 
-
 }
 
 

@@ -7,6 +7,13 @@ package provet.view.secretario;
 import javax.swing.JFrame;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
+import provet.dao.CitaSecretarioDAO;
+import provet.view.secretario.Dashboard_Secretario;
+import provet.view.secretario.Datos;
+import provet.view.secretario.EditarPacientes_secretario;
+import provet.view.secretario.Registrar_paciente_secretario;
+import provet.view.secretario.Reporte_secretario;
+import provet.view.secretario.editarCita;
 
 /**
  *
@@ -14,30 +21,18 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Citas_pendientes_secretario extends javax.swing.JFrame {
 
+    private boolean listenerSeleccionRegistrado = false;
+
     /**
      * Creates new form Citas_pendientes_secretario
      */
-    public void actualizarFila(
-        int fila,
-        String mascota,
-        String fecha,
-        String hora,
-        String motivo
-) {
-
-table_citasPendientes
-.setValueAt(mascota,fila,1);
-
-table_citasPendientes
-.setValueAt(fecha,fila,2);
-
-table_citasPendientes
-.setValueAt(hora,fila,3);
-
-table_citasPendientes
-.setValueAt(motivo,fila,4);
-
-}
+    public void actualizarFila(int fila, String mascota, String fecha, String hora, String motivo) {
+        // col 0 = ID (oculta), col 1 = Cliente, col 2 = Mascota, col 3 = Fecha, col 4 = Hora, col 5 = Motivo
+        table_citasPendientes.setValueAt(mascota, fila, 2);
+        table_citasPendientes.setValueAt(fecha,   fila, 3);
+        table_citasPendientes.setValueAt(hora,    fila, 4);
+        table_citasPendientes.setValueAt(motivo,  fila, 5);
+    }
     public Citas_pendientes_secretario() {
         initComponents();
         cargarCitas();
@@ -393,94 +388,50 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
 
     private void boton_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_editarActionPerformed
         int fila = table_citasPendientes.getSelectedRow();
+        if (fila == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Selecciona una cita primero");
+            return;
+        }
+        // col 0 = idCita (BD), col 1 = cliente, col 2 = mascota, col 3 = fecha, col 4 = hora, col 5 = motivo
+        int idCita  = Integer.parseInt(table_citasPendientes.getValueAt(fila, 0).toString());
+        String mascota = table_citasPendientes.getValueAt(fila, 2).toString();
+        String fecha   = table_citasPendientes.getValueAt(fila, 3).toString();
+        String hora    = table_citasPendientes.getValueAt(fila, 4).toString();
+        String motivo  = table_citasPendientes.getValueAt(fila, 5).toString();
 
-if (fila == -1) {
-    javax.swing.JOptionPane.showMessageDialog(
-        this,
-        "Selecciona una cita primero"
-    );
-    return;
-}
-
-String mascota =
-table_citasPendientes.getValueAt(
-fila,
-1
-).toString();
-
-String fecha =
-table_citasPendientes.getValueAt(
-fila,
-2
-).toString();
-
-String hora =
-table_citasPendientes.getValueAt(
-fila,
-3
-).toString();
-
-String motivo =
-table_citasPendientes.getValueAt(
-fila,
-4
-).toString();
-
-editarCita ventana =
-new editarCita(
-    mascota,
-    fecha,
-    hora,
-    motivo,
-    fila
-);
-
-ventana.setVisible(true);
-
-this.dispose();
-        
+        editarCita ventana = new editarCita(idCita, mascota, fecha, hora, motivo, fila);
+        ventana.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_boton_editarActionPerformed
 
     private void boton_dar_de_bajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_dar_de_bajaActionPerformed
-        // TODO add your handling code here:
         int fila = table_citasPendientes.getSelectedRow();
+        if (fila == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Selecciona una cita primero.", "Sin selección", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        int idCita   = Integer.parseInt(table_citasPendientes.getValueAt(fila, 0).toString());
+        String mascota = table_citasPendientes.getValueAt(fila, 2).toString();
 
-    if (fila == -1) {
-        javax.swing.JOptionPane.showMessageDialog(
+        int confirmacion = javax.swing.JOptionPane.showConfirmDialog(
             this,
-            "Selecciona una cita primero.",
-            "Sin selección",
-            javax.swing.JOptionPane.WARNING_MESSAGE
-        );
-        return;
-    }
-
-    String mascota =
-        table_citasPendientes.getValueAt(fila, 1).toString();
-
-    int confirmacion =
-        javax.swing.JOptionPane.showConfirmDialog(
-            this,
-            "¿Seguro que deseas eliminar la cita de \"" + mascota + "\"?",
-            "Confirmar eliminación",
+            "¿Cancelar la cita de \"" + mascota + "\"?\nEl estatus cambiará a Cancelada en la base de datos.",
+            "Confirmar cancelación",
             javax.swing.JOptionPane.YES_NO_OPTION,
             javax.swing.JOptionPane.WARNING_MESSAGE
         );
 
-    if (confirmacion == javax.swing.JOptionPane.YES_OPTION) {
-
-        Datos.citas.remove(fila);
-
-        DefaultTableModel modelo =
-            (DefaultTableModel) table_citasPendientes.getModel();
-
-        modelo.removeRow(fila);
-
-        javax.swing.JOptionPane.showMessageDialog(
-            this,
-            "Cita eliminada correctamente"
-        );
-    }
+        if (confirmacion == javax.swing.JOptionPane.YES_OPTION) {
+            // Cambiar estatus a 2 (Cancelada)
+            boolean ok = Datos.citaDAO.actualizarEstatus(idCita, 2);
+            if (ok) {
+                DefaultTableModel modelo = (DefaultTableModel) table_citasPendientes.getModel();
+                modelo.removeRow(fila);
+                javax.swing.JOptionPane.showMessageDialog(this, "Cita cancelada correctamente en la base de datos.");
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error al cancelar la cita en la base de datos.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_boton_dar_de_bajaActionPerformed
 
     private void botonSwing2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing2ActionPerformed
@@ -490,28 +441,50 @@ this.dispose();
     }//GEN-LAST:event_botonSwing2ActionPerformed
 
     private void cargarCitas() {
-    DefaultTableModel modelo = (DefaultTableModel) table_citasPendientes.getModel();
-    modelo.setRowCount(0);
+        // Reemplazar el modelo con 6 columnas (ID oculto + 5 visibles)
+        javax.swing.table.DefaultTableModel modelo = new javax.swing.table.DefaultTableModel(
+            new String[]{"ID", "Cliente", "Mascota", "Fecha", "Hora", "Motivo"}, 0
+        ) {
+            @Override public boolean isCellEditable(int row, int col) { return false; }
+        };
+        table_citasPendientes.setModel(modelo);
 
-    for (Cita c : Datos.citas) {
-        modelo.addRow(new Object[]{
-            c.getCliente(),
-            c.getMascota(),
-            c.getFecha(),
-            c.getHora(),
-            c.getMotivo()
-        });
-    }
-    table_citasPendientes.getSelectionModel().addListSelectionListener(e -> {
-    int fila = table_citasPendientes.getSelectedRow();
+        // Ocultar la columna ID (índice 0) — la necesitamos internamente pero no se muestra
+        table_citasPendientes.getColumnModel().getColumn(0).setMinWidth(0);
+        table_citasPendientes.getColumnModel().getColumn(0).setMaxWidth(0);
+        table_citasPendientes.getColumnModel().getColumn(0).setWidth(0);
 
-    if (fila != -1) {
-        jLabel_cliente.setText(table_citasPendientes.getValueAt(fila, 0).toString());
-        jLabel_mascota.setText(table_citasPendientes.getValueAt(fila, 1).toString());
-        jLabel_motivo.setText(table_citasPendientes.getValueAt(fila, 4).toString());
+        // Cargar citas pendientes de hoy desde la base de datos
+        java.util.List<CitaSecretarioDAO.CitaDTO> lista = Datos.citaDAO.selectPendientesHoy();
+        for (CitaSecretarioDAO.CitaDTO c : lista) {
+            String fechaStr = c.fechaProgramada != null ? c.fechaProgramada.toString().substring(0, 10) : "";
+            String horaStr  = c.fechaProgramada != null ? c.fechaProgramada.toString().substring(11, 16) : "";
+            modelo.addRow(new Object[]{
+                c.idCita,                                                  // col 0: ID (oculta)
+                c.nombreCliente != null ? c.nombreCliente : "Sin cliente", // col 1
+                c.nombreMascota != null ? c.nombreMascota : "Sin mascota", // col 2
+                fechaStr,                                                   // col 3
+                horaStr,                                                    // col 4
+                c.motivo != null ? c.motivo : "Sin motivo"                 // col 5
+            });
+        }
+
+        // Listener de selección para mostrar detalles en el panel inferior
+        if (!listenerSeleccionRegistrado) {
+            listenerSeleccionRegistrado = true;
+            table_citasPendientes.getSelectionModel().addListSelectionListener(e -> {
+                int fila = table_citasPendientes.getSelectedRow();
+                if (fila != -1) {
+                    Object cliente = table_citasPendientes.getValueAt(fila, 1);
+                    Object mascota = table_citasPendientes.getValueAt(fila, 2);
+                    Object motivo  = table_citasPendientes.getValueAt(fila, 5);
+                    jLabel_cliente.setText(cliente != null ? cliente.toString() : "");
+                    jLabel_mascota.setText(mascota != null ? mascota.toString() : "");
+                    jLabel_motivo.setText(motivo != null ? motivo.toString() : "");
+                }
+            });
+        }
     }
-});
-}
     /**
      * @param args the command line arguments
      */
