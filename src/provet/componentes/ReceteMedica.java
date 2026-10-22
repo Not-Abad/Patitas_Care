@@ -4,6 +4,8 @@
  */
 package provet.componentes;
 
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import provet.model.Paciente;
 import provet.model.RecetaMedica;
@@ -160,73 +162,66 @@ public class ReceteMedica extends javax.swing.JPanel {
     }//GEN-LAST:event_txtCorreoActionPerformed
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-try {
+        try {
+    String filas = "";
+    // Estilo en línea para las celdas de la tabla interna
+    String estiloTd = "padding: 10px; border: 1px solid #dddddd; color: #333333; text-align: left;";
 
-        String filas = "";
+    for (int i = 0; i < tablaMedicamentos.getRowCount(); i++) {
+        Object medicamentoObj = tablaMedicamentos.getValueAt(i, 0);
 
-        for (int i = 0; i < tablaMedicamentos.getRowCount(); i++) {
-
-            Object medicamento = tablaMedicamentos.getValueAt(i, 0);
-
-            if (medicamento == null || medicamento.toString().trim().isEmpty()) {
-                continue;
-            }
-
-            filas += "<tr>";
-            filas += "<td>" + tablaMedicamentos.getValueAt(i, 0) + "</td>";
-            filas += "<td>" + tablaMedicamentos.getValueAt(i, 1) + "</td>";
-            filas += "<td>" + tablaMedicamentos.getValueAt(i, 2) + "</td>";
-            filas += "<td>" + tablaMedicamentos.getValueAt(i, 3) + "</td>";
-            filas += "<td>" + tablaMedicamentos.getValueAt(i, 4) + "</td>";
-            filas += "</tr>";
+        if (medicamentoObj == null || medicamentoObj.toString().trim().isEmpty()) {
+            continue;
         }
 
-        String html =
-                "<html>"
-                + "<body>"
-                + "<h2>Receta Médica Veterinaria</h2>"
-                + "<p><b>Nombre:</b> " + lblNombre.getText() + "</p>"
-                + "<p><b>Especie:</b> " + lblEspecie.getText() + "</p>"
-                + "<p><b>Fecha:</b> " + lblFecha.getText() + "</p>"
-                + "<p><b>Motivo:</b> " + txtMotivo.getText() + "</p>"
-                + "<br>"
-                + "<table border='1'>"
-                + "<tr>"
-                + "<th>Medicamento</th>"
-                + "<th>Dosis</th>"
-                + "<th>Frecuencia</th>"
-                + "<th>Vía de Administración</th>"
-                + "<th>Duración</th>"
-                + "</tr>"
-                + filas
-                + "</table>"
-                + "</body>"
-                + "</html>";
+        String medicamento = medicamentoObj.toString();
+        String dosis = tablaMedicamentos.getValueAt(i, 1) != null ? tablaMedicamentos.getValueAt(i, 1).toString() : "";
+        String frecuencia = tablaMedicamentos.getValueAt(i, 2) != null ? tablaMedicamentos.getValueAt(i, 2).toString() : "";
+        String via = tablaMedicamentos.getValueAt(i, 3) != null ? tablaMedicamentos.getValueAt(i, 3).toString() : "";
+        String duracion = tablaMedicamentos.getValueAt(i, 4) != null ? tablaMedicamentos.getValueAt(i, 4).toString() : "";
 
-        Servicio_Email servicio = new Servicio_Email();
-
-        servicio.createEmail(
-                txtCorreo.getText(),
-                "Receta Médica Veterinaria",
-                html
-        );
-
-        servicio.sendEmail();
-
-        JOptionPane.showMessageDialog(
-                this,
-                "Correo enviado correctamente"
-        );
-
-    } catch (Exception ex) {
-
-        JOptionPane.showMessageDialog(
-                this,
-                "Error al enviar correo:\n" + ex.getMessage()
-        );
-
-        ex.printStackTrace();
+        filas += "<tr>";
+        filas += "<td style='" + estiloTd + "'>" + medicamento + "</td>";
+        filas += "<td style='" + estiloTd + "'>" + dosis + "</td>";
+        filas += "<td style='" + estiloTd + "'>" + frecuencia + "</td>";
+        filas += "<td style='" + estiloTd + "'>" + via + "</td>";
+        filas += "<td style='" + estiloTd + "'>" + duracion + "</td>";
+        filas += "</tr>";
     }
+
+    Servicio_Email servicio = new Servicio_Email();
+    
+    // Armamos el Map con las variables exactamente como lo haces en recuperación
+    Map<String, String> variables = new HashMap<>();
+    variables.put("NOMBRE", lblNombre.getText());
+    variables.put("ESPECIE", lblEspecie.getText());
+    variables.put("FECHA", lblFecha.getText());
+    variables.put("MOTIVO", txtMotivo.getText());
+    variables.put("TABLA_MEDICAMENTOS", filas);
+
+    // Usamos tu propio método para cargar la plantilla y reemplazar las variables
+    String htmlFinal = servicio.obtenerContenidoTemplate("receta.html", variables);
+
+    servicio.createEmail(
+            txtCorreo.getText(),
+            "Receta Médica Veterinaria",
+            htmlFinal
+    );
+
+    servicio.sendEmail();
+
+    JOptionPane.showMessageDialog(
+            this,
+            "Correo enviado correctamente"
+    );
+
+} catch (Exception ex) {
+    JOptionPane.showMessageDialog(
+            this,
+            "Error al enviar correo:\n" + ex.getMessage()
+    );
+    ex.printStackTrace();
+}
     }//GEN-LAST:event_btnEnviarActionPerformed
 
 

@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class Conexion {
 
     // Atributos de la conexión
-    private static final String URL = "jdbc:mariadb://localhost:3306/patitas_care_actualizada";
+    private static final String URL = "jdbc:mariadb://localhost:3306/patitas_care";
     private static final String USER = "root"; 
     private static final String PASS = "";    
     
