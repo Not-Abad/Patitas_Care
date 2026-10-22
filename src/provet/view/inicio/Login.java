@@ -12,6 +12,7 @@ import provet.dao.EmpleadoDAO;
 import provet.model.Empleado;
 import provet.utilidades.Conexion;
 import provet.utilidades.Sesion;
+import provet.view.secretario.EditarPacientes_secretario;
 
 //Inicio de la clase Login, que hereda de la clase JFrame
 public class Login extends javax.swing.JFrame {
@@ -158,6 +159,7 @@ public class Login extends javax.swing.JFrame {
         });
         pnl_Operativo.add(txt_contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 270, 50));
 
+        chk_Ojo.setBorder(null);
         chk_Ojo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         chk_Ojo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/basil--eye-closed-solid.png"))); // NOI18N
         chk_Ojo.addActionListener(new java.awt.event.ActionListener() {
@@ -254,7 +256,7 @@ public class Login extends javax.swing.JFrame {
 
     
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -266,8 +268,14 @@ public class Login extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
