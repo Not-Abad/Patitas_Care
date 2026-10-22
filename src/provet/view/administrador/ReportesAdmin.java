@@ -5,8 +5,10 @@ import provet.view.inicio.Login;
 import provet.componentes.botonSwing;
 import provet.componentes.PanelRedondeado;
 import provet.dao.UsuarioAdminDAO;
+import provet.utilidades.Conexion;
 import javax.swing.*;
 import java.awt.*;
+import java.sql.*;
 
 public class ReportesAdmin extends javax.swing.JFrame {
    
@@ -28,9 +30,9 @@ class Reporte {
     }
 }
 
-private int citas = 0;
-private int nuevosPacientes = 0;
-private int usuariosActivos = 0;
+private static int citas = 0;
+private static int nuevosPacientes = 0;
+private static int usuariosActivos = 0;
 
 private javax.swing.JLabel lblCitas, lblPacientes, lblUsuarios;
 private javax.swing.JPanel panelHistorial;
@@ -38,9 +40,7 @@ private javax.swing.JPanel panelHistorial;
     public ReportesAdmin() {
     initComponents();
     construirUI();
-    if (listaReportes.isEmpty()) {
-    listaReportes.add(new Reporte("Ejemplo", "Demo"));
-    }
+    cargarDatosDesdeBD();
     renderizarHistorial();
     }
 
@@ -275,27 +275,54 @@ private javax.swing.JPanel panelHistorial;
     return lblValor;
 }
     
-    private void generarDatos() {
-    // Conectar con base de datos para usuarios activos
-    UsuarioAdminDAO usuarioDAO = new UsuarioAdminDAO();
-    java.util.List<UsuarioAdminDAO.UsuarioAdmin> usuariosBD = usuarioDAO.selectAll();
-    usuariosActivos = usuariosBD.size();
+    private void cargarDatosDesdeBD() {
+        // Conectar con base de datos para usuarios activos
+        UsuarioAdminDAO usuarioDAO = new UsuarioAdminDAO();
+        java.util.List<UsuarioAdminDAO.UsuarioAdmin> usuariosBD = usuarioDAO.selectAll();
+        usuariosActivos = usuariosBD.size();
+        
+        // Conectar con base de datos para citas totales
+        Connection conn = Conexion.getConexion();
+        if (conn != null) {
+            try {
+                String sqlCitas = "SELECT COUNT(*) as total FROM trn_cita";
+                try (PreparedStatement pstmt = conn.prepareStatement(sqlCitas);
+                     ResultSet rs = pstmt.executeQuery()) {
+                    if (rs.next()) {
+                        citas = rs.getInt("total");
+                    }
+                }
+                
+                // Conectar con base de datos para nuevos pacientes (clientes registrados hoy)
+                String sqlPacientes = "SELECT COUNT(*) as total FROM mts_cliente c JOIN mts_persona p ON c.id_persona = p.id_persona WHERE DATE(p.fecha_registro_sistema) = CURDATE()";
+                try (PreparedStatement pstmt = conn.prepareStatement(sqlPacientes);
+                     ResultSet rs = pstmt.executeQuery()) {
+                    if (rs.next()) {
+                        nuevosPacientes = rs.getInt("total");
+                    }
+                }
+            } catch (SQLException e) {
+                System.err.println("Error al cargar datos desde BD: " + e.getMessage());
+                // Si hay error, mantener valores actuales
+            }
+        }
+        
+        // Actualizar labels
+        lblCitas.setText(String.valueOf(citas));
+        lblPacientes.setText(String.valueOf(nuevosPacientes));
+        lblUsuarios.setText(String.valueOf(usuariosActivos));
+    }
     
-    // Para citas y pacientes, mantener valores aleatorios ya que no hay DAOs específicos
-    citas += (int)(Math.random() * 10);
-    nuevosPacientes += (int)(Math.random() * 5);
+    private void generarDatos() {
+    cargarDatosDesdeBD();
 
-    lblCitas.setText(String.valueOf(citas));
-    lblPacientes.setText(String.valueOf(nuevosPacientes));
-    lblUsuarios.setText(String.valueOf(usuariosActivos));
-
-    listaReportes.add(new Reporte("Reporte generado", "Datos actualizados"));
+    listaReportes.add(new Reporte("Reporte generado", "Datos actualizados desde BD"));
     
     renderizarHistorial();
 
     NotificacionesAdmin.agregarNotificacionGlobal(
         "Nuevo reporte",
-        "Se generó un reporte",
+        "Se generó un reporte con datos actualizados",
         "hoy"
     );
 }

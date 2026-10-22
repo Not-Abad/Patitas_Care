@@ -10,6 +10,12 @@ import java.util.List;
 
 public class UsuarioAdminDAO {
 
+    private BitacoraMovimientosDAO bitacoraDAO;
+
+    public UsuarioAdminDAO() {
+        this.bitacoraDAO = new BitacoraMovimientosDAO();
+    }
+
     // ==========================================
     // MÉTODO READ: Obtener todos los empleados (usuarios administrativos)
     // ==========================================
@@ -94,7 +100,7 @@ public class UsuarioAdminDAO {
     // ==========================================
     // MÉTODO CREATE: Insertar un nuevo empleado
     // ==========================================
-    public int insert(UsuarioAdmin usuario) {
+    public int insert(UsuarioAdmin usuario, int idUsuario) {
         int filasAfectadas = 0;
         
         // Primero insertar en mts_persona
@@ -127,7 +133,7 @@ public class UsuarioAdminDAO {
                                 int idPersona = rs.getInt(1);
                                 
                                 // Insertar empleado
-                                try (PreparedStatement pstmtEmpleado = conn.prepareStatement(sqlEmpleado)) {
+                                try (PreparedStatement pstmtEmpleado = conn.prepareStatement(sqlEmpleado, PreparedStatement.RETURN_GENERATED_KEYS)) {
                                     pstmtEmpleado.setInt(1, idPersona);
                                     pstmtEmpleado.setInt(2, idPuesto);
                                     pstmtEmpleado.setString(3, usuario.getUsuario());
@@ -137,6 +143,32 @@ public class UsuarioAdminDAO {
                                     pstmtEmpleado.setDate(7, new java.sql.Date(usuario.getFechaContratacion().getTime()));
                                     
                                     filasAfectadas = pstmtEmpleado.executeUpdate();
+                                    
+                                    // Obtener el ID del empleado insertado
+                                    try (ResultSet rsEmpleado = pstmtEmpleado.getGeneratedKeys()) {
+                                        if (rsEmpleado.next()) {
+                                            int idEmpleado = rsEmpleado.getInt(1);
+                                            
+                                            // Obtener ID de acción
+                                            int idAccion = bitacoraDAO.obtenerIdAccion("Agregó");
+                                            
+                                            // Registrar movimiento en bitácora
+                                            String valorAnterior = "NUEVO: " + usuario.getNombre() + " " + usuario.getApellido() + 
+                                                                    ", Usuario: " + usuario.getUsuario() + 
+                                                                    ", Puesto: " + usuario.getRol();
+                                            String valorNuevo = valorAnterior;
+                                            BitacoraMovimientosDAO.BitacoraMovimiento movimiento = 
+                                                new BitacoraMovimientosDAO.BitacoraMovimiento(
+                                                    idUsuario, 
+                                                    idAccion, 
+                                                    "mts_empleado", 
+                                                    idEmpleado, 
+                                                    valorAnterior,
+                                                    valorNuevo
+                                                );
+                                            bitacoraDAO.insert(movimiento);
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -152,8 +184,19 @@ public class UsuarioAdminDAO {
     // ==========================================
     // MÉTODO UPDATE: Actualizar un empleado
     // ==========================================
-    public int update(UsuarioAdmin usuario) {
+    public int update(UsuarioAdmin usuario, int idUsuario) {
         int filasAfectadas = 0;
+        
+        // Primero obtener el valor anterior para la bitácora
+        UsuarioAdmin usuarioAnterior = selectById(usuario.getId());
+        String valorAnterior = "";
+        if (usuarioAnterior != null) {
+            valorAnterior = "ANTERIOR: " + usuarioAnterior.getNombre() + " " + usuarioAnterior.getApellido() + 
+                           ", Usuario: " + usuarioAnterior.getUsuario() + 
+                           ", Puesto: " + usuarioAnterior.getRol() + 
+                           ", Sueldo: " + usuarioAnterior.getSueldoBase();
+        }
+        
         String sqlPersona = "UPDATE mts_persona SET nombre = ?, apellido_paterno = ?, apellido_materno = ?, email = ?, telefono = ? WHERE id_persona = (SELECT id_persona FROM mts_empleado WHERE id_empleado = ?)";
         String sqlEmpleado = "UPDATE mts_empleado SET id_puesto = ?, usuario = ?, password = ?, foto_perfil = ?, sueldo_base = ? WHERE id_empleado = ?";
         
@@ -190,6 +233,25 @@ public class UsuarioAdminDAO {
                     
                     filasAfectadas = pstmtEmpleado.executeUpdate();
                 }
+                
+                // Registrar movimiento en bitácora
+                if (filasAfectadas > 0) {
+                    int idAccion = bitacoraDAO.obtenerIdAccion("Modificó");
+                    String valorNuevo = "NUEVO: " + usuario.getNombre() + " " + usuario.getApellido() + 
+                                      ", Usuario: " + usuario.getUsuario() + 
+                                      ", Puesto: " + usuario.getRol() + 
+                                      ", Sueldo: " + usuario.getSueldoBase();
+                    BitacoraMovimientosDAO.BitacoraMovimiento movimiento = 
+                        new BitacoraMovimientosDAO.BitacoraMovimiento(
+                            idUsuario, 
+                            idAccion, 
+                            "mts_empleado", 
+                            usuario.getId(), 
+                            valorAnterior,
+                            valorNuevo
+                        );
+                    bitacoraDAO.insert(movimiento);
+                }
             } catch (SQLException e) {
                 System.err.println("Error al actualizar usuario: " + e.getMessage());
             }
@@ -200,8 +262,19 @@ public class UsuarioAdminDAO {
     // ==========================================
     // MÉTODO DELETE: Eliminar un empleado
     // ==========================================
-    public int delete(int id) {
+    public int delete(int id, int idUsuario) {
         int filasAfectadas = 0;
+        
+        // Primero obtener el valor anterior para la bitácora
+        UsuarioAdmin usuarioAnterior = selectById(id);
+        String valorAnterior = "";
+        if (usuarioAnterior != null) {
+            valorAnterior = "ELIMINADO: " + usuarioAnterior.getNombre() + " " + usuarioAnterior.getApellido() + 
+                           ", Usuario: " + usuarioAnterior.getUsuario() + 
+                           ", Puesto: " + usuarioAnterior.getRol() + 
+                           ", Sueldo: " + usuarioAnterior.getSueldoBase();
+        }
+        
         String sql = "DELETE FROM mts_empleado WHERE id_empleado = ?";
         Connection conn = Conexion.getConexion();
 
@@ -209,6 +282,21 @@ public class UsuarioAdminDAO {
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setInt(1, id);
                 filasAfectadas = pstmt.executeUpdate();
+                
+                // Registrar movimiento en bitácora
+                if (filasAfectadas > 0) {
+                    int idAccion = bitacoraDAO.obtenerIdAccion("Borró");
+                    BitacoraMovimientosDAO.BitacoraMovimiento movimiento = 
+                        new BitacoraMovimientosDAO.BitacoraMovimiento(
+                            idUsuario, 
+                            idAccion, 
+                            "mts_empleado", 
+                            id, 
+                            valorAnterior,
+                            null
+                        );
+                    bitacoraDAO.insert(movimiento);
+                }
             } catch (SQLException e) {
                 System.err.println("Error al eliminar usuario: " + e.getMessage());
             }

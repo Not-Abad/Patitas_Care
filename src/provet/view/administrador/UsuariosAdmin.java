@@ -5,6 +5,7 @@ import provet.view.inicio.Login;
 import provet.componentes.botonSwing;
 import provet.componentes.PanelRedondeado;
 import provet.dao.UsuarioAdminDAO;
+import provet.utilidades.Sesion;
 import javax.swing.*;
 import java.awt.*;
 public class UsuariosAdmin extends javax.swing.JFrame {
@@ -375,7 +376,8 @@ public UsuariosAdmin() {
             if (form.isEliminado()) {
                 // Eliminar usuario usando DAO
                 UsuarioAdminDAO dao = new UsuarioAdminDAO();
-                int resultado = dao.delete(Integer.parseInt(u.getId()));
+                int idUsuario = Sesion.getEmpleadoActual() != null ? Sesion.getEmpleadoActual().getIdEmpleado() : 0;
+                int resultado = dao.delete(Integer.parseInt(u.getId()), idUsuario);
                 
                 if (resultado > 0) {
                     cargarUsuariosDesdeBD();
@@ -403,7 +405,8 @@ public UsuariosAdmin() {
                 uBD.setFotoPerfil("");
                 
                 UsuarioAdminDAO dao = new UsuarioAdminDAO();
-                int resultado = dao.update(uBD);
+                int idUsuario = Sesion.getEmpleadoActual() != null ? Sesion.getEmpleadoActual().getIdEmpleado() : 0;
+                int resultado = dao.update(uBD, idUsuario);
                 
                 if (resultado > 0) {
                     cargarUsuariosDesdeBD();
@@ -455,7 +458,8 @@ public UsuariosAdmin() {
         uBD.setFotoPerfil("");
         
         UsuarioAdminDAO dao = new UsuarioAdminDAO();
-        int resultado = dao.insert(uBD);
+        int idUsuario = Sesion.getEmpleadoActual() != null ? Sesion.getEmpleadoActual().getIdEmpleado() : 0;
+        int resultado = dao.insert(uBD, idUsuario);
         
         if (resultado > 0) {
             cargarUsuariosDesdeBD();

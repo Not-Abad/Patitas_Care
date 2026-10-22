@@ -252,7 +252,7 @@ private javax.swing.JLabel lblFecha;
 private void actualizarFecha() {
     java.time.LocalDate hoy = java.time.LocalDate.now();
     java.time.format.DateTimeFormatter f =
-        java.time.format.DateTimeFormatter.ofPattern("MMMM yyyy", new java.util.Locale("es"));
+        java.time.format.DateTimeFormatter.ofPattern("d 'de' MMMM yyyy", new java.util.Locale("es"));
     lblFecha.setText(hoy.format(f));
 }
 
