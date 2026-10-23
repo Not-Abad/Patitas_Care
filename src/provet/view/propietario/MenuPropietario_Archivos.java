@@ -116,21 +116,6 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         jLabel16.setText("Propietario");
         jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
 
-<<<<<<< HEAD
-        btn_MenuP.setForeground(new java.awt.Color(39, 53, 38));
-        btn_MenuP.setText("Menú Principal");
-        btn_MenuP.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        btn_MenuP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_MenuPActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btn_MenuP, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 60));
-
-        botonSwing1.setForeground(new java.awt.Color(39, 53, 38));
-        botonSwing1.setText("Pacientes");
-        botonSwing1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-=======
         botonSwing1.setForeground(new java.awt.Color(39, 53, 38));
         botonSwing1.setText("Mis archivos");
         botonSwing1.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +123,6 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
                 botonSwing1ActionPerformed(evt);
             }
         });
->>>>>>> 3d1a9d1 (Ventanas Propietario Completas)
         jPanel2.add(botonSwing1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 250, 60));
 
         btn_Calendario.setForeground(new java.awt.Color(39, 53, 38));
