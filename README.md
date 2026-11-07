@@ -62,3 +62,10 @@ Patitas_Care/
 ├── .gitignore
 ├── LICENSE
 └── README.md
+
+```
+
+---
+
+## Guías Rápidas
+Consulta la Guía de Flujo de Trabajo [Guía de Flujo de Trabajo (WORKFLOW.md)](./docs/WORKFLOW.md) para aprender a tomar una Issue, crear ramas y enviar Pull Requests.
