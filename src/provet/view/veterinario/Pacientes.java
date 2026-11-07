@@ -237,7 +237,19 @@ public class Pacientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_reportesActionPerformed
 
     private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
-        dispose();
+
+    int respuesta = javax.swing.JOptionPane.showConfirmDialog(
+            this,
+            "¿Estás seguro de que deseas salir?",
+            "Confirmar salida",
+            javax.swing.JOptionPane.YES_NO_OPTION);
+
+    if (respuesta == javax.swing.JOptionPane.YES_OPTION) {
+        provet.utilidades.Sesion.cerrarSesion();
+        new provet.view.inicio.Login().setVisible(true);
+        this.dispose();
+    }
+
     }//GEN-LAST:event_btn_SalirActionPerformed
 
     private void btn_MenuPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_MenuPActionPerformed
