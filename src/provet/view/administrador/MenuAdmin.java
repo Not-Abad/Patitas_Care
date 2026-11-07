@@ -10,8 +10,15 @@ public class MenuAdmin extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MenuAdmin.class.getName());
 
     public MenuAdmin() {
-        initComponents();
-    }
+    initComponents();
+
+    // Ajustar ventana automáticamente al monitor
+    Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+
+    setSize(pantalla.width, pantalla.height);
+    setLocationRelativeTo(null);
+    setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+}
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
