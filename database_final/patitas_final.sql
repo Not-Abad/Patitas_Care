@@ -1,6 +1,7 @@
 DROP DATABASE IF EXISTS patitas_final;
-CREATE DATABASE patitas_care;
+CREATE DATABASE patitas_final CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE patitas_final;
+
 CREATE TABLE catalogo_especies (
   id_especie INT          NOT NULL AUTO_INCREMENT,
   nombre     VARCHAR(50)  NOT NULL,
