@@ -15,10 +15,6 @@ import provet.view.secretario.Registrar_paciente_secretario;
 import provet.view.secretario.Reporte_secretario;
 import provet.view.secretario.editarCita;
 
-/**
- *
- * @author Andreij Haziel
- */
 public class Citas_pendientes_secretario extends javax.swing.JFrame {
 
     private boolean listenerSeleccionRegistrado = false;
