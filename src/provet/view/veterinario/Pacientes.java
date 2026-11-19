@@ -269,37 +269,24 @@ public class Pacientes extends javax.swing.JFrame {
     }//GEN-LAST:event_botonSwing1ActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        String texto = txtBuscar.getText().trim().toLowerCase();
+         String texto = txtBuscar.getText();
 
     contenedor_Cartas1.removeAll();
 
-    for (Paciente p : ControlPacientes.listaPacientes) {
+    for (Paciente p : ControlPacientes.buscarPacientes(texto)) {
+        PanelPaciente panel = new PanelPaciente();
+        panel.setDatos(p);
 
-        boolean coincideNombre =
-                p.getNombre().toLowerCase().contains(texto);
+        panel.setClickListener(() -> {
+            abrirPanelConDatos(p);
+        });
 
-        boolean coincideID =
-                String.valueOf(p.getID()).contains(texto);
-
-        if (coincideNombre || coincideID) {
-
-            PanelPaciente panel = new PanelPaciente();
-            panel.setDatos(p);
-
-            panel.setClickListener(() -> {
-                abrirPanelConDatos(p);
-            });
-
-            panel.setCursor(
-                new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR)
-            );
-
-            contenedor_Cartas1.add(panel);
-        }
+        panel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        contenedor_Cartas1.add(panel);
     }
 
     contenedor_Cartas1.revalidate();
-    contenedor_Cartas1.repaint();
+    contenedor_Cartas1.repaint();   
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
