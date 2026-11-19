@@ -1,3 +1,7 @@
+CREATE DATABASE IF NOT EXISTS patitas_care
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
 USE patitas_care;
 
 CREATE TABLE usuario (
