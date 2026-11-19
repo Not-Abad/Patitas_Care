@@ -20,25 +20,28 @@ public class Login extends javax.swing.JFrame {
     //Atributos de la clase
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Login.class.getName());
     private final EmpleadoDAO empleadoDAO;
-    public final Connection conn = Conexion.getConexion();
+    private final Connection conn = Conexion.getConexion();
     
     //Constructor de la clase Login
     public Login() {
-        initComponents();                                 //Inicia los componentes de la clase
-        this.empleadoDAO = new EmpleadoDAO();             //Indicamos que empleadoDAO es un nuevo objeto de la clase
-        
-        //Si no existe conexión con la base de datos, Entonces...
-        if (conn == null) {
-            btn_Aceptar.setEnabled(false);              //Desactiva el boton Aceptar
-            link_recuperarContra.setVisible(false);  //Oculta la recuperación de contraseña
-            lbl_Pregunta2.setVisible(false);         //Oculta el label de recuperación
-            
-        } else {    //Sino...
-            btn_Aceptar.setEnabled(true);               //Habilita el botón Aceptar
-            link_recuperarContra.setVisible(true);   //Muesta la recuperación de contraseña
-            lbl_Pregunta2.setVisible(true);          //Muestra el label de recuperación
-        }
+    this(new EmpleadoDAO());
+}
+
+public Login(EmpleadoDAO empleadoDAO) {
+    initComponents();
+    this.empleadoDAO = empleadoDAO;
+
+    if (conn == null) {
+        btn_Aceptar.setEnabled(false);
+        link_recuperarContra.setVisible(false);
+        lbl_Pregunta2.setVisible(false);
+    } else {
+        btn_Aceptar.setEnabled(true);
+        link_recuperarContra.setVisible(true);
+        lbl_Pregunta2.setVisible(true);
     }
+}
+    
 
     //Validamos los datos del Empleado
     public void validarEmpleado() {

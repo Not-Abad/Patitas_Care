@@ -20,8 +20,8 @@ public class Recuperar_Contraseña extends JFrame {
 
     // Constructor por defecto (por si se abre sin nombre)
     public Recuperar_Contraseña() {
+          prepararVentana();
         pnl_CambiarContraseña.setVisible(false);
-        prepararVentana();
     }
 
     // SOBRECARGA: Constructor que recibe el nombre desde el Login
@@ -34,8 +34,11 @@ public class Recuperar_Contraseña extends JFrame {
 
     // Método para no repetir código
     private void prepararVentana() {
-        initComponents();
-        enviarCorreoRecuperacion();
+    initComponents();
+    pnl_CambiarContraseña.setVisible(false);
+    enviarCorreoRecuperacion();
+
+
     
         // Configuración de focos
         configurarFoco(txt1, txt2, null);
