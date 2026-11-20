@@ -85,7 +85,6 @@ public class dbConection {
     public static void main(String[] args) {
         System.out.println("Probando conexión a MySQL...");
         Connection conn = dbConection.getConexion();
-
         if (conn != null && dbConection.estaConectado()) {
             try (java.sql.Statement st = conn.createStatement();
                  java.sql.ResultSet rs = st.executeQuery("SHOW TABLES")) {
