@@ -1,382 +1,297 @@
+
 package provet.dao;
 
-import provet.utilidades.Conexion;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import provet.utilidades.dbConection;
 
 public class UsuarioAdminDAO {
 
-    private BitacoraMovimientosDAO bitacoraDAO;
+    public static class UsuarioAdmin {
+        private int id;
+        private int idPersonal;
+        private String nombre;
+        private String apellido = "";
+        private String correo;
+        private String telefono;
+        private String especialidad;
+        private String cedula;
+        private String estado;
+        private String usuario;
+        private String password;
+        private String rol;
+        private double sueldoBase;
+        private java.util.Date fechaContratacion;
+        private String fotoPerfil;
 
-    public UsuarioAdminDAO() {
-        this.bitacoraDAO = new BitacoraMovimientosDAO();
+        public int getId() { return id; }
+        public void setId(int id) { this.id = id; }
+
+        public int getIdPersonal() { return idPersonal; }
+        public void setIdPersonal(int idPersonal) { this.idPersonal = idPersonal; }
+
+        public String getNombre() { return nombre; }
+        public void setNombre(String nombre) { this.nombre = nombre; }
+
+        public String getApellido() { return apellido; }
+        public void setApellido(String apellido) { this.apellido = apellido; }
+
+        public String getCorreo() { return correo; }
+        public void setCorreo(String correo) { this.correo = correo; }
+
+        public String getTelefono() { return telefono; }
+        public void setTelefono(String telefono) { this.telefono = telefono; }
+
+        public String getEspecialidad() { return especialidad; }
+        public void setEspecialidad(String especialidad) { this.especialidad = especialidad; }
+
+        public String getCedula() { return cedula; }
+        public void setCedula(String cedula) { this.cedula = cedula; }
+
+        public String getEstado() { return estado; }
+        public void setEstado(String estado) { this.estado = estado; }
+
+        public String getUsuario() { return usuario; }
+        public void setUsuario(String usuario) { this.usuario = usuario; }
+
+        public String getPassword() { return password; }
+        public void setPassword(String password) { this.password = password; }
+
+        public String getRol() { return rol; }
+        public void setRol(String rol) { this.rol = rol; }
+
+        public double getSueldoBase() { return sueldoBase; }
+        public void setSueldoBase(double sueldoBase) { this.sueldoBase = sueldoBase; }
+
+        public java.util.Date getFechaContratacion() { return fechaContratacion; }
+        public void setFechaContratacion(java.util.Date fechaContratacion) { this.fechaContratacion = fechaContratacion; }
+
+        public String getFotoPerfil() { return fotoPerfil; }
+        public void setFotoPerfil(String fotoPerfil) { this.fotoPerfil = fotoPerfil; }
     }
 
-    // ==========================================
-    // MÉTODO READ: Obtener todos los empleados (usuarios administrativos)
-    // ==========================================
     public List<UsuarioAdmin> selectAll() {
         List<UsuarioAdmin> lista = new ArrayList<>();
-        String sql = "SELECT e.id_empleado, p.nombre, p.apellido_paterno, p.apellido_materno, p.email, p.telefono, " +
-                    "e.usuario, e.password, e.foto_perfil, e.sueldo_base, e.fecha_contratacion, " +
-                    "cat.nombre_puesto " +
-                    "FROM mts_empleado e " +
-                    "JOIN mts_persona p ON e.id_persona = p.id_persona " +
-                    "JOIN cat_puesto cat ON e.id_puesto = cat.id_puesto";
-        Connection conn = Conexion.getConexion();
+        String sql = "SELECT u.id_usuario, u.username, u.password_hash, u.is_active, "
+                   + "r.nombre AS rol_nombre, "
+                   + "p.id_personal, p.nombre AS personal_nombre, p.telefono, p.correo, "
+                   + "p.especialidad, p.cedula_profesional, p.fecha_contratacion "
+                   + "FROM usuarios u "
+                   + "INNER JOIN roles r ON u.id_rol = r.id_rol "
+                   + "LEFT JOIN personal p ON p.id_usuario = u.id_usuario "
+                   + "WHERE u.is_active = 1 "
+                   + "ORDER BY u.id_usuario ASC";
 
-        if (conn != null) {
-            try (PreparedStatement pstmt = conn.prepareStatement(sql);
-                 ResultSet rs = pstmt.executeQuery()) {
+        Connection conn = dbConection.getConexion();
+        if (conn == null) return lista;
 
-                while (rs.next()) {
-                    UsuarioAdmin usuario = new UsuarioAdmin();
-                    usuario.setId(rs.getInt("id_empleado"));
-                    usuario.setNombre(rs.getString("nombre"));
-                    usuario.setApellido(rs.getString("apellido_paterno") + " " + rs.getString("apellido_materno"));
-                    usuario.setCorreo(rs.getString("email"));
-                    usuario.setTelefono(rs.getString("telefono"));
-                    usuario.setUsuario(rs.getString("usuario"));
-                    usuario.setPassword(rs.getString("password"));
-                    usuario.setFotoPerfil(rs.getString("foto_perfil"));
-                    usuario.setSueldoBase(rs.getDouble("sueldo_base"));
-                    usuario.setFechaContratacion(rs.getDate("fecha_contratacion"));
-                    usuario.setRol(rs.getString("nombre_puesto"));
-                    usuario.setEstado("Activo"); // Valor por defecto ya que mts_persona no tiene id_estatus
-                    lista.add(usuario);
-                }
-            } catch (SQLException e) {
-                System.err.println("Error al obtener usuarios: " + e.getMessage());
+        try (PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                UsuarioAdmin u = new UsuarioAdmin();
+                u.setId(rs.getInt("id_usuario"));
+                u.setIdPersonal(rs.getInt("id_personal"));
+                u.setUsuario(rs.getString("username"));
+                u.setPassword(rs.getString("password_hash"));
+                u.setEstado(rs.getInt("is_active") == 1 ? "Activo" : "Inactivo");
+                u.setRol(rs.getString("rol_nombre"));
+
+                String nombreCompleto = rs.getString("personal_nombre");
+                u.setNombre(nombreCompleto != null ? nombreCompleto : rs.getString("username"));
+                u.setApellido("");
+                u.setTelefono(rs.getString("telefono") != null ? rs.getString("telefono") : "");
+                u.setCorreo(rs.getString("correo") != null ? rs.getString("correo") : "");
+                u.setEspecialidad(rs.getString("especialidad") != null ? rs.getString("especialidad") : "");
+                u.setCedula(rs.getString("cedula_profesional") != null ? rs.getString("cedula_profesional") : "");
+                u.setFechaContratacion(rs.getDate("fecha_contratacion"));
+                u.setSueldoBase(0.0);
+                lista.add(u);
             }
+        } catch (SQLException e) {
+            System.err.println("Error en UsuarioAdminDAO.selectAll: " + e.getMessage());
         }
         return lista;
     }
 
-    // ==========================================
-    // MÉTODO READ: Obtener un empleado por ID
-    // ==========================================
-    public UsuarioAdmin selectById(int id) {
-        UsuarioAdmin usuario = null;
-        String sql = "SELECT e.id_empleado, p.nombre, p.apellido_paterno, p.apellido_materno, p.email, p.telefono, " +
-                    "e.usuario, e.password, e.foto_perfil, e.sueldo_base, e.fecha_contratacion, " +
-                    "cat.nombre_puesto " +
-                    "FROM mts_empleado e " +
-                    "JOIN mts_persona p ON e.id_persona = p.id_persona " +
-                    "JOIN cat_puesto cat ON e.id_puesto = cat.id_puesto " +
-                    "WHERE e.id_empleado = ?";
-        Connection conn = Conexion.getConexion();
+    public int insert(UsuarioAdmin u, int idUsuarioEjecutor) {
+        Connection conn = dbConection.getConexion();
+        if (conn == null) return 0;
 
-        if (conn != null) {
-            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setInt(1, id);
-                try (ResultSet rs = pstmt.executeQuery()) {
-                    if (rs.next()) {
-                        usuario = new UsuarioAdmin();
-                        usuario.setId(rs.getInt("id_empleado"));
-                        usuario.setNombre(rs.getString("nombre"));
-                        usuario.setApellido(rs.getString("apellido_paterno") + " " + rs.getString("apellido_materno"));
-                        usuario.setCorreo(rs.getString("email"));
-                        usuario.setTelefono(rs.getString("telefono"));
-                        usuario.setUsuario(rs.getString("usuario"));
-                        usuario.setPassword(rs.getString("password"));
-                        usuario.setFotoPerfil(rs.getString("foto_perfil"));
-                        usuario.setSueldoBase(rs.getDouble("sueldo_base"));
-                        usuario.setFechaContratacion(rs.getDate("fecha_contratacion"));
-                        usuario.setRol(rs.getString("nombre_puesto"));
-                        usuario.setEstado("Activo"); // Valor por defecto
-                    }
+        try {
+            conn.setAutoCommit(false);
+
+            int idRol = obtenerOInsertarRol(conn, u.getRol());
+            String sqlUser = "INSERT INTO usuarios (id_rol, username, password_hash, is_active) VALUES (?, ?, ?, 1)";
+            int idNuevoUsuario;
+
+            try (PreparedStatement ps = conn.prepareStatement(sqlUser, Statement.RETURN_GENERATED_KEYS)) {
+                ps.setInt(1, idRol);
+                ps.setString(2, u.getUsuario());
+                ps.setString(3, (u.getPassword() != null && !u.getPassword().isBlank()) ? u.getPassword() : "123456");
+                ps.executeUpdate();
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (!rs.next()) throw new SQLException("No se generó id_usuario.");
+                    idNuevoUsuario = rs.getInt(1);
                 }
-            } catch (SQLException e) {
-                System.err.println("Error al obtener usuario por ID: " + e.getMessage());
             }
+
+            String nombreCompleto = (u.getNombre() + " " + (u.getApellido() != null ? u.getApellido() : "")).trim();
+            String sqlPers = "INSERT INTO personal (id_usuario, nombre, telefono, correo, especialidad, cedula_profesional, fecha_contratacion, is_active) "
+                           + "VALUES (?, ?, ?, ?, ?, ?, ?, 1)";
+            try (PreparedStatement ps = conn.prepareStatement(sqlPers)) {
+                ps.setInt(1, idNuevoUsuario);
+                ps.setString(2, nombreCompleto.isEmpty() ? u.getUsuario() : nombreCompleto);
+                ps.setString(3, vacioANull(u.getTelefono()));
+                ps.setString(4, vacioANull(u.getCorreo()));
+                ps.setString(5, vacioANull(u.getEspecialidad()));
+                ps.setString(6, vacioANull(u.getCedula()));
+                ps.setDate(7, u.getFechaContratacion() != null
+                        ? new java.sql.Date(u.getFechaContratacion().getTime())
+                        : new java.sql.Date(System.currentTimeMillis()));
+                ps.executeUpdate();
+            }
+
+            registrarBitacora(conn, idUsuarioEjecutor, "usuarios", idNuevoUsuario, "INSERT",
+                    "Alta de usuario: " + u.getUsuario() + " (" + u.getRol() + ")");
+
+            conn.commit();
+            return idNuevoUsuario;
+        } catch (SQLException e) {
+            try { conn.rollback(); } catch (SQLException ignored) {}
+            System.err.println("Error en UsuarioAdminDAO.insert: " + e.getMessage());
+            return 0;
+        } finally {
+            try { conn.setAutoCommit(true); } catch (SQLException ignored) {}
         }
-        return usuario;
     }
 
-    // ==========================================
-    // MÉTODO CREATE: Insertar un nuevo empleado
-    // ==========================================
-    public int insert(UsuarioAdmin usuario, int idUsuario) {
-        int filasAfectadas = 0;
-        
-        // Primero insertar en mts_persona
-        String sqlPersona = "INSERT INTO mts_persona (nombre, apellido_paterno, apellido_materno, email, telefono) VALUES (?, ?, ?, ?, ?)";
-        String sqlEmpleado = "INSERT INTO mts_empleado (id_persona, id_puesto, usuario, password, foto_perfil, sueldo_base, fecha_contratacion) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        
-        Connection conn = Conexion.getConexion();
+    public int update(UsuarioAdmin u, int idUsuarioEjecutor) {
+        Connection conn = dbConection.getConexion();
+        if (conn == null) return 0;
 
-        if (conn != null) {
-            try {
-                // Insertar persona
-                int idPuesto = obtenerIdPuesto(usuario.getRol());
-                
-                try (PreparedStatement pstmtPersona = conn.prepareStatement(sqlPersona, PreparedStatement.RETURN_GENERATED_KEYS)) {
-                    String[] apellidos = usuario.getApellido().split(" ", 2);
-                    String apellidoPaterno = apellidos.length > 0 ? apellidos[0] : "";
-                    String apellidoMaterno = apellidos.length > 1 ? apellidos[1] : "";
-                    
-                    pstmtPersona.setString(1, usuario.getNombre());
-                    pstmtPersona.setString(2, apellidoPaterno);
-                    pstmtPersona.setString(3, apellidoMaterno);
-                    pstmtPersona.setString(4, usuario.getCorreo());
-                    pstmtPersona.setString(5, usuario.getTelefono());
-                    
-                    filasAfectadas = pstmtPersona.executeUpdate();
-                    
-                    if (filasAfectadas > 0) {
-                        try (ResultSet rs = pstmtPersona.getGeneratedKeys()) {
-                            if (rs.next()) {
-                                int idPersona = rs.getInt(1);
-                                
-                                // Insertar empleado
-                                try (PreparedStatement pstmtEmpleado = conn.prepareStatement(sqlEmpleado, PreparedStatement.RETURN_GENERATED_KEYS)) {
-                                    pstmtEmpleado.setInt(1, idPersona);
-                                    pstmtEmpleado.setInt(2, idPuesto);
-                                    pstmtEmpleado.setString(3, usuario.getUsuario());
-                                    pstmtEmpleado.setString(4, usuario.getPassword());
-                                    pstmtEmpleado.setString(5, usuario.getFotoPerfil());
-                                    pstmtEmpleado.setDouble(6, usuario.getSueldoBase());
-                                    pstmtEmpleado.setDate(7, new java.sql.Date(usuario.getFechaContratacion().getTime()));
-                                    
-                                    filasAfectadas = pstmtEmpleado.executeUpdate();
-                                    
-                                    // Obtener el ID del empleado insertado
-                                    try (ResultSet rsEmpleado = pstmtEmpleado.getGeneratedKeys()) {
-                                        if (rsEmpleado.next()) {
-                                            int idEmpleado = rsEmpleado.getInt(1);
-                                            
-                                            // Obtener ID de acción
-                                            int idAccion = bitacoraDAO.obtenerIdAccion("Agregó");
-                                            
-                                            // Registrar movimiento en bitácora
-                                            String valorAnterior = "NUEVO: " + usuario.getNombre() + " " + usuario.getApellido() + 
-                                                                    ", Usuario: " + usuario.getUsuario() + 
-                                                                    ", Puesto: " + usuario.getRol();
-                                            String valorNuevo = valorAnterior;
-                                            BitacoraMovimientosDAO.BitacoraMovimiento movimiento = 
-                                                new BitacoraMovimientosDAO.BitacoraMovimiento(
-                                                    idUsuario, 
-                                                    idAccion, 
-                                                    "mts_empleado", 
-                                                    idEmpleado, 
-                                                    valorAnterior,
-                                                    valorNuevo
-                                                );
-                                            bitacoraDAO.insert(movimiento);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            } catch (SQLException e) {
-                System.err.println("Error al insertar usuario: " + e.getMessage());
+        try {
+            conn.setAutoCommit(false);
+
+            int idRol = obtenerOInsertarRol(conn, u.getRol());
+            String sqlUser = "UPDATE usuarios SET id_rol = ?, username = ? WHERE id_usuario = ?";
+            try (PreparedStatement ps = conn.prepareStatement(sqlUser)) {
+                ps.setInt(1, idRol);
+                ps.setString(2, u.getUsuario());
+                ps.setInt(3, u.getId());
+                ps.executeUpdate();
             }
+
+            String nombreCompleto = (u.getNombre() + " " + (u.getApellido() != null ? u.getApellido() : "")).trim();
+            String sqlPers = "UPDATE personal SET nombre = ?, telefono = ?, correo = ?, especialidad = ?, cedula_profesional = ? "
+                           + "WHERE id_usuario = ?";
+            int filasPers;
+            try (PreparedStatement ps = conn.prepareStatement(sqlPers)) {
+                ps.setString(1, nombreCompleto.isEmpty() ? u.getUsuario() : nombreCompleto);
+                ps.setString(2, vacioANull(u.getTelefono()));
+                ps.setString(3, vacioANull(u.getCorreo()));
+                ps.setString(4, vacioANull(u.getEspecialidad()));
+                ps.setString(5, vacioANull(u.getCedula()));
+                ps.setInt(6, u.getId());
+                filasPers = ps.executeUpdate();
+            }
+
+            if (filasPers == 0) {
+                String sqlInsertPers = "INSERT INTO personal (id_usuario, nombre, telefono, correo, especialidad, cedula_profesional, fecha_contratacion, is_active) "
+                                     + "VALUES (?, ?, ?, ?, ?, ?, CURDATE(), 1)";
+                try (PreparedStatement ps = conn.prepareStatement(sqlInsertPers)) {
+                    ps.setInt(1, u.getId());
+                    ps.setString(2, nombreCompleto.isEmpty() ? u.getUsuario() : nombreCompleto);
+                    ps.setString(3, vacioANull(u.getTelefono()));
+                    ps.setString(4, vacioANull(u.getCorreo()));
+                    ps.setString(5, vacioANull(u.getEspecialidad()));
+                    ps.setString(6, vacioANull(u.getCedula()));
+                    ps.executeUpdate();
+                }
+            }
+
+            registrarBitacora(conn, idUsuarioEjecutor, "usuarios", u.getId(), "UPDATE",
+                    "Actualización de usuario: " + u.getUsuario());
+
+            conn.commit();
+            return 1;
+        } catch (SQLException e) {
+            try { conn.rollback(); } catch (SQLException ignored) {}
+            System.err.println("Error en UsuarioAdminDAO.update: " + e.getMessage());
+            return 0;
+        } finally {
+            try { conn.setAutoCommit(true); } catch (SQLException ignored) {}
         }
-        return filasAfectadas;
     }
 
-    // ==========================================
-    // MÉTODO UPDATE: Actualizar un empleado
-    // ==========================================
-    public int update(UsuarioAdmin usuario, int idUsuario) {
-        int filasAfectadas = 0;
-        
-        // Primero obtener el valor anterior para la bitácora
-        UsuarioAdmin usuarioAnterior = selectById(usuario.getId());
-        String valorAnterior = "";
-        if (usuarioAnterior != null) {
-            valorAnterior = "ANTERIOR: " + usuarioAnterior.getNombre() + " " + usuarioAnterior.getApellido() + 
-                           ", Usuario: " + usuarioAnterior.getUsuario() + 
-                           ", Puesto: " + usuarioAnterior.getRol() + 
-                           ", Sueldo: " + usuarioAnterior.getSueldoBase();
-        }
-        
-        String sqlPersona = "UPDATE mts_persona SET nombre = ?, apellido_paterno = ?, apellido_materno = ?, email = ?, telefono = ? WHERE id_persona = (SELECT id_persona FROM mts_empleado WHERE id_empleado = ?)";
-        String sqlEmpleado = "UPDATE mts_empleado SET id_puesto = ?, usuario = ?, password = ?, foto_perfil = ?, sueldo_base = ? WHERE id_empleado = ?";
-        
-        Connection conn = Conexion.getConexion();
+    public int delete(int idUsuarioEliminar, int idUsuarioEjecutor) {
+        Connection conn = dbConection.getConexion();
+        if (conn == null) return 0;
 
-        if (conn != null) {
-            try {
-                int idPuesto = obtenerIdPuesto(usuario.getRol());
-                
-                // Actualizar persona
-                try (PreparedStatement pstmtPersona = conn.prepareStatement(sqlPersona)) {
-                    String[] apellidos = usuario.getApellido().split(" ", 2);
-                    String apellidoPaterno = apellidos.length > 0 ? apellidos[0] : "";
-                    String apellidoMaterno = apellidos.length > 1 ? apellidos[1] : "";
-                    
-                    pstmtPersona.setString(1, usuario.getNombre());
-                    pstmtPersona.setString(2, apellidoPaterno);
-                    pstmtPersona.setString(3, apellidoMaterno);
-                    pstmtPersona.setString(4, usuario.getCorreo());
-                    pstmtPersona.setString(5, usuario.getTelefono());
-                    pstmtPersona.setInt(6, usuario.getId());
-                    
-                    filasAfectadas = pstmtPersona.executeUpdate();
-                }
-                
-                // Actualizar empleado
-                try (PreparedStatement pstmtEmpleado = conn.prepareStatement(sqlEmpleado)) {
-                    pstmtEmpleado.setInt(1, idPuesto);
-                    pstmtEmpleado.setString(2, usuario.getUsuario());
-                    pstmtEmpleado.setString(3, usuario.getPassword());
-                    pstmtEmpleado.setString(4, usuario.getFotoPerfil());
-                    pstmtEmpleado.setDouble(5, usuario.getSueldoBase());
-                    pstmtEmpleado.setInt(6, usuario.getId());
-                    
-                    filasAfectadas = pstmtEmpleado.executeUpdate();
-                }
-                
-                // Registrar movimiento en bitácora
-                if (filasAfectadas > 0) {
-                    int idAccion = bitacoraDAO.obtenerIdAccion("Modificó");
-                    String valorNuevo = "NUEVO: " + usuario.getNombre() + " " + usuario.getApellido() + 
-                                      ", Usuario: " + usuario.getUsuario() + 
-                                      ", Puesto: " + usuario.getRol() + 
-                                      ", Sueldo: " + usuario.getSueldoBase();
-                    BitacoraMovimientosDAO.BitacoraMovimiento movimiento = 
-                        new BitacoraMovimientosDAO.BitacoraMovimiento(
-                            idUsuario, 
-                            idAccion, 
-                            "mts_empleado", 
-                            usuario.getId(), 
-                            valorAnterior,
-                            valorNuevo
-                        );
-                    bitacoraDAO.insert(movimiento);
-                }
-            } catch (SQLException e) {
-                System.err.println("Error al actualizar usuario: " + e.getMessage());
+        try {
+            conn.setAutoCommit(false);
+
+            try (PreparedStatement ps = conn.prepareStatement("UPDATE usuarios SET is_active = 0 WHERE id_usuario = ?")) {
+                ps.setInt(1, idUsuarioEliminar);
+                ps.executeUpdate();
             }
+
+            try (PreparedStatement ps = conn.prepareStatement("UPDATE personal SET is_active = 0 WHERE id_usuario = ?")) {
+                ps.setInt(1, idUsuarioEliminar);
+                ps.executeUpdate();
+            }
+
+            registrarBitacora(conn, idUsuarioEjecutor, "usuarios", idUsuarioEliminar, "DELETE",
+                    "Baja lógica de usuario ID: " + idUsuarioEliminar);
+
+            conn.commit();
+            return 1;
+        } catch (SQLException e) {
+            try { conn.rollback(); } catch (SQLException ignored) {}
+            System.err.println("Error en UsuarioAdminDAO.delete: " + e.getMessage());
+            return 0;
+        } finally {
+            try { conn.setAutoCommit(true); } catch (SQLException ignored) {}
         }
-        return filasAfectadas;
     }
 
-    // ==========================================
-    // MÉTODO DELETE: Eliminar un empleado
-    // ==========================================
-    public int delete(int id, int idUsuario) {
-        int filasAfectadas = 0;
-        
-        // Primero obtener el valor anterior para la bitácora
-        UsuarioAdmin usuarioAnterior = selectById(id);
-        String valorAnterior = "";
-        if (usuarioAnterior != null) {
-            valorAnterior = "ELIMINADO: " + usuarioAnterior.getNombre() + " " + usuarioAnterior.getApellido() + 
-                           ", Usuario: " + usuarioAnterior.getUsuario() + 
-                           ", Puesto: " + usuarioAnterior.getRol() + 
-                           ", Sueldo: " + usuarioAnterior.getSueldoBase();
-        }
-        
-        String sql = "DELETE FROM mts_empleado WHERE id_empleado = ?";
-        Connection conn = Conexion.getConexion();
-
-        if (conn != null) {
-            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setInt(1, id);
-                filasAfectadas = pstmt.executeUpdate();
-                
-                // Registrar movimiento en bitácora
-                if (filasAfectadas > 0) {
-                    int idAccion = bitacoraDAO.obtenerIdAccion("Borró");
-                    BitacoraMovimientosDAO.BitacoraMovimiento movimiento = 
-                        new BitacoraMovimientosDAO.BitacoraMovimiento(
-                            idUsuario, 
-                            idAccion, 
-                            "mts_empleado", 
-                            id, 
-                            valorAnterior,
-                            null
-                        );
-                    bitacoraDAO.insert(movimiento);
-                }
-            } catch (SQLException e) {
-                System.err.println("Error al eliminar usuario: " + e.getMessage());
+    private int obtenerOInsertarRol(Connection conn, String nombreRol) throws SQLException {
+        String rolLimpio = (nombreRol != null && !nombreRol.isBlank()) ? nombreRol.trim() : "Secretario";
+        String sqlBuscar = "SELECT id_rol FROM roles WHERE LOWER(nombre) = LOWER(?) LIMIT 1";
+        try (PreparedStatement ps = conn.prepareStatement(sqlBuscar)) {
+            ps.setString(1, rolLimpio);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) return rs.getInt("id_rol");
             }
         }
-        return filasAfectadas;
-    }
-
-    // ==========================================
-    // MÉTODO AUXILIAR: Obtener ID de puesto por nombre
-    // ==========================================
-    private int obtenerIdPuesto(String nombrePuesto) {
-        int id = 0;
-        String sql = "SELECT id_puesto FROM cat_puesto WHERE nombre_puesto = ?";
-        Connection conn = Conexion.getConexion();
-
-        if (conn != null) {
-            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setString(1, nombrePuesto);
-                try (ResultSet rs = pstmt.executeQuery()) {
-                    if (rs.next()) {
-                        id = rs.getInt("id_puesto");
-                    }
-                }
-            } catch (SQLException e) {
-                System.err.println("Error al obtener ID de puesto: " + e.getMessage());
+        String sqlInsert = "INSERT INTO roles (nombre) VALUES (?)";
+        try (PreparedStatement ps = conn.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, rolLimpio);
+            ps.executeUpdate();
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                if (rs.next()) return rs.getInt(1);
             }
         }
-        return id;
+        return 1;
     }
 
-    // Clase interna para representar un usuario administrativo
-    public static class UsuarioAdmin {
-        private int id;
-        private String nombre;
-        private String apellido;
-        private String correo;
-        private String telefono;
-        private String usuario;
-        private String password;
-        private String fotoPerfil;
-        private double sueldoBase;
-        private java.util.Date fechaContratacion;
-        private String rol;
-        private String estado;
+    private void registrarBitacora(Connection conn, int idUsuario, String tabla, int idReg, String accion, String desc) {
+        if (idUsuario <= 0) return;
+        String sql = "INSERT INTO bitacora_movimientos (id_usuario, tabla_afectada, id_registro_afectado, accion, descripcion) "
+                   + "VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idUsuario);
+            ps.setString(2, tabla);
+            ps.setInt(3, idReg);
+            ps.setString(4, accion);
+            ps.setString(5, desc);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("No se pudo registrar en bitácora: " + e.getMessage());
+        }
+    }
 
-        // Getters y Setters
-        public int getId() { return id; }
-        public void setId(int id) { this.id = id; }
-        
-        public String getNombre() { return nombre; }
-        public void setNombre(String nombre) { this.nombre = nombre; }
-        
-        public String getApellido() { return apellido; }
-        public void setApellido(String apellido) { this.apellido = apellido; }
-        
-        public String getCorreo() { return correo; }
-        public void setCorreo(String correo) { this.correo = correo; }
-        
-        public String getTelefono() { return telefono; }
-        public void setTelefono(String telefono) { this.telefono = telefono; }
-        
-        public String getUsuario() { return usuario; }
-        public void setUsuario(String usuario) { this.usuario = usuario; }
-        
-        public String getPassword() { return password; }
-        public void setPassword(String password) { this.password = password; }
-        
-        public String getFotoPerfil() { return fotoPerfil; }
-        public void setFotoPerfil(String fotoPerfil) { this.fotoPerfil = fotoPerfil; }
-        
-        public double getSueldoBase() { return sueldoBase; }
-        public void setSueldoBase(double sueldoBase) { this.sueldoBase = sueldoBase; }
-        
-        public java.util.Date getFechaContratacion() { return fechaContratacion; }
-        public void setFechaContratacion(java.util.Date fechaContratacion) { this.fechaContratacion = fechaContratacion; }
-        
-        public String getRol() { return rol; }
-        public void setRol(String rol) { this.rol = rol; }
-        
-        public String getEstado() { return estado; }
-        public void setEstado(String estado) { this.estado = estado; }
+    private String vacioANull(String valor) {
+        return (valor == null || valor.trim().isEmpty()) ? null : valor.trim();
     }
 }

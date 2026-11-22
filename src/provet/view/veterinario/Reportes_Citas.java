@@ -1,68 +1,67 @@
-
 package provet.view.veterinario;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import javax.swing.JFrame;
-import provet.model.Paciente;
-import provet.model.ControlPacientes;
-import provet.componentes.PanelPaciente;
-import provet.componentes.PanelPaciente2;
-import provet.componentes.PanelCitas;
-import provet.componentes.PanelCitas2;
-import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
+import provet.componentes.PanelCitas;
 import provet.componentes.PanelCitas_Editable;
-import provet.model.ControlUsuarios;
-import provet.model.Usuario;
-import provet.model.Reporte;
-import provet.model.ControlReportes;
+import provet.dao.ReporteCitaDAO;
+import provet.modelo.Reporte;
+import provet.modelo.Usuario;
+import provet.utilidades.Sesion;
 
 public class Reportes_Citas extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Reportes_Citas.class.getName());
     private Usuario usuario;
-    
-   public Reportes_Citas(Usuario usuario) {
-    initComponents();
-    this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-    if (usuario != null) {
-    lblNombreVet.setText(usuario.getNombre());
-    } else {
-    lblNombreVet.setText("Sin usuario");
+    private final ReporteCitaDAO reporteDAO = new ReporteCitaDAO();
+    private List<Reporte> listaReportes = new ArrayList<>();
+
+    public Reportes_Citas() {
+        this(Sesion.getUsuarioActual());
     }
     
-    
+    public Reportes_Citas(Usuario usuario) {
+        initComponents();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.usuario = (usuario != null) ? usuario : Sesion.getUsuarioActual();
 
-    // DATOS DE PRUEBA
-    ControlPacientes.listaPacientes.add(
-        new Paciente(1, "Firulais", "Perro", "Labrador", 3, 20, "M", "", "", "src/img/perro1.jpg")
-    );
+        if (Sesion.haySesionActiva()) {
+            lblNombreVet.setText(Sesion.getNombreMostrar());
+            String rol = Sesion.getNombreRol();
+            if (!rol.isEmpty()) {
+                jLabel6.setText(rol);
+            }
+        } else if (this.usuario != null) {
+            lblNombreVet.setText(this.usuario.getUsername());
+        } else {
+            lblNombreVet.setText("Sin usuario");
+        }
 
-    ControlPacientes.listaPacientes.add(
-        new Paciente(2, "Michi", "Gato", "Siames", 2, 5, "H", "", "", "src/img/gato1.jpg")
-    );
+        txtBuscar.addActionListener(e -> btnBuscarActionPerformed(e));
 
-    ControlPacientes.listaPacientes.add(
-        new Paciente(3, "Rocky", "Perro", "Bulldog", 4, 18, "M", "", "", "src/img/perro2.jpg")
-    );
-    ControlPacientes.listaPacientes.add(
-        new Paciente(3, "Rocky", "Perro", "Bulldog", 4, 18, "M", "", "", "src/img/perro2.jpg")
-    );
-    
+        cargarReportesDesdeBD();
+    }
 
-    
-}
-public void agregarReporte(Reporte reporte) {
-    ControlReportes.listaReportes.add(reporte);
+    public final void cargarReportesDesdeBD() {
+        this.listaReportes = reporteDAO.selectAllReportes();
+        renderizarReportes(this.listaReportes);
+    }
 
-    PanelCitas_Editable carta = new PanelCitas_Editable(reporte);
+    private void renderizarReportes(List<Reporte> reportes) {
+        contenedor.removeAll();
+        for (Reporte r : reportes) {
+            contenedor.add(new PanelCitas_Editable(r));
+        }
+        contenedor.revalidate();
+        contenedor.repaint();
+    }
 
-    contenedor.add(carta);
-
-    contenedor.revalidate();
-    contenedor.repaint();
-} 
+    public void agregarReporte(Reporte reporte) {
+        listaReportes.add(0, reporte);
+        renderizarReportes(listaReportes);
+    } 
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -189,46 +188,40 @@ public void agregarReporte(Reporte reporte) {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_administrativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_administrativoActionPerformed
-        
-        // TODO add your handling code here:
     }//GEN-LAST:event_btn_administrativoActionPerformed
 
     private void btn_atencionmedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_atencionmedActionPerformed
-        
-        dispose();    }//GEN-LAST:event_btn_atencionmedActionPerformed
+        dispose();
+    }//GEN-LAST:event_btn_atencionmedActionPerformed
 
     private void btn_configuraciónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_configuraciónActionPerformed
-         
     }//GEN-LAST:event_btn_configuraciónActionPerformed
 
     private void btn_reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reportesActionPerformed
-        
     }//GEN-LAST:event_btn_reportesActionPerformed
 
     private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
+        int respuesta = javax.swing.JOptionPane.showConfirmDialog(
+                this,
+                "¿Estás seguro de que deseas salir?",
+                "Confirmar salida",
+                javax.swing.JOptionPane.YES_NO_OPTION);
 
-    int respuesta = javax.swing.JOptionPane.showConfirmDialog(
-            this,
-            "¿Estás seguro de que deseas salir?",
-            "Confirmar salida",
-            javax.swing.JOptionPane.YES_NO_OPTION);
-
-    if (respuesta == javax.swing.JOptionPane.YES_OPTION) {
-        provet.utilidades.Sesion.cerrarSesion();
-        new provet.view.inicio.Login().setVisible(true);
-        this.dispose();
-    }
-
+        if (respuesta == javax.swing.JOptionPane.YES_OPTION) {
+            Sesion.cerrarSesion();
+            new provet.view.inicio.Login().setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_btn_SalirActionPerformed
 
     private void btn_MenuPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_MenuPActionPerformed
-        Menu_Principal m = new Menu_Principal(ControlUsuarios.usuarioActivo); 
+        Menu_Principal m = new Menu_Principal(usuario); 
         m.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btn_MenuPActionPerformed
 
     private void btn_ReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReportesActionPerformed
-        
+        cargarReportesDesdeBD();
     }//GEN-LAST:event_btn_ReportesActionPerformed
 
     private void botonSwing1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing1ActionPerformed
@@ -238,52 +231,40 @@ public void agregarReporte(Reporte reporte) {
     }//GEN-LAST:event_botonSwing1ActionPerformed
 
     private void btnSubirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubirActionPerformed
-    PanelCitas panel = new PanelCitas(this);
+        PanelCitas panel = new PanelCitas(this);
 
-    JDialog dialog = new JDialog(this, "Nuevo Reporte", true);
-    dialog.setSize(603, 546);
-    dialog.setLocationRelativeTo(this);
-    dialog.add(panel);
-    dialog.setVisible(true);
-
+        JDialog dialog = new JDialog(this, "Nuevo Reporte", true);
+        dialog.setSize(603, 546);
+        dialog.setLocationRelativeTo(this);
+        dialog.add(panel);
+        dialog.setVisible(true);
     }//GEN-LAST:event_btnSubirActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String texto = txtBuscar.getText().trim().toLowerCase();
 
-        contenedor.removeAll();
+        if (texto.isEmpty()) {
+            renderizarReportes(listaReportes);
+            return;
+        }
 
-    for (Reporte r : ControlReportes.listaReportes) {
+        List<Reporte> filtrados = new ArrayList<>();
+        for (Reporte r : listaReportes) {
+            boolean coincideID = String.valueOf(r.getIdMascota()).contains(texto);
+            boolean coincideNombre = r.getNombreMascota() != null && r.getNombreMascota().toLowerCase().contains(texto);
+            boolean coincideEspecie = r.getEspecie() != null && r.getEspecie().toLowerCase().contains(texto);
+            boolean coincideVet = r.getVeterinario() != null && r.getVeterinario().toLowerCase().contains(texto);
+            boolean coincideMotivo = r.getMotivo() != null && r.getMotivo().toLowerCase().contains(texto);
 
-    boolean coincideID =
-            String.valueOf(r.getID()).contains(texto);
+            if (coincideID || coincideNombre || coincideEspecie || coincideVet || coincideMotivo) {
+                filtrados.add(r);
+            }
+        }
 
-    boolean coincideNombre =
-            r.getNombre().toLowerCase().contains(texto);
-
-    if (coincideID || coincideNombre) {
-
-        PanelCitas_Editable panel =
-                new PanelCitas_Editable(r);
-
-        contenedor.add(panel);
-    }
-}
-
-contenedor.revalidate();
-contenedor.repaint();
-                 
+        renderizarReportes(filtrados);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -294,10 +275,8 @@ contenedor.repaint();
         } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Reportes_Citas(ControlUsuarios.usuarioActivo).setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new Reportes_Citas().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

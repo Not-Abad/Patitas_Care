@@ -1,153 +1,114 @@
-/** @author jesus-abad */
 
-//Indicamos a que paquete pertenece la clase
 package provet.dao;
 
-//Importamos las clases a usar
-import provet.model.Cita;               //Importamos la clase modelo Cita
-import provet.utilidades.Conexion;      //Importamos la clase Conexion
-import java.sql.Connection;             //Importamos la libreria de conexion
-import java.sql.PreparedStatement;      //Importamos la libreria de sentencias SQL
-import java.sql.ResultSet;              //Importamos la libreria de la tabla virtual SQL
-import java.sql.SQLException;           //Importamos la libreria de gestión de errores
-import java.util.ArrayList;             //Importamos la libreria de listas
-import java.util.List;                  //Importamos la libreria de listas
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import provet.modelo.Cita;
+import provet.utilidades.dbConection;
 
-//Inicio de la clase CitaDAO
 public class CitaDAO {
 
-    //Insertar una nueva cita
-    public int insert(Cita cita) {
-        int filasAfectadas = 0;
-        String sql = "INSERT INTO mts_cita (id_cliente, id_mascota, id_estatus_cita, fecha_programada, motivo) VALUES (?, ?, ?, ?, ?)";
-        Connection conn = Conexion.getConexion();
-
-        //Si existe la conexión, Entonces...
-        if (conn != null) {
-            
-            //Caja de seguridad para los datos de la cita
-            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setInt(1, cita.getIdCliente());           //Insertamos ID cliente en el 1er lugar
-                pstmt.setInt(2, cita.getIdMascota());           //Insertamos ID mascota en el 2do lugar
-                pstmt.setInt(3, cita.getIdEstatusCita());       //Insertamos estatus en el 3er lugar
-                pstmt.setTimestamp(4, cita.getFechaProgramada()); //Insertamos fecha en el 4to lugar
-                pstmt.setString(5, cita.getMotivo());           //Insertamos motivo en el 5to lugar
-                
-                filasAfectadas = pstmt.executeUpdate();         //Envíamos la orden a MariaDB y guardamos respuesta
-            } catch (SQLException e) {
-                System.err.println("Error al insertar cita: " + e.getMessage());
+    public boolean insert(Cita obj) {
+        String sql = "INSERT INTO citas (id_mascota, id_veterinario, id_usuario_registro, fecha_hora_inicio, fecha_hora_fin, motivo, estado, recordatorio_enviado) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        Connection conn = dbConection.getConexion();
+        if (conn == null) return false;
+        try (PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setInt(1, obj.getIdMascota());
+            ps.setInt(2, obj.getIdVeterinario());
+            ps.setInt(3, obj.getIdUsuarioRegistro());
+            ps.setTimestamp(4, obj.getFechaHoraInicio());
+            ps.setTimestamp(5, obj.getFechaHoraFin());
+            ps.setString(6, obj.getMotivo());
+            ps.setString(7, obj.getEstado() != null ? obj.getEstado() : "Programada");
+            ps.setBoolean(8, obj.isRecordatorioEnviado());
+            if (ps.executeUpdate() > 0) {
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) obj.setIdCita(rs.getInt(1));
+                }
+                return true;
             }
+        } catch (SQLException e) {
+            System.err.println("Error en CitaDAO.insert: " + e.getMessage());
         }
-        return filasAfectadas;                                  //Retorna la respuesta de MariaDB
+        return false;
     }
 
-    //Leer una cita por su ID
     public Cita selectById(int idCita) {
-        Cita cita = null;                                       //Inicializamos el objeto como nulo
-        String sql = "SELECT * FROM mts_cita WHERE id_cita = ?"; //Consulta para buscar por ID
-        Connection conn = Conexion.getConexion();               //Obtenemos la conexión activa
-
-        //Si existe la conexión, Entonces...
-        if (conn != null) {
-            //Caja de seguridad para la consulta
-            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setInt(1, idCita);                        //Insertamos ID a buscar
-                ResultSet rs = pstmt.executeQuery();            //Ejecutamos y guardamos el resultado
-
-                //Si se encontró un registro, Entonces...
-                if (rs.next()) {
-                    cita = new Cita();                          //Instanciamos nueva Cita
-                    cita.setIdCita(rs.getInt("id_cita"));
-                    cita.setIdCliente(rs.getInt("id_cliente"));
-                    cita.setIdMascota(rs.getInt("id_mascota"));
-                    cita.setIdEstatusCita(rs.getInt("id_estatus_cita"));
-                    cita.setFechaProgramada(rs.getTimestamp("fecha_programada"));
-                    cita.setMotivo(rs.getString("motivo"));
-                }
-            } catch (SQLException e) {
-                System.err.println("Error al buscar cita por ID: " + e.getMessage());
+        String sql = "SELECT * FROM citas WHERE id_cita = ?";
+        Connection conn = dbConection.getConexion();
+        if (conn == null) return null;
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idCita);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) return mapear(rs);
             }
+        } catch (SQLException e) {
+            System.err.println("Error en CitaDAO.selectById: " + e.getMessage());
         }
-        return cita;                                            //Retorna el objeto cita encontrado
+        return null;
     }
 
-    //Leer todas las citas
     public List<Cita> selectAll() {
-        List<Cita> listaCitas = new ArrayList<>();              //Lista vacía para guardar resultados
-        String sql = "SELECT * FROM mts_cita";                  //Consulta general
-        Connection conn = Conexion.getConexion();               //Obtenemos la conexión activa
-
-        //Si existe la conexión, Entonces...
-        if (conn != null) {
-            //Caja de seguridad para la consulta
-            try (PreparedStatement pstmt = conn.prepareStatement(sql);
-                 ResultSet rs = pstmt.executeQuery()) {         //Ejecutamos y recibimos datos
-
-                //Mientras haya registros...
-                while (rs.next()) {
-                    Cita cita = new Cita();                     //Creamos objeto Cita
-                    cita.setIdCita(rs.getInt("id_cita"));
-                    cita.setIdCliente(rs.getInt("id_cliente"));
-                    cita.setIdMascota(rs.getInt("id_mascota"));
-                    cita.setIdEstatusCita(rs.getInt("id_estatus_cita"));
-                    cita.setFechaProgramada(rs.getTimestamp("fecha_programada"));
-                    cita.setMotivo(rs.getString("motivo"));
-                    
-                    listaCitas.add(cita);                       //Agregamos a la lista
-                }
-            } catch (SQLException e) {
-                System.err.println("Error al listar citas: " + e.getMessage());
-            }
+        List<Cita> lista = new ArrayList<>();
+        String sql = "SELECT * FROM citas";
+        Connection conn = dbConection.getConexion();
+        if (conn == null) return lista;
+        try (PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) lista.add(mapear(rs));
+        } catch (SQLException e) {
+            System.err.println("Error en CitaDAO.selectAll: " + e.getMessage());
         }
-        return listaCitas;                                      //Retorna la lista completa
+        return lista;
     }
 
-    //Actualizar una cita
-    public boolean update(Cita cita) {
-        boolean actualizado = false;                            //Bandera de control
-        String sql = "UPDATE mts_cita SET id_cliente=?, id_mascota=?, id_estatus_cita=?, fecha_programada=?, motivo=? WHERE id_cita=?";
-        Connection conn = Conexion.getConexion();               //Obtenemos conexión
-
-        //Si existe la conexión, Entonces...
-        if (conn != null) {
-            //Caja de seguridad para la actualización
-            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setInt(1, cita.getIdCliente());
-                pstmt.setInt(2, cita.getIdMascota());
-                pstmt.setInt(3, cita.getIdEstatusCita());
-                pstmt.setTimestamp(4, cita.getFechaProgramada());
-                pstmt.setString(5, cita.getMotivo());
-                pstmt.setInt(6, cita.getIdCita());              //ID para identificar registro
-
-                if (pstmt.executeUpdate() > 0) {
-                    actualizado = true;                         //Marcamos éxito
-                }
-            } catch (SQLException e) {
-                System.err.println("Error al actualizar cita: " + e.getMessage());
-            }
+    public boolean update(Cita obj) {
+        String sql = "UPDATE citas SET id_mascota = ?, id_veterinario = ?, id_usuario_registro = ?, fecha_hora_inicio = ?, fecha_hora_fin = ?, motivo = ?, estado = ?, recordatorio_enviado = ? WHERE id_cita = ?";
+        Connection conn = dbConection.getConexion();
+        if (conn == null) return false;
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, obj.getIdMascota());
+            ps.setInt(2, obj.getIdVeterinario());
+            ps.setInt(3, obj.getIdUsuarioRegistro());
+            ps.setTimestamp(4, obj.getFechaHoraInicio());
+            ps.setTimestamp(5, obj.getFechaHoraFin());
+            ps.setString(6, obj.getMotivo());
+            ps.setString(7, obj.getEstado());
+            ps.setBoolean(8, obj.isRecordatorioEnviado());
+            ps.setInt(9, obj.getIdCita());
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error en CitaDAO.update: " + e.getMessage());
+            return false;
         }
-        return actualizado;                                     //Retorna estado de la operación
     }
 
-    //Eliminar una cita
     public boolean delete(int idCita) {
-        boolean eliminado = false;                              //Bandera de control
-        String sql = "DELETE FROM mts_cita WHERE id_cita = ?";  //Consulta borrar
-        Connection conn = Conexion.getConexion();               //Obtenemos conexión
-
-        //Si existe la conexión, Entonces...
-        if (conn != null) {
-            //Caja de seguridad para el borrado
-            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setInt(1, idCita);                        //Asignamos ID
-
-                if (pstmt.executeUpdate() > 0) {
-                    eliminado = true;                           //Marcamos éxito
-                }
-            } catch (SQLException e) {
-                System.err.println("Error al eliminar cita: " + e.getMessage());
-            }
+        String sql = "DELETE FROM citas WHERE id_cita = ?";
+        Connection conn = dbConection.getConexion();
+        if (conn == null) return false;
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idCita);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error en CitaDAO.delete: " + e.getMessage());
+            return false;
         }
-        return eliminado;                                       //Retorna estado de la operación
+    }
+
+    private Cita mapear(ResultSet rs) throws SQLException {
+        Cita c = new Cita();
+        c.setIdCita(rs.getInt("id_cita"));
+        c.setIdMascota(rs.getInt("id_mascota"));
+        c.setIdVeterinario(rs.getInt("id_veterinario"));
+        c.setIdUsuarioRegistro(rs.getInt("id_usuario_registro"));
+        c.setFechaHoraInicio(rs.getTimestamp("fecha_hora_inicio"));
+        c.setFechaHoraFin(rs.getTimestamp("fecha_hora_fin"));
+        c.setMotivo(rs.getString("motivo"));
+        c.setEstado(rs.getString("estado"));
+        c.setRecordatorioEnviado(rs.getBoolean("recordatorio_enviado"));
+        c.setCreatedAt(rs.getTimestamp("created_at"));
+        return c;
     }
 }

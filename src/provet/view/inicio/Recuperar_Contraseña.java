@@ -2,13 +2,14 @@
 package provet.view.inicio;
 
 //Importamos librerias
-import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.*;
+import provet.dao.PersonalDAO;
+import provet.dao.UsuarioDAO;
 import provet.utilidades.Servicio_Email;
-import provet.dao.EmpleadoDAO;
 
 //Inicio de la clase
 public class Recuperar_Contraseña extends JFrame {
@@ -20,14 +21,13 @@ public class Recuperar_Contraseña extends JFrame {
 
     // Constructor por defecto (por si se abre sin nombre)
     public Recuperar_Contraseña() {
-        pnl_CambiarContraseña.setVisible(false);
         prepararVentana();
     }
 
     // SOBRECARGA: Constructor que recibe el nombre desde el Login
     public Recuperar_Contraseña(String nombre) {
-        if (nombre != null && !nombre.isEmpty()) {
-            this.nombreUsuario = nombre;
+        if (nombre != null && !nombre.trim().isEmpty()) {
+            this.nombreUsuario = nombre.trim();
         }
         prepararVentana();
     }
@@ -35,6 +35,8 @@ public class Recuperar_Contraseña extends JFrame {
     // Método para no repetir código
     private void prepararVentana() {
         initComponents();
+        pnl_CambiarContraseña.setVisible(false);
+        pnl_IngresarDatos.setVisible(true);
         enviarCorreoRecuperacion();
     
         // Configuración de focos
@@ -46,29 +48,32 @@ public class Recuperar_Contraseña extends JFrame {
         configurarFoco(txt6, null, txt5);
     }
 
-    //Método Enviar correo (Ajustado a los estándares con MariaDB)
+    //Método Enviar correo (Consultando 'usuarios' + 'personal' en MySQL)
     private void enviarCorreoRecuperacion() {
         new Thread(() -> {
             try {
-                //Buscamos el correo real en la base de datos usando el DAO
-                EmpleadoDAO dao = new EmpleadoDAO();
-                String correoDestino = dao.obtenerEmailPorUsuario(this.nombreUsuario);
+                // Buscamos el correo en 'personal' asociado al username en 'usuarios'
+                PersonalDAO personalDAO = new PersonalDAO();
+                String correoDestino = personalDAO.obtenerEmailPorUsername(this.nombreUsuario);
 
                 if (correoDestino == null || correoDestino.trim().isEmpty()) {
                     SwingUtilities.invokeLater(() -> {
-                        JOptionPane.showMessageDialog(this, "El usuario '" + nombreUsuario + "' no existe o no tiene un correo registrado.", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this,
+                                "El usuario '" + nombreUsuario + "' no existe o no tiene un correo registrado.",
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                        this.dispose();
                     });
                     return; // Detenemos el proceso
                 }
 
-                //Preparamos el servicio de email
+                // Preparamos el servicio de email
                 Servicio_Email service = new Servicio_Email();                  
                 this.codigoEnviado = service.generarCodigoRandom();             
                 Map<String, String> variables = new HashMap<>();                
                 variables.put("codigo", String.valueOf(codigoEnviado));
                 variables.put("nombre", nombreUsuario);
 
-                //Cargamos la plantilla HTML y enviamos el correo
+                // Cargamos la plantilla HTML y enviamos el correo
                 String cuerpoHtml = service.obtenerContenidoTemplate("recuperacion.html", variables);
                 service.createEmail(correoDestino, "Código de autenticación - PatitasCare", cuerpoHtml);
                 service.sendEmail();
@@ -469,7 +474,6 @@ public class Recuperar_Contraseña extends JFrame {
 
     private void btn_ContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ContinuarActionPerformed
         verificarCodigo();
-        
     }//GEN-LAST:event_btn_ContinuarActionPerformed
 
     private void link_reenviarCorreoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_link_reenviarCorreoMouseClicked
@@ -477,19 +481,15 @@ public class Recuperar_Contraseña extends JFrame {
     }//GEN-LAST:event_link_reenviarCorreoMouseClicked
 
     private void txt3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt3ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txt3ActionPerformed
 
     private void txt4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt4ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txt4ActionPerformed
 
     private void txt5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt5ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txt5ActionPerformed
 
     private void txt6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt6ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txt6ActionPerformed
 
     private void btn_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ActualizarActionPerformed
@@ -497,25 +497,25 @@ public class Recuperar_Contraseña extends JFrame {
         String confirmarPass = new String(txt_ConfirmarPass.getPassword()).trim();
 
         if (nuevaPass.isEmpty() || confirmarPass.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, completa ambos campos.");
+            JOptionPane.showMessageDialog(this, "Por favor, completa ambos campos.");
             return;
         }
 
         if (nuevaPass.equals(confirmarPass)) {
             
-            // Instanciamos el DAO y llamamos a actualizarPassword
-            EmpleadoDAO dao = new EmpleadoDAO();
-            boolean exito = dao.actualizarContraseña(this.nombreUsuario, nuevaPass);
+            // Actualizamos password_hash en la tabla 'usuarios'
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
+            boolean exito = usuarioDAO.actualizarPassword(this.nombreUsuario, nuevaPass);
             
             if (exito) {
-                javax.swing.JOptionPane.showMessageDialog(this, "¡Contraseña actualizada exitosamente en PatitasCare!");
+                JOptionPane.showMessageDialog(this, "¡Contraseña actualizada exitosamente en PatitasCare!");
                 this.dispose(); // Cierra y permite que el usuario regrese al Login
             } else {
-                javax.swing.JOptionPane.showMessageDialog(this, "Hubo un error al actualizar en la base de datos.", "Error SQL", javax.swing.JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Hubo un error al actualizar en la base de datos.", "Error SQL", JOptionPane.ERROR_MESSAGE);
             }
 
         } else {
-            javax.swing.JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden. Inténtalo de nuevo.", "Error de seguridad", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden. Inténtalo de nuevo.", "Error de seguridad", JOptionPane.ERROR_MESSAGE);
             txt_NuevaPass.setText("");
             txt_ConfirmarPass.setText("");
             txt_NuevaPass.requestFocus(); 
@@ -533,15 +533,9 @@ public class Recuperar_Contraseña extends JFrame {
     }//GEN-LAST:event_chk_OjoActionPerformed
 
     public void verificar_Datos(){
-
     }
     
-        public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -552,9 +546,7 @@ public class Recuperar_Contraseña extends JFrame {
         } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new Recuperar_Contraseña().setVisible(true));
     }
 

@@ -1,8 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package provet.componentes;
+
+import java.awt.Image;
+import java.beans.Beans;
+import java.net.URL;
+import javax.swing.ImageIcon;
+import provet.modelo.Usuario;
+import provet.utilidades.Sesion;
 
 /**
  *
@@ -15,48 +19,44 @@ public class MenuLateral extends javax.swing.JPanel {
      */
     public MenuLateral() {
         initComponents();
-        cargarDatosUsuario();
-
+        if (!Beans.isDesignTime()) {
+            cargarDatosUsuario();
+        }
     }
     
-    private void cargarDatosUsuario() {
-        // 1. Obtenemos al usuario activo desde la sesión global
-        provet.model.Empleado usuarioActivo = provet.utilidades.Sesion.getEmpleadoActual();
+    public final void cargarDatosUsuario() {
+        Usuario usuarioActivo = Sesion.getUsuarioActual();
 
         if (usuarioActivo != null) {
-            // Seteamos el nombre de usuario
-            lbl_NombreUsuario.setText(usuarioActivo.getUsuario()); 
+            // Muestra el nombre real desde 'personal' o el 'username' como respaldo
+            lbl_NombreUsuario.setText(Sesion.getNombreMostrar());
             
-            // Seteamos el puesto según tu tabla cat_puesto
-            switch (usuarioActivo.getIdPuesto()) {
-                case 1: lbl_Puesto.setText("Sin Especificar"); break;
-                case 2: lbl_Puesto.setText("Administrador"); break;
-                case 3: lbl_Puesto.setText("Veterinario"); break;
-                case 4: lbl_Puesto.setText("Recepcionista"); break;
-                case 5: lbl_Puesto.setText("Cajero"); break;
-                default: lbl_Puesto.setText("Empleado"); break;
-            }
+            // Muestra el nombre del rol directamente desde la tabla 'roles'
+            String rol = Sesion.getNombreRol();
+            lbl_Puesto.setText(!rol.isEmpty() ? rol : "Sin especificar");
 
-            // --- CARGA DE FOTO CON EL ESTÁNDAR DE CARPETAS SEPARADAS ---
+            // Carga de foto por username en /imagenes/empleados/ con respaldo a default.png
             try {
-                String nombreFoto = usuarioActivo.getFotoPerfil();
-                
-                // Ajuste de la ruta para que busque dentro de la subcarpeta específica de empleados
-                java.net.URL urlFoto = getClass().getResource("/imagenes/empleados/" + nombreFoto);
-                
+                String username = usuarioActivo.getUsername();
+                URL urlFoto = getClass().getResource("/imagenes/empleados/" + username + ".png");
+                if (urlFoto == null) {
+                    urlFoto = getClass().getResource("/imagenes/empleados/" + username + ".jpg");
+                }
+                if (urlFoto == null) {
+                    urlFoto = getClass().getResource("/imagenes/empleados/default.png");
+                }
+
                 if (urlFoto != null) {
-                    javax.swing.ImageIcon iconoOriginal = new javax.swing.ImageIcon(urlFoto);
-                    
-                    // Escalamiento suave para ajustar al tamaño del contenedor de la interfaz
-                    java.awt.Image imagenEscalada = iconoOriginal.getImage().getScaledInstance(
-                            lbl_Foto.getWidth(), 
-                            lbl_Foto.getHeight(), 
-                            java.awt.Image.SCALE_SMOOTH
+                    ImageIcon iconoOriginal = new ImageIcon(urlFoto);
+                    int ancho = lbl_Foto.getPreferredSize().width > 0 ? lbl_Foto.getPreferredSize().width : 90;
+                    int alto = lbl_Foto.getPreferredSize().height > 0 ? lbl_Foto.getPreferredSize().height : 90;
+
+                    Image imagenEscalada = iconoOriginal.getImage().getScaledInstance(
+                            ancho,
+                            alto,
+                            Image.SCALE_SMOOTH
                     );
-                    
-                    lbl_Foto.setIcon(new javax.swing.ImageIcon(imagenEscalada));
-                } else {
-                    System.err.println("No se encontró la foto en /imagenes/empleados/: " + nombreFoto);
+                    lbl_Foto.setIcon(new ImageIcon(imagenEscalada));
                 }
             } catch (Exception e) {
                 System.err.println("Error al procesar la foto de perfil: " + e.getMessage());

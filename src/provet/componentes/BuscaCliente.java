@@ -1,11 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package provet.componentes;
 
+import java.beans.Beans;
 import java.util.List;
-import provet.model.Cliente;
+import provet.dao.PropietarioDAO;
+import provet.modelo.Propietario;
 
 /**
  *
@@ -33,27 +32,45 @@ public class BuscaCliente extends javax.swing.JPanel {
             }
         }
 
-        // --- TU LÓGICA AUTÓNOMA AQUÍ ---
-        // El componente va a la base de datos por su cuenta al momento de nacer
-        provet.dao.ClienteDAO dao = new provet.dao.ClienteDAO();
-        java.util.List<provet.model.Cliente> lista = dao.obtenerTodosLosClientes();
-        if (lista != null) {
-            cbBuscador.setDatosClientes(lista);
+        // Evita consultas a MySQL mientras se diseña la ventana en NetBeans
+        if (!Beans.isDesignTime()) {
+            recargarDatos();
         }
     }
 
-    public void setDatosClientes(java.util.List<provet.model.Cliente> clientes) {
-        if (clientes != null) {
-            cbBuscador.setDatosClientes(clientes); // cbBuscador es el nombre del JComboBox interno
+    /**
+     * Carga o actualiza la lista de propietarios activos desde MySQL.
+     */
+    public final void recargarDatos() {
+        PropietarioDAO dao = new PropietarioDAO();
+        List<Propietario> lista = dao.selectAllActivos();
+        if (lista != null) {
+            cbBuscador.setDatosPropietarios(lista);
         }
     }
+
+    public void setDatosPropietarios(List<Propietario> propietarios) {
+        if (propietarios != null) {
+            cbBuscador.setDatosPropietarios(propietarios);
+        }
+    }
+
+    // Alias de compatibilidad
+    public void setDatosClientes(List<Propietario> propietarios) {
+        setDatosPropietarios(propietarios);
+    }
     
-    public provet.model.Cliente getClienteSeleccionado() {
+    public Propietario getPropietarioSeleccionado() {
         Object seleccionado = cbBuscador.getSelectedItem();
-        if (seleccionado instanceof provet.model.Cliente) {
-            return (provet.model.Cliente) seleccionado;
+        if (seleccionado instanceof Propietario) {
+            return (Propietario) seleccionado;
         }
         return null; // Si no hay nada seleccionado o el texto está a medias
+    }
+
+    // Alias de compatibilidad
+    public Propietario getClienteSeleccionado() {
+        return getPropietarioSeleccionado();
     }
 
     public provet.componentes.BuscadorCliente getComboBox() {

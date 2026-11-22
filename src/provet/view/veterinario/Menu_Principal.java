@@ -1,31 +1,103 @@
-
 package provet.view.veterinario;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JFrame;
-import provet.model.Usuario;
-import provet.model.ControlUsuarios;
-
+import provet.modelo.Usuario;
+import provet.utilidades.Sesion;
+import provet.utilidades.dbConection;
 
 public class Menu_Principal extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Menu_Principal.class.getName());
     private Usuario usuario;
 
-    public Menu_Principal(){
+    public Menu_Principal() {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.usuario = Sesion.getUsuarioActual();
+        cargarDatosSesionYResumen();
     }
     
-public Menu_Principal(Usuario usuario) {
-    initComponents();
-    this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-    this.usuario = usuario;
-    if (usuario != null) {
-        lblNombreVet.setText(usuario.getNombre());
-    } else {
-        lblNombreVet.setText("Sin usuario");
+    public Menu_Principal(Usuario usuario) {
+        initComponents();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.usuario = (usuario != null) ? usuario : Sesion.getUsuarioActual();
+        cargarDatosSesionYResumen();
     }
-}
+
+    private void cargarDatosSesionYResumen() {
+        if (Sesion.haySesionActiva()) {
+            lblNombreVet.setText(Sesion.getNombreMostrar());
+            String rol = Sesion.getNombreRol();
+            if (!rol.isEmpty()) {
+                jLabel6.setText(rol);
+            }
+        } else if (this.usuario != null) {
+            lblNombreVet.setText(this.usuario.getUsername());
+        } else {
+            lblNombreVet.setText("Sin usuario");
+        }
+
+        // Mostrar métricas rápidas desde 'citas' para el veterinario en sesión
+        int citasPendientes = 0;
+        int cirugiasPendientes = 0;
+        int citasCompletadas = 0;
+
+        Connection conn = dbConection.getConexion();
+        int idVet = Sesion.getIdPersonalActual();
+
+        if (conn != null) {
+            try {
+                String filtroVet = (idVet > 0) ? " AND id_veterinario = ?" : "";
+
+                try (PreparedStatement ps = conn.prepareStatement(
+                        "SELECT COUNT(*) FROM citas WHERE estado IN ('Programada', 'Confirmada')" + filtroVet)) {
+                    if (idVet > 0) ps.setInt(1, idVet);
+                    try (ResultSet rs = ps.executeQuery()) {
+                        if (rs.next()) citasPendientes = rs.getInt(1);
+                    }
+                }
+
+                try (PreparedStatement ps = conn.prepareStatement(
+                        "SELECT COUNT(*) FROM citas WHERE estado IN ('Programada', 'Confirmada') AND LOWER(motivo) LIKE '%cirug%'" + filtroVet)) {
+                    if (idVet > 0) ps.setInt(1, idVet);
+                    try (ResultSet rs = ps.executeQuery()) {
+                        if (rs.next()) cirugiasPendientes = rs.getInt(1);
+                    }
+                }
+
+                try (PreparedStatement ps = conn.prepareStatement(
+                        "SELECT COUNT(*) FROM citas WHERE estado = 'Completada'" + filtroVet)) {
+                    if (idVet > 0) ps.setInt(1, idVet);
+                    try (ResultSet rs = ps.executeQuery()) {
+                        if (rs.next()) citasCompletadas = rs.getInt(1);
+                    }
+                }
+            } catch (SQLException e) {
+                System.err.println("Error al cargar métricas en Menu_Principal: " + e.getMessage());
+            }
+        }
+
+        Font fuenteContador = new Font("Tahoma", Font.BOLD, 28);
+        Color colorTexto = new Color(39, 53, 38);
+
+        lbl_acceder.setFont(fuenteContador);
+        lbl_acceder.setForeground(colorTexto);
+        lbl_acceder.setText(String.valueOf(citasPendientes));
+
+        lbl_acceder1.setFont(fuenteContador);
+        lbl_acceder1.setForeground(colorTexto);
+        lbl_acceder1.setText(String.valueOf(cirugiasPendientes));
+
+        lbl_acceder3.setFont(fuenteContador);
+        lbl_acceder3.setForeground(colorTexto);
+        lbl_acceder3.setText(String.valueOf(citasCompletadas));
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -270,52 +342,42 @@ public Menu_Principal(Usuario usuario) {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_administrativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_administrativoActionPerformed
-        
-        // TODO add your handling code here:
     }//GEN-LAST:event_btn_administrativoActionPerformed
 
     private void btn_atencionmedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_atencionmedActionPerformed
-        
-        dispose();    }//GEN-LAST:event_btn_atencionmedActionPerformed
+        dispose();
+    }//GEN-LAST:event_btn_atencionmedActionPerformed
 
     private void btn_configuraciónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_configuraciónActionPerformed
-         
     }//GEN-LAST:event_btn_configuraciónActionPerformed
 
     private void btn_reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reportesActionPerformed
-        
     }//GEN-LAST:event_btn_reportesActionPerformed
 
     private void btn_iniciarsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_iniciarsActionPerformed
-        
     }//GEN-LAST:event_btn_iniciarsActionPerformed
 
     private void btn_iniciars1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_iniciars1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_btn_iniciars1ActionPerformed
 
     private void btn_iniciars2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_iniciars2ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_btn_iniciars2ActionPerformed
 
     private void btn_iniciars3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_iniciars3ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_btn_iniciars3ActionPerformed
 
     private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
+        int respuesta = javax.swing.JOptionPane.showConfirmDialog(
+                this,
+                "¿Estás seguro de que deseas salir?",
+                "Confirmar salida",
+                javax.swing.JOptionPane.YES_NO_OPTION);
 
-    int respuesta = javax.swing.JOptionPane.showConfirmDialog(
-            this,
-            "¿Estás seguro de que deseas salir?",
-            "Confirmar salida",
-            javax.swing.JOptionPane.YES_NO_OPTION);
-
-    if (respuesta == javax.swing.JOptionPane.YES_OPTION) {
-        provet.utilidades.Sesion.cerrarSesion();
-        new provet.view.inicio.Login().setVisible(true);
-        this.dispose();
-    }
-
+        if (respuesta == javax.swing.JOptionPane.YES_OPTION) {
+            Sesion.cerrarSesion();
+            new provet.view.inicio.Login().setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_btn_SalirActionPerformed
 
     private void btnPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacientesActionPerformed
@@ -331,30 +393,26 @@ public Menu_Principal(Usuario usuario) {
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void btn_MenuPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_MenuPActionPerformed
-        // TODO add your handling code here:
+        cargarDatosSesionYResumen();
     }//GEN-LAST:event_btn_MenuPActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-
-    try {
-        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-            if ("Nimbus".equals(info.getName())) {
-                javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                break;
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
             }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-    } catch (Exception ex) {
-        ex.printStackTrace();
-    }
 
-    java.awt.EventQueue.invokeLater(() -> {
-        Menu_Principal m = new Menu_Principal(ControlUsuarios.usuarioActivo);
-        m.setVisible(true);
-    });
-}
+        java.awt.EventQueue.invokeLater(() -> {
+            Menu_Principal m = new Menu_Principal();
+            m.setVisible(true);
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private provet.componentes.botonSwing btnPacientes;

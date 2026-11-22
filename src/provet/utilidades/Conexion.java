@@ -41,10 +41,7 @@ public class Conexion {
 
             // Si la conexión es nula o está cerrada, crear una nueva
             if (conexion == null || conexion.isClosed()) {
-               conexion = DriverManager.getConnection(
-        System.getProperty("db.url", URL),
-        System.getProperty("db.user", USER),
-        System.getProperty("db.pass", PASS));
+                conexion = DriverManager.getConnection(URL, USER, PASS);
                 System.out.println("Conexión establecida con patitas_care.");
 
                 Runtime.getRuntime().addShutdownHook(new Thread(() -> {

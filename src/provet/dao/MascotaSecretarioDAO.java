@@ -1,391 +1,313 @@
 package provet.dao;
 
-import provet.utilidades.Conexion;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import provet.utilidades.dbConection;
 
-/**
- * DAO del secretario para gestionar mascotas.
- * Maneja las tablas: mts_mascota, mts_cliente, mts_persona, cat_raza, cat_especie, cat_sexo_animal
- */
 public class MascotaSecretarioDAO {
 
-    // ---------- MODELO INTERNO (usado por los formularios del secretario) ----------
     public static class MascotaDTO {
         public int idMascota;
-        public int idCliente;
-        public int idPersona;
+        public int idPropietario;
+        public int idRaza;
         public String nombreMascota;
         public String especie;
-        public int idEspecie;
         public String raza;
-        public int idRaza;
         public String sexo;
-        public int idSexo;
-        public String fechaNacimiento; // "yyyy-MM-dd"
-        // Datos del propietario
+        public String fechaNacimiento;
+        public double pesoActualKg;
+        public String antecedentesMedicos;
+        public String estatus; // Activo, Inactivo, Fallecido
         public String nombrePropietario;
         public String telefonoPropietario;
-        public String emailPropietario;
-        // Estado del cliente
-        public String estatusCliente;
-        public int idEstatus;
+        public String correoPropietario;
     }
 
-    // ---------- OBTENER TODAS LAS MASCOTAS CON SUS DATOS ----------
+    private Connection getConnection() throws SQLException {
+    Connection conn = dbConection.getConexion();
+    if (conn == null || conn.isClosed()) {
+        throw new SQLException("No se pudo obtener una conexión activa desde dbConection.");
+    }
+    return conn;
+}
+
     public List<MascotaDTO> selectAll() {
         List<MascotaDTO> lista = new ArrayList<>();
-        String sql =
-            "SELECT m.id_mascota, m.id_cliente, m.nombre, " +
-            "       e.nombre_especie, r.nombre_raza, r.id_raza, " +
-            "       s.nombre_sexo, s.id_sexo, m.fecha_nacimiento, " +
-            "       p.id_persona, p.nombre AS nom_prop, p.apellido_paterno, " +
-            "       p.telefono, p.email, " +
-            "       ec.nom_estatus_cliente, ec.id_estatus, " +
-            "       e.id_especie " +
-            "FROM mts_mascota m " +
-            "JOIN mts_cliente c  ON m.id_cliente  = c.id_cliente " +
-            "JOIN mts_persona p  ON c.id_persona  = p.id_persona " +
-            "JOIN cat_raza r     ON m.id_raza      = r.id_raza " +
-            "JOIN cat_especie e  ON r.id_especie   = e.id_especie " +
-            "JOIN cat_sexo_animal s ON m.id_sexo   = s.id_sexo " +
-            "JOIN cat_estatus_cliente ec ON c.id_estatus = ec.id_estatus " +
-            "ORDER BY m.id_mascota";
-        Connection conn = Conexion.getConexion();
-        if (conn == null) return lista;
-        try (PreparedStatement ps = conn.prepareStatement(sql);
+        String sql = "SELECT m.id_mascota, m.id_propietario, m.id_raza, m.nombre, m.sexo, "
+                   + "m.fecha_nacimiento, m.peso_actual_kg, m.antecedentes_medicos, m.estatus, "
+                   + "r.nombre AS raza, e.nombre AS especie, "
+                   + "p.nombre AS nombre_prop, p.telefono, p.correo "
+                   + "FROM mascotas m "
+                   + "INNER JOIN catalogo_razas r ON m.id_raza = r.id_raza "
+                   + "INNER JOIN catalogo_especies e ON r.id_especie = e.id_especie "
+                   + "INNER JOIN propietarios p ON m.id_propietario = p.id_propietario "
+                   + "ORDER BY m.id_mascota DESC";
+        try (Connection cn = getConnection();
+             PreparedStatement ps = cn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
-                MascotaDTO d = new MascotaDTO();
-                d.idMascota       = rs.getInt("id_mascota");
-                d.idCliente       = rs.getInt("id_cliente");
-                d.idPersona       = rs.getInt("id_persona");
-                d.nombreMascota   = rs.getString("nombre");
-                d.especie         = rs.getString("nombre_especie");
-                d.idEspecie       = rs.getInt("id_especie");
-                d.raza            = rs.getString("nombre_raza");
-                d.idRaza          = rs.getInt("id_raza");
-                d.sexo            = rs.getString("nombre_sexo");
-                d.idSexo          = rs.getInt("id_sexo");
-                d.fechaNacimiento = rs.getString("fecha_nacimiento");
-                d.nombrePropietario = rs.getString("nom_prop") + " " + rs.getString("apellido_paterno");
-                d.telefonoPropietario = rs.getString("telefono");
-                d.emailPropietario    = rs.getString("email");
-                d.estatusCliente      = rs.getString("nom_estatus_cliente");
-                d.idEstatus           = rs.getInt("id_estatus");
-                lista.add(d);
+                lista.add(mapearDTO(rs));
             }
-        } catch (SQLException e) {
-            System.err.println("Error al listar mascotas: " + e.getMessage());
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
         return lista;
     }
 
-    // ---------- OBTENER UNA MASCOTA POR ID ----------
     public MascotaDTO selectById(int idMascota) {
-        String sql =
-            "SELECT m.id_mascota, m.id_cliente, m.nombre, " +
-            "       e.nombre_especie, r.nombre_raza, r.id_raza, " +
-            "       s.nombre_sexo, s.id_sexo, m.fecha_nacimiento, " +
-            "       p.id_persona, p.nombre AS nom_prop, p.apellido_paterno, " +
-            "       p.telefono, p.email, " +
-            "       ec.nom_estatus_cliente, ec.id_estatus, " +
-            "       e.id_especie " +
-            "FROM mts_mascota m " +
-            "JOIN mts_cliente c  ON m.id_cliente  = c.id_cliente " +
-            "JOIN mts_persona p  ON c.id_persona  = p.id_persona " +
-            "JOIN cat_raza r     ON m.id_raza      = r.id_raza " +
-            "JOIN cat_especie e  ON r.id_especie   = e.id_especie " +
-            "JOIN cat_sexo_animal s ON m.id_sexo   = s.id_sexo " +
-            "JOIN cat_estatus_cliente ec ON c.id_estatus = ec.id_estatus " +
-            "WHERE m.id_mascota = ?";
-        Connection conn = Conexion.getConexion();
-        if (conn == null) return null;
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+        String sql = "SELECT m.id_mascota, m.id_propietario, m.id_raza, m.nombre, m.sexo, "
+                   + "m.fecha_nacimiento, m.peso_actual_kg, m.antecedentes_medicos, m.estatus, "
+                   + "r.nombre AS raza, e.nombre AS especie, "
+                   + "p.nombre AS nombre_prop, p.telefono, p.correo "
+                   + "FROM mascotas m "
+                   + "INNER JOIN catalogo_razas r ON m.id_raza = r.id_raza "
+                   + "INNER JOIN catalogo_especies e ON r.id_especie = e.id_especie "
+                   + "INNER JOIN propietarios p ON m.id_propietario = p.id_propietario "
+                   + "WHERE m.id_mascota = ?";
+        try (Connection cn = getConnection();
+             PreparedStatement ps = cn.prepareStatement(sql)) {
             ps.setInt(1, idMascota);
             try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    MascotaDTO d = new MascotaDTO();
-                    d.idMascota       = rs.getInt("id_mascota");
-                    d.idCliente       = rs.getInt("id_cliente");
-                    d.idPersona       = rs.getInt("id_persona");
-                    d.nombreMascota   = rs.getString("nombre");
-                    d.especie         = rs.getString("nombre_especie");
-                    d.idEspecie       = rs.getInt("id_especie");
-                    d.raza            = rs.getString("nombre_raza");
-                    d.idRaza          = rs.getInt("id_raza");
-                    d.sexo            = rs.getString("nombre_sexo");
-                    d.idSexo          = rs.getInt("id_sexo");
-                    d.fechaNacimiento = rs.getString("fecha_nacimiento");
-                    d.nombrePropietario = rs.getString("nom_prop") + " " + rs.getString("apellido_paterno");
-                    d.telefonoPropietario = rs.getString("telefono");
-                    d.emailPropietario    = rs.getString("email");
-                    d.estatusCliente      = rs.getString("nom_estatus_cliente");
-                    d.idEstatus           = rs.getInt("id_estatus");
-                    return d;
-                }
+                if (rs.next()) return mapearDTO(rs);
             }
-        } catch (SQLException e) {
-            System.err.println("Error al buscar mascota: " + e.getMessage());
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
         return null;
     }
 
     /**
-     * Registra una mascota nueva.
-     * Si la raza no existe la crea; si el propietario (email) no existe lo crea también.
-     * Retorna el id_mascota generado, o -1 si falla.
+     * Inserta propietario (si no existe) y mascota con peso y antecedentes médicos en patitas_final.
      */
-    public int insertar(
-            String nombreMascota,
-            String nombreEspecie,
-            String nombreRaza,
-            String nombreSexo,
-            String fechaNacimiento,
-            String nombrePropietario,
-            String apellidoProp,
-            String telefonoProp,
-            String emailProp
-    ) {
-        Connection conn = Conexion.getConexion();
-        if (conn == null) return -1;
-        try {
-            conn.setAutoCommit(false);
+    public int insertar(String nombreMascota, String especie, String raza, String sexo,
+                        String fechaNacimiento, Double pesoActualKg, String antecedentesMedicos,
+                        String nombreProp, String telefonoProp, String direccionProp, String correoProp) {
+        try (Connection cn = getConnection()) {
+            cn.setAutoCommit(false);
+            try {
+                int idPropietario = resolverOInsertarPropietario(cn, nombreProp, telefonoProp, direccionProp, correoProp);
+                int idRaza = resolverOInsertarRaza(cn, especie, raza);
 
-            // 1. Obtener id_especie
-            int idEspecie = obtenerOCrearEspecie(conn, nombreEspecie);
+                String sql = "INSERT INTO mascotas "
+                           + "(id_propietario, id_raza, nombre, sexo, fecha_nacimiento, peso_actual_kg, antecedentes_medicos, estatus) "
+                           + "VALUES (?, ?, ?, ?, ?, ?, ?, 'Activo')";
+                try (PreparedStatement ps = cn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                    ps.setInt(1, idPropietario);
+                    ps.setInt(2, idRaza);
+                    ps.setString(3, nombreMascota);
+                    ps.setString(4, (sexo != null && sexo.equalsIgnoreCase("Hembra")) ? "Hembra" : "Macho");
 
-            // 2. Obtener/crear raza
-            int idRaza = obtenerOCrearRaza(conn, nombreRaza, idEspecie);
+                    if (fechaNacimiento != null && !fechaNacimiento.trim().isEmpty()) {
+                        ps.setDate(5, java.sql.Date.valueOf(fechaNacimiento.trim()));
+                    } else {
+                        ps.setNull(5, Types.DATE);
+                    }
 
-            // 3. Obtener id_sexo
-            int idSexo = obtenerSexo(conn, nombreSexo);
-            if (idSexo == -1) idSexo = 1; // fallback "Macho"
+                    if (pesoActualKg != null) {
+                        ps.setDouble(6, pesoActualKg);
+                    } else {
+                        ps.setNull(6, Types.DECIMAL);
+                    }
 
-            // 4. Obtener/crear persona (propietario)
-            int idPersona = obtenerOCrearPersona(conn, nombrePropietario, apellidoProp, telefonoProp, emailProp);
+                    if (antecedentesMedicos != null && !antecedentesMedicos.trim().isEmpty()) {
+                        ps.setString(7, antecedentesMedicos.trim());
+                    } else {
+                        ps.setNull(7, Types.VARCHAR);
+                    }
 
-            // 5. Obtener/crear cliente
-            int idCliente = obtenerOCrearCliente(conn, idPersona);
-
-            // 6. Insertar mascota
-            String sqlMascota = "INSERT INTO mts_mascota (id_cliente, id_raza, id_sexo, nombre, fecha_nacimiento) VALUES (?,?,?,?,?)";
-            int idMascota = -1;
-            try (PreparedStatement ps = conn.prepareStatement(sqlMascota, Statement.RETURN_GENERATED_KEYS)) {
-                ps.setInt(1, idCliente);
-                ps.setInt(2, idRaza);
-                ps.setInt(3, idSexo);
-                ps.setString(4, nombreMascota);
-                ps.setString(5, fechaNacimiento);
-                ps.executeUpdate();
-                try (ResultSet rs = ps.getGeneratedKeys()) {
-                    if (rs.next()) idMascota = rs.getInt(1);
+                    ps.executeUpdate();
+                    try (ResultSet gk = ps.getGeneratedKeys()) {
+                        if (gk.next()) {
+                            int idMascota = gk.getInt(1);
+                            cn.commit();
+                            return idMascota;
+                        }
+                    }
                 }
+                cn.rollback();
+            } catch (Exception e) {
+                cn.rollback();
+                throw e;
             }
-            conn.commit();
-            conn.setAutoCommit(true);
-            return idMascota;
-        } catch (SQLException e) {
-            System.err.println("Error al registrar mascota: " + e.getMessage());
-            try { conn.rollback(); conn.setAutoCommit(true); } catch (SQLException ex2) { /* ignore */ }
-            return -1;
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
+        return -1;
     }
 
     /**
-     * Actualiza el nombre y raza de una mascota existente.
+     * Sobrecarga de 9 parámetros por compatibilidad con llamadas anteriores.
      */
-    public boolean actualizar(int idMascota, String nombreMascota, String nombreRaza, String nombreEspecie, String nombreSexo, String fechaNacimiento) {
-        Connection conn = Conexion.getConexion();
-        if (conn == null) return false;
-        try {
-            conn.setAutoCommit(false);
-            int idEspecie = obtenerOCrearEspecie(conn, nombreEspecie);
-            int idRaza    = obtenerOCrearRaza(conn, nombreRaza, idEspecie);
-            int idSexo    = obtenerSexo(conn, nombreSexo);
-            if (idSexo == -1) idSexo = 1;
+    public int insertar(String nombreMascota, String especie, String raza, String sexo,
+                        String fechaNacimiento, String nombreProp, String telefonoProp,
+                        String direccionProp, String correoProp) {
+        return insertar(nombreMascota, especie, raza, sexo, fechaNacimiento,
+                        null, null, nombreProp, telefonoProp, direccionProp, correoProp);
+    }
 
-            String sql = "UPDATE mts_mascota SET nombre=?, id_raza=?, id_sexo=?, fecha_nacimiento=? WHERE id_mascota=?";
-            try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, nombreMascota);
+    public boolean actualizar(int idMascota, String nombre, String raza, String especie,
+                              String sexo, String fechaNacimiento, String estatus) {
+        String sql = "UPDATE mascotas SET nombre = ?, id_raza = ?, sexo = ?, fecha_nacimiento = ?, estatus = ? "
+                   + "WHERE id_mascota = ?";
+        try (Connection cn = getConnection()) {
+            int idRaza = resolverOInsertarRaza(cn, especie, raza);
+            try (PreparedStatement ps = cn.prepareStatement(sql)) {
+                ps.setString(1, nombre);
                 ps.setInt(2, idRaza);
-                ps.setInt(3, idSexo);
-                ps.setString(4, fechaNacimiento);
-                ps.setInt(5, idMascota);
-                ps.executeUpdate();
+                ps.setString(3, (sexo != null && sexo.equalsIgnoreCase("Hembra")) ? "Hembra" : "Macho");
+                if (fechaNacimiento != null && !fechaNacimiento.trim().isEmpty()) {
+                    ps.setDate(4, java.sql.Date.valueOf(fechaNacimiento.trim()));
+                } else {
+                    ps.setNull(4, Types.DATE);
+                }
+                ps.setString(5, estatus);
+                ps.setInt(6, idMascota);
+                return ps.executeUpdate() > 0;
             }
-            conn.commit();
-            conn.setAutoCommit(true);
-            return true;
-        } catch (SQLException e) {
-            System.err.println("Error al actualizar mascota: " + e.getMessage());
-            try { conn.rollback(); conn.setAutoCommit(true); } catch (SQLException ex2) { /* ignore */ }
+        } catch (Exception ex) {
+            ex.printStackTrace();
             return false;
         }
     }
 
-    /**
-     * Elimina una mascota de la base de datos (baja definitiva).
-     */
+    /** Baja lógica respetando llaves foráneas en citas, consultas y cobros_servicios. */
+    public boolean darDeBaja(int idMascota) {
+        String sql = "UPDATE mascotas SET estatus = 'Inactivo' WHERE id_mascota = ?";
+        try (Connection cn = getConnection();
+             PreparedStatement ps = cn.prepareStatement(sql)) {
+            ps.setInt(1, idMascota);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
     public boolean eliminar(int idMascota) {
-        Connection conn = Conexion.getConexion();
-        if (conn == null) return false;
-        // Primero eliminar citas relacionadas para no violar FK
-        try {
-            conn.setAutoCommit(false);
-            try (PreparedStatement ps = conn.prepareStatement("DELETE FROM trn_cita WHERE id_mascota=?")) {
-                ps.setInt(1, idMascota);
-                ps.executeUpdate();
-            }
-            try (PreparedStatement ps = conn.prepareStatement("DELETE FROM mts_mascota WHERE id_mascota=?")) {
-                ps.setInt(1, idMascota);
-                ps.executeUpdate();
-            }
-            conn.commit();
-            conn.setAutoCommit(true);
-            return true;
-        } catch (SQLException e) {
-            System.err.println("Error al eliminar mascota: " + e.getMessage());
-            try { conn.rollback(); conn.setAutoCommit(true); } catch (SQLException ex2) { /* ignore */ }
-            return false;
-        }
+        return darDeBaja(idMascota);
     }
 
-    // ---------- HELPERS ----------
-
-    private int obtenerOCrearEspecie(Connection conn, String nombre) throws SQLException {
-        try (PreparedStatement ps = conn.prepareStatement("SELECT id_especie FROM cat_especie WHERE nombre_especie=?")) {
-            ps.setString(1, nombre);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) return rs.getInt(1);
-            }
+    public int contarMascotas() {
+        String sql = "SELECT COUNT(*) FROM mascotas WHERE estatus = 'Activo'";
+        try (Connection cn = getConnection();
+             PreparedStatement ps = cn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) return rs.getInt(1);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
-        try (PreparedStatement ps = conn.prepareStatement("INSERT INTO cat_especie (nombre_especie) VALUES (?)", Statement.RETURN_GENERATED_KEYS)) {
-            ps.setString(1, nombre);
-            ps.executeUpdate();
-            try (ResultSet rs = ps.getGeneratedKeys()) {
-                if (rs.next()) return rs.getInt(1);
-            }
-        }
-        return 1; // fallback
+        return 0;
     }
-
-    private int obtenerOCrearRaza(Connection conn, String nombre, int idEspecie) throws SQLException {
-        try (PreparedStatement ps = conn.prepareStatement("SELECT id_raza FROM cat_raza WHERE nombre_raza=? AND id_especie=?")) {
-            ps.setString(1, nombre);
-            ps.setInt(2, idEspecie);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) return rs.getInt(1);
-            }
-        }
-        // Buscar por nombre sin importar especie
-        try (PreparedStatement ps = conn.prepareStatement("SELECT id_raza FROM cat_raza WHERE nombre_raza=?")) {
-            ps.setString(1, nombre);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) return rs.getInt(1);
-            }
-        }
-        try (PreparedStatement ps = conn.prepareStatement("INSERT INTO cat_raza (id_especie, nombre_raza) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS)) {
-            ps.setInt(1, idEspecie);
-            ps.setString(2, nombre);
-            ps.executeUpdate();
-            try (ResultSet rs = ps.getGeneratedKeys()) {
-                if (rs.next()) return rs.getInt(1);
-            }
-        }
-        return 1;
-    }
-
-    private int obtenerSexo(Connection conn, String nombre) throws SQLException {
-        try (PreparedStatement ps = conn.prepareStatement("SELECT id_sexo FROM cat_sexo_animal WHERE nombre_sexo=?")) {
-            ps.setString(1, nombre);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) return rs.getInt(1);
-            }
-        }
-        return -1;
-    }
-
-    private int obtenerOCrearPersona(Connection conn, String nombre, String apellido, String telefono, String email) throws SQLException {
-        try (PreparedStatement ps = conn.prepareStatement("SELECT id_persona FROM mts_persona WHERE email=?")) {
-            ps.setString(1, email);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) return rs.getInt(1);
-            }
-        }
-        String sql = "INSERT INTO mts_persona (nombre, apellido_paterno, telefono, email) VALUES (?,?,?,?)";
-        try (PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            ps.setString(1, nombre);
-            ps.setString(2, apellido != null && !apellido.isEmpty() ? apellido : "-");
-            if (telefono != null && !telefono.trim().isEmpty()) {
-                ps.setString(3, telefono.trim());
-            } else {
-                ps.setNull(3, Types.VARCHAR);
-            }
-            ps.setString(4, email);
-            ps.executeUpdate();
-            try (ResultSet rs = ps.getGeneratedKeys()) {
-                if (rs.next()) return rs.getInt(1);
-            }
-        }
-        return -1;
-    }
-
-    private int obtenerOCrearCliente(Connection conn, int idPersona) throws SQLException {
-        try (PreparedStatement ps = conn.prepareStatement("SELECT id_cliente FROM mts_cliente WHERE id_persona=?")) {
-            ps.setInt(1, idPersona);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) return rs.getInt(1);
-            }
-        }
-        try (PreparedStatement ps = conn.prepareStatement("INSERT INTO mts_cliente (id_persona, id_estatus) VALUES (?,2)", Statement.RETURN_GENERATED_KEYS)) {
-            ps.setInt(1, idPersona);
-            ps.executeUpdate();
-            try (ResultSet rs = ps.getGeneratedKeys()) {
-                if (rs.next()) return rs.getInt(1);
-            }
-        }
-        return -1;
-    }
-
-    // ---------- CATÁLOGOS PARA COMBOS ----------
 
     public List<String> getEspecies() {
         List<String> lista = new ArrayList<>();
-        Connection conn = Conexion.getConexion();
-        if (conn == null) return lista;
-        try (PreparedStatement ps = conn.prepareStatement("SELECT nombre_especie FROM cat_especie ORDER BY nombre_especie");
+        String sql = "SELECT nombre FROM catalogo_especies ORDER BY nombre";
+        try (Connection cn = getConnection();
+             PreparedStatement ps = cn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
-            while (rs.next()) lista.add(rs.getString(1));
-        } catch (SQLException e) {
-            System.err.println("Error al obtener especies: " + e.getMessage());
+            while (rs.next()) lista.add(rs.getString("nombre"));
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
         return lista;
     }
 
     public List<String> getSexos() {
-        List<String> lista = new ArrayList<>();
-        Connection conn = Conexion.getConexion();
-        if (conn == null) return lista;
-        try (PreparedStatement ps = conn.prepareStatement("SELECT nombre_sexo FROM cat_sexo_animal ORDER BY id_sexo");
-             ResultSet rs = ps.executeQuery()) {
-            while (rs.next()) lista.add(rs.getString(1));
-        } catch (SQLException e) {
-            System.err.println("Error al obtener sexos: " + e.getMessage());
-        }
-        return lista;
+        return List.of("Macho", "Hembra");
     }
 
-    public int contarMascotas() {
-        Connection conn = Conexion.getConexion();
-        if (conn == null) return 0;
-        try (PreparedStatement ps = conn.prepareStatement("SELECT COUNT(*) FROM mts_mascota");
-             ResultSet rs = ps.executeQuery()) {
-            if (rs.next()) return rs.getInt(1);
-        } catch (SQLException e) {
-            System.err.println("Error al contar mascotas: " + e.getMessage());
+    public int resolverOInsertarRaza(Connection cn, String especie, String raza) throws SQLException {
+        String esp = (especie == null || especie.trim().isEmpty()) ? "Perro" : especie.trim();
+        String raz = (raza == null || raza.trim().isEmpty()) ? "Mestizo" : raza.trim();
+
+        int idEspecie = -1;
+        try (PreparedStatement ps = cn.prepareStatement("SELECT id_especie FROM catalogo_especies WHERE LOWER(nombre) = LOWER(?)")) {
+            ps.setString(1, esp);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) idEspecie = rs.getInt(1);
+            }
         }
-        return 0;
+        if (idEspecie == -1) {
+            try (PreparedStatement ps = cn.prepareStatement("INSERT INTO catalogo_especies (nombre) VALUES (?)", Statement.RETURN_GENERATED_KEYS)) {
+                ps.setString(1, esp);
+                ps.executeUpdate();
+                try (ResultSet gk = ps.getGeneratedKeys()) {
+                    if (gk.next()) idEspecie = gk.getInt(1);
+                }
+            }
+        }
+
+        try (PreparedStatement ps = cn.prepareStatement("SELECT id_raza FROM catalogo_razas WHERE id_especie = ? AND LOWER(nombre) = LOWER(?)")) {
+            ps.setInt(1, idEspecie);
+            ps.setString(2, raz);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) return rs.getInt(1);
+            }
+        }
+        try (PreparedStatement ps = cn.prepareStatement("INSERT INTO catalogo_razas (id_especie, nombre) VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+            ps.setInt(1, idEspecie);
+            ps.setString(2, raz);
+            ps.executeUpdate();
+            try (ResultSet gk = ps.getGeneratedKeys()) {
+                if (gk.next()) return gk.getInt(1);
+            }
+        }
+        throw new SQLException("No se pudo resolver id_raza");
+    }
+
+    private int resolverOInsertarPropietario(Connection cn, String nombreProp, String telefono,
+                                             String direccion, String correo) throws SQLException {
+        String dato = (nombreProp == null || nombreProp.trim().isEmpty()) ? "Sin especificar" : nombreProp.trim();
+
+        if (dato.matches("\\d+")) {
+            int idBuscado = Integer.parseInt(dato);
+            try (PreparedStatement ps = cn.prepareStatement("SELECT id_propietario FROM propietarios WHERE id_propietario = ?")) {
+                ps.setInt(1, idBuscado);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) return rs.getInt(1);
+                }
+            }
+        }
+
+        try (PreparedStatement ps = cn.prepareStatement("SELECT id_propietario FROM propietarios WHERE LOWER(nombre) = LOWER(?) LIMIT 1")) {
+            ps.setString(1, dato);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) return rs.getInt(1);
+            }
+        }
+
+        String sqlIns = "INSERT INTO propietarios (nombre, telefono, correo, direccion, is_active) VALUES (?, ?, ?, ?, 1)";
+        try (PreparedStatement ps = cn.prepareStatement(sqlIns, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, dato);
+            ps.setString(2, (telefono != null && !telefono.trim().isEmpty()) ? telefono.trim() : null);
+            ps.setString(3, (correo != null && !correo.trim().isEmpty()) ? correo.trim() : null);
+            ps.setString(4, (direccion != null && !direccion.trim().isEmpty()) ? direccion.trim() : null);
+            ps.executeUpdate();
+            try (ResultSet gk = ps.getGeneratedKeys()) {
+                if (gk.next()) return gk.getInt(1);
+            }
+        }
+        throw new SQLException("No se pudo registrar ni localizar al propietario");
+    }
+
+    private MascotaDTO mapearDTO(ResultSet rs) throws SQLException {
+        MascotaDTO d = new MascotaDTO();
+        d.idMascota = rs.getInt("id_mascota");
+        d.idPropietario = rs.getInt("id_propietario");
+        d.idRaza = rs.getInt("id_raza");
+        d.nombreMascota = rs.getString("nombre");
+        d.sexo = rs.getString("sexo");
+        Date fn = rs.getDate("fecha_nacimiento");
+        d.fechaNacimiento = fn != null ? fn.toString() : "";
+        d.pesoActualKg = rs.getDouble("peso_actual_kg");
+        d.antecedentesMedicos = rs.getString("antecedentes_medicos");
+        d.estatus = rs.getString("estatus");
+        d.raza = rs.getString("raza");
+        d.especie = rs.getString("especie");
+        d.nombrePropietario = rs.getString("nombre_prop");
+        d.telefonoPropietario = rs.getString("telefono");
+        d.correoPropietario = rs.getString("correo");
+        return d;
     }
 }

@@ -1,51 +1,56 @@
-
 //Paquete al que pertenece la ventana
 package provet.view.inicio;
 
 //Importamos librerias
 import java.sql.Connection;
 import javax.swing.JOptionPane;
-import provet.view.administrador.MenuAdmin;
-import provet.view.veterinario.Menu_Principal;
-import provet.view.secretario.Dashboard_Secretario;
-import provet.dao.EmpleadoDAO;
-import provet.model.Empleado;
-import provet.utilidades.Conexion;
+import provet.dao.PersonalDAO;
+import provet.dao.RolDAO;
+import provet.dao.UsuarioDAO;
+import provet.modelo.Personal;
+import provet.modelo.Rol;
+import provet.modelo.Usuario;
 import provet.utilidades.Sesion;
-import provet.view.secretario.EditarPacientes_secretario;
+import provet.utilidades.dbConection;
+import provet.view.administrador.MenuAdmin;
+import provet.view.secretario.Dashboard_Secretario;
+import provet.view.veterinario.Menu_Principal;
 
 //Inicio de la clase Login, que hereda de la clase JFrame
 public class Login extends javax.swing.JFrame {
     
     //Atributos de la clase
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Login.class.getName());
-    private final EmpleadoDAO empleadoDAO;
-    public final Connection conn = Conexion.getConexion();
+    private final UsuarioDAO usuarioDAO;
+    private final PersonalDAO personalDAO;
+    private final RolDAO rolDAO;
+    public final Connection conn = dbConection.getConexion();
     
     //Constructor de la clase Login
     public Login() {
         initComponents();                                 //Inicia los componentes de la clase
-        this.empleadoDAO = new EmpleadoDAO();             //Indicamos que empleadoDAO es un nuevo objeto de la clase
+        this.usuarioDAO = new UsuarioDAO();
+        this.personalDAO = new PersonalDAO();
+        this.rolDAO = new RolDAO();
         
         //Si no existe conexión con la base de datos, Entonces...
         if (conn == null) {
             btn_Aceptar.setEnabled(false);              //Desactiva el boton Aceptar
-            link_recuperarContra.setVisible(false);  //Oculta la recuperación de contraseña
-            lbl_Pregunta2.setVisible(false);         //Oculta el label de recuperación
-            
-        } else {    //Sino...
+            link_recuperarContra.setVisible(false);     //Oculta la recuperación de contraseña
+            lbl_Pregunta2.setVisible(false);            //Oculta el label de recuperación
+        } else {
             btn_Aceptar.setEnabled(true);               //Habilita el botón Aceptar
-            link_recuperarContra.setVisible(true);   //Muesta la recuperación de contraseña
-            lbl_Pregunta2.setVisible(true);          //Muestra el label de recuperación
+            link_recuperarContra.setVisible(true);      //Muestra la recuperación de contraseña
+            lbl_Pregunta2.setVisible(true);             //Muestra el label de recuperación
         }
     }
 
-    //Validamos los datos del Empleado
+    //Validamos los datos del Usuario
     public void validarEmpleado() {
         
         //Variables del método
-        String usuario = txt_Usuario.getText().trim();                   //El usuario = el texto de txt_Usuario
-        String contra  = new String(txt_contraseña.getPassword());  //La contraseña = el texto de txt_contraseña
+        String usuario = txt_Usuario.getText().trim();
+        String contra  = new String(txt_contraseña.getPassword());
 
         // Validaciones básicas de campos vacíos
         if (usuario.isEmpty() || contra.isEmpty()) {
@@ -53,24 +58,33 @@ public class Login extends javax.swing.JFrame {
             return;
         }
 
-        // Revisamos si el usuario existe y coincide la contraseña en MariaDB
-        Empleado usuarioValido = empleadoDAO.autenticarUsuario(usuario, contra);
+        // Revisamos si el usuario existe, está activo y coincide la contraseña en MySQL
+        Usuario usuarioValido = usuarioDAO.autenticarUsuario(usuario, contra);
 
         // Si el usuario existe y las credenciales son correctas...
         if (usuarioValido != null) {
             
-            // Guardamos la Sesión Global
-            Sesion.setEmpleadoActual(usuarioValido);
-            
-            // Obtenemos el ID del puesto para saber qué pantalla abrir
-            int idPuesto = usuarioValido.getIdPuesto();
+            // Registramos la fecha/hora de último acceso
+            usuarioDAO.actualizarUltimoAcceso(usuarioValido.getIdUsuario());
 
-            // Estructura para abrir la ventana según el id_puesto
-            switch (idPuesto) {
-                case 2 -> new MenuAdmin().setVisible(true);             // ID 2 = Administrador
-                case 3 -> new Menu_Principal().setVisible(true);        // ID 3 = Veterinario
-                case 4 -> new Dashboard_Secretario().setVisible(true);  // ID 4 = Secretario
+            // Cargamos el perfil laboral (puede ser null si es una cuenta solo administrativa) y su rol
+            Personal personal = personalDAO.selectByIdUsuario(usuarioValido.getIdUsuario());
+            Rol rol = rolDAO.selectById(usuarioValido.getIdRol());
+
+            // Guardamos la Sesión Global completa
+            Sesion.iniciarSesion(usuarioValido, personal, rol);
+            
+            String nombreRol = (rol != null && rol.getNombre() != null)
+                    ? rol.getNombre().trim().toLowerCase()
+                    : "";
+
+            // Estructura para abrir la ventana según el nombre del rol
+            switch (nombreRol) {
+                case "administrador", "admin" -> new MenuAdmin().setVisible(true);
+                case "veterinario" -> new Menu_Principal().setVisible(true);
+                case "secretario"  -> new Dashboard_Secretario().setVisible(true);
                 default -> {
+                    Sesion.cerrarSesion();
                     JOptionPane.showMessageDialog(this, "Tu usuario no tiene un rol válido asignado.");
                     return; // Detenemos la ejecución para que no cierre el login
                 }
@@ -224,16 +238,14 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_AceptarActionPerformed
 
     private void link_recuperarContraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_link_recuperarContraMouseClicked
-        if(txt_Usuario.getText().equals("")){
-           JOptionPane.showMessageDialog(null, "Error, no hay usuario para recuperar contraseña");
-           txt_Usuario.requestFocus();
-        }else{
-            String Usuario = txt_Usuario.getText();
-            Recuperar_Contraseña vEmergente = new Recuperar_Contraseña(Usuario);
+        String usuarioIngresado = txt_Usuario.getText().trim();
+        if (usuarioIngresado.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Error, ingresa primero tu usuario para recuperar la contraseña.");
+            txt_Usuario.requestFocus();
+        } else {
+            Recuperar_Contraseña vEmergente = new Recuperar_Contraseña(usuarioIngresado);
             vEmergente.setVisible(true);
-
         }
-        
     }//GEN-LAST:event_link_recuperarContraMouseClicked
 
     private void chk_OjoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chk_OjoActionPerformed

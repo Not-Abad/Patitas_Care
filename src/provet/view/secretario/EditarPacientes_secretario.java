@@ -1,151 +1,90 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package provet.view.secretario;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
 import provet.dao.MascotaSecretarioDAO;
-import provet.view.secretario.Registrar_paciente_secretario;
-import provet.view.secretario.Reporte_secretario;
-import provet.view.secretario.editar_paciente;
+import provet.utilidades.Sesion;
 
-/**
- *
- * @author Andreij Haziel
- */
 public class EditarPacientes_secretario extends javax.swing.JFrame {
 
-    /**
-     * Creates new form EditarPacientes_secretario
-     */
     public EditarPacientes_secretario() {
-    initComponents();
+        initComponents();
+        cargarDatosSesion();
 
-    // Poblar combo de filtro con especies desde BD (con fallback a lista fija)
-    try {
-        java.util.List<String> especies = Datos.mascotaDAO.getEspecies();
-        java.util.List<String> listaConTodos = new java.util.ArrayList<>();
-        listaConTodos.add("Todos");
-        listaConTodos.addAll(especies);
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(listaConTodos.toArray(new String[0])));
-    } catch (Exception ex) {
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(
-            new String[]{"Todos", "Perro", "Gato", "Hamster", "Ardilla", "Uron", "Cuyo", "Conejo", "Especie diferente"}
-        ));
+        try {
+            java.util.List<String> especies = Datos.mascotaDAO.getEspecies();
+            java.util.List<String> listaConTodos = new java.util.ArrayList<>();
+            listaConTodos.add("Todos");
+            listaConTodos.addAll(especies);
+            jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(listaConTodos.toArray(new String[0])));
+        } catch (Exception ex) {
+            jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(
+                new String[]{"Todos", "Perro", "Gato", "Ave", "Roedor", "Reptil", "Otro"}
+            ));
+        }
+
+        cargarTabla();
+
+        jTextField_bucarPaciente.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            public void insertUpdate(javax.swing.event.DocumentEvent e)  { filtrarTabla(); }
+            public void removeUpdate(javax.swing.event.DocumentEvent e)  { filtrarTabla(); }
+            public void changedUpdate(javax.swing.event.DocumentEvent e) { filtrarTabla(); }
+        });
+
+        jComboBox1.addActionListener(e -> filtrarTabla());
+
+        boton_ver_detalles.addActionListener(e -> {
+            int fila = jTableBuscarPaciente.getSelectedRow();
+            if (fila == -1) {
+                JOptionPane.showMessageDialog(this, "Selecciona un paciente de la tabla primero.", "Sin selección", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            int idMascota = Integer.parseInt(jTableBuscarPaciente.getValueAt(fila, 0).toString());
+            MascotaSecretarioDAO.MascotaDTO dto = Datos.mascotaDAO.selectById(idMascota);
+            if (dto != null) {
+                String detalles = "ID Mascota: " + dto.idMascota + "\n"
+                    + "Nombre: " + dto.nombreMascota + "\n"
+                    + "Especie: " + dto.especie + "\n"
+                    + "Raza: " + dto.raza + "\n"
+                    + "Sexo: " + dto.sexo + "\n"
+                    + "Fecha nacimiento: " + (dto.fechaNacimiento != null && !dto.fechaNacimiento.isEmpty() ? dto.fechaNacimiento : "N/A") + "\n"
+                    + "Peso actual: " + (dto.pesoActualKg > 0 ? dto.pesoActualKg + " kg" : "N/A") + "\n"
+                    + "Estatus mascota: " + dto.estatus + "\n"
+                    + "Antecedentes: " + (dto.antecedentesMedicos != null && !dto.antecedentesMedicos.isEmpty() ? dto.antecedentesMedicos : "Ninguno") + "\n"
+                    + "Propietario: " + dto.nombrePropietario + "\n"
+                    + "Teléfono: " + (dto.telefonoPropietario != null && !dto.telefonoPropietario.isEmpty() ? dto.telefonoPropietario : "N/A") + "\n"
+                    + "Correo: " + (dto.correoPropietario != null && !dto.correoPropietario.isEmpty() ? dto.correoPropietario : "N/A");
+                JOptionPane.showMessageDialog(this, detalles, "Detalle del paciente", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "No se encontró el paciente en la BD.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        if (isUndecorated()) {
+            dispose();
+            setUndecorated(false);
+        }
+
+        getContentPane().removeAll();
+        getContentPane().setLayout(new java.awt.BorderLayout());
+        getContentPane().add(jPanel2, java.awt.BorderLayout.WEST);
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        jPanel2.setPreferredSize(new java.awt.Dimension(270, 0));
+
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
-    cargarTabla();
-
-    // --- Búsqueda en tiempo real ---
-    jTextField_bucarPaciente.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
-        public void insertUpdate(javax.swing.event.DocumentEvent e)  { filtrarTabla(); }
-        public void removeUpdate(javax.swing.event.DocumentEvent e)  { filtrarTabla(); }
-        public void changedUpdate(javax.swing.event.DocumentEvent e) { filtrarTabla(); }
-    });
-
-    // --- Filtro por especie ---
-    jComboBox1.addActionListener(e -> filtrarTabla());
-
-    // --- Selección de fila ---
-    jTableBuscarPaciente.getSelectionModel().addListSelectionListener(e -> {
-        int fila = jTableBuscarPaciente.getSelectedRow();
-        if (fila != -1) {
-            System.out.println("Paciente seleccionado: " + jTableBuscarPaciente.getValueAt(fila, 1));
-        }
-    });
-
-    // --- Dar de baja ---
-    boton_dar_de_baja.addActionListener(e -> {
-        int fila = jTableBuscarPaciente.getSelectedRow();
-        if (fila == -1) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Selecciona un paciente de la tabla primero.", "Sin selección", javax.swing.JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        int idMascota = Integer.parseInt(jTableBuscarPaciente.getValueAt(fila, 0).toString());
-        String nombreSeleccionado = jTableBuscarPaciente.getValueAt(fila, 1).toString();
-        int confirm = javax.swing.JOptionPane.showConfirmDialog(this,
-            "¿Seguro que deseas eliminar a \"" + nombreSeleccionado + "\" de la base de datos?\nSus citas asociadas también serán eliminadas.",
-            "Confirmar eliminación", javax.swing.JOptionPane.YES_NO_OPTION, javax.swing.JOptionPane.WARNING_MESSAGE);
-        if (confirm == javax.swing.JOptionPane.YES_OPTION) {
-            boolean ok = Datos.mascotaDAO.eliminar(idMascota);
-            if (ok) {
-                Datos.sincronizarConVeterinario();
-                cargarTabla();
-                javax.swing.JOptionPane.showMessageDialog(this, "Paciente eliminado correctamente de la base de datos.");
-            } else {
-                javax.swing.JOptionPane.showMessageDialog(this, "Error al eliminar de la base de datos.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+    private void cargarDatosSesion() {
+        if (Sesion.haySesionActiva()) {
+            jLabel6.setText(Sesion.getNombreMostrar());
+            if (!Sesion.getNombreRol().isEmpty()) {
+                jLabel16.setText(Sesion.getNombreRol());
             }
         }
-    });
-
-    // --- Ver detalles ---
-    boton_ver_detalles.addActionListener(e -> {
-        int fila = jTableBuscarPaciente.getSelectedRow();
-        if (fila == -1) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Selecciona un paciente de la tabla primero.", "Sin selección", javax.swing.JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        int idMascota = Integer.parseInt(jTableBuscarPaciente.getValueAt(fila, 0).toString());
-        MascotaSecretarioDAO.MascotaDTO dto = Datos.mascotaDAO.selectById(idMascota);
-        if (dto != null) {
-            String detalles = "ID BD: " + dto.idMascota + "\n"
-                + "Nombre: " + dto.nombreMascota + "\n"
-                + "Especie: " + dto.especie + "\n"
-                + "Raza: " + dto.raza + "\n"
-                + "Sexo: " + dto.sexo + "\n"
-                + "Fecha nacimiento: " + dto.fechaNacimiento + "\n"
-                + "Propietario: " + dto.nombrePropietario + "\n"
-                + "Teléfono: " + (dto.telefonoPropietario != null ? dto.telefonoPropietario : "N/A") + "\n"
-                + "Email: " + (dto.emailPropietario != null ? dto.emailPropietario : "N/A") + "\n"
-                + "Estatus cliente: " + dto.estatusCliente;
-            javax.swing.JOptionPane.showMessageDialog(this, detalles, "Detalle del paciente", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            javax.swing.JOptionPane.showMessageDialog(this, "No se encontró el paciente en la BD.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        }
-    });
-
-    if(isUndecorated()){
-
-        dispose();
-
-        setUndecorated(false);
-
     }
-
-    getContentPane().removeAll();
-
-    getContentPane().setLayout(
-        new java.awt.BorderLayout()
-    );
-
-    getContentPane().add(
-        jPanel2,
-        java.awt.BorderLayout.WEST
-    );
-
-    getContentPane().add(
-        jPanel1,
-        java.awt.BorderLayout.CENTER
-    );
-
-    jPanel2.setPreferredSize(
-        new java.awt.Dimension(
-            270,
-            0
-        )
-    );
-
-    setDefaultCloseOperation(
-        DISPOSE_ON_CLOSE
-    );
-
-    setExtendedState(
-        JFrame.MAXIMIZED_BOTH
-    );
-}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -349,38 +288,39 @@ public class EditarPacientes_secretario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonSwing3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing3ActionPerformed
+    private void botonSwing3ActionPerformed(java.awt.event.ActionEvent evt) {
         Dashboard_Secretario menu = new Dashboard_Secretario();
         menu.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_botonSwing3ActionPerformed
+    }
 
-    private void botonSwing1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing1ActionPerformed
+    private void botonSwing1ActionPerformed(java.awt.event.ActionEvent evt) {
         Registrar_paciente_secretario menu = new Registrar_paciente_secretario();
         menu.setVisible(true);
-        this.dispose();// TODO add your handling code here:
-    }//GEN-LAST:event_botonSwing1ActionPerformed
+        this.dispose();
+    }
 
-    private void btn_CalendarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CalendarioActionPerformed
-        EditarPacientes_secretario menu = new EditarPacientes_secretario();
-        menu.setVisible(true);
-        this.dispose();// TODO add your handling code here:
-    }//GEN-LAST:event_btn_CalendarioActionPerformed
+    private void btn_CalendarioActionPerformed(java.awt.event.ActionEvent evt) {
+        cargarTabla();
+    }
 
-    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
+    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {
         dispose();
-    }//GEN-LAST:event_btn_SalirActionPerformed
+    }
 
-    private void btn_ReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReportesActionPerformed
-    Reporte_secretario menu = new Reporte_secretario();
-    menu.setVisible(true);
-    this.dispose();    // TODO add your handling code here:
-    }//GEN-LAST:event_btn_ReportesActionPerformed
+    private void btn_ReportesActionPerformed(java.awt.event.ActionEvent evt) {
+        /*
+        Reporte_secretario menu = new Reporte_secretario();
+        menu.setVisible(true);
+        this.dispose();
+*/
+    }
 
-    private void boton_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_editarActionPerformed
+    private void boton_editarActionPerformed(java.awt.event.ActionEvent evt) {
+        /*
         int fila = jTableBuscarPaciente.getSelectedRow();
         if (fila == -1) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Selecciona un paciente de la tabla primero.", "Sin selección", javax.swing.JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Selecciona un paciente de la tabla primero.", "Sin selección", JOptionPane.WARNING_MESSAGE);
             return;
         }
         int idMascota = Integer.parseInt(jTableBuscarPaciente.getValueAt(fila, 0).toString());
@@ -388,45 +328,44 @@ public class EditarPacientes_secretario extends javax.swing.JFrame {
         if (dto != null) {
             editar_paciente editor = new editar_paciente(dto);
             editor.setVisible(true);
-            EditarPacientes_secretario.this.dispose();
+            this.dispose();
         } else {
-            javax.swing.JOptionPane.showMessageDialog(this, "No se pudo cargar el paciente de la BD.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No se pudo cargar el paciente de la BD.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_boton_editarActionPerformed
+*/
+    }
 
-    private void boton_dar_de_bajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_dar_de_bajaActionPerformed
+    private void boton_dar_de_bajaActionPerformed(java.awt.event.ActionEvent evt) {
         int fila = jTableBuscarPaciente.getSelectedRow();
         if (fila == -1) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Selecciona un paciente de la tabla primero.", "Sin selección", javax.swing.JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Selecciona un paciente de la tabla primero.", "Sin selección", JOptionPane.WARNING_MESSAGE);
             return;
         }
         int idMascota = Integer.parseInt(jTableBuscarPaciente.getValueAt(fila, 0).toString());
         String nombre = jTableBuscarPaciente.getValueAt(fila, 1).toString();
-        int confirm = javax.swing.JOptionPane.showConfirmDialog(this,
-            "¿Seguro que deseas eliminar a \"" + nombre + "\" de la base de datos?\nEsta acción también borrará sus citas relacionadas.",
-            "Confirmar eliminación", javax.swing.JOptionPane.YES_NO_OPTION, javax.swing.JOptionPane.WARNING_MESSAGE);
-        if (confirm == javax.swing.JOptionPane.YES_OPTION) {
-            boolean ok = Datos.mascotaDAO.eliminar(idMascota);
+        int confirm = JOptionPane.showConfirmDialog(this,
+            "¿Seguro que deseas dar de baja a \"" + nombre + "\"?\nSu estatus cambiará a 'Inactivo' conservando su historial clínico.",
+            "Confirmar baja lógica", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (confirm == JOptionPane.YES_OPTION) {
+            boolean ok = Datos.mascotaDAO.darDeBaja(idMascota);
             if (ok) {
-                Datos.sincronizarConVeterinario();
                 cargarTabla();
-                javax.swing.JOptionPane.showMessageDialog(this, "Mascota eliminada correctamente de la base de datos.");
+                JOptionPane.showMessageDialog(this, "Paciente marcado como 'Inactivo' en patitas_final.");
             } else {
-                javax.swing.JOptionPane.showMessageDialog(this, "Error al eliminar de la base de datos.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Error al actualizar estatus en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
-    }//GEN-LAST:event_boton_dar_de_bajaActionPerformed
+    }
 
-    private void botonSwing2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing2ActionPerformed
+    private void botonSwing2ActionPerformed(java.awt.event.ActionEvent evt) {
         Dashboard_Secretario menu = new Dashboard_Secretario();
         menu.setVisible(true);
-        this.dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_botonSwing2ActionPerformed
+        this.dispose();
+    }
 
     private void cargarTabla() {
-        // Cargar desde base de datos
         Datos.cargarMascotas();
-        javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) jTableBuscarPaciente.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) jTableBuscarPaciente.getModel();
         modelo.setRowCount(0);
         for (MascotaSecretarioDAO.MascotaDTO d : Datos.mascotas) {
             modelo.addRow(new Object[]{
@@ -434,8 +373,8 @@ public class EditarPacientes_secretario extends javax.swing.JFrame {
                 d.nombreMascota,
                 d.especie,
                 d.raza,
-                d.fechaNacimiento,
-                d.estatusCliente
+                d.fechaNacimiento != null ? d.fechaNacimiento : "",
+                d.estatus
             });
         }
     }
@@ -444,18 +383,23 @@ public class EditarPacientes_secretario extends javax.swing.JFrame {
         String textoBusqueda = jTextField_bucarPaciente.getText().trim().toLowerCase();
         String especieFiltro = jComboBox1.getSelectedItem() != null ? jComboBox1.getSelectedItem().toString() : "Todos";
 
-        javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) jTableBuscarPaciente.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) jTableBuscarPaciente.getModel();
         modelo.setRowCount(0);
 
         for (MascotaSecretarioDAO.MascotaDTO d : Datos.mascotas) {
+            String nombreM = d.nombreMascota != null ? d.nombreMascota.toLowerCase() : "";
+            String razaM   = d.raza != null ? d.raza.toLowerCase() : "";
+            String propM   = d.nombrePropietario != null ? d.nombrePropietario.toLowerCase() : "";
+            String espM    = d.especie != null ? d.especie : "";
+
             boolean coincideTexto = textoBusqueda.isEmpty()
                 || String.valueOf(d.idMascota).contains(textoBusqueda)
-                || d.nombreMascota.toLowerCase().contains(textoBusqueda)
-                || d.raza.toLowerCase().contains(textoBusqueda)
-                || d.nombrePropietario.toLowerCase().contains(textoBusqueda);
+                || nombreM.contains(textoBusqueda)
+                || razaM.contains(textoBusqueda)
+                || propM.contains(textoBusqueda);
 
             boolean coincideEspecie = especieFiltro.equals("Todos")
-                || d.especie.equalsIgnoreCase(especieFiltro);
+                || espM.equalsIgnoreCase(especieFiltro);
 
             if (coincideTexto && coincideEspecie) {
                 modelo.addRow(new Object[]{
@@ -463,21 +407,14 @@ public class EditarPacientes_secretario extends javax.swing.JFrame {
                     d.nombreMascota,
                     d.especie,
                     d.raza,
-                    d.fechaNacimiento,
-                    d.estatusCliente
+                    d.fechaNacimiento != null ? d.fechaNacimiento : "",
+                    d.estatus
                 });
             }
         }
     }
-    /**
-     * @param args the command line arguments
-     */
+
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -485,23 +422,11 @@ public class EditarPacientes_secretario extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EditarPacientes_secretario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EditarPacientes_secretario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EditarPacientes_secretario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(EditarPacientes_secretario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new EditarPacientes_secretario().setVisible(true);
-            }
-        });
+        java.awt.EventQueue.invokeLater(() -> new EditarPacientes_secretario().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

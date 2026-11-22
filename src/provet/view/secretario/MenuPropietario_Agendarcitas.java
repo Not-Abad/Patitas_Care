@@ -1,52 +1,62 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package provet.view.secretario;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import provet.view.propietario.MenuPropietario_Archivos;
-import provet.view.propietario.MenuPropietario_Archivos;
-import provet.view.propietario.MenuPropietario_Archivos;
-import provet.view.propietario.MenuPropietario_Principal;
-import provet.view.propietario.MenuPropietario_Principal;
-import provet.view.propietario.MenuPropietario_Principal;
-import provet.view.secretario.Registrar_paciente_secretario;
-import provet.view.secretario.Reporte_secretario;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import provet.utilidades.Sesion;
 
-/**
- *
- * @author mayel
- */
 public class MenuPropietario_Agendarcitas extends javax.swing.JFrame {
-    
+
     public static Citas_pendientes_secretario instanciaUnica;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MenuPropietario_Agendarcitas.class.getName());
+    private final Map<String, Integer> mapaVeterinarios = new LinkedHashMap<>();
 
-    /**
-     * Creates new form MenuPropietario_Agendarcitas
-     */
     public MenuPropietario_Agendarcitas() {
         initComponents();
-       if (isUndecorated()) {
-    dispose();
-    setUndecorated(false);
-}
+        cargarDatosSesion();
+        cargarCatalogos();
 
-// paneles se estiran
-getContentPane().removeAll();
-getContentPane().setLayout(new java.awt.BorderLayout());
-getContentPane().add(jPanel2, java.awt.BorderLayout.WEST);    // sidebar
-getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);  // contenido
+        if (isUndecorated()) {
+            dispose();
+            setUndecorated(false);
+        }
 
-// 3) Sidebar mantiene 270px de ancho fijo
-jPanel2.setPreferredSize(new java.awt.Dimension(270, 0));
+        getContentPane().removeAll();
+        getContentPane().setLayout(new java.awt.BorderLayout());
+        getContentPane().add(jPanel2, java.awt.BorderLayout.WEST);
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        jPanel2.setPreferredSize(new java.awt.Dimension(270, 0));
 
-// 4) Maximizar y cierre limpio
-setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+    }
+
+    private void cargarDatosSesion() {
+        if (Sesion.haySesionActiva()) {
+            jLabel6.setText(Sesion.getNombreMostrar());
+            if (!Sesion.getNombreRol().isEmpty()) {
+                jLabel16.setText(Sesion.getNombreRol());
+            }
+        }
+    }
+
+    private void cargarCatalogos() {
+        mapaVeterinarios.clear();
+        mapaVeterinarios.putAll(Datos.citaDAO.obtenerVeterinarios());
+        if (!mapaVeterinarios.isEmpty()) {
+            comboVeterinario.setModel(new DefaultComboBoxModel<>(mapaVeterinarios.keySet().toArray(new String[0])));
+        }
+
+        List<String> especies = Datos.mascotaDAO.getEspecies();
+        if (!especies.isEmpty()) {
+            comboespecie.setModel(new DefaultComboBoxModel<>(especies.toArray(new String[0])));
+        }
     }
 
     /**
@@ -296,129 +306,125 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void comboHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboHorarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboHorarioActionPerformed
+    private void comboHorarioActionPerformed(java.awt.event.ActionEvent evt) {}
 
-    private void txtbotonconfirmarcitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbotonconfirmarcitaActionPerformed
-        // 1. Captura de datos
+    private void txtbotonconfirmarcitaActionPerformed(java.awt.event.ActionEvent evt) {
         String raza        = txt_raza.getText().trim();
         String nombre      = txt_nombremascota.getText().trim();
-        String especie     = comboespecie.getSelectedItem().toString();
-        String veterinario = comboVeterinario.getSelectedItem().toString();
+        String especie     = comboespecie.getSelectedItem() != null ? comboespecie.getSelectedItem().toString() : "Perro";
+        String veterinario = comboVeterinario.getSelectedItem() != null ? comboVeterinario.getSelectedItem().toString() : "";
         String fechaTxt    = txtFecha.getText().trim();
-        String horario     = comboHorario.getSelectedItem().toString();
-        String motivo      = comboMotivo.getSelectedItem().toString();
+        String horario     = comboHorario.getSelectedItem() != null ? comboHorario.getSelectedItem().toString() : "9:00 am";
+        String motivoBase  = comboMotivo.getSelectedItem() != null ? comboMotivo.getSelectedItem().toString() : "Consulta general";
         String descripcion = txtDescripcion.getText().trim();
 
-        // 2. Validación
         if (nombre.isEmpty() || fechaTxt.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor completa: nombre de mascota y fecha.");
             return;
         }
 
-        // 3. Construir fecha-hora para la BD (formato yyyy-MM-dd HH:mm:ss)
-        String fechaHora;
+        String fechaHoraInicio;
+        String fechaHoraFin;
         try {
-            // fechaTxt puede venir como "dd/MM/yyyy" o "yyyy-MM-dd"
             String fechaLimpia = fechaTxt.replace("/", "-").trim();
-            if (fechaLimpia.length() == 10) {
-                // verificar si viene en dd-MM-yyyy
-                String[] partes = fechaLimpia.split("-");
-                if (partes[0].length() == 4) {
-                    fechaHora = fechaLimpia + " " + horarioToHHMM(horario) + ":00";
-                } else {
-                    // dd-MM-yyyy → yyyy-MM-dd
-                    fechaHora = partes[2] + "-" + partes[1] + "-" + partes[0] + " " + horarioToHHMM(horario) + ":00";
-                }
-            } else {
-                fechaHora = java.time.LocalDateTime.now().toString().substring(0, 10) + " " + horarioToHHMM(horario) + ":00";
+            String[] partes = fechaLimpia.split("-");
+            if (partes.length != 3) {
+                throw new IllegalArgumentException("Formato incompleto");
             }
+            String fechaISO = partes[0].length() == 4
+                ? String.format("%04d-%02d-%02d", Integer.parseInt(partes[0]), Integer.parseInt(partes[1]), Integer.parseInt(partes[2]))
+                : String.format("%04d-%02d-%02d", Integer.parseInt(partes[2]), Integer.parseInt(partes[1]), Integer.parseInt(partes[0]));
+
+            String hhmm = horarioToHHMM(horario);
+            DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            LocalDateTime inicio = LocalDateTime.parse(fechaISO + " " + hhmm + ":00", fmt);
+            LocalDateTime fin = inicio.plusMinutes(30);
+            fechaHoraInicio = inicio.format(fmt);
+            fechaHoraFin = fin.format(fmt);
         } catch (Exception ex) {
-            fechaHora = java.time.LocalDateTime.now().toString().substring(0, 10) + " 09:00:00";
+            JOptionPane.showMessageDialog(this, "Formato de fecha inválido. Usa YYYY-MM-DD o DD/MM/YYYY.", "Fecha inválida", JOptionPane.WARNING_MESSAGE);
+            return;
         }
 
-        // 4. Guardar en base de datos
-        int idCita = Datos.citaDAO.insertarConNombre(nombre, raza, especie, fechaHora, motivo, descripcion);
+        int idVeterinario = mapaVeterinarios.getOrDefault(veterinario, 0);
+        int idUsuarioRegistro = Datos.obtenerIdUsuarioActual();
+        String motivoCompleto = descripcion.isEmpty() ? motivoBase : motivoBase + " - " + descripcion;
+
+        int idCita = Datos.citaDAO.insertarConNombre(
+            nombre, raza, especie, idVeterinario, idUsuarioRegistro,
+            fechaHoraInicio, fechaHoraFin, motivoCompleto
+        );
 
         if (idCita > 0) {
-            JOptionPane.showMessageDialog(this, "Cita agendada correctamente en la base de datos.\nID de cita: " + idCita);
+            Datos.cargarCitas();
+            JOptionPane.showMessageDialog(this, "Cita agendada correctamente en patitas_final.\nID de cita: " + idCita);
             JOptionPane.showMessageDialog(null, "Recuerda llegar 10 min antes a tu cita");
             Citas_pendientes_secretario ventana = new Citas_pendientes_secretario();
             ventana.setVisible(true);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this,
-                "Error al guardar la cita en la base de datos.\nVerifica la conexión con MariaDB.",
+                "Error al guardar la cita en la base de datos.\nVerifica que exista al menos un veterinario activo y conexión con MariaDB.",
                 "Error de BD", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_txtbotonconfirmarcitaActionPerformed
+    }
 
-    private void txtbotoncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbotoncancelarActionPerformed
-
+    private void txtbotoncancelarActionPerformed(java.awt.event.ActionEvent evt) {
         txt_raza.setText("");
         txt_nombremascota.setText("");
         txtFecha.setText("");
         txtDescripcion.setText("");
-
-        comboespecie.setSelectedIndex(0);
-        comboVeterinario.setSelectedIndex(0);
-        comboHorario.setSelectedIndex(0);
-        comboMotivo.setSelectedIndex(0);
-
-        JOptionPane.showMessageDialog(this, "Se han eliminado la cita correctamente");
+        if (comboespecie.getItemCount() > 0) comboespecie.setSelectedIndex(0);
+        if (comboVeterinario.getItemCount() > 0) comboVeterinario.setSelectedIndex(0);
+        if (comboHorario.getItemCount() > 0) comboHorario.setSelectedIndex(0);
+        if (comboMotivo.getItemCount() > 0) comboMotivo.setSelectedIndex(0);
+        JOptionPane.showMessageDialog(this, "Formulario limpiado correctamente.");
         txt_nombremascota.requestFocus();
-    }//GEN-LAST:event_txtbotoncancelarActionPerformed
+    }
 
-    private void botonSwing2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing2ActionPerformed
-        Dashboard_Secretario menu = new Dashboard_Secretario();
-        menu.setVisible(true);
-        this.dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_botonSwing2ActionPerformed
-
-    private void botonSwing3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing3ActionPerformed
-        MenuPropietario_Principal menu = new MenuPropietario_Principal();
-        menu.setVisible(true);
-        this.dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_botonSwing3ActionPerformed
-
-    private void txt_nombremascotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombremascotaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_nombremascotaActionPerformed
-
-    private void txt_razaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_razaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_razaActionPerformed
-
-    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
-        dispose();
-    }//GEN-LAST:event_btn_SalirActionPerformed
-
-    private void botonSwing5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing5ActionPerformed
+    private void botonSwing2ActionPerformed(java.awt.event.ActionEvent evt) {
         Dashboard_Secretario menu = new Dashboard_Secretario();
         menu.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_botonSwing5ActionPerformed
+    }
 
-    private void botonSwing1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing1ActionPerformed
+    private void botonSwing3ActionPerformed(java.awt.event.ActionEvent evt) {
+        
+    }
+
+    private void txt_nombremascotaActionPerformed(java.awt.event.ActionEvent evt) {}
+    private void txt_razaActionPerformed(java.awt.event.ActionEvent evt) {}
+
+    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {
+        dispose();
+    }
+
+    private void botonSwing5ActionPerformed(java.awt.event.ActionEvent evt) {
+        Dashboard_Secretario menu = new Dashboard_Secretario();
+        menu.setVisible(true);
+        this.dispose();
+    }
+
+    private void botonSwing1ActionPerformed(java.awt.event.ActionEvent evt) {
         Registrar_paciente_secretario menu = new Registrar_paciente_secretario();
         menu.setVisible(true);
-        this.dispose();// TODO add your handling code here:
-    }//GEN-LAST:event_botonSwing1ActionPerformed
+        this.dispose();
+    }
 
-    private void btn_CalendarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CalendarioActionPerformed
+    private void btn_CalendarioActionPerformed(java.awt.event.ActionEvent evt) {
         EditarPacientes_secretario menu = new EditarPacientes_secretario();
         menu.setVisible(true);
-        this.dispose();// TODO add your handling code here:
-    }//GEN-LAST:event_btn_CalendarioActionPerformed
+        this.dispose();
+    }
 
-    private void btn_ReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReportesActionPerformed
+    private void btn_ReportesActionPerformed(java.awt.event.ActionEvent evt) {
+        /*
         Reporte_secretario menu = new Reporte_secretario();
         menu.setVisible(true);
-        this.dispose();    // TODO add your handling code here:
-    }//GEN-LAST:event_btn_ReportesActionPerformed
+        this.dispose();
+*/
+    }
 
-    /** Convierte "09:00 a.m." o "9:00 AM" al formato HH:mm (24h). */
     private String horarioToHHMM(String horario) {
         if (horario == null || horario.trim().isEmpty()) return "09:00";
         try {
@@ -437,15 +443,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         }
     }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -456,9 +454,7 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new MenuPropietario_Agendarcitas().setVisible(true));
     }
 
