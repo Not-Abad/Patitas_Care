@@ -1,114 +1,103 @@
-
 package provet.view.veterinario;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.Cursor;
+import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
-import provet.model.Paciente;
-import provet.model.ControlPacientes;
 import provet.componentes.PanelPaciente;
 import provet.componentes.PanelPaciente2;
-import java.awt.GridLayout;
-import javax.swing.JDialog;
-import provet.model.ControlUsuarios;
-import provet.model.Usuario;
+import provet.dao.PacienteDetalleDAO;
+import provet.modelo.PacienteDetalle;
+import provet.modelo.Usuario;
+import provet.utilidades.Sesion;
+
 public class Pacientes extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Pacientes.class.getName());
     private Usuario usuario;
-    
-   public Pacientes(Usuario usuario) {
-    initComponents();
-    this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-    this.usuario = usuario;
+    private final PacienteDetalleDAO pacienteDAO = new PacienteDetalleDAO();
+    private List<PacienteDetalle> listaPacientes = new ArrayList<>();
 
-    if (usuario != null) {
-    lblNombreVet.setText(usuario.getNombre());
-    } else {
-    lblNombreVet.setText("Sin usuario");
+    public Pacientes() {
+        this(Sesion.getUsuarioActual());
     }
     
+    public Pacientes(Usuario usuario) {
+        initComponents();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.usuario = (usuario != null) ? usuario : Sesion.getUsuarioActual();
+
+        if (Sesion.haySesionActiva()) {
+            lblNombreVet.setText(Sesion.getNombreMostrar());
+            String rol = Sesion.getNombreRol();
+            if (!rol.isEmpty()) {
+                jLabel6.setText(rol);
+            }
+        } else if (this.usuario != null) {
+            lblNombreVet.setText(this.usuario.getUsername());
+        } else {
+            lblNombreVet.setText("Sin usuario");
+        }
+
+        contenedor_Cartas1.setLayout(new GridLayout(0, 2, 20, 20));
+        contenedor_Cartas1.setPreferredSize(null); 
+
+        txtBuscar.addActionListener(e -> btnBuscarActionPerformed(e));
+
+        cargarPacientesDesdeBD();
+    }
     
+    public void agregarPaciente(PacienteDetalle p) {
+        PanelPaciente panel = new PanelPaciente();
+        panel.setDatos(p);
+        panel.setClickListener(() -> abrirPanelConDatos(p));
 
-    contenedor_Cartas1.setLayout(new GridLayout(0, 2, 20, 20));
-    contenedor_Cartas1.setPreferredSize(null); 
-
-    // DATOS DE PRUEBA
-    ControlPacientes.listaPacientes.add(
-        new Paciente(1, "Firulais", "Perro", "Labrador", 3, 20, "M", "", "", "src/img/perro1.jpg")
-    );
-
-    ControlPacientes.listaPacientes.add(
-        new Paciente(2, "Michi", "Gato", "Siames", 2, 5, "H", "", "", "src/img/gato1.jpg")
-    );
-
-    ControlPacientes.listaPacientes.add(
-        new Paciente(3, "Rocky", "Perro", "Bulldog", 4, 18, "M", "", "", "src/img/perro2.jpg")
-    );
-    ControlPacientes.listaPacientes.add(
-        new Paciente(3, "Rocky", "Perro", "Bulldog", 4, 18, "M", "", "", "src/img/perro2.jpg")
-    );
+        contenedor_Cartas1.add(panel);
+        contenedor_Cartas1.revalidate();
+        contenedor_Cartas1.repaint();
+    }
     
+    public final void cargarPacientesDesdeBD() {
+        this.listaPacientes = pacienteDAO.selectAllActivos();
+        renderizarPacientes(this.listaPacientes);
+    }
 
-    cargarPacientes();
-}
-    
-    public void agregarPaciente(Paciente p) {
-    PanelPaciente panel = new PanelPaciente();
-    panel.setDatos(p);
+    private void renderizarPacientes(List<PacienteDetalle> pacientes) {
+        contenedor_Cartas1.removeAll();
 
-    contenedor_Cartas1.add(panel);
-    contenedor_Cartas1.revalidate();
-    contenedor_Cartas1.repaint();
-}
-    
-    public void cargarPacientes() {
-    contenedor_Cartas1.removeAll();
+        for (PacienteDetalle p : pacientes) {
+            PanelPaciente panel = new PanelPaciente();
+            panel.setDatos(p);
 
-    for (Paciente p : ControlPacientes.listaPacientes) {
-    PanelPaciente panel = new PanelPaciente();
-    panel.setDatos(p);
+            panel.setClickListener(() -> {
+                panel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                abrirPanelConDatos(p);
+            });
+            panel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            contenedor_Cartas1.add(panel);
+        }
 
-    panel.setClickListener(() -> {
-        System.out.println("CLICK RECIBIDO");
-        panel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        abrirPanelConDatos(p);
-    });
-    panel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    contenedor_Cartas1.add(panel);
-}
+        contenedor_Cartas1.revalidate();
+        contenedor_Cartas1.repaint();
+    }
 
-    contenedor_Cartas1.revalidate();
-    contenedor_Cartas1.repaint();
-}
-    
-    private void abrirPanel() {
-    JDialog dialog = new JDialog(
-        (java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this),true );
+    private void abrirPanelConDatos(PacienteDetalle p) {
+        JDialog dialog = new JDialog(this, true);
+        dialog.setTitle("Detalle del paciente");
 
-    dialog.setTitle("Detalle del paciente");
+        // Consultamos el expediente completo (incluyendo vacunas y antecedentes)
+        PacienteDetalle detalleCompleto = pacienteDAO.selectDetalleById(p.getIdMascota());
+        PanelPaciente2 panel = new PanelPaciente2();
+        panel.setDatos(detalleCompleto != null ? detalleCompleto : p);
 
-    PanelPaciente2 panel = new PanelPaciente2();
+        dialog.add(panel);
+        dialog.pack();
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+    }
 
-    dialog.add(panel);
-    dialog.pack(); 
-    dialog.setLocationRelativeTo(null); 
-
-    dialog.setVisible(true);
-}
-
-    private void abrirPanelConDatos(Paciente p) {
-    JDialog dialog = new JDialog(this, true);
-    dialog.setTitle("Detalle del paciente");
-
-    PanelPaciente2 panel = new PanelPaciente2();
-    panel.setDatos(p); // 👈 importante
-
-    dialog.add(panel);
-    dialog.pack();
-    dialog.setLocationRelativeTo(null);
-    dialog.setVisible(true);
-}
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -220,40 +209,34 @@ public class Pacientes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_administrativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_administrativoActionPerformed
-        
-        // TODO add your handling code here:
     }//GEN-LAST:event_btn_administrativoActionPerformed
 
     private void btn_atencionmedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_atencionmedActionPerformed
-        
-        dispose();    }//GEN-LAST:event_btn_atencionmedActionPerformed
+        dispose();
+    }//GEN-LAST:event_btn_atencionmedActionPerformed
 
     private void btn_configuraciónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_configuraciónActionPerformed
-         
     }//GEN-LAST:event_btn_configuraciónActionPerformed
 
     private void btn_reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reportesActionPerformed
-        
     }//GEN-LAST:event_btn_reportesActionPerformed
 
     private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
+        int respuesta = javax.swing.JOptionPane.showConfirmDialog(
+                this,
+                "¿Estás seguro de que deseas salir?",
+                "Confirmar salida",
+                javax.swing.JOptionPane.YES_NO_OPTION);
 
-    int respuesta = javax.swing.JOptionPane.showConfirmDialog(
-            this,
-            "¿Estás seguro de que deseas salir?",
-            "Confirmar salida",
-            javax.swing.JOptionPane.YES_NO_OPTION);
-
-    if (respuesta == javax.swing.JOptionPane.YES_OPTION) {
-        provet.utilidades.Sesion.cerrarSesion();
-        new provet.view.inicio.Login().setVisible(true);
-        this.dispose();
-    }
-
+        if (respuesta == javax.swing.JOptionPane.YES_OPTION) {
+            Sesion.cerrarSesion();
+            new provet.view.inicio.Login().setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_btn_SalirActionPerformed
 
     private void btn_MenuPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_MenuPActionPerformed
-        Menu_Principal m = new Menu_Principal(ControlUsuarios.usuarioActivo); 
+        Menu_Principal m = new Menu_Principal(usuario); 
         m.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btn_MenuPActionPerformed
@@ -265,39 +248,16 @@ public class Pacientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_ReportesActionPerformed
 
     private void botonSwing1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing1ActionPerformed
-        // TODO add your handling code here:
+        cargarPacientesDesdeBD();
     }//GEN-LAST:event_botonSwing1ActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-         String texto = txtBuscar.getText();
-
-    contenedor_Cartas1.removeAll();
-
-    for (Paciente p : ControlPacientes.buscarPacientes(texto)) {
-        PanelPaciente panel = new PanelPaciente();
-        panel.setDatos(p);
-
-        panel.setClickListener(() -> {
-            abrirPanelConDatos(p);
-        });
-
-        panel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        contenedor_Cartas1.add(panel);
-    }
-
-    contenedor_Cartas1.revalidate();
-    contenedor_Cartas1.repaint();   
+        String texto = txtBuscar.getText();
+        List<PacienteDetalle> filtrados = pacienteDAO.buscarPorFiltro(texto);
+        renderizarPacientes(filtrados);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -308,10 +268,8 @@ public class Pacientes extends javax.swing.JFrame {
         } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Pacientes(ControlUsuarios.usuarioActivo).setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new Pacientes().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

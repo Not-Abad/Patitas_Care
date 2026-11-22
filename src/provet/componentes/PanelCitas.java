@@ -1,15 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package provet.componentes;
 
-import java.awt.Color;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.beans.Beans;
+import java.time.LocalDate;
 import javax.swing.JDialog;
-import provet.model.Paciente;
-import provet.model.Reporte;
-import provet.model.RecetaMedica;
-import provet.componentes.ReceteMedica;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import provet.dao.ReporteCitaDAO;
+import provet.modelo.Reporte;
+import provet.utilidades.Sesion;
 import provet.view.veterinario.Reportes_Citas;
 
 /**
@@ -19,12 +20,62 @@ import provet.view.veterinario.Reportes_Citas;
 public class PanelCitas extends javax.swing.JPanel {
 
     private Reportes_Citas ventana;
+    private final ReporteCitaDAO reporteDAO = new ReporteCitaDAO();
+    private String correoPropietarioActual = "";
+    private Integer idDiagnosticoGenerado = null;
+
+    public PanelCitas() {
+        initComponents();
+        configurarDefaults();
+    }
+
     public PanelCitas(Reportes_Citas ventana) {
         initComponents();
         this.ventana = ventana;
+        configurarDefaults();
     }
-    
-    
+
+    private void configurarDefaults() {
+        if (Beans.isDesignTime()) return;
+
+        // Prellenar fecha actual y veterinario logueado
+        txtfFecha.setText(LocalDate.now().toString());
+        if (Sesion.haySesionActiva()) {
+            txtfVet.setText(Sesion.getNombreMostrar());
+        }
+
+        // Autocompletar paciente y especie al salir del campo ID
+        txtfID.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                autocompletarPacientePorId();
+            }
+        });
+    }
+
+    private void autocompletarPacientePorId() {
+        String idTexto = txtfID.getText().trim();
+        if (idTexto.isEmpty()) return;
+
+        try {
+            int idMascota = Integer.parseInt(idTexto);
+            Reporte datos = reporteDAO.buscarDatosPaciente(idMascota);
+            if (datos != null) {
+                txtfNombre.setText(datos.getNombreMascota());
+                txtfEspecie.setText(datos.getEspecie());
+                this.correoPropietarioActual = datos.getCorreoPropietario() != null ? datos.getCorreoPropietario() : "";
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "No se encontró ninguna mascota con ID: " + idMascota,
+                        "Paciente no encontrado", JOptionPane.WARNING_MESSAGE);
+                txtfNombre.setText("");
+                txtfEspecie.setText("");
+                this.correoPropietarioActual = "";
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "El ID del paciente debe ser numérico.", "Dato inválido", JOptionPane.WARNING_MESSAGE);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -166,103 +217,113 @@ public class PanelCitas extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecetaActionPerformed
-    String nombre = txtfNombre.getText();
-String fecha = txtfFecha.getText();
-String especie = txtfEspecie.getText();
+        Reporte datosReceta = new Reporte();
+        if (!txtfID.getText().trim().isEmpty()) {
+            try {
+                datosReceta.setIdMascota(Integer.parseInt(txtfID.getText().trim()));
+            } catch (NumberFormatException ignored) {}
+        }
+        datosReceta.setIdDiagnostico(this.idDiagnosticoGenerado);
+        datosReceta.setNombreMascota(txtfNombre.getText().trim());
+        datosReceta.setFecha(txtfFecha.getText().trim());
+        datosReceta.setEspecie(txtfEspecie.getText().trim());
+        datosReceta.setMotivo(txtfMotivo.getText().trim());
+        datosReceta.setCorreoPropietario(this.correoPropietarioActual);
+        datosReceta.setMedicamentos(txtfMed.getText().trim());
+        datosReceta.setDosis(txtfDosis.getText().trim());
 
-RecetaMedica receta = new RecetaMedica(
-    nombre,
-    fecha,
-    especie,
-    "",
-    ""
-);
+        ReceteMedica panel = new ReceteMedica(datosReceta);
 
-ReceteMedica panel = new ReceteMedica(receta);
-
-JDialog dialog = new JDialog();
-dialog.setTitle("Receta Médica");
-dialog.setModal(true);
-dialog.setContentPane(panel);
-dialog.pack();
-dialog.setLocationRelativeTo(this);
-dialog.setVisible(true);
+        JDialog dialog = new JDialog();
+        dialog.setTitle("Receta Médica");
+        dialog.setModal(true);
+        dialog.setContentPane(panel);
+        dialog.pack();
+        dialog.setLocationRelativeTo(this);
+        dialog.setVisible(true);
     }//GEN-LAST:event_btnRecetaActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // VALIDAR CAMPOS VACÍOS
-    if (txtfID.getText().trim().isEmpty() ||
-        txtfNombre.getText().trim().isEmpty() ||
-        txtfEspecie.getText().trim().isEmpty() ||
-        txtfFecha.getText().trim().isEmpty() ||
-        txtfVet.getText().trim().isEmpty() ||
-        txtfAnalisis.getText().trim().isEmpty() ||
-        txtfMed.getText().trim().isEmpty() ||
-        txtfDosis.getText().trim().isEmpty() ||
-        txtfMotivo.getText().trim().isEmpty()) {
+        if (txtfID.getText().trim().isEmpty() ||
+            txtfNombre.getText().trim().isEmpty() ||
+            txtfEspecie.getText().trim().isEmpty() ||
+            txtfFecha.getText().trim().isEmpty() ||
+            txtfVet.getText().trim().isEmpty() ||
+            txtfAnalisis.getText().trim().isEmpty() ||
+            txtfMed.getText().trim().isEmpty() ||
+            txtfDosis.getText().trim().isEmpty() ||
+            txtfMotivo.getText().trim().isEmpty()) {
 
-        javax.swing.JOptionPane.showMessageDialog(
-            this,
-            "Por favor completa todos los campos",
-            "Campos vacíos",
-            javax.swing.JOptionPane.WARNING_MESSAGE
-        );
+            JOptionPane.showMessageDialog(
+                this,
+                "Por favor completa todos los campos",
+                "Campos vacíos",
+                JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
 
-        return; // detener ejecución
-    }
+        try {
+            int idMascota = Integer.parseInt(txtfID.getText().trim());
+            String nombre = txtfNombre.getText().trim();
+            String especie = txtfEspecie.getText().trim();
+            String fecha = txtfFecha.getText().trim();
+            String vet = txtfVet.getText().trim();
+            String analisis = txtfAnalisis.getText().trim();
+            String medicamentos = txtfMed.getText().trim();
+            String dosis = txtfDosis.getText().trim();
+            String motivos = txtfMotivo.getText().trim();
 
-    try {
+            Reporte r = new Reporte(
+                idMascota,
+                nombre,
+                especie,
+                fecha,
+                vet,
+                analisis,
+                medicamentos,
+                dosis,
+                motivos
+            );
+            r.setCorreoPropietario(this.correoPropietarioActual);
 
-        int id = Integer.parseInt(txtfID.getText());
-        String nombre = txtfNombre.getText();
-        String especie = txtfEspecie.getText();
-        String fecha = txtfFecha.getText();
-        String vet = txtfVet.getText();
-        String analisis = txtfAnalisis.getText();
-        String medicamentos = txtfMed.getText();
-        String dosis = txtfDosis.getText();
-        String motivos = txtfMotivo.getText();
+            // Guardamos en MySQL ('citas', 'consultas', 'diagnosticos', 'analisis_clinicos', 'recetas')
+            boolean guardadoBD = reporteDAO.registrarReporteCompleto(r);
+            this.idDiagnosticoGenerado = r.getIdDiagnostico();
 
-        Reporte r = new Reporte(
-            id,
-            nombre,
-            especie,
-            fecha,
-            vet,
-            analisis,
-            medicamentos,
-            dosis,
-            motivos
-        );
+            if (!guardadoBD) {
+                JOptionPane.showMessageDialog(
+                    this,
+                    "No se pudo guardar el reporte en MySQL. Verifica que el ID de mascota exista y que haya sesión activa.",
+                    "Error de Base de Datos",
+                    JOptionPane.ERROR_MESSAGE
+                );
+                return;
+            }
 
-        ventana.agregarReporte(r);
+            if (ventana != null) {
+                ventana.agregarReporte(r);
+            }
 
-        // MENSAJE ÉXITO
-        javax.swing.JOptionPane.showMessageDialog(
-            this,
-            "Reporte agregado correctamente"
-        );
+            JOptionPane.showMessageDialog(this, "Reporte guardado correctamente en la base de datos.");
 
-        // CERRAR VENTANA
-        javax.swing.JDialog dialog =
-            (javax.swing.JDialog)
-            javax.swing.SwingUtilities.getWindowAncestor(this);
+            java.awt.Window ancestro = SwingUtilities.getWindowAncestor(this);
+            if (ancestro instanceof JDialog) {
+                ancestro.dispose();
+            }
 
-        dialog.dispose();
-
-    } catch (NumberFormatException e) {
-
-        javax.swing.JOptionPane.showMessageDialog(
-            this,
-            "El ID debe ser numérico",
-            "Error",
-            javax.swing.JOptionPane.ERROR_MESSAGE
-        );
-    }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(
+                this,
+                "El ID del paciente debe ser numérico",
+                "Error",
+                JOptionPane.ERROR_MESSAGE
+            );
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtfIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfIDActionPerformed
-        // TODO add your handling code here:
+        autocompletarPacientePorId();
     }//GEN-LAST:event_txtfIDActionPerformed
 
 
@@ -291,5 +352,4 @@ dialog.setVisible(true);
     private javax.swing.JTextField txtfNombre;
     private javax.swing.JTextField txtfVet;
     // End of variables declaration//GEN-END:variables
-
 }

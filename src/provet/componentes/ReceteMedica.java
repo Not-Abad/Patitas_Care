@@ -1,31 +1,59 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package provet.componentes;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
-import provet.model.Paciente;
-import provet.model.RecetaMedica;
+import provet.dao.DetalleTratamientoDAO;
+import provet.dao.RecetaDAO;
+import provet.dao.ReporteCitaDAO;
+import provet.modelo.DetalleTratamiento;
+import provet.modelo.Receta;
+import provet.modelo.Reporte;
 import provet.utilidades.Servicio_Email;
+import provet.utilidades.Sesion;
+
 /**
  *
  * @author anguv
  */
 public class ReceteMedica extends javax.swing.JPanel {
 
+    private Integer idDiagnostico;
+
     public ReceteMedica() {
-    initComponents();
-}
-    public ReceteMedica(RecetaMedica receta) {
         initComponents();
-        lblNombre.setText(receta.getNombre());
-        lblFecha.setText(receta.getFecha());
-        lblEspecie.setText(receta.getEspecie());
-        
-        
+    }
+
+    public ReceteMedica(Reporte datos) {
+        initComponents();
+        if (datos != null) {
+            this.idDiagnostico = datos.getIdDiagnostico();
+            lblNombre.setText(datos.getNombreMascota() != null ? datos.getNombreMascota() : "");
+            lblFecha.setText(datos.getFecha() != null ? datos.getFecha() : LocalDate.now().toString());
+            lblEspecie.setText(datos.getEspecie() != null ? datos.getEspecie() : "");
+            txtMotivo.setText(datos.getMotivo() != null ? datos.getMotivo() : "");
+
+            // Si viene el correo del propietario o el idMascota, lo cargamos automáticamente
+            if (datos.getCorreoPropietario() != null && !datos.getCorreoPropietario().isBlank()) {
+                txtCorreo.setText(datos.getCorreoPropietario());
+            } else if (datos.getIdMascota() > 0) {
+                Reporte infoPaciente = new ReporteCitaDAO().buscarDatosPaciente(datos.getIdMascota());
+                if (infoPaciente != null && infoPaciente.getCorreoPropietario() != null) {
+                    txtCorreo.setText(infoPaciente.getCorreoPropietario());
+                }
+            }
+
+            // Si se escribió un medicamento inicial en PanelCitas, lo ponemos en la primera fila
+            if (datos.getMedicamentos() != null && !datos.getMedicamentos().isBlank()) {
+                tablaMedicamentos.setValueAt(datos.getMedicamentos(), 0, 0);
+                if (datos.getDosis() != null) {
+                    tablaMedicamentos.setValueAt(datos.getDosis(), 0, 1);
+                }
+            }
+        }
     }
 
     /**
@@ -158,70 +186,117 @@ public class ReceteMedica extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtCorreoActionPerformed
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-        try {
-    String filas = "";
-    // Estilo en línea para las celdas de la tabla interna
-    String estiloTd = "padding: 10px; border: 1px solid #dddddd; color: #333333; text-align: left;";
-
-    for (int i = 0; i < tablaMedicamentos.getRowCount(); i++) {
-        Object medicamentoObj = tablaMedicamentos.getValueAt(i, 0);
-
-        if (medicamentoObj == null || medicamentoObj.toString().trim().isEmpty()) {
-            continue;
+        if (tablaMedicamentos.isEditing()) {
+            tablaMedicamentos.getCellEditor().stopCellEditing();
         }
 
-        String medicamento = medicamentoObj.toString();
-        String dosis = tablaMedicamentos.getValueAt(i, 1) != null ? tablaMedicamentos.getValueAt(i, 1).toString() : "";
-        String frecuencia = tablaMedicamentos.getValueAt(i, 2) != null ? tablaMedicamentos.getValueAt(i, 2).toString() : "";
-        String via = tablaMedicamentos.getValueAt(i, 3) != null ? tablaMedicamentos.getValueAt(i, 3).toString() : "";
-        String duracion = tablaMedicamentos.getValueAt(i, 4) != null ? tablaMedicamentos.getValueAt(i, 4).toString() : "";
+        String correoDestino = txtCorreo.getText().trim();
+        if (correoDestino.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingresa el correo electrónico del destinatario.", "Campo vacío", JOptionPane.WARNING_MESSAGE);
+            txtCorreo.requestFocus();
+            return;
+        }
 
-        filas += "<tr>";
-        filas += "<td style='" + estiloTd + "'>" + medicamento + "</td>";
-        filas += "<td style='" + estiloTd + "'>" + dosis + "</td>";
-        filas += "<td style='" + estiloTd + "'>" + frecuencia + "</td>";
-        filas += "<td style='" + estiloTd + "'>" + via + "</td>";
-        filas += "<td style='" + estiloTd + "'>" + duracion + "</td>";
-        filas += "</tr>";
-    }
+        try {
+            StringBuilder filas = new StringBuilder();
+            String estiloTd = "padding: 10px; border: 1px solid #dddddd; color: #333333; text-align: left;";
 
-    Servicio_Email servicio = new Servicio_Email();
-    
-    // Armamos el Map con las variables exactamente como lo haces en recuperación
-    Map<String, String> variables = new HashMap<>();
-    variables.put("NOMBRE", lblNombre.getText());
-    variables.put("ESPECIE", lblEspecie.getText());
-    variables.put("FECHA", lblFecha.getText());
-    variables.put("MOTIVO", txtMotivo.getText());
-    variables.put("TABLA_MEDICAMENTOS", filas);
+            // Si existe un diagnóstico vinculado en MySQL, persistimos la receta y sus detalles
+            Integer idRecetaGuardada = null;
+            int idVeterinario = Sesion.getIdPersonalActual();
 
-    // Usamos tu propio método para cargar la plantilla y reemplazar las variables
-    String htmlFinal = servicio.obtenerContenidoTemplate("receta.html", variables);
+            if (this.idDiagnostico != null && this.idDiagnostico > 0 && idVeterinario > 0) {
+                Receta nuevaReceta = new Receta();
+                nuevaReceta.setIdDiagnostico(this.idDiagnostico);
+                nuevaReceta.setIdVeterinario(idVeterinario);
+                nuevaReceta.setIndicacionesGenerales(txtMotivo.getText().trim());
 
-    servicio.createEmail(
-            txtCorreo.getText(),
-            "Receta Médica Veterinaria",
-            htmlFinal
-    );
+                if (new RecetaDAO().insert(nuevaReceta)) {
+                    idRecetaGuardada = nuevaReceta.getIdReceta();
+                }
+            }
 
-    servicio.sendEmail();
+            DetalleTratamientoDAO detalleDAO = new DetalleTratamientoDAO();
 
-    JOptionPane.showMessageDialog(
-            this,
-            "Correo enviado correctamente"
-    );
+            for (int i = 0; i < tablaMedicamentos.getRowCount(); i++) {
+                Object medicamentoObj = tablaMedicamentos.getValueAt(i, 0);
 
-} catch (Exception ex) {
-    JOptionPane.showMessageDialog(
-            this,
-            "Error al enviar correo:\n" + ex.getMessage()
-    );
-    ex.printStackTrace();
-}
+                if (medicamentoObj == null || medicamentoObj.toString().trim().isEmpty()) {
+                    continue;
+                }
+
+                String medicamento = medicamentoObj.toString().trim();
+                String dosis = tablaMedicamentos.getValueAt(i, 1) != null ? tablaMedicamentos.getValueAt(i, 1).toString().trim() : "";
+                String frecuencia = tablaMedicamentos.getValueAt(i, 2) != null ? tablaMedicamentos.getValueAt(i, 2).toString().trim() : "";
+                String via = tablaMedicamentos.getValueAt(i, 3) != null ? tablaMedicamentos.getValueAt(i, 3).toString().trim() : "";
+                String duracion = tablaMedicamentos.getValueAt(i, 4) != null ? tablaMedicamentos.getValueAt(i, 4).toString().trim() : "";
+
+                // Guardar cada renglón en 'detalle_tratamiento'
+                if (idRecetaGuardada != null) {
+                    DetalleTratamiento dt = new DetalleTratamiento();
+                    dt.setIdReceta(idRecetaGuardada);
+                    dt.setMedicamento(medicamento);
+                    dt.setDosis(dosis.isEmpty() ? "N/A" : dosis);
+                    dt.setFrecuencia(frecuencia.isEmpty() ? "N/A" : frecuencia);
+                    dt.setFechaInicio(Date.valueOf(LocalDate.now()));
+                    dt.setEstado("Activo");
+                    dt.setObservaciones(!via.isEmpty() ? "Vía: " + via + (duracion.isEmpty() ? "" : " | Duración: " + duracion) : duracion);
+                    try {
+                        String soloDigitos = duracion.replaceAll("[^0-9]", "");
+                        if (!soloDigitos.isEmpty()) {
+                            int dias = Integer.parseInt(soloDigitos);
+                            dt.setDuracionDias(dias);
+                            dt.setFechaFin(Date.valueOf(LocalDate.now().plusDays(dias)));
+                        }
+                    } catch (NumberFormatException ignored) {}
+                    detalleDAO.insert(dt);
+                }
+
+                filas.append("<tr>")
+                     .append("<td style='").append(estiloTd).append("'>").append(medicamento).append("</td>")
+                     .append("<td style='").append(estiloTd).append("'>").append(dosis).append("</td>")
+                     .append("<td style='").append(estiloTd).append("'>").append(frecuencia).append("</td>")
+                     .append("<td style='").append(estiloTd).append("'>").append(via).append("</td>")
+                     .append("<td style='").append(estiloTd).append("'>").append(duracion).append("</td>")
+                     .append("</tr>");
+            }
+
+            Servicio_Email servicio = new Servicio_Email();
+
+            Map<String, String> variables = new HashMap<>();
+            variables.put("NOMBRE", lblNombre.getText());
+            variables.put("ESPECIE", lblEspecie.getText());
+            variables.put("FECHA", lblFecha.getText());
+            variables.put("MOTIVO", txtMotivo.getText());
+            variables.put("TABLA_MEDICAMENTOS", filas.toString());
+
+            String htmlFinal = servicio.obtenerContenidoTemplate("receta.html", variables);
+
+            servicio.createEmail(
+                    correoDestino,
+                    "Receta Médica Veterinaria - PatitasCare",
+                    htmlFinal
+            );
+
+            servicio.sendEmail();
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Receta registrada y correo enviado correctamente a:\n" + correoDestino
+            );
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Error al enviar correo:\n" + ex.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+            ex.printStackTrace();
+        }
     }//GEN-LAST:event_btnEnviarActionPerformed
 
 
@@ -243,6 +318,4 @@ public class ReceteMedica extends javax.swing.JPanel {
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextArea txtMotivo;
     // End of variables declaration//GEN-END:variables
-
-  
 }

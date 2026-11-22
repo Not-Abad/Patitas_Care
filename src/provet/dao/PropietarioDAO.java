@@ -102,4 +102,18 @@ public class PropietarioDAO {
         p.setCreatedAt(rs.getTimestamp("created_at"));
         return p;
     }
+    
+    public List<Propietario> selectAllActivos() {
+        List<Propietario> lista = new ArrayList<>();
+        String sql = "SELECT * FROM propietarios WHERE is_active = 1 ORDER BY nombre ASC";
+        Connection conn = dbConection.getConexion();
+        if (conn == null) return lista;
+        try (PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) lista.add(mapear(rs));
+        } catch (SQLException e) {
+            System.err.println("Error en PropietarioDAO.selectAllActivos: " + e.getMessage());
+        }
+        return lista;
+    }
 }

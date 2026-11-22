@@ -1,50 +1,117 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package provet.view.secretario;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import provet.dao.CitaSecretarioDAO;
-import provet.view.secretario.Cita;
-/**
- *
- * @author Diego Rivera
- */
-public class editarCita extends javax.swing.JFrame {
-    private Cita cita;
-    private int indice;
-    private int posicion;
-    private Citas_pendientes_secretario padre;
-    private int filaSeleccionada;
-    private int idCitaBD = -1; // ID real en base de datos
 
-    /** Constructor principal — recibe el id_cita de BD junto con los datos de la fila. */
+public class editarCita extends javax.swing.JFrame {
+    private int filaSeleccionada;
+    private int idCitaBD = -1;
+    private final Map<String, Integer> mapaVeterinarios = new LinkedHashMap<>();
+
+    public editarCita(CitaSecretarioDAO.CitaDTO dto, int fila) {
+        initComponents();
+        getContentPane().setBackground(new java.awt.Color(228, 230, 217));
+        cargarCatalogos();
+        this.filaSeleccionada = fila;
+
+        if (dto != null) {
+            this.idCitaBD = dto.idCita;
+            txtId.setText(dto.nombreMascota != null ? dto.nombreMascota : "");
+            txtId.setEditable(false);
+            txtNombre.setText(dto.raza != null ? dto.raza : "");
+            txtNombre.setEditable(false);
+            if (dto.especie != null) comboespecie.setSelectedItem(dto.especie);
+            comboespecie.setEnabled(false);
+
+            if (dto.nombreVeterinario != null) {
+                comboVeterinario.setSelectedItem(dto.nombreVeterinario);
+            }
+            if (dto.fechaHoraInicio != null && dto.fechaHoraInicio.length() >= 16) {
+                txtEdad.setText(dto.fechaHoraInicio.substring(0, 10));
+                seleccionarHorarioEnCombo(dto.fechaHoraInicio.substring(11, 16));
+            }
+            if (dto.motivo != null) {
+                int sep = dto.motivo.indexOf(" - ");
+                if (sep > 0) {
+                    comboMotivo.setSelectedItem(dto.motivo.substring(0, sep));
+                    txtEspecie2.setText(dto.motivo.substring(sep + 3));
+                } else {
+                    comboMotivo.setSelectedItem(dto.motivo);
+                }
+            }
+        }
+    }
+
     public editarCita(int idCita, String mascota, String fecha, String hora, String motivo, int fila) {
         initComponents();
         getContentPane().setBackground(new java.awt.Color(228, 230, 217));
+        cargarCatalogos();
         this.idCitaBD = idCita;
-        filaSeleccionada = fila;
+        this.filaSeleccionada = fila;
         txtId.setText(mascota);
         txtEdad.setText(fecha);
-        comboHorario.setSelectedItem(hora);
+        seleccionarHorarioEnCombo(hora);
         comboMotivo.setSelectedItem(motivo);
     }
 
-    /** Constructor legacy sin idCita (compatibilidad). */
     public editarCita(String mascota, String fecha, String hora, String motivo, int fila) {
         this(-1, mascota, fecha, hora, motivo, fila);
     }
 
-    /**
-     * Creates new form editarCita
-     */
     public editarCita() {
-    initComponents();
+        initComponents();
+        getContentPane().setBackground(new java.awt.Color(228, 230, 217));
+        cargarCatalogos();
+    }
 
-    getContentPane().setBackground(
-        new java.awt.Color(228, 230, 217)
-    );
-}    
+    private void cargarCatalogos() {
+        mapaVeterinarios.clear();
+        mapaVeterinarios.putAll(Datos.citaDAO.obtenerVeterinarios());
+        if (!mapaVeterinarios.isEmpty()) {
+            comboVeterinario.setModel(new DefaultComboBoxModel<>(mapaVeterinarios.keySet().toArray(new String[0])));
+        }
+
+        List<String> especies = Datos.mascotaDAO.getEspecies();
+        if (!especies.isEmpty()) {
+            comboespecie.setModel(new DefaultComboBoxModel<>(especies.toArray(new String[0])));
+        }
+    }
+
+    private void seleccionarHorarioEnCombo(String hora24) {
+        for (int i = 0; i < comboHorario.getItemCount(); i++) {
+            String item = comboHorario.getItemAt(i);
+            if (horarioToHHMM(item).equals(hora24)) {
+                comboHorario.setSelectedIndex(i);
+                return;
+            }
+        }
+    }
+
+    private String horarioToHHMM(String horario) {
+        if (horario == null || horario.trim().isEmpty()) return "09:00";
+        try {
+            String h = horario.trim().toLowerCase();
+            boolean pm = h.contains("pm") || h.contains("p.m.");
+            boolean am = h.contains("am") || h.contains("a.m.");
+            h = h.replace("a.m.", "").replace("p.m.", "").replace("am", "").replace("pm", "").trim();
+            String[] partes = h.split(":");
+            int hora = Integer.parseInt(partes[0].trim());
+            int min  = partes.length > 1 ? Integer.parseInt(partes[1].trim()) : 0;
+            if (pm && hora != 12) hora += 12;
+            if (am && hora == 12) hora = 0;
+            return String.format("%02d:%02d", hora, min);
+        } catch (Exception e) {
+            return "09:00";
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -254,13 +321,13 @@ public class editarCita extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void boton_dar_de_bajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_dar_de_bajaActionPerformed
+    private void boton_dar_de_bajaActionPerformed(java.awt.event.ActionEvent evt) {
         if (idCitaBD > 0) {
             int confirm = JOptionPane.showConfirmDialog(this,
                 "¿Deseas cancelar esta cita en la base de datos?",
                 "Cancelar cita", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (confirm == JOptionPane.YES_OPTION) {
-                boolean ok = Datos.citaDAO.actualizarEstatus(idCitaBD, 2); // 2 = Cancelada
+                boolean ok = Datos.citaDAO.actualizarEstado(idCitaBD, "Cancelada");
                 if (ok) {
                     JOptionPane.showMessageDialog(this, "Cita cancelada correctamente.");
                 } else {
@@ -270,71 +337,64 @@ public class editarCita extends javax.swing.JFrame {
         }
         new Citas_pendientes_secretario().setVisible(true);
         dispose();
-    }//GEN-LAST:event_boton_dar_de_bajaActionPerformed
+    }
 
-    private void boton_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_editarActionPerformed
-        String mascota = txtId.getText().trim();
-        String fecha   = txtEdad.getText().trim();
-        String hora    = comboHorario.getSelectedItem().toString();
-        String motivo  = comboMotivo.getSelectedItem().toString();
+    private void boton_editarActionPerformed(java.awt.event.ActionEvent evt) {
+        String mascota     = txtId.getText().trim();
+        String fecha       = txtEdad.getText().trim();
+        String hora        = comboHorario.getSelectedItem() != null ? comboHorario.getSelectedItem().toString() : "9:00 am";
+        String motivoBase  = comboMotivo.getSelectedItem() != null ? comboMotivo.getSelectedItem().toString() : "";
+        String descripcion = txtEspecie2.getText().trim();
+        String vetNombre   = comboVeterinario.getSelectedItem() != null ? comboVeterinario.getSelectedItem().toString() : "";
 
         if (mascota.isEmpty() || fecha.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor completa la mascota y la fecha.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        // Construir fecha-hora
-        String fechaHora;
+        if (idCitaBD <= 0) {
+            JOptionPane.showMessageDialog(this, "No se pudo identificar la cita en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String fechaHoraInicio;
+        String fechaHoraFin;
         try {
             String fechaLimpia = fecha.replace("/", "-").trim();
             String[] partes = fechaLimpia.split("-");
             String fechaISO = partes[0].length() == 4
                 ? fechaLimpia
                 : partes[2] + "-" + partes[1] + "-" + partes[0];
-            String hh = hora.length() >= 5 ? hora.substring(0, 5) : "09:00";
-            fechaHora = fechaISO + " " + hh + ":00";
+            String hhmm = horarioToHHMM(hora);
+            DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            LocalDateTime inicio = LocalDateTime.parse(fechaISO + " " + hhmm + ":00", fmt);
+            LocalDateTime fin = inicio.plusMinutes(30);
+            fechaHoraInicio = inicio.format(fmt);
+            fechaHoraFin = fin.format(fmt);
         } catch (Exception ex) {
-            fechaHora = java.time.LocalDate.now() + " 09:00:00";
-        }
-
-        boolean ok = false;
-        if (idCitaBD > 0) {
-            // Actualizar en BD
-            ok = Datos.citaDAO.actualizar(idCitaBD, fechaHora, motivo);
-        } else {
-            // Fallback: solo muestra el mensaje (sin id de BD no podemos actualizar)
-            JOptionPane.showMessageDialog(this, "No se pudo identificar la cita en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Formato de fecha inválido. Usa YYYY-MM-DD o DD/MM/YYYY.", "Fecha inválida", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
+        int idVeterinario = mapaVeterinarios.getOrDefault(vetNombre, 0);
+        String motivoCompleto = descripcion.isEmpty() ? motivoBase : motivoBase + " - " + descripcion;
+
+        boolean ok = Datos.citaDAO.actualizar(idCitaBD, idVeterinario, fechaHoraInicio, fechaHoraFin, motivoCompleto);
+
         if (ok) {
-            JOptionPane.showMessageDialog(this, "Cita actualizada correctamente en la base de datos.");
+            JOptionPane.showMessageDialog(this, "Cita actualizada correctamente en patitas_final.");
             new Citas_pendientes_secretario().setVisible(true);
             dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Error al actualizar la cita en la base de datos.", "Error de BD", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_boton_editarActionPerformed
+    }
 
-    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdActionPerformed
-
-    private void txtEdadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEdadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEdadActionPerformed
-
-    private void txtEspecie2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEspecie2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEspecie2ActionPerformed
-
-    private void comboVeterinarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboVeterinarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboVeterinarioActionPerformed
-
-    private void comboHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboHorarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboHorarioActionPerformed
+    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {}
+    private void txtEdadActionPerformed(java.awt.event.ActionEvent evt) {}
+    private void txtEspecie2ActionPerformed(java.awt.event.ActionEvent evt) {}
+    private void comboVeterinarioActionPerformed(java.awt.event.ActionEvent evt) {}
+    private void comboHorarioActionPerformed(java.awt.event.ActionEvent evt) {}
 
     /**
      * @param args the command line arguments

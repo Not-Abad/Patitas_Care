@@ -110,4 +110,36 @@ public class PersonalDAO {
         p.setActive(rs.getBoolean("is_active"));
         return p;
     }
+    
+    public Personal selectByIdUsuario(int idUsuario) {
+        String sql = "SELECT * FROM personal WHERE id_usuario = ? AND is_active = 1";
+        Connection conn = dbConection.getConexion();
+        if (conn == null) return null;
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idUsuario);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) return mapear(rs);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error en PersonalDAO.selectByIdUsuario: " + e.getMessage());
+        }
+        return null;
+    }
+
+    public String obtenerEmailPorUsername(String username) {
+        String sql = "SELECT p.correo FROM personal p "
+                   + "INNER JOIN usuarios u ON p.id_usuario = u.id_usuario "
+                   + "WHERE u.username = ? AND u.is_active = 1 AND p.is_active = 1";
+        Connection conn = dbConection.getConexion();
+        if (conn == null) return null;
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, username);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) return rs.getString("correo");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error en PersonalDAO.obtenerEmailPorUsername: " + e.getMessage());
+        }
+        return null;
+    }
 }

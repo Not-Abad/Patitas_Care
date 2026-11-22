@@ -1,17 +1,18 @@
 package provet.componentes;
 
 import java.awt.Color;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.List;
-import provet.model.Cliente;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+import provet.modelo.Propietario;
 
 /** @author jesus-abad */
-public class BuscadorCliente extends JComboBox<Cliente> {
+public class BuscadorCliente extends JComboBox<Propietario> {
 
-    private List<Cliente> todosLosClientes;
+    private List<Propietario> todosLosPropietarios = new ArrayList<>();
 
     public BuscadorCliente() {
         setEditable(true);
@@ -30,9 +31,9 @@ public class BuscadorCliente extends JComboBox<Cliente> {
             }
         });
         
-        setBackground(new Color(233,237,225));
+        setBackground(new Color(233, 237, 225));
 
-        // --- SOLUCIÓN: Reemplazar el botón de la flecha por uno invisible y sin dimensiones ---
+        // Reemplazar el botón de la flecha por uno invisible y sin dimensiones
         this.setUI(new javax.swing.plaf.basic.BasicComboBoxUI() {
             @Override
             protected javax.swing.JButton createArrowButton() {
@@ -44,22 +45,33 @@ public class BuscadorCliente extends JComboBox<Cliente> {
         });
     }
 
-    public void setDatosClientes(List<Cliente> clientes) {
-        this.todosLosClientes = clientes;
+    public void setDatosPropietarios(List<Propietario> propietarios) {
+        this.todosLosPropietarios = (propietarios != null) ? propietarios : new ArrayList<>();
         filtrarLista(""); // Llena el combo al inicio
+    }
+
+    // Alias de compatibilidad por si alguna vista aún llama al nombre anterior
+    public void setDatosClientes(List<Propietario> propietarios) {
+        setDatosPropietarios(propietarios);
     }
 
     private void filtrarLista(String texto) {
         removeAllItems();
-        if (texto.isEmpty()) {
-            for (Cliente c : todosLosClientes) {
-                addItem(c);
+        if (todosLosPropietarios == null) {
+            return;
+        }
+
+        if (texto == null || texto.isEmpty()) {
+            for (Propietario p : todosLosPropietarios) {
+                addItem(p);
             }
         } else {
-            for (Cliente c : todosLosClientes) {
-                // Usa el toString() que definimos en la clase Cliente
-                if (c.toString().toLowerCase().contains(texto.toLowerCase())) {
-                    addItem(c);
+            String filtro = texto.toLowerCase();
+            for (Propietario p : todosLosPropietarios) {
+                boolean coincideToString = p.toString() != null && p.toString().toLowerCase().contains(filtro);
+                boolean coincideCorreo = p.getCorreo() != null && p.getCorreo().toLowerCase().contains(filtro);
+                if (coincideToString || coincideCorreo) {
+                    addItem(p);
                 }
             }
         }

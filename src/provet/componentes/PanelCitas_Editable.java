@@ -1,33 +1,28 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package provet.componentes;
 
 import java.awt.Color;
-import provet.model.Paciente;
-import provet.view.veterinario.Reportes_Citas;
-import provet.model.Reporte;
+import provet.modelo.Reporte;
+
 /**
  *
  * @author anguv
  */
 public class PanelCitas_Editable extends PanelRedondeado {
 
-    
     public PanelCitas_Editable(Reporte r) {
-    initComponents();
-    setBackground(new Color(228,230,217));
+        initComponents();
+        setBackground(new Color(228, 230, 217));
 
-    lblID.setText(String.valueOf(r.getID()));
-    Motivo.setText(r.getNombre());
-    lblEspecie.setText(r.getEspecie());
-    lblFecha1.setText(r.getFecha());
-    lblVet1.setText(r.getVeterinario());
-    lblAnalisis1.setText(r.getAnalisis());
-    lblMed1.setText(r.getMedicamentos());
-    lblMotivo.setText(r.getMotivo());
-}
+        lblID.setText("ID: " + r.getIdMascota());
+        lblNombre.setText(r.getNombreMascota());
+        lblEspecie.setText(r.getEspecie());
+        lblFecha1.setText(r.getFecha());
+        lblVet1.setText(r.getVeterinario());
+        lblAnalisis1.setText(r.getAnalisis());
+        lblMed1.setText(r.getMedicamentos());
+        lblMotivo.setText(r.getMotivo());
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -176,6 +171,4 @@ public class PanelCitas_Editable extends PanelRedondeado {
     private javax.swing.JLabel lblfoto;
     private provet.componentes.PanelRedondeado panelRedondeado1;
     // End of variables declaration//GEN-END:variables
-
-    
 }

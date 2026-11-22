@@ -1,10 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package provet.componentes;
 
-import provet.model.Paciente;
+import java.awt.Image;
+import java.net.URL;
+import javax.swing.ImageIcon;
+import provet.dao.PacienteDetalleDAO;
+import provet.modelo.Mascota;
+import provet.modelo.PacienteDetalle;
+
 /**
  *
  * @author anguv
@@ -16,6 +19,11 @@ public class PanelPaciente2 extends javax.swing.JPanel {
      */
     public PanelPaciente2() {
         initComponents();
+    }
+
+    public PanelPaciente2(PacienteDetalle paciente) {
+        initComponents();
+        setDatos(paciente);
     }
 
     /**
@@ -214,16 +222,52 @@ public class PanelPaciente2 extends javax.swing.JPanel {
     private javax.swing.JLabel lblfoto;
     // End of variables declaration//GEN-END:variables
 
-    public void setDatos(Paciente p) {
-    lblID.setText(String.valueOf(p.getID()));
-    lblNombre.setText(p.getNombre());
-    lblRaza.setText(p.getRaza());
-    lblEdad.setText(String.valueOf(p.getEdad()));
-    lblPeso.setText(String.valueOf(p.getPeso()));
-    lblSexo.setText(p.getSexo());
-    lblEspecie.setText(p.getEspecie());
-    lblAlergias.setText(p.getAlergias());
-    lblVacunas.setText(p.getVacunas());
-    
-}
+    public final void setDatos(PacienteDetalle p) {
+        if (p == null) return;
+
+        lblID.setText("ID Mascota: " + p.getIdMascota());
+        lblNombre.setText(p.getNombre());
+        lblRaza.setText(p.getRaza() != null ? p.getRaza() : "No especificada");
+        lblEdad.setText(p.getEdadFormateada());
+        lblPeso.setText(p.getPesoFormateado());
+        lblSexo.setText(p.getSexo() != null ? p.getSexo() : "No especificado");
+        lblEspecie.setText(p.getEspecie() != null ? p.getEspecie() : "");
+        lblAlergias.setText(p.getAlergias() != null ? p.getAlergias() : "Ninguna registrada");
+        lblVacunas.setText("Vacunas: " + (p.getVacunas() != null ? p.getVacunas() : "Ninguna registrada"));
+        cargarFoto(p.getFotoUrl());
+    }
+
+    /**
+     * Sobrecarga compatible si la vista pasa directamente una entidad Mascota.
+     */
+    public final void setDatos(Mascota m) {
+        if (m == null) return;
+
+        PacienteDetalle detalle = new PacienteDetalleDAO().selectDetalleById(m.getIdMascota());
+        if (detalle != null) {
+            setDatos(detalle);
+        } else {
+            lblID.setText("ID Mascota: " + m.getIdMascota());
+            lblNombre.setText(m.getNombre());
+            lblSexo.setText(m.getSexo() != null ? m.getSexo() : "");
+        }
+    }
+
+    private void cargarFoto(String fotoUrl) {
+        try {
+            URL url = null;
+            if (fotoUrl != null && !fotoUrl.isBlank()) {
+                url = getClass().getResource("/imagenes/mascotas/" + fotoUrl);
+            }
+            if (url == null) {
+                url = getClass().getResource("/imagenes/mascotas/default.png");
+            }
+            if (url != null) {
+                ImageIcon icono = new ImageIcon(url);
+                Image img = icono.getImage().getScaledInstance(131, 131, Image.SCALE_SMOOTH);
+                lblfoto.setText("");
+                lblfoto.setIcon(new ImageIcon(img));
+            }
+        } catch (Exception ignored) {}
+    }
 }

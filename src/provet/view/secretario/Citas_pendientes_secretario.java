@@ -1,58 +1,42 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package provet.view.secretario;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
 import provet.dao.CitaSecretarioDAO;
-import provet.view.secretario.Dashboard_Secretario;
-import provet.view.secretario.Datos;
-import provet.view.secretario.EditarPacientes_secretario;
-import provet.view.secretario.Registrar_paciente_secretario;
-import provet.view.secretario.Reporte_secretario;
-import provet.view.secretario.editarCita;
 
-/**
- *
- * @author Andreij Haziel
- */
 public class Citas_pendientes_secretario extends javax.swing.JFrame {
 
     private boolean listenerSeleccionRegistrado = false;
+    private List<CitaSecretarioDAO.CitaDTO> listaCitasHoy = new ArrayList<>();
 
-    /**
-     * Creates new form Citas_pendientes_secretario
-     */
     public void actualizarFila(int fila, String mascota, String fecha, String hora, String motivo) {
-        // col 0 = ID (oculta), col 1 = Cliente, col 2 = Mascota, col 3 = Fecha, col 4 = Hora, col 5 = Motivo
         table_citasPendientes.setValueAt(mascota, fila, 2);
         table_citasPendientes.setValueAt(fecha,   fila, 3);
         table_citasPendientes.setValueAt(hora,    fila, 4);
         table_citasPendientes.setValueAt(motivo,  fila, 5);
     }
+
     public Citas_pendientes_secretario() {
         initComponents();
         cargarCitas();
         if (isUndecorated()) {
-    dispose();
-    setUndecorated(false);
-}
+            dispose();
+            setUndecorated(false);
+        }
 
-// paneles se estiran
-getContentPane().removeAll();
-getContentPane().setLayout(new java.awt.BorderLayout());
-getContentPane().add(jPanel2, java.awt.BorderLayout.WEST);    // sidebar
-getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);  // contenido
+        getContentPane().removeAll();
+        getContentPane().setLayout(new java.awt.BorderLayout());
+        getContentPane().add(jPanel2, java.awt.BorderLayout.WEST);
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        jPanel2.setPreferredSize(new java.awt.Dimension(270, 0));
 
-// 3) Sidebar mantiene 270px de ancho fijo
-jPanel2.setPreferredSize(new java.awt.Dimension(270, 0));
-
-// 4) Maximizar y cierre limpio
-setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /**
@@ -358,129 +342,134 @@ setExtendedState(JFrame.MAXIMIZED_BOTH);
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
+    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {
         dispose();
-    }//GEN-LAST:event_btn_SalirActionPerformed
+    }
 
-    private void botonSwing1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing1ActionPerformed
+    private void botonSwing1ActionPerformed(java.awt.event.ActionEvent evt) {
         Registrar_paciente_secretario menu = new Registrar_paciente_secretario();
         menu.setVisible(true);
-        this.dispose();// TODO add your handling code here:
-    }//GEN-LAST:event_botonSwing1ActionPerformed
+        this.dispose();
+    }
 
-    private void botonSwing3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing3ActionPerformed
+    private void botonSwing3ActionPerformed(java.awt.event.ActionEvent evt) {
         Dashboard_Secretario menu = new Dashboard_Secretario();
         menu.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_botonSwing3ActionPerformed
+    }
 
-    private void btn_editarpacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editarpacienteActionPerformed
-    EditarPacientes_secretario menu = new EditarPacientes_secretario();
-    menu.setVisible(true);
-    this.dispose();// TODO add your handling code here:
-    }//GEN-LAST:event_btn_editarpacienteActionPerformed
+    private void btn_editarpacienteActionPerformed(java.awt.event.ActionEvent evt) {
+        EditarPacientes_secretario menu = new EditarPacientes_secretario();
+        menu.setVisible(true);
+        this.dispose();
+    }
 
-    private void btn_ReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReportesActionPerformed
-    Reporte_secretario menu = new Reporte_secretario();
-    menu.setVisible(true);
-    this.dispose();    // TODO add your handling code here:
-    }//GEN-LAST:event_btn_ReportesActionPerformed
+    private void btn_ReportesActionPerformed(java.awt.event.ActionEvent evt) {
+        /*
+        Reporte_secretario menu = new Reporte_secretario();
+        menu.setVisible(true);
+        this.dispose();
+        */
+    }
 
-    private void boton_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_editarActionPerformed
+    private void boton_editarActionPerformed(java.awt.event.ActionEvent evt) {
         int fila = table_citasPendientes.getSelectedRow();
-        if (fila == -1) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Selecciona una cita primero");
+        if (fila == -1 || fila >= listaCitasHoy.size()) {
+            JOptionPane.showMessageDialog(this, "Selecciona una cita primero");
             return;
         }
-        // col 0 = idCita (BD), col 1 = cliente, col 2 = mascota, col 3 = fecha, col 4 = hora, col 5 = motivo
-        int idCita  = Integer.parseInt(table_citasPendientes.getValueAt(fila, 0).toString());
-        String mascota = table_citasPendientes.getValueAt(fila, 2).toString();
-        String fecha   = table_citasPendientes.getValueAt(fila, 3).toString();
-        String hora    = table_citasPendientes.getValueAt(fila, 4).toString();
-        String motivo  = table_citasPendientes.getValueAt(fila, 5).toString();
-
-        editarCita ventana = new editarCita(idCita, mascota, fecha, hora, motivo, fila);
+        CitaSecretarioDAO.CitaDTO dto = listaCitasHoy.get(fila);
+        editarCita ventana = new editarCita(dto, fila);
         ventana.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_boton_editarActionPerformed
+    }
 
-    private void boton_dar_de_bajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_dar_de_bajaActionPerformed
+    private void boton_dar_de_bajaActionPerformed(java.awt.event.ActionEvent evt) {
         int fila = table_citasPendientes.getSelectedRow();
-        if (fila == -1) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Selecciona una cita primero.", "Sin selección", javax.swing.JOptionPane.WARNING_MESSAGE);
+        if (fila == -1 || fila >= listaCitasHoy.size()) {
+            JOptionPane.showMessageDialog(this, "Selecciona una cita primero.", "Sin selección", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        int idCita   = Integer.parseInt(table_citasPendientes.getValueAt(fila, 0).toString());
-        String mascota = table_citasPendientes.getValueAt(fila, 2).toString();
+        CitaSecretarioDAO.CitaDTO dto = listaCitasHoy.get(fila);
 
-        int confirmacion = javax.swing.JOptionPane.showConfirmDialog(
+        int confirmacion = JOptionPane.showConfirmDialog(
             this,
-            "¿Cancelar la cita de \"" + mascota + "\"?\nEl estatus cambiará a Cancelada en la base de datos.",
+            "¿Cancelar la cita de \"" + dto.nombreMascota + "\"?\nEl estado cambiará a 'Cancelada' en la base de datos.",
             "Confirmar cancelación",
-            javax.swing.JOptionPane.YES_NO_OPTION,
-            javax.swing.JOptionPane.WARNING_MESSAGE
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE
         );
 
-        if (confirmacion == javax.swing.JOptionPane.YES_OPTION) {
-            // Cambiar estatus a 2 (Cancelada)
-            boolean ok = Datos.citaDAO.actualizarEstatus(idCita, 2);
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            boolean ok = Datos.citaDAO.actualizarEstado(dto.idCita, "Cancelada");
             if (ok) {
+                listaCitasHoy.remove(fila);
                 DefaultTableModel modelo = (DefaultTableModel) table_citasPendientes.getModel();
                 modelo.removeRow(fila);
-                javax.swing.JOptionPane.showMessageDialog(this, "Cita cancelada correctamente en la base de datos.");
+                limpiarDetalle();
+                JOptionPane.showMessageDialog(this, "Cita cancelada correctamente en la base de datos.");
             } else {
-                javax.swing.JOptionPane.showMessageDialog(this, "Error al cancelar la cita en la base de datos.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Error al cancelar la cita en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
-    }//GEN-LAST:event_boton_dar_de_bajaActionPerformed
+    }
 
-    private void botonSwing2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing2ActionPerformed
+    private void botonSwing2ActionPerformed(java.awt.event.ActionEvent evt) {
         Dashboard_Secretario menu = new Dashboard_Secretario();
         menu.setVisible(true);
-        this.dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_botonSwing2ActionPerformed
+        this.dispose();
+    }
+
+    private void limpiarDetalle() {
+        jLabel_cliente.setText("");
+        jLabel_telefono.setText("");
+        jLabel_mascota.setText("");
+        jLabel_especie.setText("");
+        jLabel_motivo.setText("");
+        jLabel_veterinario.setText("");
+    }
 
     private void cargarCitas() {
-        // Reemplazar el modelo con 6 columnas (ID oculto + 5 visibles)
-        javax.swing.table.DefaultTableModel modelo = new javax.swing.table.DefaultTableModel(
+        DefaultTableModel modelo = new DefaultTableModel(
             new String[]{"ID", "Cliente", "Mascota", "Fecha", "Hora", "Motivo"}, 0
         ) {
             @Override public boolean isCellEditable(int row, int col) { return false; }
         };
         table_citasPendientes.setModel(modelo);
 
-        // Ocultar la columna ID (índice 0) — la necesitamos internamente pero no se muestra
         table_citasPendientes.getColumnModel().getColumn(0).setMinWidth(0);
         table_citasPendientes.getColumnModel().getColumn(0).setMaxWidth(0);
         table_citasPendientes.getColumnModel().getColumn(0).setWidth(0);
 
-        // Cargar citas pendientes de hoy desde la base de datos
-        java.util.List<CitaSecretarioDAO.CitaDTO> lista = Datos.citaDAO.selectPendientesHoy();
-        for (CitaSecretarioDAO.CitaDTO c : lista) {
-            String fechaStr = c.fechaProgramada != null ? c.fechaProgramada.toString().substring(0, 10) : "";
-            String horaStr  = c.fechaProgramada != null ? c.fechaProgramada.toString().substring(11, 16) : "";
+        listaCitasHoy = Datos.citaDAO.selectPendientesHoy();
+        for (CitaSecretarioDAO.CitaDTO c : listaCitasHoy) {
+            String fechaStr = c.fechaHoraInicio != null && c.fechaHoraInicio.length() >= 10
+                    ? c.fechaHoraInicio.substring(0, 10) : "";
+            String horaStr  = c.fechaHoraInicio != null && c.fechaHoraInicio.length() >= 16
+                    ? c.fechaHoraInicio.substring(11, 16) : "";
             modelo.addRow(new Object[]{
-                c.idCita,                                                  // col 0: ID (oculta)
-                c.nombreCliente != null ? c.nombreCliente : "Sin cliente", // col 1
-                c.nombreMascota != null ? c.nombreMascota : "Sin mascota", // col 2
-                fechaStr,                                                   // col 3
-                horaStr,                                                    // col 4
-                c.motivo != null ? c.motivo : "Sin motivo"                 // col 5
+                c.idCita,
+                c.nombreCliente != null ? c.nombreCliente : "Sin cliente",
+                c.nombreMascota != null ? c.nombreMascota : "Sin mascota",
+                fechaStr,
+                horaStr,
+                c.motivo != null ? c.motivo : "Sin motivo"
             });
         }
 
-        // Listener de selección para mostrar detalles en el panel inferior
         if (!listenerSeleccionRegistrado) {
             listenerSeleccionRegistrado = true;
             table_citasPendientes.getSelectionModel().addListSelectionListener(e -> {
+                if (e.getValueIsAdjusting()) return;
                 int fila = table_citasPendientes.getSelectedRow();
-                if (fila != -1) {
-                    Object cliente = table_citasPendientes.getValueAt(fila, 1);
-                    Object mascota = table_citasPendientes.getValueAt(fila, 2);
-                    Object motivo  = table_citasPendientes.getValueAt(fila, 5);
-                    jLabel_cliente.setText(cliente != null ? cliente.toString() : "");
-                    jLabel_mascota.setText(mascota != null ? mascota.toString() : "");
-                    jLabel_motivo.setText(motivo != null ? motivo.toString() : "");
+                if (fila != -1 && fila < listaCitasHoy.size()) {
+                    CitaSecretarioDAO.CitaDTO c = listaCitasHoy.get(fila);
+                    jLabel_cliente.setText(c.nombreCliente != null ? c.nombreCliente : "");
+                    jLabel_telefono.setText(c.telefonoCliente != null && !c.telefonoCliente.isEmpty() ? c.telefonoCliente : "No registrado");
+                    jLabel_mascota.setText(c.nombreMascota != null ? c.nombreMascota : "");
+                    jLabel_especie.setText(c.especie != null ? c.especie : "");
+                    jLabel_motivo.setText(c.motivo != null ? c.motivo : "");
+                    jLabel_veterinario.setText(c.nombreVeterinario != null ? c.nombreVeterinario : "");
                 }
             });
         }

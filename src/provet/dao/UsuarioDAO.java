@@ -102,4 +102,47 @@ public class UsuarioDAO {
         u.setCreatedAt(rs.getTimestamp("created_at"));
         return u;
     }
+    
+    public Usuario autenticarUsuario(String username, String password) {
+        String sql = "SELECT * FROM usuarios WHERE username = ? AND password_hash = ? AND is_active = 1";
+        Connection conn = dbConection.getConexion();
+        if (conn == null) return null;
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, username);
+            ps.setString(2, password);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) return mapear(rs);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error en UsuarioDAO.autenticarUsuario: " + e.getMessage());
+        }
+        return null;
+    }
+
+    public boolean actualizarUltimoAcceso(int idUsuario) {
+        String sql = "UPDATE usuarios SET ultimo_acceso = NOW() WHERE id_usuario = ?";
+        Connection conn = dbConection.getConexion();
+        if (conn == null) return false;
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idUsuario);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error en UsuarioDAO.actualizarUltimoAcceso: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean actualizarPassword(String username, String nuevaPassword) {
+        String sql = "UPDATE usuarios SET password_hash = ? WHERE username = ? AND is_active = 1";
+        Connection conn = dbConection.getConexion();
+        if (conn == null) return false;
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, nuevaPassword);
+            ps.setString(2, username);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error en UsuarioDAO.actualizarPassword: " + e.getMessage());
+            return false;
+        }
+    }
 }

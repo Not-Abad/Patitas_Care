@@ -28,4 +28,12 @@ public class Propietario {
     public void setActive(boolean active) { isActive = active; }
     public Timestamp getCreatedAt() { return createdAt; }
     public void setCreatedAt(Timestamp createdAt) { this.createdAt = createdAt; }
+    
+    @Override
+    public String toString() {
+        if (telefono != null && !telefono.isBlank()) {
+            return nombre + " - " + telefono;
+        }
+        return nombre;
+    }
 }

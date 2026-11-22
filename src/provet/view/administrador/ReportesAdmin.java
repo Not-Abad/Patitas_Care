@@ -1,47 +1,57 @@
+
 package provet.view.administrador;
 
-import javax.swing.JOptionPane;
-import provet.view.inicio.Login;
-import provet.componentes.botonSwing;
-import provet.componentes.PanelRedondeado;
-import provet.dao.UsuarioAdminDAO;
-import provet.utilidades.Conexion;
-import javax.swing.*;
 import java.awt.*;
 import java.sql.*;
+import javax.swing.*;
+import provet.componentes.PanelRedondeado;
+import provet.componentes.botonSwing;
+import provet.utilidades.Sesion;
+import provet.utilidades.dbConection;
+import provet.view.inicio.Login;
 
 public class ReportesAdmin extends javax.swing.JFrame {
    
-private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ReportesAdmin.class.getName());
-public static java.util.List<Reporte> listaReportes = new java.util.ArrayList<>();
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ReportesAdmin.class.getName());
+    public static java.util.List<Reporte> listaReportes = new java.util.ArrayList<>();
 
-private final java.awt.Color C_FONDO = new java.awt.Color(228,230,217);
-private final java.awt.Color C_CARD = new java.awt.Color(167, 184, 156);
-private final java.awt.Color C_OSCURO = new java.awt.Color(84, 104, 94);
-private final java.awt.Color C_TEXTO = new java.awt.Color(60,60,60);
+    private final java.awt.Color C_FONDO = new java.awt.Color(228,230,217);
+    private final java.awt.Color C_CARD = new java.awt.Color(167, 184, 156);
+    private final java.awt.Color C_OSCURO = new java.awt.Color(84, 104, 94);
+    private final java.awt.Color C_TEXTO = new java.awt.Color(60,60,60);
 
-class Reporte {
-    String titulo;
-    String descripcion;
-    public Reporte(String t, String d) {
-        titulo = t;
-        descripcion = d;
- 
+    class Reporte {
+        String titulo;
+        String descripcion;
+        public Reporte(String t, String d) {
+            titulo = t;
+            descripcion = d;
+        }
     }
-}
 
-private static int citas = 0;
-private static int nuevosPacientes = 0;
-private static int usuariosActivos = 0;
+    private static int citas = 0;
+    private static int nuevosPacientes = 0;
+    private static int usuariosActivos = 0;
 
-private javax.swing.JLabel lblCitas, lblPacientes, lblUsuarios;
-private javax.swing.JPanel panelHistorial;
+    private javax.swing.JLabel lblCitas, lblPacientes, lblUsuarios;
+    private javax.swing.JPanel panelHistorial;
 
     public ReportesAdmin() {
-    initComponents();
-    construirUI();
-    cargarDatosDesdeBD();
-    renderizarHistorial();
+        initComponents();
+        cargarDatosSesion();
+        construirUI();
+        cargarDatosDesdeBD();
+        renderizarHistorial();
+    }
+
+    private void cargarDatosSesion() {
+        if (Sesion.haySesionActiva()) {
+            jLabel6.setText(Sesion.getNombreMostrar());
+            String rol = Sesion.getNombreRol();
+            if (!rol.isEmpty()) {
+                jLabel16.setText(rol);
+            }
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -149,18 +159,18 @@ private javax.swing.JPanel panelHistorial;
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonSwing4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing4ActionPerformed
-     new MenuAdmin().setVisible(true); 
-    this.setVisible(false);
+        new MenuAdmin().setVisible(true); 
+        this.setVisible(false);
     }//GEN-LAST:event_botonSwing4ActionPerformed
 
     private void botonSwing1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSwing1ActionPerformed
-    new UsuariosAdmin().setVisible(true); 
-    this.setVisible(false);
+        new UsuariosAdmin().setVisible(true); 
+        this.setVisible(false);
     }//GEN-LAST:event_botonSwing1ActionPerformed
 
     private void btn_CalendarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CalendarioActionPerformed
-    new NotificacionesAdmin().setVisible(true); 
-    this.setVisible(false);
+        new NotificacionesAdmin().setVisible(true); 
+        this.setVisible(false);
     }//GEN-LAST:event_btn_CalendarioActionPerformed
 
     private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
@@ -168,6 +178,7 @@ private javax.swing.JPanel panelHistorial;
             "¿Estás seguro de que deseas salir?",
             "Confirmar salida",
             () -> {
+                Sesion.cerrarSesion();
                 new Login().setVisible(true);
                 this.dispose();
             }
@@ -220,81 +231,84 @@ private javax.swing.JPanel panelHistorial;
     }
 
     private void construirUI() {
-    jPanel2.setLayout(null);
-    jPanel2.setBackground(C_FONDO);
+        jPanel2.setLayout(null);
+        jPanel2.setBackground(C_FONDO);
 
-    javax.swing.JLabel titulo = new javax.swing.JLabel("Reportes administrativos");
-    titulo.setBounds(30, 20, 400, 30);
-    titulo.setFont(new java.awt.Font("Tahoma", 1, 20));
-    jPanel2.add(titulo);
+        javax.swing.JLabel titulo = new javax.swing.JLabel("Reportes administrativos");
+        titulo.setBounds(30, 20, 400, 30);
+        titulo.setFont(new java.awt.Font("Tahoma", 1, 20));
+        jPanel2.add(titulo);
 
-    javax.swing.JLabel subtitulo = new javax.swing.JLabel("Actualizado en ejecución");
-    subtitulo.setBounds(30, 50, 300, 20);
-    subtitulo.setForeground(C_TEXTO);
-    jPanel2.add(subtitulo);
+        javax.swing.JLabel subtitulo = new javax.swing.JLabel("Actualizado en ejecución");
+        subtitulo.setBounds(30, 50, 300, 20);
+        subtitulo.setForeground(C_TEXTO);
+        jPanel2.add(subtitulo);
 
-    botonSwing btnGenerar = new botonSwing();
-    btnGenerar.setText("+ Generar reporte");
-    btnGenerar.setBounds(900, 20, 200, 30);
-    btnGenerar.setBackground(C_CARD);
-    btnGenerar.setForeground(new java.awt.Color(39, 53, 38));
-    jPanel2.add(btnGenerar);
+        botonSwing btnGenerar = new botonSwing();
+        btnGenerar.setText("+ Generar reporte");
+        btnGenerar.setBounds(900, 20, 200, 30);
+        btnGenerar.setBackground(C_CARD);
+        btnGenerar.setForeground(new java.awt.Color(39, 53, 38));
+        jPanel2.add(btnGenerar);
 
-    btnGenerar.addActionListener(e -> generarDatos());
+        btnGenerar.addActionListener(e -> generarDatos());
 
-    lblCitas = crearCard("Citas totales", 50);
-    lblPacientes = crearCard("Nuevos pacientes", 300);
-    lblUsuarios = crearCard("Usuarios activos", 550);
+        lblCitas = crearCard("Citas totales", 50);
+        lblPacientes = crearCard("Nuevos pacientes (hoy)", 300);
+        lblUsuarios = crearCard("Usuarios activos", 550);
 
-    panelHistorial = new provet.componentes.PanelRedondeado();
-    panelHistorial.setLayout(new javax.swing.BoxLayout(panelHistorial, javax.swing.BoxLayout.Y_AXIS));
+        panelHistorial = new provet.componentes.PanelRedondeado();
+        panelHistorial.setLayout(new javax.swing.BoxLayout(panelHistorial, javax.swing.BoxLayout.Y_AXIS));
 
-    javax.swing.JScrollPane scroll = new javax.swing.JScrollPane(panelHistorial);
-    scroll.setBounds(50, 200, 1000, 400);
+        javax.swing.JScrollPane scroll = new javax.swing.JScrollPane(panelHistorial);
+        scroll.setBounds(50, 200, 1000, 400);
 
-    jPanel2.add(scroll);
-}
+        jPanel2.add(scroll);
+    }
+
     private javax.swing.JLabel crearCard(String titulo, int x) {
-    provet.componentes.PanelRedondeado card = new provet.componentes.PanelRedondeado();
-    card.setLayout(null);
-    card.setBackground(C_CARD);
-    card.setBounds(x, 90, 200, 80);
+        provet.componentes.PanelRedondeado card = new provet.componentes.PanelRedondeado();
+        card.setLayout(null);
+        card.setBackground(C_CARD);
+        card.setBounds(x, 90, 200, 80);
 
-    javax.swing.JLabel lblTitulo = new javax.swing.JLabel(titulo);
-    lblTitulo.setBounds(10, 10, 180, 20);
+        javax.swing.JLabel lblTitulo = new javax.swing.JLabel(titulo);
+        lblTitulo.setBounds(10, 10, 180, 20);
 
-    javax.swing.JLabel lblValor = new javax.swing.JLabel("0");
-    lblValor.setBounds(10, 35, 180, 30);
-    lblValor.setFont(new java.awt.Font("Tahoma", 1, 20));
+        javax.swing.JLabel lblValor = new javax.swing.JLabel("0");
+        lblValor.setBounds(10, 35, 180, 30);
+        lblValor.setFont(new java.awt.Font("Tahoma", 1, 20));
 
-    card.add(lblTitulo);
-    card.add(lblValor);
+        card.add(lblTitulo);
+        card.add(lblValor);
 
-    jPanel2.add(card);
-    card.setVisible(true);;
-    return lblValor;
-}
+        jPanel2.add(card);
+        card.setVisible(true);
+        return lblValor;
+    }
     
     private void cargarDatosDesdeBD() {
-        // Conectar con base de datos para usuarios activos
-        UsuarioAdminDAO usuarioDAO = new UsuarioAdminDAO();
-        java.util.List<UsuarioAdminDAO.UsuarioAdmin> usuariosBD = usuarioDAO.selectAll();
-        usuariosActivos = usuariosBD.size();
-        
-        // Conectar con base de datos para citas totales
-        Connection conn = Conexion.getConexion();
+        Connection conn = dbConection.getConexion();
         if (conn != null) {
             try {
-                String sqlCitas = "SELECT COUNT(*) as total FROM trn_cita";
-                try (PreparedStatement pstmt = conn.prepareStatement(sqlCitas);
+                // 1. Usuarios activos en 'usuarios'
+                try (PreparedStatement pstmt = conn.prepareStatement("SELECT COUNT(*) AS total FROM usuarios WHERE is_active = 1");
+                     ResultSet rs = pstmt.executeQuery()) {
+                    if (rs.next()) {
+                        usuariosActivos = rs.getInt("total");
+                    }
+                }
+
+                // 2. Citas totales en 'citas'
+                try (PreparedStatement pstmt = conn.prepareStatement("SELECT COUNT(*) AS total FROM citas");
                      ResultSet rs = pstmt.executeQuery()) {
                     if (rs.next()) {
                         citas = rs.getInt("total");
                     }
                 }
                 
-                // Conectar con base de datos para nuevos pacientes (clientes registrados hoy)
-                String sqlPacientes = "SELECT COUNT(*) as total FROM mts_cliente c JOIN mts_persona p ON c.id_persona = p.id_persona WHERE DATE(p.fecha_registro_sistema) = CURDATE()";
+                // 3. Nuevos pacientes registrados hoy en 'mascotas'
+                String sqlPacientes = "SELECT COUNT(*) AS total FROM mascotas WHERE estatus = 'Activo' AND DATE(created_at) = CURDATE()";
                 try (PreparedStatement pstmt = conn.prepareStatement(sqlPacientes);
                      ResultSet rs = pstmt.executeQuery()) {
                     if (rs.next()) {
@@ -302,109 +316,99 @@ private javax.swing.JPanel panelHistorial;
                     }
                 }
             } catch (SQLException e) {
-                System.err.println("Error al cargar datos desde BD: " + e.getMessage());
-                // Si hay error, mantener valores actuales
+                System.err.println("Error al cargar datos desde BD en ReportesAdmin: " + e.getMessage());
             }
         }
         
-        // Actualizar labels
         lblCitas.setText(String.valueOf(citas));
         lblPacientes.setText(String.valueOf(nuevosPacientes));
         lblUsuarios.setText(String.valueOf(usuariosActivos));
     }
     
     private void generarDatos() {
-    cargarDatosDesdeBD();
+        cargarDatosDesdeBD();
 
-    listaReportes.add(new Reporte("Reporte generado", "Datos actualizados desde BD"));
-    
-    renderizarHistorial();
+        String resumen = "Citas: " + citas + " | Nuevos pacientes hoy: " + nuevosPacientes + " | Usuarios activos: " + usuariosActivos;
+        listaReportes.add(new Reporte("Reporte generado", resumen));
+        
+        renderizarHistorial();
 
-    NotificacionesAdmin.agregarNotificacionGlobal(
-        "Nuevo reporte",
-        "Se generó un reporte con datos actualizados",
-        "hoy"
-    );
-}
+        NotificacionesAdmin.agregarNotificacionGlobal(
+            "Nuevo reporte",
+            "Se generó un reporte con datos actualizados",
+            "hoy"
+        );
+    }
     
     private void renderizarHistorial() {
-    panelHistorial.removeAll();
+        panelHistorial.removeAll();
 
-    // Agregar encabezado
-    provet.componentes.PanelRedondeado encabezado = new provet.componentes.PanelRedondeado();
-    encabezado.setLayout(new java.awt.GridLayout(1, 3));
-    encabezado.setMaximumSize(new java.awt.Dimension(1000, 40));
-    encabezado.setBackground(C_OSCURO);
-    
-    javax.swing.JLabel lblEnc1 = new javax.swing.JLabel("Título");
-    lblEnc1.setForeground(java.awt.Color.WHITE);
-    lblEnc1.setFont(new java.awt.Font("Tahoma", 1, 14));
-    lblEnc1.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 15, 10, 15));
-    
-    javax.swing.JLabel lblEnc2 = new javax.swing.JLabel("Fecha");
-    lblEnc2.setForeground(java.awt.Color.WHITE);
-    lblEnc2.setFont(new java.awt.Font("Tahoma", 1, 14));
-    lblEnc2.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 15, 10, 15));
-    
-    javax.swing.JLabel lblEnc3 = new javax.swing.JLabel("Descripción");
-    lblEnc3.setForeground(java.awt.Color.WHITE);
-    lblEnc3.setFont(new java.awt.Font("Tahoma", 1, 14));
-    lblEnc3.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 15, 10, 15));
-    
-    encabezado.add(lblEnc1);
-    encabezado.add(lblEnc2);
-    encabezado.add(lblEnc3);
-    panelHistorial.add(encabezado);
-    panelHistorial.add(javax.swing.Box.createRigidArea(new java.awt.Dimension(0, 10)));
-
-    int index = 0;
-    for (Reporte r : listaReportes) {
-
-        provet.componentes.PanelRedondeado fila = new provet.componentes.PanelRedondeado();
-        fila.setLayout(new java.awt.GridLayout(1, 3));
-        fila.setMaximumSize(new java.awt.Dimension(1000, 50));
+        provet.componentes.PanelRedondeado encabezado = new provet.componentes.PanelRedondeado();
+        encabezado.setLayout(new java.awt.GridLayout(1, 3));
+        encabezado.setMaximumSize(new java.awt.Dimension(1000, 40));
+        encabezado.setBackground(C_OSCURO);
         
-        // Color alternado
-        if (index % 2 == 0) {
-            fila.setBackground(new java.awt.Color(228, 230, 217));
-        } else {
-            fila.setBackground(new java.awt.Color(192, 207, 178));
+        javax.swing.JLabel lblEnc1 = new javax.swing.JLabel("Título");
+        lblEnc1.setForeground(java.awt.Color.WHITE);
+        lblEnc1.setFont(new java.awt.Font("Tahoma", 1, 14));
+        lblEnc1.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 15, 10, 15));
+        
+        javax.swing.JLabel lblEnc2 = new javax.swing.JLabel("Fecha");
+        lblEnc2.setForeground(java.awt.Color.WHITE);
+        lblEnc2.setFont(new java.awt.Font("Tahoma", 1, 14));
+        lblEnc2.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 15, 10, 15));
+        
+        javax.swing.JLabel lblEnc3 = new javax.swing.JLabel("Descripción");
+        lblEnc3.setForeground(java.awt.Color.WHITE);
+        lblEnc3.setFont(new java.awt.Font("Tahoma", 1, 14));
+        lblEnc3.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 15, 10, 15));
+        
+        encabezado.add(lblEnc1);
+        encabezado.add(lblEnc2);
+        encabezado.add(lblEnc3);
+        panelHistorial.add(encabezado);
+        panelHistorial.add(javax.swing.Box.createRigidArea(new java.awt.Dimension(0, 10)));
+
+        int index = 0;
+        for (Reporte r : listaReportes) {
+            provet.componentes.PanelRedondeado fila = new provet.componentes.PanelRedondeado();
+            fila.setLayout(new java.awt.GridLayout(1, 3));
+            fila.setMaximumSize(new java.awt.Dimension(1000, 50));
+            
+            if (index % 2 == 0) {
+                fila.setBackground(new java.awt.Color(228, 230, 217));
+            } else {
+                fila.setBackground(new java.awt.Color(192, 207, 178));
+            }
+
+            javax.swing.JLabel lblTitulo = new javax.swing.JLabel(r.titulo);
+            lblTitulo.setFont(new java.awt.Font("Tahoma", 0, 14));
+            lblTitulo.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 15, 15));
+            
+            java.time.LocalDate fecha = java.time.LocalDate.now();
+            java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            javax.swing.JLabel lblFecha = new javax.swing.JLabel(fecha.format(formatter));
+            lblFecha.setFont(new java.awt.Font("Tahoma", 0, 14));
+            lblFecha.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 15, 15));
+            
+            javax.swing.JLabel lblDesc = new javax.swing.JLabel(r.descripcion);
+            lblDesc.setFont(new java.awt.Font("Tahoma", 0, 14));
+            lblDesc.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 15, 15));
+
+            fila.add(lblTitulo);
+            fila.add(lblFecha);
+            fila.add(lblDesc);
+
+            panelHistorial.add(fila);
+            panelHistorial.add(javax.swing.Box.createRigidArea(new java.awt.Dimension(0, 8)));
+            index++;
         }
 
-        javax.swing.JLabel lblTitulo = new javax.swing.JLabel(r.titulo);
-        lblTitulo.setFont(new java.awt.Font("Tahoma", 0, 14));
-        lblTitulo.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 15, 15));
-        
-        java.time.LocalDate fecha = java.time.LocalDate.now();
-        java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        javax.swing.JLabel lblFecha = new javax.swing.JLabel(fecha.format(formatter));
-        lblFecha.setFont(new java.awt.Font("Tahoma", 0, 14));
-        lblFecha.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 15, 15));
-        
-        javax.swing.JLabel lblDesc = new javax.swing.JLabel(r.descripcion);
-        lblDesc.setFont(new java.awt.Font("Tahoma", 0, 14));
-        lblDesc.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 15, 15));
-
-        fila.add(lblTitulo);
-        fila.add(lblFecha);
-        fila.add(lblDesc);
-
-        panelHistorial.add(fila);
-        panelHistorial.add(javax.swing.Box.createRigidArea(new java.awt.Dimension(0, 8)));
-        index++;
+        panelHistorial.revalidate();
+        panelHistorial.repaint();
     }
-
-    panelHistorial.revalidate();
-    panelHistorial.repaint();
-}
-    
     
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -415,9 +419,7 @@ private javax.swing.JPanel panelHistorial;
         } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new ReportesAdmin().setVisible(true));
     }
 

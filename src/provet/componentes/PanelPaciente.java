@@ -1,15 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package provet.componentes;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Image;
+import java.net.URL;
 import javax.swing.ImageIcon;
-import provet.componentes.PanelRedondeado;
-import provet.model.Paciente;
+import provet.dao.PacienteDetalleDAO;
+import provet.modelo.Mascota;
+import provet.modelo.PacienteDetalle;
+
 /**
  *
  * @author anguv
@@ -18,25 +18,68 @@ public class PanelPaciente extends PanelRedondeado {
 
     public PanelPaciente() {
         initComponents();
-        
-        setBackground(new Color(228,230,217));
+        setBackground(new Color(228, 230, 217));
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
-    
-    public void setDatos(Paciente paciente) {
-    jLabel1.setText("ID: " + paciente.getID());
-    jLabel2.setText(paciente.getNombre());
-    jLabel3.setText(paciente.getRaza());
-}
-    
-    public void setClickListener(Runnable action) {
-    this.addMouseListener(new java.awt.event.MouseAdapter() {
-        @Override
-        public void mouseClicked(java.awt.event.MouseEvent e) {
-            System.out.println("CLICK DESDE PANEL 👈");
-            action.run();
+
+    public PanelPaciente(PacienteDetalle paciente) {
+        this();
+        setDatos(paciente);
+    }
+
+    public final void setDatos(PacienteDetalle paciente) {
+        if (paciente == null) return;
+
+        jLabel1.setText("ID: " + paciente.getIdMascota());
+        jLabel2.setText(paciente.getNombre());
+        jLabel3.setText(paciente.getRaza() != null ? paciente.getRaza() : "Sin raza");
+        cargarFoto(paciente.getFotoUrl());
+    }
+
+    /**
+     * Sobrecarga compatible si la vista pasa directamente una entidad Mascota.
+     */
+    public final void setDatos(Mascota mascota) {
+        if (mascota == null) return;
+
+        PacienteDetalle detalle = new PacienteDetalleDAO().selectDetalleById(mascota.getIdMascota());
+        if (detalle != null) {
+            setDatos(detalle);
+        } else {
+            jLabel1.setText("ID: " + mascota.getIdMascota());
+            jLabel2.setText(mascota.getNombre());
+            jLabel3.setText("Raza ID: " + mascota.getIdRaza());
         }
-    });
-}
+    }
+
+    private void cargarFoto(String fotoUrl) {
+        try {
+            URL url = null;
+            if (fotoUrl != null && !fotoUrl.isBlank()) {
+                url = getClass().getResource("/imagenes/mascotas/" + fotoUrl);
+            }
+            if (url == null) {
+                url = getClass().getResource("/imagenes/mascotas/default.png");
+            }
+            if (url != null) {
+                ImageIcon icono = new ImageIcon(url);
+                Image img = icono.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
+                lblFoto.setText("");
+                lblFoto.setIcon(new ImageIcon(img));
+            }
+        } catch (Exception ignored) {}
+    }
+
+    public void setClickListener(Runnable action) {
+        this.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                if (action != null) {
+                    action.run();
+                }
+            }
+        });
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -1,14 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package provet.componentes;
 
-
 import java.awt.Color;
-import provet.model.Paciente;
-import provet.view.veterinario.Reportes_Citas;
-import provet.model.Reporte;
+import provet.modelo.Reporte;
+
 /**
  *
  * @author anguv
@@ -16,19 +11,14 @@ import provet.model.Reporte;
 public class PanelCitas2 extends PanelRedondeado {
 
     public PanelCitas2(Reporte r) {
-        
         initComponents();
 
-    lblID.setText(String.valueOf(r.getID()));
-    lblNombre.setText(r.getNombre());
-    lblEspecie.setText(r.getEspecie());
-    lblVet.setText(String.valueOf(r.getVeterinario()));
-        setBackground(new Color(228,230,217));
+        lblID.setText("ID Mascota: " + r.getIdMascota());
+        lblNombre.setText(r.getNombreMascota());
+        lblEspecie.setText(r.getEspecie());
+        lblVet.setText(r.getVeterinario());
+        setBackground(new Color(228, 230, 217));
     }
-    
-    
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
